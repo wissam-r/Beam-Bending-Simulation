@@ -50,8 +50,6 @@
     <Compile Include="beem\forms\Form.cs" />
     <Compile Include="beem\forms\Rectangle.cs" />
     <Compile Include="beem\NonReinRecBeem.cs" />
-    <Compile Include="beem\reinforcement\DoubleReinforcement.cs" />
-    <Compile Include="beem\reinforcement\nonreinforcement.cs" />
     <Compile Include="beem\reinforcement\Reinforcement.cs" />
     <Compile Include="beem\reinforcement\SingleReinforcement.cs" />
     <Compile Include="beem\SinReinRecBeem.cs" />
@@ -61,6 +59,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="helper\MathHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

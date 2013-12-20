@@ -7,18 +7,7 @@ namespace TestsForSC.beem.forms
 {
     class Rectangle : Form
     {
-        public Rectangle(double h, double l, double b) { 
-            H = h;
-            B = b;
-            L = l;
-        }
-        double l, h, b; //
-        public double crossSectionalArea()
-        {
-            return H * B;
-        }
-
-        
+        double l, h, b; // h : high  , l : Length , b : width
 
         public double L
         {
@@ -36,6 +25,31 @@ namespace TestsForSC.beem.forms
         {
             get { return b; }
             set { b = value; }
+        }
+
+        public Rectangle(double h, double l, double b) { 
+            H = h;
+            B = b;
+            L = l;
+        }
+ 
+        public double crossSectionalArea()
+        {
+            return H * B;
+        }
+
+        
+
+
+        public double distanceCenterGravity()
+        {
+            return H / 2.0; 
+        }
+
+
+        public double momentInertiaNonCrackedSection()
+        {
+            return B * Math.Pow(H, 3) / 12;
         }
     }
 }

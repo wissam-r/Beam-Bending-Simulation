@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+
 namespace TestsForSC.beem
 {
+    
     abstract class Beem
     {
-        public Beem(double CS)
+       
+        public Beem(double cP)
         {
-            this.CS = CS;
-            emC = Math.Sqrt(this.CS) * 6645;
+            CP = cP;
+            emC = Math.Sqrt(this.CP) * 6645;
+            cF = 0.74 * Math.Sqrt(CP);
         }
 
         forms.Form form;
@@ -20,26 +24,43 @@ namespace TestsForSC.beem
 
         }
 
-        reinforcement.Reinforcement reinforcement;
-        public reinforcement.Reinforcement Reinforcement
-        {
-            get { return reinforcement; }
-            set { reinforcement = value; }
-        } 
+        //reinforcement.Reinforcement reinforcement;
+        //public reinforcement.Reinforcement Reinforcement
+        //{
+        //    get { return reinforcement; }
+        //    set { reinforcement = value; }
+        //} 
               
-        private double cS; //Compressive Strength for Concrete (f'c)
-        public double CS 
+        private double cP; //Resistance of concrete to pressure (f'c)
+        public double CP 
         {
-            get { return cS ; }
-            set { cS = value; }
+            get { return cP ; }
+            set { cP = value; }
         
         }
+        private double cF;//Resistance of concrete to flatten Fcb
 
+        public double CF
+        {
+            get { return cF; }
+            set { cF = value; }
+        }
         private double emC;//Elastic modulus of concrete Eco
 
         public double getCrossSectionalArea()
         {
             return Form.crossSectionalArea(); 
+        }
+        public double getDistanceCenterGravity()
+        {
+            return Form.distanceCenterGravity();
+        }//Yt
+        public double getMomentInertiaNonCrackedSection() {
+            return form.momentInertiaNonCrackedSection();
+        }//Ig
+        public double Mcr() //the moment that cause of the cracking of the concrete
+        {
+            return CF * getMomentInertiaNonCrackedSection() / getDistanceCenterGravity() 
         }
 
 

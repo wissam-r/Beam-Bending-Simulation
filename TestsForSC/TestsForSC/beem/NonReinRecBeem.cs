@@ -7,14 +7,14 @@ namespace TestsForSC.beem
 {
     class NonReinRecBeem : Beem
     {
-        double As; 
         
-        public NonReinRecBeem(double cS,double h ,double l , double b ) 
-            :base(cS)
+        
+        public NonReinRecBeem(double cP,double h ,double l , double b ) 
+            :base(cP)
         {
             Form = new forms.Rectangle(h, l, b);
             forms.Rectangle Rectangle = (forms.Rectangle)Form;
-            As = getCrossSectionalArea(); 
+             
         }
 
         
