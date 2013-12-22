@@ -12,9 +12,10 @@ namespace TestsForSC.beem
        
         public Beem(double cP)
         {
-            CP = cP;
-            emC = Math.Sqrt(this.CP) * 6645;
-            cF = 0.74 * Math.Sqrt(CP);
+            this.cP = cP;
+            emC = Math.Sqrt(this.cP) * 6645;
+            cF = 0.74 * Math.Sqrt(this.cP);
+            mcr  =cF * getMomentInertiaNonCrackedSection() / getDistanceCenterGravity(); ;
         }
 
         forms.Form form;
@@ -24,33 +25,40 @@ namespace TestsForSC.beem
 
         }
 
-        //reinforcement.Reinforcement reinforcement;
-        //public reinforcement.Reinforcement Reinforcement
-        //{
-        //    get { return reinforcement; }
-        //    set { reinforcement = value; }
-        //} 
-              
-        private double cP; //Resistance of concrete to pressure (f'c)
-        public double CP 
+        reinforcement.Reinforcement reinforcement;
+        public reinforcement.Reinforcement Reinforcement
         {
-            get { return cP ; }
-            set { cP = value; }
-        
+            get { return reinforcement; }
+            set { reinforcement = value; }
         }
-        private double cF;//Resistance of concrete to flatten Fcb
 
+        private double cP; //Resistance of concrete to pressure (f'c
+        private double cF;//Resistance of concrete to flatten Fcb
+        private double emC;//Elastic modulus of concrete Eco
+        private double mcr;//the moment that cause the cracking of the concrete
+
+        public double CP
+        {
+            get { return cP; }
+        }//Resistance of concrete to pressure (f'c
         public double CF
         {
             get { return cF; }
-            set { cF = value; }
+        }//Resistance of concrete to flatten Fcb
+        public double EMC
+        {
+            get { return emC; }
+        }//Elastic modulus of concrete Eco
+        public double Mcr //the moment that cause the cracking of the concrete
+        {
+            get { return mcr; }
         }
-        private double emC;//Elastic modulus of concrete Eco
+       
 
         public double getCrossSectionalArea()
         {
             return Form.crossSectionalArea(); 
-        }
+        }//A
         public double getDistanceCenterGravity()
         {
             return Form.distanceCenterGravity();
@@ -58,10 +66,18 @@ namespace TestsForSC.beem
         public double getMomentInertiaNonCrackedSection() {
             return form.momentInertiaNonCrackedSection();
         }//Ig
-        public double Mcr() //the moment that cause of the cracking of the concrete
-        {
-            return CF * getMomentInertiaNonCrackedSection() / getDistanceCenterGravity() 
+        public double getRatioOfStandard() {
+            return reinforcement.ratioOfStandard();
         }
+        public double getIe(double Ma,double Icr){
+            return reinforcement.Ie(Mcr , Ma , getMomentInertiaNonCrackedSection() , Icr) ;
+        }    //moment effective inertia  
+        public double getSpaceTensileReinforcement() {
+            return reinforcement.spaceTensileReinforcement();
+        }//As
+
+
+        
 
 
     }

@@ -12,44 +12,39 @@ namespace TestsForSC.beem.forms
         public double L
         {
             get { return l; }
-            set { l = value; }
         }
-
         public double H
         {
             get { return h; }
-            set { h = value; }
         }
-
         public double B
         {
             get { return b; }
-            set { b = value; }
         }
+        double A;//crossSectionalArea
+        double Yt;//distanceCenterGravity
+        double Ig;//momentInertiaNonCrackedSection
 
         public Rectangle(double h, double l, double b) { 
-            H = h;
-            B = b;
-            L = l;
+            this.h = h;
+            this.b = b;
+            this.l = l;
+            this.A = this.h * this.b;
+            this.Yt = h / 2.0;
+            this.Ig = this.b * Math.Pow(this.h, 3) / 12; 
+
         }
- 
         public double crossSectionalArea()
         {
-            return H * B;
+            return A;
         }
-
-        
-
-
         public double distanceCenterGravity()
         {
-            return H / 2.0; 
+            return Yt; 
         }
-
-
         public double momentInertiaNonCrackedSection()
         {
-            return B * Math.Pow(H, 3) / 12;
+            return Ig;
         }
     }
 }

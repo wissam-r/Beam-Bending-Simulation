@@ -2,36 +2,41 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TestsForSC.helper;
 
 namespace TestsForSC.beem.reinforcement
 {
     class SingleReinforcement : Reinforcement
     {
         private double es;//Elastic modulus
+        private double n; //Space equivalent of concrete n ,  ratioOfStandard
+        private double As;//As  spaceTensileReinforcement
+        
 
-        private double Es
+        public SingleReinforcement(double es, double cP, double r, double number)
         {
-            get { return es; }
-            set { es = value; }
-        }
-        public SingleReinforcement(double es) {
-            Es = es;
+            this.es = es;
+            this.n = es / cP;
+            As = number * Math.PI * Math.Pow(r / 2, 2);
+           
         }
         public double elasticModulus()
         {
-            return Es;
+            return es;
         }
-
-        public double ratioOfStandard( double cP)
+        public double ratioOfStandard()
         {
-            return Es/ cP;
-        }
-
-
-        public double spaceTensileReinforcement(double R, double N)
+            return n;
+        }//Space equivalent of concrete n
+        public double spaceTensileReinforcement()
         {
-            return N*Math.PI * Math.Pow(R / 2, 2);
+            return As;
             
         }
+        public double Ie(double Mcr, double Ma, double Ig , double Icr)
+        {
+             return Mcr > Ma ? ((Math.Pow(Mcr/Ma,3)*Ig)+(1-Math.Pow(Mcr/Ma,3))* Icr) : Ig ;
+        }
+        
     }
 }

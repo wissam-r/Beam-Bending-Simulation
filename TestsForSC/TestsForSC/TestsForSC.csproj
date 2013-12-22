@@ -49,7 +49,6 @@
     <Compile Include="beem\Beem.cs" />
     <Compile Include="beem\forms\Form.cs" />
     <Compile Include="beem\forms\Rectangle.cs" />
-    <Compile Include="beem\NonReinRecBeem.cs" />
     <Compile Include="beem\reinforcement\Reinforcement.cs" />
     <Compile Include="beem\reinforcement\SingleReinforcement.cs" />
     <Compile Include="beem\SinReinRecBeem.cs" />

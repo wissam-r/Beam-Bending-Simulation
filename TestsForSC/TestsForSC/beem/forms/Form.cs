@@ -7,9 +7,9 @@ namespace TestsForSC.beem.forms
 {
     interface Form
     {
-        public double crossSectionalArea(); //Area Calculation
-        public double distanceCenterGravity();// Distance from the center of gravity
-        public double momentInertiaNonCrackedSection();//Moment inertia non-cracked section
+        double crossSectionalArea(); //Area Calculation
+        double distanceCenterGravity();// Distance from the center of gravity
+        double momentInertiaNonCrackedSection();//Moment inertia non-cracked section
 
     }
 }
