@@ -52,11 +52,6 @@
     <Compile Include="beem\reinforcement\Reinforcement.cs" />
     <Compile Include="beem\reinforcement\SingleReinforcement.cs" />
     <Compile Include="beem\SinReinRecBeem.cs" />
-    <Compile Include="force\Forces.cs" />
-    <Compile Include="force\PointBaemForce.cs" />
-    <Compile Include="force\DistributedBeamForce.cs" />
-    <Compile Include="force\Force.cs" />
-    <Compile Include="force\ReflectionBeamForce.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
