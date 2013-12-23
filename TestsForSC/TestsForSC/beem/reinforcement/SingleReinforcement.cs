@@ -13,10 +13,10 @@ namespace TestsForSC.beem.reinforcement
         private double As;//As  spaceTensileReinforcement
         
 
-        public SingleReinforcement(double es, double cP, double r, double number)
+        public SingleReinforcement(double es, double emc, double r, double number)
         {
             this.es = es;
-            this.n = es / cP;
+            this.n = es / emc;
             As = number * Math.PI * Math.Pow(r / 2, 2);
            
         }
@@ -35,7 +35,7 @@ namespace TestsForSC.beem.reinforcement
         }
         public double Ie(double Mcr, double Ma, double Ig , double Icr)
         {
-             return Mcr > Ma ? ((Math.Pow(Mcr/Ma,3)*Ig)+(1-Math.Pow(Mcr/Ma,3))* Icr) : Ig ;
+             return Mcr > Ma ? Ig :((Math.Pow(Mcr/Ma,3)*Ig)+(1-Math.Pow(Mcr/Ma,3))* Icr)  ;
         }
         
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using TestsForSC.beem;
 
 namespace TestsForSC
 {
@@ -16,11 +17,7 @@ namespace TestsForSC
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
-            
-            
-
-            
+            Application.Run(new Form1());  
         }
     }
 }

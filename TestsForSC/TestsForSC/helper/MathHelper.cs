@@ -23,7 +23,7 @@ namespace TestsForSC.helper
             }
             else
             {
-                return Math.Max((double)(-b + Math.Sqrt(d)) / 2 * a ,(double)(-b - Math.Sqrt(d)) / 2 * a);
+                return (-b + Math.Sqrt(d)) / (2 * a);
                 
             }
         }
