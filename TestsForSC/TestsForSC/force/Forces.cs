@@ -6,12 +6,27 @@ using System.Text;
 
 namespace TestsForSC.force
 {
-    class Forces : ICollection<Force>
+    class Forces
     {
         LinkedList<Force> forces;
+        private double beamLength;
+        
 
-        public void ICollection<Force>.Add(Force item)
+        public Forces(double weight,double beamLength)
         {
+            this.beamLength = beamLength;
+            forces = new LinkedList<Force>();
+            forces.AddFirst(new ReflectionBeamForce(weight / 2, 0));
+            forces.AddLast(new ReflectionBeamForce(weight / 2, beamLength));
+            forces.AddBefore(forces.Last, new DistributedBeamForce(weight/beamLength,0,beamLength));
+        }
+
+
+
+        public void Add(Force item)
+        {
+            if(item is ReflectionBeamForce)
+                return;
             bool added = false;
             foreach (Force f in forces)
             {
@@ -24,15 +39,8 @@ namespace TestsForSC.force
             }
             if (!added)
                 forces.AddBefore(forces.Last, item);
-
-        }
-
-        public Forces(DistributedBeamForce weight,double beamLength)
-        {
-            forces = new LinkedList<Force>();
-            forces.AddFirst(new ReflectionBeamForce(weight.Power * beamLength / 2, 0));
-            forces.AddLast(new ReflectionBeamForce(weight.Power * beamLength / 2, beamLength));
-            forces.AddBefore(forces.Last, weight);
+            this.forces.First.Value.add(item.getReflectionLeft(beamLength));
+            this.forces.Last.Value.add(item.getReflectionRight(beamLength));
         }
 
         public double getMomentom(double distance)
@@ -49,52 +57,37 @@ namespace TestsForSC.force
             double sum = 0;
             foreach (Force f in forces)
             {
-                sum += f.getfMomentomd2x(distance,beamLength);
+                sum += f.getfMomentomd2x(distance, beamLength);
             }
             return sum;
         }
 
 
-        
 
-        void ICollection<Force>.Clear()
+
+        public void Clear()
         {
             forces.Clear();
         }
 
-        bool ICollection<Force>.Contains(Force item)
+        public bool Contains(Force item)
         {
             return this.forces.Contains(item);
         }
 
-        void ICollection<Force>.CopyTo(Force[] array, int arrayIndex)
+        public void CopyTo(Force[] array, int arrayIndex)
         {
             this.forces.CopyTo(array, arrayIndex);
         }
 
-        int ICollection<Force>.Count
+        public int Count
         {
             get { return this.forces.Count; }
         }
 
-        private bool ICollection<Force>.IsReadOnly
-        {
-            get { return false; }
-        }
-
-        bool ICollection<Force>.Remove(Force item)
+        public bool Remove(Force item)
         {
             return forces.Remove(item);
-        }
-
-        IEnumerator<Force> IEnumerable<Force>.GetEnumerator()
-        {
-            return this.forces.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return this.forces.GetEnumerator();
         }
     }
 }

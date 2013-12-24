@@ -33,33 +33,44 @@ namespace TestsForSC.force
         }
         public override double getfMomentomd2x(double distance,double beamLength)
         {
+            double A = -Power * Math.Pow(beamLength - start, 4) / (24 * beamLength);
+            
             if (distance <= start)
-                return 0;
+                return A * distance;
             else
             {
-                double all, sub=0;
+                double all, sub = 0;
                 all = Power * Math.Pow(distance - start, 4) / 24;
-                double A = -Power * Math.Pow(beamLength - start, 4) / (24 * beamLength);
                 if (distance > end)
                 {
                     sub = Power * Math.Pow(distance - end, 4) / 24;
                     A += Power * Math.Pow(beamLength - end, 4) / (24 * beamLength);
                 }
-                return all - sub + A * beamLength;
+                return all - sub + A * distance;
             }
 
         }
         public override void add(Force force)
         {
             if (this.canAdd(force))
-                base.add(force);
+                base.addPower(force);
         }
         public override bool canAdd(Force force)
         {
-            if (!base.canAdd(force)) return false;
+            if (!base.sameType(force)) return false;
             return this.start == ((DistributedBeamForce)force).start
                 && this.end == ((DistributedBeamForce)force).end;
         }
-        
+
+
+        public override ReflectionBeamForce getReflectionLeft(double BeamLenght)
+        {
+            return new ReflectionBeamForce(this.Power * (Math.Pow(end, 2) - Math.Pow(start, 2) + 2 * BeamLenght * (start - end)) / (2 * BeamLenght),0);
+        }
+
+        public override ReflectionBeamForce getReflectionRight(double BeamLenght)
+        {
+            return new ReflectionBeamForce(this.Power * (Math.Pow(start, 2) - Math.Pow(end, 2)) / (2 * BeamLenght), BeamLenght);
+        }
     }
 }

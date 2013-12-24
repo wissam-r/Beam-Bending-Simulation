@@ -11,16 +11,20 @@ namespace TestsForSC.force
         {
             Power = power;
         }
-        public double Power { protected set; public get; }
+        public double Power { set; get; }
         abstract public double getMomentom(double distance);
         abstract public double getfMomentomd2x(double distance, double beamLength);
-        public void add(Force force)
+        public abstract void add(Force force);
+        protected void addPower(Force force)
         {
             this.Power += force.Power;
         }
-        public bool canAdd(Force force)
+        public abstract bool canAdd(Force force);
+        protected bool sameType(Force force)
         {
             return this.GetType() == force.GetType();
         }
+        abstract public ReflectionBeamForce getReflectionLeft(double BeamLenght);
+        abstract public ReflectionBeamForce getReflectionRight(double BeamLenght);
     }
 }

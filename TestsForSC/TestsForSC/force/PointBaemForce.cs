@@ -26,22 +26,32 @@ namespace TestsForSC.force
 
         public override double getfMomentomd2x(double distance,double beamLength)
         {
+            double A = -Power * Math.Pow(beamLength - Position, 3) / (6 * beamLength);
             if (distance <= Position)
-                return 0;
-            else{
-                double A = -Power * Math.Pow(beamLength - Position, 3) / (6*beamLength);
+                return A * distance;
+            else{                
                 return Power * Math.Pow(distance - Position, 3) / 6 + A*distance;
             }
         }
         public override void add(Force force)
         {
             if (this.canAdd(force))
-                base.add(force);
+                base.addPower(force);
         }
         public override bool canAdd(Force force)
         {
-            if (!base.canAdd(force)) return false;
+            if (!base.sameType(force)) return false;
             return this.Position == ((PointBaemForce)force).Position;
+        }
+
+        public override ReflectionBeamForce getReflectionLeft(double BeamLenght)
+        {
+            return new ReflectionBeamForce(this.Power * (BeamLenght - this.Position) / BeamLenght, 0);
+        }
+
+        public override ReflectionBeamForce getReflectionRight(double BeamLenght)
+        {
+            return new ReflectionBeamForce(this.Power * this.Position / BeamLenght, 0);
         }
     }
 }

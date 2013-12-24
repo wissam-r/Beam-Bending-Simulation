@@ -28,16 +28,16 @@ namespace TestsForSC.force
             if (!isleft)
                 return 0;
             else{
-                double A = -Power * Math.Pow(beamLength , 3) / (6*beamLength);
+                double A = -Power * Math.Pow(beamLength , 2) / (6);
                 return -Power * Math.Pow(distance , 3) / 6 - A*distance;
             }
         }
-        public override void add(Force force)
+        public void add(Force force)
         {
             if (this.canAdd(force))
                 base.add(force);
         }
-        public override bool canAdd(Force force)
+        public bool canAdd(Force force)
         {
             if (!base.canAdd(force)) return false;
             return this.isleft == ((ReflectionBeamForce)force).isleft;
