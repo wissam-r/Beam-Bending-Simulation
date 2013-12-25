@@ -18,14 +18,20 @@ namespace TestsForSC.beem
         private double mcr;//the moment that cause the cracking of the concrete  MNm
         private double y; //Height equivalent to the pressure zone
         private double x;//The depth of the neutral axis of the section 
-        private double asb ;
+        private double asb;// equilibrium Space reinforcemenT
+        private double asMax;//maxmum Space reinforcemenT
+        private double teta; //strength reduction factor
 
-public double Asb
+        public double Teta {
+            get { return teta; }
+        }
+        public double AsMax { 
+            get {return asMax;}
+        }
+        public double Asb
 {
   get { return asb; }
-  set { asb = value; }
 } 
-
         public double Y
         {
             get { return y; }
@@ -55,12 +61,13 @@ public double Asb
         {
             get { return x; }
         }
-       
 
 
-        
 
-        public SinReinRecBeem(double cP,double iF, double h, double l, double b, double es, double r, double n, double a)// a : the distance between the Maximum fiber strain and reinforcement
+
+
+
+        public SinReinRecBeem(double cP, double iF, double h, double l, double b, double es, double r, double n, double a, byte choese)// a : the distance between the Maximum fiber strain and reinforcement , choese  : Type Bracelets iron
             : base(cP,iF , b, l,es)//(30, 20, 200, 20, 210000, 10, 2, 5);
             //a,h,l,b,r : cm , es,cp :Mpa 
         {
@@ -75,9 +82,16 @@ public double Asb
             icr = momentInertiaEquivalentCrackedSection();
             this.y = yQ();
             this.x = getX();
+            this.asb = asbQ();
+            this.asMax = asMaxQ();
+            this.teta = getTeta(choese ,MioS);
                   
         }
 
+        double asMaxQ()
+        {
+            return Asb / 2;
+        }
         double depthNeutralAxisSectionEquivalent( ) //The depth of the neutral axis of the section equivalent
         {
             return MathHelper.sESDRP(B / 2, getRatioOfStandard() * getSpaceTensileReinforcement(),
@@ -95,6 +109,9 @@ public double Asb
         {
             return getSpaceTensileReinforcement() / (B * D);
         }//The actual percentage of reinforcement
+        double asbQ() {
+            return MioSb / (B * D);
+        }
        
         
         
@@ -105,6 +122,14 @@ public double Asb
         }//Height equivalent to the pressure zone  
         public override double getIe(double Ma) {
             return Reinforcement.Ie(Ma, Mcr,getMomentInertiaNonCrackedSection() , Icr);
+        }
+        public override double et()
+        {
+            return ((getX() - D) / getX()) * Ecu;
+        }
+        public override double rM()
+        {
+            return getSpaceTensileReinforcement() * IF * (D - Y / 2);
         }
        
     }

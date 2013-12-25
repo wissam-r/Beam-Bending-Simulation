@@ -59,7 +59,8 @@ namespace TestsForSC.beem
         private double es;//Elastic modulus
         private double n; //Space equivalent of concrete n ,  ratioOfStandard
         private double mioSb;///Equilibrium ratio of reinforcement
-        private double mioSmax;
+        private double mioSmax;//Maxmum ratio of reinforcement
+        
 
         public double MioSmax
         {
@@ -128,7 +129,21 @@ namespace TestsForSC.beem
         public double getSpaceTensileReinforcement() {
             return reinforcement.spaceTensileReinforcement();
         }//As
+        
+        protected double getTeta(byte choese,double mioS) {
+            if (mioS < MioSmax)
+                return 0.9;
+            else if (mioS > MioSb)
+                return 0.7;
+            else {
+                if (choese == 1)
 
+                    return 0.7 + (et() - (IF / Es)) * (200 / 3) <= 0.9 ? 0.7 + (et() - (IF / Es)) * (200 / 3) : 0.9;
+                else
+                    return 0.75 + (et() - (IF / Es)) * (150 / 3) <= 0.9 ? 0.75 + (et() - (IF / Es)) * (150 / 3): 0.9;
+            }
+                
+        }//strength reduction factor
         protected double getX() {
             return yQ() / B1;
         }////The depth of the neutral axis of the section 
@@ -172,8 +187,8 @@ namespace TestsForSC.beem
 
         abstract public double getIe(double Ma);//moment effective inertia  
         abstract public double yQ();//Height equivalent to the pressure zone
-        
-
+        abstract public double et();//
+        abstract public double rM();//Momentum-resistant
 
         
 
