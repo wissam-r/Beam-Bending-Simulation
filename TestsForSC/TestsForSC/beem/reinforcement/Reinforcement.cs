@@ -8,10 +8,10 @@ namespace TestsForSC.beem.reinforcement
 {
     interface Reinforcement
     {
-        double elasticModulus();////Elastic modulus
-        double ratioOfStandard();
+
         double spaceTensileReinforcement();//R : radius ,  N : number of Reinforcing penis
-        double Ie(double Mcr , double Ma ,double Ig,double Icr); //moment effective inertia 
+        double Ie(double Mcr , double Ma ,double Ig,double Icr); //moment effective inertia
+        
 
         
         

@@ -8,26 +8,16 @@ namespace TestsForSC.beem.reinforcement
 {
     class SingleReinforcement : Reinforcement
     {
-        private double es;//Elastic modulus
-        private double n; //Space equivalent of concrete n ,  ratioOfStandard
         private double As;//As  spaceTensileReinforcement
+        private double iF;//Resistant iron to flatten
         
 
-        public SingleReinforcement(double es, double emc, double r, double number)
+        public SingleReinforcement(double iF , double r, double number)
         {
-            this.es = es;
-            this.n = es / emc;
-            As = number * Math.PI * Math.Pow(r / 2, 2);
+            this.iF = iF;
+            As = AsQ(r, number);
            
         }
-        public double elasticModulus()
-        {
-            return es;
-        }
-        public double ratioOfStandard()
-        {
-            return n;
-        }//Space equivalent of concrete n
         public double spaceTensileReinforcement()
         {
             return As;
@@ -37,6 +27,7 @@ namespace TestsForSC.beem.reinforcement
         {
              return Mcr > Ma ? Ig :((Math.Pow(Mcr/Ma,3)*Ig)+(1-Math.Pow(Mcr/Ma,3))* Icr)  ;
         }
-        
+
+        private double AsQ(double r ,  double number) { return number * Math.PI * Math.Pow(r / 2, 2); }
     }
 }

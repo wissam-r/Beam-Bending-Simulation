@@ -11,7 +11,7 @@ namespace TestsForSC
 {
     public partial class Form1 : Form
     {
-        beem.SinReinRecBeem bemo= new beem.SinReinRecBeem(30, 20, 200, 20, 210000, 10, 2, 5);
+        beem.SinReinRecBeem bemo= new beem.SinReinRecBeem(30,420, 20, 200, 20, 210000, 10, 2, 5);
         public Form1()
         {
             InitializeComponent();
