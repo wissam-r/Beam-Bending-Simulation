@@ -14,7 +14,7 @@ namespace TestsForSC.beem
         public RenforcedBeem(double cP,double iF,double b, double l ,double es)
         {
             this.b = b;
-            this.l = L;
+            this.l = l;
             this.cP = cP;
             this.iF = iF;
             this.es = es;
