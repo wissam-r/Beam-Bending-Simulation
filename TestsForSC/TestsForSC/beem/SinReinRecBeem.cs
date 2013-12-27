@@ -21,7 +21,13 @@ namespace TestsForSC.beem
         private double asb;// equilibrium Space reinforcemenT
         private double asMax;//maxmum Space reinforcemenT
         private double teta; //strength reduction factor
+        private double momentumRegulars;
+        private double momentumInvestment;
 
+        public double MomentumInvestment
+        {
+            get { return momentumInvestment; }
+        }
         public double Teta {
             get { return teta; }
         }
@@ -29,9 +35,9 @@ namespace TestsForSC.beem
             get {return asMax;}
         }
         public double Asb
-{
-  get { return asb; }
-} 
+        {
+            get { return asb; }
+        } 
         public double Y
         {
             get { return y; }
@@ -61,6 +67,11 @@ namespace TestsForSC.beem
         {
             get { return x; }
         }
+        public double MomentumRegulars
+        {
+            get { return momentumRegulars; }
+        }
+        
 
 
 
@@ -85,6 +96,9 @@ namespace TestsForSC.beem
             this.asb = asbQ();
             this.asMax = asMaxQ();
             this.teta = getTeta(choese ,MioS);
+            this.momentumRegulars = rM();
+            this.momentumInvestment = MomentumRegulars * Teta;
+            
                   
         }
 
@@ -117,7 +131,7 @@ namespace TestsForSC.beem
         
         
         public override double  yQ() {
-            return (getSpaceTensileReinforcement() * IF) / (B * getSpaceTensileReinforcement() * CP);
+            return (getSpaceTensileReinforcement() * IF) / (B * 0.85 * CP);
         
         }//Height equivalent to the pressure zone  
         public override double getIe(double Ma) {
@@ -129,7 +143,7 @@ namespace TestsForSC.beem
         }
         public override double rM()
         {
-            return getSpaceTensileReinforcement() * IF * (D - Y / 2);
+            return  getSpaceTensileReinforcement() * IF * (D - Y / 2);
         }
        
     }

@@ -147,7 +147,7 @@ namespace TestsForSC.beem
         protected double getX() {
             return yQ() / B1;
         }////The depth of the neutral axis of the section 
-        protected double getXbDivisiond(){
+        public double getXbDivisiond(){
             return Ecu/(Ecu+Ey) ;
         }
 
