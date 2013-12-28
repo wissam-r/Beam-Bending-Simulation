@@ -28,8 +28,28 @@ namespace TestsForSC
                 double.Parse(textBoxRadius.Text),
                 double.Parse(textBoxCount.Text),
                 double.Parse(textBoxA.Text),
-                0);
+                1);
             this.myForces = new force.Forces(0, myBeam.L);
+        //    MessageBox.Show("العزم المقاوم الاستثماري  : " + myBeam.MomentumInvestment.ToString() + "\n"
+        //        + "عزم التشقق : " + myBeam.Mcr.ToString() + "\n"
+        //        +"ارتفاع منطقة الضغط الجديد : " + myBeam.Y + "\n"
+        //        + "معامل تخفيض المقاومة : " + myBeam.Teta.ToString() + "\n"
+        //        + "مساحة التسليح العظمى : " + myBeam.AsMax.ToString());
+        //    (myBeam.getXbDivisiond() * myBeam.B1).ToString()
+        //    myBeam.MioSmax.ToString()
+
+        //    MessageBox.Show(myBeam.Teta +
+        //    "\n" + myBeam.MomentumInvestment
+
+        //);
+            MessageBox.Show(myBeam.Teta + "\n" +
+                myBeam.CP + "\n" +
+                myBeam.B + "\n" +
+                myBeam.Y + "\n" +
+                myBeam.D+ "\n" +
+                myBeam.getSpaceTensileReinforcement() + "\n" +
+                myBeam.IF + "\n" + 
+                myBeam.MomentumInvestment);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -55,6 +75,11 @@ namespace TestsForSC
         private void button5_Click(object sender, EventArgs e)
         {
             MessageBox.Show((myForces.getfMomentomd2x(double.Parse(textBoxLocation.Text), myBeam.L)/(myBeam.getIe(myForces.getMomentom(double.Parse(textBoxLocation.Text)) * myBeam.Es))).ToString());
+        }
+
+        private void textBoxFc_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using TestsForSC.helper;
 using TestsForSC.beem.reinforcement;
 using TestsForSC.beem.forms;
+using System.Windows.Forms;
 
 namespace TestsForSC.beem
 {
@@ -95,7 +96,7 @@ namespace TestsForSC.beem
             this.x = getX();
             this.asb = asbQ();
             this.asMax = asMaxQ();
-            this.teta = getTeta(choese ,MioS);
+            this.teta = getTeta(choese , MioS);
             this.momentumRegulars = rM();
             this.momentumInvestment = MomentumRegulars * Teta;
             
@@ -131,19 +132,28 @@ namespace TestsForSC.beem
         
         
         public override double  yQ() {
-            return (getSpaceTensileReinforcement() * IF) / (B * 0.85 * CP);
-        
+            return mioS < MioSb ?
+                (getSpaceTensileReinforcement() * IF) / (B * 0.85 * CP) : 
+                this.y = MathHelper.sESDRP(((0.85 * CP) / (MioS * Es * Ecu)), D, -(0.85 * Math.Pow(D, 2)));         
         }//Height equivalent to the pressure zone  
         public override double getIe(double Ma) {
             return Reinforcement.Ie(Ma, Mcr,getMomentInertiaNonCrackedSection() , Icr);
         }
         public override double et()
         {
-            return ((getX() - D) / getX()) * Ecu;
+            return (D - (getX() ) / getX()) * Ecu;
         }
         public override double rM()
         {
-            return  getSpaceTensileReinforcement() * IF * (D - Y / 2);
+            return  //getSpaceTensileReinforcement() * IF * (D - (Y / 2));
+                0.85 * CP * B * Y * (D - Y / 2);
+        }
+        public override void getTheCorrectY()
+        {
+            
+             
+             MessageBox.Show(Y+"\n"+MioS+"\n"+getSpaceTensileReinforcement());
+            
         }
        
     }
