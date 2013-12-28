@@ -30,26 +30,22 @@ namespace TestsForSC
                 double.Parse(textBoxA.Text),
                 1);
             this.myForces = new force.Forces(0, myBeam.L);
-        //    MessageBox.Show("العزم المقاوم الاستثماري  : " + myBeam.MomentumInvestment.ToString() + "\n"
-        //        + "عزم التشقق : " + myBeam.Mcr.ToString() + "\n"
-        //        +"ارتفاع منطقة الضغط الجديد : " + myBeam.Y + "\n"
-        //        + "معامل تخفيض المقاومة : " + myBeam.Teta.ToString() + "\n"
-        //        + "مساحة التسليح العظمى : " + myBeam.AsMax.ToString());
-        //    (myBeam.getXbDivisiond() * myBeam.B1).ToString()
-        //    myBeam.MioSmax.ToString()
-
-        //    MessageBox.Show(myBeam.Teta +
-        //    "\n" + myBeam.MomentumInvestment
-
-        //);
-            MessageBox.Show(myBeam.Teta + "\n" +
-                myBeam.CP + "\n" +
-                myBeam.B + "\n" +
-                myBeam.Y + "\n" +
-                myBeam.D+ "\n" +
-                myBeam.getSpaceTensileReinforcement() + "\n" +
-                myBeam.IF + "\n" + 
-                myBeam.MomentumInvestment);
+            MessageBox.Show("العزم المقاوم الاستثماري  : " + myBeam.MomentumInvestment.ToString() + "\n"
+                + " العزم المقاوم المثالي : " + myBeam.MomentumRegulars + "\n"
+                + "عزم التشقق : " + myBeam.Mcr.ToString() + "\n"
+                + "معامل تخفيض المقاومة : " + myBeam.Teta.ToString() + "\n"
+                + "مساحة التسليح العظمى : " + myBeam.AsMax.ToString()
+                
+                );
+  
+            //MessageBox.Show(myBeam.Teta + "\n" +
+            //    myBeam.CP + "\n" +
+            //    myBeam.B + "\n" +
+            //    myBeam.Y + "\n" +
+            //    myBeam.D+ "\n" +
+            //    myBeam.getSpaceTensileReinforcement() + "\n" +
+            //    myBeam.IF + "\n" + 
+            //    myBeam.MomentumInvestment);
         }
 
         private void button2_Click(object sender, EventArgs e)
