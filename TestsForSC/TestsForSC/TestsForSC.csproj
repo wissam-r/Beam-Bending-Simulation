@@ -46,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="beem\Beem.cs" />
+    <Compile Include="beem\RenforcedBeem.cs" />
     <Compile Include="beem\forms\Form.cs" />
     <Compile Include="beem\forms\Rectangle.cs" />
     <Compile Include="beem\reinforcement\Reinforcement.cs" />

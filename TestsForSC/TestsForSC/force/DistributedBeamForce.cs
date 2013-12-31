@@ -27,13 +27,13 @@ namespace TestsForSC.force
                     e = distance;
                 else
                     e = end;
-                return Power * (Math.Pow(e, 2) / 2 - e * start + Math.Pow(start, 2) / 2);
+                return -Power * (Math.Pow(e, 2) / 2 - e * start + Math.Pow(start, 2) / 2);
             }
                 
         }
         public override double getfMomentomd2x(double distance,double beamLength)
         {
-            double A = -Power * Math.Pow(beamLength - start, 4) / (24 * beamLength);
+            double A = Power * Math.Pow(beamLength - start, 4) / (24 * beamLength);
             
             if (distance <= start)
                 return A * distance;
@@ -44,9 +44,9 @@ namespace TestsForSC.force
                 if (distance > end)
                 {
                     sub = Power * Math.Pow(distance - end, 4) / 24;
-                    A += Power * Math.Pow(beamLength - end, 4) / (24 * beamLength);
+                    A += -Power * Math.Pow(beamLength - end, 4) / (24 * beamLength);
                 }
-                return all - sub + A * distance;
+                return -(all - sub) + A * distance;
             }
 
         }
@@ -65,12 +65,12 @@ namespace TestsForSC.force
 
         public override ReflectionBeamForce getReflectionLeft(double BeamLenght)
         {
-            return new ReflectionBeamForce(this.Power * (Math.Pow(end, 2) - Math.Pow(start, 2) + 2 * BeamLenght * (start - end)) / (2 * BeamLenght),0);
+            return new ReflectionBeamForce(this.Power * ( Math.Pow(start, 2) - Math.Pow(end, 2) + 2 * BeamLenght * (end-start)) / (2 * BeamLenght),0);
         }
 
         public override ReflectionBeamForce getReflectionRight(double BeamLenght)
         {
-            return new ReflectionBeamForce(this.Power * (Math.Pow(start, 2) - Math.Pow(end, 2)) / (2 * BeamLenght), BeamLenght);
+            return new ReflectionBeamForce(this.Power * (Math.Pow(end, 2) - Math.Pow(start, 2)) / (2 * BeamLenght), BeamLenght);
         }
     }
 }

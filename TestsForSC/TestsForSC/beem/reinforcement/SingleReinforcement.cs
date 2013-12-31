@@ -23,7 +23,7 @@ namespace TestsForSC.beem.reinforcement
             return As;
             
         }
-        public double Ie(double Mcr, double Ma, double Ig , double Icr)
+        public double Ie(double Ma,double Mcr, double Ig , double Icr)
         {
              return Mcr > Ma ? Ig :((Math.Pow(Mcr/Ma,3)*Ig)+(1-Math.Pow(Mcr/Ma,3))* Icr)  ;
         }

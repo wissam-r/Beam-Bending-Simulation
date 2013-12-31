@@ -19,7 +19,7 @@ namespace TestsForSC.force
                 return 0;
             else
             {
-                return -distance * Power;
+                return distance * Power;
             }
         }
 
@@ -29,7 +29,7 @@ namespace TestsForSC.force
                 return 0;
             else{
                 double A = -Power * Math.Pow(beamLength , 2) / (6);
-                return -Power * Math.Pow(distance , 3) / 6 - A*distance;
+                return Power * Math.Pow(distance , 3) / 6 + A*distance;
             }
         }
         public void add(Force force)

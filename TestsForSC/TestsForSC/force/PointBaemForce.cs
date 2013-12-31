@@ -20,17 +20,17 @@ namespace TestsForSC.force
                 return 0;
             else
             {
-                return (distance - Position) * Power;
+                return -(distance - Position) * Power;
             }
         }
 
         public override double getfMomentomd2x(double distance,double beamLength)
         {
-            double A = -Power * Math.Pow(beamLength - Position, 3) / (6 * beamLength);
+            double A = Power * Math.Pow(beamLength - Position, 3) / (6 * beamLength);
             if (distance <= Position)
                 return A * distance;
             else{                
-                return Power * Math.Pow(distance - Position, 3) / 6 + A*distance;
+                return -Power * Math.Pow(distance - Position, 3) / 6 + A*distance;
             }
         }
         public override void add(Force force)
