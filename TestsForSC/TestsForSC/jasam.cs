@@ -30,8 +30,8 @@ namespace TestsForSC
                 double.Parse(textBoxA.Text),
                 1);
             this.myForces = new force.Forces(0, myBeam.L);
-            MessageBox.Show("العزم المقاوم الاستثماري  : " + myBeam.MomentumInvestment.ToString() + "\n"
-                + " العزم المقاوم المثالي : " + myBeam.MomentumRegulars + "\n"
+            MessageBox.Show("العزم المقاوم الاستثماري  : " + myBeam.ERM.ToString() + "\n"
+                + " العزم المقاوم المثالي : " + myBeam.RM + "\n"
                 + "عزم التشقق : " + myBeam.Mcr.ToString() + "\n"
                 + "معامل تخفيض المقاومة : " + myBeam.Teta.ToString() + "\n"
                 + "مساحة التسليح العظمى : " + myBeam.AsMax.ToString()
@@ -45,7 +45,7 @@ namespace TestsForSC
             //    myBeam.D+ "\n" +
             //    myBeam.getSpaceTensileReinforcement() + "\n" +
             //    myBeam.IF + "\n" + 
-            //    myBeam.MomentumInvestment);
+            //    myBeam.ERM);
         }
 
         private void button2_Click(object sender, EventArgs e)

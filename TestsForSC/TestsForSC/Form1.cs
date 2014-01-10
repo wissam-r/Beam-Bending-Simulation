@@ -44,7 +44,7 @@ namespace TestsForSC
             textBox4.Text = bemo.EMC.ToString();
             textBox5.Text = bemo.getRatioOfStandard().ToString();
             textBox6.Text = bemo.getSpaceTensileReinforcement().ToString();
-            textBox7.Text = bemo.DNASE.ToString();
+            textBox7.Text = bemo.EquivalentX.ToString();
             textBox8.Text = bemo.CF.ToString();
             textBox9.Text = bemo.Mcr.ToString();
             textBox10.Text = bemo.Icr.ToString();

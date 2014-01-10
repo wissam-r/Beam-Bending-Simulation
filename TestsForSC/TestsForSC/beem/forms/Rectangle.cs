@@ -7,44 +7,52 @@ namespace TestsForSC.beem.forms
 {
     class Rectangle : Form
     {
-        double l, h, b; // h : high  , l : Length , b : width
-
-        public double L
-        {
-            get { return l; }
-        }
-        public double H
-        {
-            get { return h; }
-        }
-        public double B
-        {
-            get { return b; }
-        }
-        double A;//crossSectionalArea
-        double Yt;//distanceCenterGravity
-        double Ig;//momentInertiaNonCrackedSection
-
-        public Rectangle(double h, double l, double b) { 
-            this.h = h;
-            this.b = b;
-            this.l = l;
-            this.A = this.h * this.b;
-            this.Yt = h / 2.0;
-            this.Ig = this.b * Math.Pow(this.h, 3) / 12; 
+        //crossSectionalArea 
+        //مساحة المقطع العرضي
+        private double A;
+        //distanceCenterGravity 
+        //البعد عن مركز ثقل الجٍسم
+        private double Yt;
+        //momentInertiaNonCrackedSection 
+        // عزم العطالة حول مركز الجسم غير المتشقق
+        private double Ig;
+        // h : high  ارتفاع, l : Length طول الخرسانة, b : width عرض الخرسانة
+        public Rectangle(double h, double l, double b) 
+        { 
+            this.A = calcCrossSectionalArea(h, b);
+            this.Yt = calcDistanceCenterGravity(h);
+            this.Ig = calcMomentInertiaNonCrackedSection(h, b);
 
         }
+        
+        private double calcCrossSectionalArea(double h , double b){
+            return h*b ;
+        }
+        private double calcDistanceCenterGravity(double h){
+
+            return h / 2.0;
+    
+    }
+        private double calcMomentInertiaNonCrackedSection(double h, double b)
+        {
+            return b * Math.Pow(h, 3) / 12; 
+        
+        }
+
+        //A
         public double crossSectionalArea()
         {
             return A;
         }
+        // Yt
         public double distanceCenterGravity()
         {
             return Yt; 
         }
+        // Ig
         public double momentInertiaNonCrackedSection()
         {
             return Ig;
-        }
+        } 
     }
 }

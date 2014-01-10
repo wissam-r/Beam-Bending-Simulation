@@ -11,23 +11,50 @@ namespace TestsForSC.beem
 {
     class SinReinRecBeem : RenforcedBeem 
     {
+        //The distance between the extreme pressure fiber and reinforcement center in the concrete
+        //المسافة بين أقصى ليف شد و مركز التسليح
+        private double d;
+        //hight
+        private double h;
+        //The depth of the neutral axis of the section equivalent
+        //عمق المحور المحايد للمقطع المكافئ
+        private double equivalentX;
+        //Moment Inertia equivalent cracked section about the neutral axis Icr
+        //عزم العطالة حول المحور للمقطع المتشقق
+        private double icr;
+        //The actual percentage of reinforcement
+        //نسبة مساحة مقطع التسليح العرضي الى مساحة مقطع الخرسانة العرضي
+        private double muS;
+        //the moment that cause the cracking of the concrete  MNm
+        //عزم التشقق
+        private double mcr;
+        //Height equivalent to the pressure zone
+        //عمق منطقة الضغط
+        private double y;
+        //The depth of the neutral axis of the section 
+        //عمق المحور المحايد
+        private double x;
+        // equilibrium Space reinforcemenT
+        //مساحة التسليح الوسطية
+        private double asb;
+        //maxmum Space reinforcemenT
+        //مساحة التسليح العظمى
+        private double asMax;
+        //strength reduction factor
+        //معامل تخفيض المقاومة
+        private double teta;
+        //Momentum resistor in the ideal case
+        //العزم المقاوم في الحالة المثالية
+        private double rM;
+        //Momentum-resistant investment
+        //العزم المقاوم الاستثماري
+        private double eRM;
 
-        private double d; //The distance between the extreme pressure fiber and reinforcement center in the concrete 
-        private double dNASE;//The depth of the neutral axis of the section equivalent
-        private double icr;//Moment Inertia equivalent cracked section about the neutral axis Icr
-        private double mioS;
-        private double mcr;//the moment that cause the cracking of the concrete  MNm
-        private double y; //Height equivalent to the pressure zone
-        private double x;//The depth of the neutral axis of the section 
-        private double asb;// equilibrium Space reinforcemenT
-        private double asMax;//maxmum Space reinforcemenT
-        private double teta; //strength reduction factor
-        private double momentumRegulars;
-        private double momentumInvestment;
-
-        public double MomentumInvestment
+        public double H { get { return h; } 
+        }
+        public double ERM
         {
-            get { return momentumInvestment; }
+            get { return eRM; }
         }
         public double Teta {
             get { return teta; }
@@ -43,23 +70,23 @@ namespace TestsForSC.beem
         {
             get { return y; }
         }
-        public double MioS
+        public double MuS
         {
-            get { return mioS; }
-        }//The actual percentage of reinforcement
+            get { return muS; }
+        }
         public double D
         {
             get { return d; }
         }      
-        public double DNASE
+        public double EquivalentX
         {
-            get { return dNASE; }
+            get { return equivalentX; }
         }
         public double Icr
         {
             get { return icr; }
         }
-        public double Mcr //the moment that cause the cracking of the concrete
+        public double Mcr 
         {
             get { return mcr; }
             protected set { mcr = value; }
@@ -68,9 +95,9 @@ namespace TestsForSC.beem
         {
             get { return x; }
         }
-        public double MomentumRegulars
+        public double RM
         {
-            get { return momentumRegulars; }
+            get { return rM; }
         }
         
 
@@ -85,74 +112,77 @@ namespace TestsForSC.beem
         {
             
             Form = new Rectangle(h, l, b);
-            Reinforcement = new SingleReinforcement(iF , r, n);
-
+            Reinforcement = new SingleReinforcement(r, n);
+            this.h = h; 
             this.d = h - a;
-            this.mioS = mioSQ();
-            Mcr = mcrQ(); 
-            dNASE = depthNeutralAxisSectionEquivalent();
+            this.muS = calcMioS();
+            Mcr = calcMcr(); 
+            equivalentX = depthNeutralAxisSectionEquivalent();
             icr = momentInertiaEquivalentCrackedSection();
-            this.y = yQ();
+            this.y = calcY();
             this.x = getX();
-            this.asb = asbQ();
-            this.asMax = asMaxQ();
-            this.teta = getTeta(choese , MioS);
-            this.momentumRegulars = rM();
-            this.momentumInvestment = MomentumRegulars * Teta;
+            this.asb = calcAsb();
+            this.asMax = calcAsMax();
+            this.teta = getTeta(choese , MuS);
+            this.rM = calcRM();
+            this.eRM = RM * Teta;
             
                   
         }
 
-        double asMaxQ()
+        private double calcAsMax()
         {
             return Asb / 2;
         }
-        double depthNeutralAxisSectionEquivalent( ) //The depth of the neutral axis of the section equivalent
+        //The depth of the neutral axis of the section equivalent
+        private double depthNeutralAxisSectionEquivalent( )
         {
             return MathHelper.sESDRP(B / 2, getRatioOfStandard() * getSpaceTensileReinforcement(),
                 -(getRatioOfStandard() * getSpaceTensileReinforcement() * D));
         }
-        double momentInertiaEquivalentCrackedSection() // Moment Inertia equivalent cracked section about the neutral axis Icr
+        // Moment Inertia equivalent cracked section about the neutral axis Icr
+        private double momentInertiaEquivalentCrackedSection() 
         {
-            return B * Math.Pow(DNASE, 3) / 3 + getRatioOfStandard() * getSpaceTensileReinforcement() * Math.Pow(D - DNASE, 2);
+            return B * Math.Pow(EquivalentX, 3) / 3 + getRatioOfStandard() * getSpaceTensileReinforcement() * Math.Pow(D - EquivalentX, 2);
         }
-        double mcrQ()
+        private double calcMcr()
         {
             return (CF * getMomentInertiaNonCrackedSection() * Math.Pow(10, -8)) / (getDistanceCenterGravity() * Math.Pow(10, -2));
         }
-        double mioSQ()
+        //The actual percentage of reinforcement
+        private double calcMioS()
         {
             return getSpaceTensileReinforcement() / (B * D);
-        }//The actual percentage of reinforcement
-        double asbQ() {
+        }
+        private double calcAsb() {
             return MioSb / (B * D);
         }
-       
-        
-        
-        
-        public override double  yQ() {
-            return mioS < MioSb ?
+
+
+
+        //Height equivalent to the pressure zone  
+        protected override double  calcY() {
+            return muS < MioSb ?
                 (getSpaceTensileReinforcement() * IF) / (B * 0.85 * CP) : 
-                this.y = MathHelper.sESDRP(((0.85 * CP) / (MioS * Es * Ecu)), D, -(0.85 * Math.Pow(D, 2)));         
-        }//Height equivalent to the pressure zone  
+                this.y = MathHelper.sESDRP(((0.85 * CP) / (MuS * Es * Ecu)), D, -(0.85 * Math.Pow(D, 2)));         
+        }
         public override double getIe(double Ma) {
             return Reinforcement.Ie(Ma, Mcr,getMomentInertiaNonCrackedSection() , Icr);
         }
-        public override double et()
+        protected override double et()
         {
             return (D - (getX() ) / getX()) * Ecu;
         }
-        public override double rM()
+        protected override double calcRM()
         {
             return  //getSpaceTensileReinforcement() * IF * (D - (Y / 2));
                 0.85 * CP * B * Y * (D - Y / 2);
         }
-        public override void getTheCorrectY()
+        protected override void getTheCorrectY()
         {
             
              
-             MessageBox.Show(Y+"\n"+MioS+"\n"+getSpaceTensileReinforcement());
+             MessageBox.Show(Y+"\n"+MuS+"\n"+getSpaceTensileReinforcement());
             
         }
        

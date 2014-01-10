@@ -6,38 +6,39 @@ using System.Windows.Forms;
 
 namespace TestsForSC.beem
 {
-    
+
     abstract class RenforcedBeem
     {
-        public const double Ecu = 0.003 ;//Deformation of the concrete
-       
-        public RenforcedBeem(double cP,double iF,double b, double l ,double es)
+        public const double Ecu = 0.003;//Deformation of the concrete
+
+        public RenforcedBeem(double cP, double iF, double b, double l, double es)
         {
             this.b = b;
             this.l = l;
             this.cP = cP;
             this.iF = iF;
             this.es = es;
-            this.b1 = b1Q();
-            this.emC = emcQ();
-            this.cF = cfQ();
-            this.mioSmin = mioSminQ();
-            this.ey = EyQ();
+            this.b1 = calcB1();
+            this.emC = calcEmc();
+            this.cF = calcCF();
+            this.mioSmin = calcMioSmin();
+            this.ey = calcEy();
             this.n = ratioOfStandard();
-            this.mioSb = mioSbQ();
-            this.mioSmax = mioSmaxQ();
-            
-                        
+            this.mioSb = calcMioSb();
+            this.mioSmax = calcMioSmax();
+
+
         }
 
 
 
-        
+
 
         forms.Form form;
-        public forms.Form Form {
+        public forms.Form Form
+        {
             get { return form; }
-            set {form = value;}
+            set { form = value; }
 
         }
         reinforcement.Reinforcement reinforcement;
@@ -46,21 +47,33 @@ namespace TestsForSC.beem
             get { return reinforcement; }
             set { reinforcement = value; }
         }
+        //Resistance of concrete to pressure f'c
+        private double cP;
+        //Resistance of concrete to flatten Fcb
+        private double cF;
+        //Elastic modulus of concrete Eco
+        private double emC;
+        //length
+        private double l;
+        //width
+        private double b;
+        //Resistant iron to flatten
+        private double iF;
+        //Minimum ratio of reinforcement
+        private double mioSmin;
+        //Coefficient to bring pressure area in the form of a rectangle
+        private double b1;
+        //Deformation of reinforcing
+        private double ey;
+        //Elastic modulus
+        private double es;
+        //Space equivalent of concrete n ,  ratioOfStandard
+        private double n;
+        ///Equilibrium ratio of reinforcement
+        private double mioSb;
+        //Maxmum ratio of reinforcement
+        private double mioSmax;
 
-        private double cP; //Resistance of concrete to pressure (f'c
-        private double cF;//Resistance of concrete to flatten Fcb
-        private double emC;//Elastic modulus of concrete Eco
-        private double l;//
-        private double b;//
-        private double iF;//Resistant iron to flatten
-        private double mioSmin;//Minimum ratio of reinforcement
-        private double b1;//Coefficient to bring pressure area in the form of a rectangle
-        private double ey;//Deformation of reinforcing
-        private double es;//Elastic modulus
-        private double n; //Space equivalent of concrete n ,  ratioOfStandard
-        private double mioSb;///Equilibrium ratio of reinforcement
-        private double mioSmax;//Maxmum ratio of reinforcement
-        
 
         public double MioSmax
         {
@@ -101,39 +114,46 @@ namespace TestsForSC.beem
         public double CP
         {
             get { return cP; }
-        }//Resistance of concrete to pressure (f'c
+        }
         public double CF
         {
             get { return cF; }
-        }//Resistance of concrete to flatten Fcb
+        }
         public double EMC
         {
             get { return emC; }
-        }//Elastic modulus of concrete Eco
-       
+        }
 
-        public double getCrossSectionalArea()
+        //A
+        protected double getCrossSectionalArea()
         {
-            return Form.crossSectionalArea(); 
-        }//A
-        public double getDistanceCenterGravity()
+            return Form.crossSectionalArea();
+        }
+        //Yt
+        protected double getDistanceCenterGravity()
         {
             return Form.distanceCenterGravity();
-        }//Yt
-        public double getMomentInertiaNonCrackedSection() {
+        }
+        //Ig
+        protected double getMomentInertiaNonCrackedSection()
+        {
             return form.momentInertiaNonCrackedSection();
-        }//Ig
-        public double getRatioOfStandard() {
+        }
+        protected double getRatioOfStandard()
+        {
             return n;
-        }     
-        public double getSpaceTensileReinforcement() {
+        }
+        //As
+        protected double getSpaceTensileReinforcement()
+        {
             return reinforcement.spaceTensileReinforcement();
-        }//As
-        
-        protected double getTeta(byte choese,double mioS) {
+        }
+        //strength reduction factor
+        protected double getTeta(byte choese, double mioS)
+        {
             if (mioS < MioSmax)
             {
-               
+
                 return 0.9;
             }
             else if (mioS > MioSb)
@@ -147,25 +167,29 @@ namespace TestsForSC.beem
                 //getTheCorrectY();
                 if (choese == 1)
 
-                    return 0.7 +  (et() - (IF / Es)) * (200 / 3) <= 0.9 ? 0.7 + (et() - (IF / Es)) * (200 / 3) : 0.9;
+                    return 0.7 + (et() - (IF / Es)) * (200 / 3) <= 0.9 ? 0.7 + (et() - (IF / Es)) * (200 / 3) : 0.9;
                 else
                     return 0.75 + (et() - (IF / Es)) * (150 / 3) <= 0.9 ? 0.75 + (et() - (IF / Es)) * (150 / 3) : 0.9;
             }
-                
+
+        }
+        //The depth of the neutral axis of the section 
+        protected double getX()
+        {
+            return calcY() / B1;
+        }
+        //Xb/D
+        private double getXbDivisionD()
+        {
+            return Ecu / (Ecu + Ey);
         }
 
-        //strength reduction factor
-        protected double getX() {
-            return yQ() / B1;
-        }////The depth of the neutral axis of the section 
-        public double getXbDivisiond(){
-            return Ecu/(Ecu+Ey) ;
-        }
-
-        private double mioSminQ() {
+        private double calcMioSmin()
+        {
             return Math.Sqrt(CP) / (4 * IF) > 1.4 / IF ? Math.Sqrt(CP) / (4 * IF) : 1.4 / IF; ;
         }
-        private double b1Q() {
+        private double calcB1()
+        {
             if (CP <= 30)
                 return 0.85;
             else if (CP >= 58)
@@ -173,35 +197,41 @@ namespace TestsForSC.beem
             else
                 return 0.85 - 0.007 * (CP - 30);
         }
-        private double emcQ() {
+        private double calcEmc()
+        {
             return Math.Sqrt(this.cP) * 6645;
         }
-        private double cfQ()
+        private double calcCF()
         {
             return 0.74 * Math.Sqrt(this.cP);
         }
-        private double EyQ() {
+        private double calcEy()
+        {
             return IF / Es;
         }
+        //Space equivalent of concrete n
         private double ratioOfStandard()
         {
             return Es / EMC;
-        }//Space equivalent of concrete n
-        private double mioSbQ() {
-            return (B1 * CP * 0.85 * getXbDivisiond()) / IF; 
         }
-        private double mioSmaxQ()
+        private double calcMioSb()
         {
-            return mioSbQ() / 2;
+            return (B1 * CP * 0.85 * getXbDivisionD()) / IF;
+        }
+        private double calcMioSmax()
+        {
+            return calcMioSb() / 2;
         }
 
+        //moment effective inertia  
+        abstract public double getIe(double Ma);
+        //Height equivalent to the pressure zone
+        abstract protected double calcY();
+        abstract protected double et();
+        //Momentum-resistant
+        abstract protected double calcRM();
+        abstract protected void getTheCorrectY();
 
-        abstract public double getIe(double Ma);//moment effective inertia  
-        abstract public double yQ();//Height equivalent to the pressure zone
-        abstract public double et();//
-        abstract public double rM();//Momentum-resistant
-        abstract public void getTheCorrectY();
-        
 
 
     }
