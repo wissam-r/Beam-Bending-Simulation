@@ -82,5 +82,9 @@ namespace TestsForSC
         {
             MessageBox.Show(myForces.getfMomentomd2x(double.Parse(textBoxLocation.Text), myBeam.L).ToString());
         }
+
+        public Control XnaContorl{
+            get{ return this.tabPage4; }
+        }
     }
 }
