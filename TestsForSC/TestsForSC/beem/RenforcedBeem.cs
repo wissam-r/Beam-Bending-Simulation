@@ -13,11 +13,11 @@ namespace TestsForSC.beem
 
         public RenforcedBeem(double cP, double iF, double b, double l, double es)
         {
-            this.b = b;
-            this.l = l;
-            this.cP = cP;
-            this.iF = iF;
-            this.es = es;
+            B = b;
+            L = l;
+            CP = cP;
+            IF = iF;
+            Es = es;
             this.b1 = calcB1();
             this.emC = calcEmc();
             this.cF = calcCF();
@@ -86,6 +86,15 @@ namespace TestsForSC.beem
         public double Es
         {
             get { return es; }
+            private set {
+                if (value <= 0) {
+                    throw new ArgumentException("Es can't be <=  0");
+                }
+                else
+                {
+                    this.es = value;
+                }
+            }
         }
         public double Ey
         {
@@ -102,26 +111,73 @@ namespace TestsForSC.beem
         public double IF
         {
             get { return iF; }
+            private set {
+                if (value <= 0) 
+                {
+                    throw new ArgumentException("iF can't be < 0");    
+                }
+                else
+                {
+                    this.iF = value;
+                }
+            }
         }
         public double B
         {
             get { return b; }
+            private set
+            {
+                if (value <= 0)
+                {
+                    throw new ArgumentException("B can't ne <= 0 " );
+                }
+                else
+                    this.b = value;
+            }
         }
         public double L
         {
             get { return l; }
+            private set {
+                if (value <= 0)
+                {
+                    throw new ArgumentException("L can't be < 0 ");
+                }
+                else {
+                    this.l = value;
+                }
+            
+            }
         }
         public double CP
         {
             get { return cP; }
+            private set {
+                if (value <= 0)
+                {
+                    throw new ArgumentException("cP can't be <= 0 ");
+                }
+                else
+                    this.cP = value;
+            }
         }
         public double CF
         {
             get { return cF; }
+            private set {
+                if (value <= 0)
+                {
+                    throw new ArgumentException("cF can't be < 0 ");
+                }
+                else
+                {
+                    cF = value;
+                }
+            }
         }
         public double EMC
         {
-            get { return emC; }
+            get { return emC; } 
         }
 
         //A

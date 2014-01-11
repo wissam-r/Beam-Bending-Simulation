@@ -13,6 +13,11 @@ namespace TestsForSC.beem.reinforcement
 
         public SingleReinforcement(double r, double number)
         {
+            if (r <= 0)
+                throw new ArgumentException("r can't be < = 0 ");
+            if (number <= 0) 
+                throw new ArgumentException("number of rebar can't be <=0") ;
+            
             As = calcAs(r, number);
 
         }

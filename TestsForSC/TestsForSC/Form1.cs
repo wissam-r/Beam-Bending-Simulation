@@ -38,12 +38,7 @@ namespace TestsForSC
 
         private void button1_Click(object sender, EventArgs e)
         {
-            textBox1.Text = bemo.getCrossSectionalArea().ToString();
-            textBox2.Text = bemo.getDistanceCenterGravity().ToString();
-            textBox3.Text = bemo.getMomentInertiaNonCrackedSection().ToString();
             textBox4.Text = bemo.EMC.ToString();
-            textBox5.Text = bemo.getRatioOfStandard().ToString();
-            textBox6.Text = bemo.getSpaceTensileReinforcement().ToString();
             textBox7.Text = bemo.EquivalentX.ToString();
             textBox8.Text = bemo.CF.ToString();
             textBox9.Text = bemo.Mcr.ToString();

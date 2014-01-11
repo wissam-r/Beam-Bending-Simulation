@@ -50,7 +50,19 @@ namespace TestsForSC.beem
         //العزم المقاوم الاستثماري
         private double eRM;
 
-        public double H { get { return h; } 
+        public double H 
+        { 
+            get { return h; }
+            private set {
+                if (value <= 0) {
+                    throw new ArgumentException("H can't be <= 0 "); 
+                }
+                else
+                {
+                    this.h = value;
+                }
+            
+            }
         }
         public double ERM
         {
@@ -77,6 +89,17 @@ namespace TestsForSC.beem
         public double D
         {
             get { return d; }
+            private set {
+                if (value <= 0)
+                {
+                    throw new ArgumentException("D can't be  <= 0 ");
+                }
+                else
+                {
+                    this.d = value;
+                }
+                
+            }
         }      
         public double EquivalentX
         {
@@ -110,12 +133,13 @@ namespace TestsForSC.beem
             : base(cP,iF , b, l,es)//(30, 20, 200, 20, 210000, 10, 2, 5);
             //a,h,l,b,r : cm , es,cp :Mpa 
         {
-            
+            H = h;           
             Form = new Rectangle(h, l, b);
             Reinforcement = new SingleReinforcement(r, n);
-            this.h = h; 
-            this.d = h - a;
+            D = h - a;
             this.muS = calcMioS();
+            if (MuS >= 1)
+                throw new ArgumentException("As can't be <=  A");
             Mcr = calcMcr(); 
             equivalentX = depthNeutralAxisSectionEquivalent();
             icr = momentInertiaEquivalentCrackedSection();
@@ -167,6 +191,7 @@ namespace TestsForSC.beem
                 this.y = MathHelper.sESDRP(((0.85 * CP) / (MuS * Es * Ecu)), D, -(0.85 * Math.Pow(D, 2)));         
         }
         public override double getIe(double Ma) {
+            
             return Reinforcement.Ie(Ma, Mcr,getMomentInertiaNonCrackedSection() , Icr);
         }
         protected override double et()

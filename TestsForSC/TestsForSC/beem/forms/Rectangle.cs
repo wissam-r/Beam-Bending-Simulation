@@ -17,6 +17,8 @@ namespace TestsForSC.beem.forms
         // عزم العطالة حول مركز الجسم غير المتشقق
         private double Ig;
         // h : high  ارتفاع, l : Length طول الخرسانة, b : width عرض الخرسانة
+
+
         public Rectangle(double h, double l, double b) 
         { 
             this.A = calcCrossSectionalArea(h, b);
