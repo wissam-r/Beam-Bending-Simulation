@@ -14,6 +14,8 @@ namespace TestsForSC
         public jasam()
         {
             InitializeComponent();
+            NewPointsFlag = false;
+            NewPointPositionFlag = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -37,6 +39,9 @@ namespace TestsForSC
                 + "مساحة التسليح العظمى : " + myBeam.AsMax.ToString()
                 
                 );
+
+            NewPointsFlag = true;
+            MaxMomentom = myBeam.ERM;
   
             //MessageBox.Show(myBeam.Teta + "\n" +
             //    myBeam.CP + "\n" +
@@ -53,6 +58,7 @@ namespace TestsForSC
             this.myForces.Add(new force.PointBaemForce(
                 double.Parse(textBoxPointForce.Text),
                 double.Parse(textBoxForceLocation.Text)));
+            NewPointPositionFlag = true;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -61,6 +67,7 @@ namespace TestsForSC
                 double.Parse(textBoxDistributedForce.Text),
                 double.Parse(textBoxForceStart.Text),
                 double.Parse(textBoxForceEnd.Text)));
+            NewPointPositionFlag = true;
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -70,7 +77,7 @@ namespace TestsForSC
 
         private void button5_Click(object sender, EventArgs e)
         {
-            MessageBox.Show((myForces.getfMomentomd2x(double.Parse(textBoxLocation.Text), myBeam.L)/(myBeam.getIe(myForces.getMomentom(double.Parse(textBoxLocation.Text)) * myBeam.EMC))).ToString());
+            MessageBox.Show((myForces.getfMomentomd2x(double.Parse(textBoxLocation.Text), myBeam.L)/(myBeam.getIe(myForces.getMomentom(double.Parse(textBoxLocation.Text))) * myBeam.EMC)).ToString());
         }
 
         private void textBoxFc_TextChanged(object sender, EventArgs e)
@@ -84,7 +91,41 @@ namespace TestsForSC
         }
 
         public Control XnaContorl{
-            get{ return this.tabPage4; }
+            get{ return this.splitContainer1.Panel1; }
+        }
+
+        public bool NewPointsFlag
+        {
+            set;
+            get;
+        }
+
+        public bool NewPointPositionFlag
+        {
+            set;
+            get;
+        }
+
+        
+
+        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            this.label24.Text = trackBar1.Value.ToString();
+        }
+
+        private void trackBar1_ValueChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(MaxMomentom.ToString());
         }
     }
 }

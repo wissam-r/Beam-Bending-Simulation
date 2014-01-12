@@ -27,7 +27,7 @@ namespace TestsForSC.force
                     e = distance;
                 else
                     e = end;
-                return -Power * (Math.Pow(e, 2) / 2 - e * start + Math.Pow(start, 2) / 2);
+                return -Power * (Math.Pow(e, 2) / 2 - e * start + Math.Pow(start, 2) / 2) * factor;
             }
                 
         }
@@ -36,7 +36,7 @@ namespace TestsForSC.force
             double A = Power * Math.Pow(beamLength - start, 4) / (24 * beamLength);
             
             if (distance <= start)
-                return A * distance;
+                return A * distance * factor;
             else
             {
                 double all, sub = 0;
@@ -46,7 +46,7 @@ namespace TestsForSC.force
                     sub = Power * Math.Pow(distance - end, 4) / 24;
                     A += -Power * Math.Pow(beamLength - end, 4) / (24 * beamLength);
                 }
-                return -(all - sub) + A * distance;
+                return (-(all - sub) + A * distance) * factor;
             }
 
         }

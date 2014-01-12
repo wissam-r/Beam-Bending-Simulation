@@ -7,6 +7,7 @@ namespace TestsForSC.force
 {
     abstract class Force
     {
+        public const int factor = 1;//للتحويل بين الواحدات
         public Force(double power)
         {
             Power = power;

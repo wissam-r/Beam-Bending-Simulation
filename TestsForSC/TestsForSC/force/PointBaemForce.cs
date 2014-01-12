@@ -8,7 +8,7 @@ namespace TestsForSC.force
     class PointBaemForce : Force 
     {
         private double Position;
-
+        
         public PointBaemForce(double power, double position)
             : base(power)
         {
@@ -20,17 +20,18 @@ namespace TestsForSC.force
                 return 0;
             else
             {
-                return -(distance - Position) * Power;
+                return -(distance - Position) * Power * factor;
             }
         }
 
         public override double getfMomentomd2x(double distance,double beamLength)
         {
+            
             double A = Power * Math.Pow(beamLength - Position, 3) / (6 * beamLength);
             if (distance <= Position)
-                return A * distance;
+                return A * distance * factor;
             else{                
-                return -Power * Math.Pow(distance - Position, 3) / 6 + A*distance;
+                return (-Power * Math.Pow(distance - Position, 3) / 6 + A*distance)*factor;
             }
         }
         public override void add(Force force)
