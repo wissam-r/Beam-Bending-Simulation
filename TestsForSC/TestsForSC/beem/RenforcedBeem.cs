@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using TestsForSC.helper;
 
 namespace TestsForSC.beem
 {
@@ -21,18 +22,16 @@ namespace TestsForSC.beem
             this.b1 = calcB1();
             this.emC = calcEmc();
             this.cF = calcCF();
-            this.mioSmin = calcMioSmin();
+            this.muSmin = calcMuSmin();
             this.ey = calcEy();
             this.n = ratioOfStandard();
-            this.mioSb = calcMioSb();
-            this.mioSmax = calcMioSmax();
+            this.muSb = calcMuSb();
+            
 
 
         }
 
-
-
-
+        #region Composing Parammters
 
         forms.Form form;
         public forms.Form Form
@@ -47,6 +46,10 @@ namespace TestsForSC.beem
             get { return reinforcement; }
             set { reinforcement = value; }
         }
+
+        #endregion
+
+        #region Private Parammeters
         //Resistance of concrete to pressure f'c
         private double cP;
         //Resistance of concrete to flatten Fcb
@@ -60,7 +63,7 @@ namespace TestsForSC.beem
         //Resistant iron to flatten
         private double iF;
         //Minimum ratio of reinforcement
-        private double mioSmin;
+        private double muSmin;
         //Coefficient to bring pressure area in the form of a rectangle
         private double b1;
         //Deformation of reinforcing
@@ -70,18 +73,16 @@ namespace TestsForSC.beem
         //Space equivalent of concrete n ,  ratioOfStandard
         private double n;
         ///Equilibrium ratio of reinforcement
-        private double mioSb;
-        //Maxmum ratio of reinforcement
-        private double mioSmax;
+        private double muSb;
 
 
-        public double MioSmax
+        #endregion
+
+        #region Public Getters
+
+        public double MuSb
         {
-            get { return mioSmax; }
-        }
-        public double MioSb
-        {
-            get { return mioSb; }
+            get { return muSb; }
         }
         public double Es
         {
@@ -104,9 +105,9 @@ namespace TestsForSC.beem
         {
             get { return b1; }
         }
-        public double MioSmin
+        public double MuSmin
         {
-            get { return mioSmin; }
+            get { return muSmin; }
         }
         public double IF
         {
@@ -179,7 +180,9 @@ namespace TestsForSC.beem
         {
             get { return emC; } 
         }
+        #endregion
 
+        #region Protected Getters
         //A
         protected double getCrossSectionalArea()
         {
@@ -204,15 +207,19 @@ namespace TestsForSC.beem
         {
             return reinforcement.spaceTensileReinforcement();
         }
+        //Aas
+        protected double getSpaceCompressionReinforcement() {
+            return Reinforcement.spaceCompressionReinforcement();
+        }
         //strength reduction factor
-        protected double getTeta(byte choese, double mioS)
+        protected double getTeta(byte choese, double muS,double MuSmax, double D)
         {
-            if (mioS < MioSmax)
+            if (muS < MuSmax)
             {
 
                 return 0.9;
             }
-            else if (mioS > MioSb)
+            else if (muS > MuSb)
             {
                 //getTheCorrectY();
                 return 0.7;
@@ -223,9 +230,9 @@ namespace TestsForSC.beem
                 //getTheCorrectY();
                 if (choese == 1)
 
-                    return 0.7 + (et() - (IF / Es)) * (200 / 3) <= 0.9 ? 0.7 + (et() - (IF / Es)) * (200 / 3) : 0.9;
+                    return 0.7 + (et(D) - (IF / Es)) * (200 / 3) <= 0.9 ? 0.7 + (et(D) - (IF / Es)) * (200 / 3) : 0.9;
                 else
-                    return 0.75 + (et() - (IF / Es)) * (150 / 3) <= 0.9 ? 0.75 + (et() - (IF / Es)) * (150 / 3) : 0.9;
+                    return 0.75 + (et(D) - (IF / Es)) * (150 / 3) <= 0.9 ? 0.75 + (et(D) - (IF / Es)) * (150 / 3) : 0.9;
             }
 
         }
@@ -234,13 +241,55 @@ namespace TestsForSC.beem
         {
             return calcY() / B1;
         }
+
+        protected double calcMcr()
+        {
+            return (CF * getMomentInertiaNonCrackedSection() * Math.Pow(10, -8)) / (getDistanceCenterGravity() * Math.Pow(10, -2));
+        }
+        protected double et(double D)
+        //تشوه الحديد
+        {
+            return (D - (getX()) / getX()) * Ecu;
+        }
+
+        //The actual percentage of reinforcement
+        protected double calcMuS(double As , double D)
+        {
+            return As / (D*B);
+        }
+        protected double calcAsb(double D)
+        {
+            return MuSb * B * D;
+        }
+        //The depth of the neutral axis of the section equivalent
+        protected double depthNeutralAxisSectionEquivalent(double As ,  double Aas ,  double D ,double Da)
+        {
+            return MathHelper.sESDRP(B / 2, getRatioOfStandard() * As +(getRatioOfStandard()-1)*Aas,
+                -(getRatioOfStandard() * As * D) - (getRatioOfStandard() - 1) * Aas*Da);
+        }
+        // Moment Inertia equivalent cracked section about the neutral axis Icr
+        protected double momentInertiaEquivalentCrackedSection(double x , double As,double Aas ,  double D, double Da )
+        {
+            return B * Math.Pow(x, 3) / 3 + getRatioOfStandard() * As * Math.Pow(D - x, 2) + (getRatioOfStandard() - 1) * Aas * Math.Pow(Da - x, 2);
+        }
+
+        //moment effective inertia 
+        //عزم العطالة حول مركز الجسم المتشقق
+        public double Ie(double Ma, double Mcr, double Ig, double Icr)
+        {
+            return Mcr > Ma ? Ig : ((Math.Pow(Mcr / Ma, 3) * Ig) + (1 - Math.Pow(Mcr / Ma, 3)) * Icr);
+        } 
+
+        #endregion
+
+        #region Private CalcMethods
+
         //Xb/D
         private double getXbDivisionD()
         {
             return Ecu / (Ecu + Ey);
         }
-
-        private double calcMioSmin()
+        private double calcMuSmin()
         {
             return Math.Sqrt(CP) / (4 * IF) > 1.4 / IF ? Math.Sqrt(CP) / (4 * IF) : 1.4 / IF; ;
         }
@@ -270,23 +319,25 @@ namespace TestsForSC.beem
         {
             return Es / EMC;
         }
-        private double calcMioSb()
+        private double calcMuSb()
         {
             return (B1 * CP * 0.85 * getXbDivisionD()) / IF;
         }
-        private double calcMioSmax()
-        {
-            return calcMioSb() / 2;
-        }
+        
 
+        #endregion
+
+
+        #region Abstract Methods
         //moment effective inertia  
         abstract public double getIe(double Ma);
         //Height equivalent to the pressure zone
         abstract protected double calcY();
-        abstract protected double et();
+        
         //Momentum-resistant
         abstract protected double calcRM();
-        abstract protected void getTheCorrectY();
+
+        #endregion
 
 
 

@@ -10,10 +10,10 @@ namespace TestsForSC.beem.reinforcement
     {
         //R : radius قطر قضيب التسليح
         //N : number of Reinforcing penis عدد قضبان التسليح
+        //مساحة المقطع العرضي لتسليح الشد
         double spaceTensileReinforcement();
-        //moment effective inertia 
-        //عزم العطالة حول مركز الجسم المتشقق
-        double Ie(double Mcr, double Ma, double Ig, double Icr);
+        //مساحة المقطع العرضي لتسليح الضغط
+        double spaceCompressionReinforcement();
 
     }
 }

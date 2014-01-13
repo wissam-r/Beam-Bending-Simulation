@@ -9,8 +9,9 @@ using System.Windows.Forms;
 
 namespace TestsForSC.beem
 {
-    class SinReinRecBeem : RenforcedBeem 
+    class SinReinRecBeem : RenforcedBeem
     {
+        #region Private Parammters
         //The distance between the extreme pressure fiber and reinforcement center in the concrete
         //المسافة بين أقصى ليف شد و مركز التسليح
         private double d;
@@ -25,6 +26,8 @@ namespace TestsForSC.beem
         //The actual percentage of reinforcement
         //نسبة مساحة مقطع التسليح العرضي الى مساحة مقطع الخرسانة العرضي
         private double muS;
+        //Maxmum ratio of reinforcement
+        private double muSmax;
         //the moment that cause the cracking of the concrete  MNm
         //عزم التشقق
         private double mcr;
@@ -50,6 +53,10 @@ namespace TestsForSC.beem
         //العزم المقاوم الاستثماري
         private double eRM;
 
+        #endregion
+
+        #region Public Getters
+
         public double H 
         { 
             get { return h; }
@@ -63,6 +70,10 @@ namespace TestsForSC.beem
                 }
             
             }
+        }
+        public double MuSmax
+        {
+            get { return muSmax; }
         }
         public double ERM
         {
@@ -85,6 +96,18 @@ namespace TestsForSC.beem
         public double MuS
         {
             get { return muS; }
+            private set { 
+                if (value >= 1)
+                    throw new ArgumentException("As can't be >=  A");
+                else if (value < MuSmin)
+                {
+                    throw new ArgumentException("Mus can't be < MusMin");
+                }
+                else
+                {
+                    this.muS = value;
+                }
+            }
         }
         public double D
         {
@@ -122,14 +145,11 @@ namespace TestsForSC.beem
         {
             get { return rM; }
         }
-        
+
+        #endregion
 
 
-
-
-
-
-        public SinReinRecBeem(double cP, double iF, double h, double l, double b, double es, double r, double n, double a, byte choese)// a : the distance between the Maximum fiber strain and reinforcement , choese  : Type Bracelets iron
+        public SinReinRecBeem(double cP, double iF, double h, double l, double b, double es, double r, int n, double a, byte choese)// a : the distance between the Maximum fiber strain and reinforcement , choese  : Type Bracelets iron
             : base(cP,iF , b, l,es)//(30, 20, 200, 20, 210000, 10, 2, 5);
             //a,h,l,b,r : cm , es,cp :Mpa 
         {
@@ -137,79 +157,56 @@ namespace TestsForSC.beem
             Form = new Rectangle(h, l, b);
             Reinforcement = new SingleReinforcement(r, n);
             D = h - a;
-            this.muS = calcMioS();
-            if (MuS >= 1)
-                throw new ArgumentException("As can't be <=  A");
-            Mcr = calcMcr(); 
-            equivalentX = depthNeutralAxisSectionEquivalent();
-            icr = momentInertiaEquivalentCrackedSection();
+            MuS = calcMuS(getSpaceTensileReinforcement() ,  D);
             this.y = calcY();
             this.x = getX();
-            this.asb = calcAsb();
+            this.asb = calcAsb(D);
             this.asMax = calcAsMax();
-            this.teta = getTeta(choese , MuS);
+            this.muSmax = calcMuSmax();       
+            this.teta = getTeta(choese, MuS, MuSmax,D);
             this.rM = calcRM();
             this.eRM = RM * Teta;
-            
-                  
+
+            Mcr = calcMcr(); 
+            equivalentX = depthNeutralAxisSectionEquivalent(getSpaceTensileReinforcement(),0,D,0);
+            icr = momentInertiaEquivalentCrackedSection(EquivalentX, getSpaceTensileReinforcement() , 0, D, 0);  
+                          
         }
+
+        #region Private ClacMethodes
 
         private double calcAsMax()
         {
             return Asb / 2;
         }
-        //The depth of the neutral axis of the section equivalent
-        private double depthNeutralAxisSectionEquivalent( )
+        private double calcMuSmax()
         {
-            return MathHelper.sESDRP(B / 2, getRatioOfStandard() * getSpaceTensileReinforcement(),
-                -(getRatioOfStandard() * getSpaceTensileReinforcement() * D));
+            return AsMax/(B*D);
         }
-        // Moment Inertia equivalent cracked section about the neutral axis Icr
-        private double momentInertiaEquivalentCrackedSection() 
-        {
-            return B * Math.Pow(EquivalentX, 3) / 3 + getRatioOfStandard() * getSpaceTensileReinforcement() * Math.Pow(D - EquivalentX, 2);
-        }
-        private double calcMcr()
-        {
-            return (CF * getMomentInertiaNonCrackedSection() * Math.Pow(10, -8)) / (getDistanceCenterGravity() * Math.Pow(10, -2));
-        }
-        //The actual percentage of reinforcement
-        private double calcMioS()
-        {
-            return getSpaceTensileReinforcement() / (B * D);
-        }
-        private double calcAsb() {
-            return MioSb / (B * D);
-        }
+        
+        #endregion
 
-
+        #region Overrided Methodes
 
         //Height equivalent to the pressure zone  
         protected override double  calcY() {
-            return muS < MioSb ?
+            return muS < MuSb ?
                 (getSpaceTensileReinforcement() * IF) / (B * 0.85 * CP) : 
-                this.y = MathHelper.sESDRP(((0.85 * CP) / (MuS * Es * Ecu)), D, -(0.85 * Math.Pow(D, 2)));         
+                this.y = MathHelper.sESDRP(((0.85 * CP) / (MuS * Es * Ecu)), D, -(B1 * Math.Pow(D, 2)));         
         }
         public override double getIe(double Ma) {
             
-            return Reinforcement.Ie(Ma, Mcr,getMomentInertiaNonCrackedSection() , Icr);
+            return Ie(Ma, Mcr,getMomentInertiaNonCrackedSection() , Icr);
         }
-        protected override double et()
-        {
-            return (D - (getX() ) / getX()) * Ecu;
-        }
+      
+        //العزم المقاوم
         protected override double calcRM()
         {
             return  //getSpaceTensileReinforcement() * IF * (D - (Y / 2));
                 0.85 * CP * B * Y * (D - Y / 2);
         }
-        protected override void getTheCorrectY()
-        {
-            
-             
-             MessageBox.Show(Y+"\n"+MuS+"\n"+getSpaceTensileReinforcement());
-            
-        }
-       
+
+        #endregion
+
     }
 }

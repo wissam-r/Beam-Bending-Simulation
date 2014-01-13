@@ -11,7 +11,7 @@ namespace TestsForSC.beem.reinforcement
         //As  spaceTensileReinforcement
         private double As;
 
-        public SingleReinforcement(double r, double number)
+        public SingleReinforcement(double r, int number)
         {
             if (r <= 0)
                 throw new ArgumentException("r can't be < = 0 ");
@@ -27,13 +27,14 @@ namespace TestsForSC.beem.reinforcement
             return As;
 
         }
-        //moment effective inertia 
-        //عزم العطالة حول مركز الجسم المتشقق
-        public double Ie(double Ma, double Mcr, double Ig, double Icr)
-        {
-            return Mcr > Ma ? Ig : ((Math.Pow(Mcr / Ma, 3) * Ig) + (1 - Math.Pow(Mcr / Ma, 3)) * Icr);
-        } 
+        
 
-        private double calcAs(double r, double number) { return number * Math.PI * Math.Pow(r / 2, 2); }
+        private double calcAs(double r, int number) { return number * Math.PI * Math.Pow(r / 2, 2); }
+
+
+        public double spaceCompressionReinforcement()
+        {
+            return 0;
+        }
     }
 }
