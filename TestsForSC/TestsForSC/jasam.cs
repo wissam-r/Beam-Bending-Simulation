@@ -28,7 +28,7 @@ namespace TestsForSC
                 double.Parse(textBoxWidth.Text),
                 double.Parse(textBoxEs.Text),
                 double.Parse(textBoxRadius.Text),
-                double.Parse(textBoxCount.Text),
+                int.Parse(textBoxCount.Text),
                 double.Parse(textBoxA.Text),
                 1);
             this.myForces = new force.Forces(0, myBeam.L);
