@@ -51,6 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="beem\DoubReinRecBeem.cs" />
+    <Compile Include="beem\reinforcement\DoubleReinforcement.cs" />
     <Compile Include="beem\RenforcedBeem.cs" />
     <Compile Include="beem\forms\Form.cs" />
     <Compile Include="beem\forms\Rectangle.cs" />
@@ -106,7 +108,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\BeamDesign\BeamDesign.csproj">
+      <Project>{9EBE0A20-D466-45F3-90CC-803A6D0BF038}</Project>
+      <Name>BeamDesign</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

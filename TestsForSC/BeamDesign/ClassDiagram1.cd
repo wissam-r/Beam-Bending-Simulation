@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BeamDesign.DoubleReinforcement" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DoubleReinforcement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BeamDesign.PartialDesign" Collapsed="true">
+    <Position X="5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAoAAAAQAAAAAAAAAAAAABAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PartialDesign.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BeamDesign.RectangularBeam" Collapsed="true">
+    <Position X="2.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAABAAAAAAAAAAACAAAAAAAAQAAEAQAAAAAAAAA=</HashCode>
+      <FileName>RectangularBeam.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BeamDesign.SectionDesign" Collapsed="true">
+    <Position X="2.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAoAAAAAAAAAAgAAAAAAAAAAAAAAAEAAABAAAAAAA=</HashCode>
+      <FileName>SectionDesign.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BeamDesign.SingleReinforcement" Collapsed="true">
+    <Position X="3.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAoAAAAAAAAAAAAAAAAAAAAAGAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>SingleReinforcement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BeamDesign.WithMaxAs" Collapsed="true">
+    <Position X="2" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WithMaxAs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BeamDesign.WithMinAs" Collapsed="true">
+    <Position X="3.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WithMinAs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>
