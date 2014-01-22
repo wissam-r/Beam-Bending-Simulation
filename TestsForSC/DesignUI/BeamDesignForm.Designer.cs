@@ -93,7 +93,7 @@
             this.radioBtnPartialDesign.Location = new System.Drawing.Point(3, 3);
             this.radioBtnPartialDesign.Name = "radioBtnPartialDesign";
             this.radioBtnPartialDesign.Size = new System.Drawing.Size(90, 17);
-            this.radioBtnPartialDesign.TabIndex = 5;
+            this.radioBtnPartialDesign.TabIndex = 1;
             this.radioBtnPartialDesign.TabStop = true;
             this.radioBtnPartialDesign.Tag = "0";
             this.radioBtnPartialDesign.Text = "Partial Design";
@@ -106,7 +106,7 @@
             this.radioBtnSDWMaxAs.Location = new System.Drawing.Point(3, 49);
             this.radioBtnSDWMaxAs.Name = "radioBtnSDWMaxAs";
             this.radioBtnSDWMaxAs.Size = new System.Drawing.Size(158, 17);
-            this.radioBtnSDWMaxAs.TabIndex = 4;
+            this.radioBtnSDWMaxAs.TabIndex = 3;
             this.radioBtnSDWMaxAs.Tag = "2";
             this.radioBtnSDWMaxAs.Text = "Section Design With Max As";
             this.radioBtnSDWMaxAs.UseVisualStyleBackColor = true;
@@ -118,7 +118,7 @@
             this.radioBtnSDWMinAs.Location = new System.Drawing.Point(3, 26);
             this.radioBtnSDWMinAs.Name = "radioBtnSDWMinAs";
             this.radioBtnSDWMinAs.Size = new System.Drawing.Size(154, 17);
-            this.radioBtnSDWMinAs.TabIndex = 3;
+            this.radioBtnSDWMinAs.TabIndex = 2;
             this.radioBtnSDWMinAs.Tag = "1";
             this.radioBtnSDWMinAs.Text = "Section Design With Min As";
             this.radioBtnSDWMinAs.UseVisualStyleBackColor = true;
@@ -132,7 +132,7 @@
             this.btnCalc.Location = new System.Drawing.Point(49, 246);
             this.btnCalc.Name = "btnCalc";
             this.btnCalc.Size = new System.Drawing.Size(77, 25);
-            this.btnCalc.TabIndex = 2;
+            this.btnCalc.TabIndex = 10;
             this.btnCalc.Text = "Calc";
             this.btnCalc.UseVisualStyleBackColor = true;
             this.btnCalc.Click += new System.EventHandler(this.btnCalc_Click);
@@ -179,35 +179,40 @@
             this.txtBoxMu.Location = new System.Drawing.Point(30, 3);
             this.txtBoxMu.Name = "txtBoxMu";
             this.txtBoxMu.Size = new System.Drawing.Size(100, 20);
-            this.txtBoxMu.TabIndex = 16;
+            this.txtBoxMu.TabIndex = 4;
+            this.txtBoxMu.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBox_KeyPress);
             // 
             // txtBoxb
             // 
             this.txtBoxb.Location = new System.Drawing.Point(30, 29);
             this.txtBoxb.Name = "txtBoxb";
             this.txtBoxb.Size = new System.Drawing.Size(100, 20);
-            this.txtBoxb.TabIndex = 13;
+            this.txtBoxb.TabIndex = 5;
+            this.txtBoxb.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBox_KeyPress);
             // 
             // txtBoxfy
             // 
             this.txtBoxfy.Location = new System.Drawing.Point(30, 55);
             this.txtBoxfy.Name = "txtBoxfy";
             this.txtBoxfy.Size = new System.Drawing.Size(100, 20);
-            this.txtBoxfy.TabIndex = 12;
+            this.txtBoxfy.TabIndex = 6;
+            this.txtBoxfy.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBox_KeyPress);
             // 
             // txtBoxfc
             // 
             this.txtBoxfc.Location = new System.Drawing.Point(30, 81);
             this.txtBoxfc.Name = "txtBoxfc";
             this.txtBoxfc.Size = new System.Drawing.Size(100, 20);
-            this.txtBoxfc.TabIndex = 15;
+            this.txtBoxfc.TabIndex = 7;
+            this.txtBoxfc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBox_KeyPress);
             // 
             // txtBoxd
             // 
             this.txtBoxd.Location = new System.Drawing.Point(30, 107);
             this.txtBoxd.Name = "txtBoxd";
             this.txtBoxd.Size = new System.Drawing.Size(100, 20);
-            this.txtBoxd.TabIndex = 14;
+            this.txtBoxd.TabIndex = 8;
+            this.txtBoxd.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBox_KeyPress);
             // 
             // txtBoxAs
             // 
@@ -215,7 +220,7 @@
             this.txtBoxAs.Name = "txtBoxAs";
             this.txtBoxAs.ReadOnly = true;
             this.txtBoxAs.Size = new System.Drawing.Size(100, 20);
-            this.txtBoxAs.TabIndex = 11;
+            this.txtBoxAs.TabIndex = 9;
             // 
             // label7
             // 
