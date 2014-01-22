@@ -21,34 +21,34 @@ namespace BeamDesign
         #endregion
 
         #region Properties
-        public double Mu
+        protected double Mu
         {
-            private set { this.mu = value; }
+            private set { this.mu = value * Math.Pow(10, 6); }
             get { return mu; }
         }
         public double D
         {
-            protected set { d = value; }
+            protected set { d = Math.Round(value, 5); }
             get { return d; }
         }
-        public double B
+        protected double B
         {
             private set { this.b = value; }
             get { return b; }
         }
-        public double Fy
+        protected double Fy
         {
             private set { this.fy = value; }
             get { return fy; }
         }
-        public double Fc
+        protected double Fc
         {
             private set { this.fc = value; }
             get { return fc; }
         }
         public double AreaS
         {
-            protected set { this.As = value; }
+            protected set { this.As =  Math.Round(value,5); }
             get { return As; }
         }
         #endregion

@@ -20,8 +20,6 @@ namespace BeamDesign
         {
             return 0.5 * Beta1Calc() * (630 / (630 + Fy));
         }
-
-
         public void print()
         {
             Console.WriteLine(musCalc() + " " + AlphaCalc() + " " + AzeroCalc() + " " + rzeroCalc() + " " +
