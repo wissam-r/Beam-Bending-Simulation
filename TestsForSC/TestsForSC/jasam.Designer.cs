@@ -75,6 +75,7 @@
             this.textBoxForceLocation = new System.Windows.Forms.TextBox();
             this.textBoxPointForce = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.button7 = new System.Windows.Forms.Button();
             this.textBoxLocation = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
@@ -84,7 +85,6 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.label24 = new System.Windows.Forms.Label();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.button7 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -382,6 +382,9 @@
             // 
             // tabControl1
             // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
@@ -562,6 +565,16 @@
             this.tabPage3.Text = "force test";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(17, 133);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(108, 35);
+            this.button7.TabIndex = 5;
+            this.button7.Text = "get max momentom";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
             // textBoxLocation
             // 
             this.textBoxLocation.Location = new System.Drawing.Point(70, 20);
@@ -661,16 +674,6 @@
             this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.None;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             this.trackBar1.ValueChanged += new System.EventHandler(this.trackBar1_ValueChanged);
-            // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(17, 133);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(108, 35);
-            this.button7.TabIndex = 5;
-            this.button7.Text = "get max momentom";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // jasam
             // 
