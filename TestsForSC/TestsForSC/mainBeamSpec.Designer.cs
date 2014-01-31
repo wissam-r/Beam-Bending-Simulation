@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainBeamSpec));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label13 = new System.Windows.Forms.Label();
@@ -66,17 +68,24 @@
             this.textBoxForceStart = new System.Windows.Forms.TextBox();
             this.textBoxDistributedForce = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.button4 = new System.Windows.Forms.Button();
+            this.buttonAddPointForce = new System.Windows.Forms.Button();
             this.label19 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.textBoxForceLocation = new System.Windows.Forms.TextBox();
             this.textBoxPointForce = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBoxDistributedForce = new System.Windows.Forms.PictureBox();
+            this.pictureBoxPointForce = new System.Windows.Forms.PictureBox();
             this.labelPanelLength = new System.Windows.Forms.Label();
             this.labelpanelWidth = new System.Windows.Forms.Label();
             this.labelPanelHeight = new System.Windows.Forms.Label();
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.contextMenuStripForce = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripTextBoxForce = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cancelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -85,6 +94,9 @@
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDistributedForce)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPointForce)).BeginInit();
+            this.contextMenuStripForce.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -98,7 +110,10 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(340, 407);
             this.tabControl1.TabIndex = 0;
-            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
+            this.tabControl1.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabControl1_Selecting);
+            this.tabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl1_Selected);
+            this.tabControl1.Deselecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabControl1_Deselecting);
+            this.tabControl1.Deselected += new System.Windows.Forms.TabControlEventHandler(this.tabControl1_Deselected);
             // 
             // tabPage1
             // 
@@ -193,7 +208,6 @@
             this.textBoxWidth.TabIndex = 21;
             this.textBoxWidth.Text = "25";
             this.textBoxWidth.TextChanged += new System.EventHandler(this.textBoxWidth_TextChanged);
-            this.textBoxWidth.TextChanged += new System.EventHandler(textBoxNoZero_textChanged);
             this.textBoxWidth.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.HandleNumberedEntry);
             this.textBoxWidth.Leave += new System.EventHandler(this.textBoxNoZero_Leave);
             // 
@@ -205,7 +219,6 @@
             this.textBoxLength.TabIndex = 20;
             this.textBoxLength.Text = "2";
             this.textBoxLength.TextChanged += new System.EventHandler(this.textBoxLength_TextChanged);
-            this.textBoxLength.TextChanged += new System.EventHandler(textBoxNoZero_textChanged);
             this.textBoxLength.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.HandleNumberedEntry);
             this.textBoxLength.Leave += new System.EventHandler(this.textBoxNoZero_Leave);
             // 
@@ -217,7 +230,6 @@
             this.textBoxHieght.TabIndex = 1;
             this.textBoxHieght.Text = "55";
             this.textBoxHieght.TextChanged += new System.EventHandler(this.textBoxHieght_TextChanged);
-            this.textBoxHieght.TextChanged += new System.EventHandler(textBoxNoZero_textChanged);
             this.textBoxHieght.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.HandleNumberedEntry);
             this.textBoxHieght.Leave += new System.EventHandler(this.textBoxNoZero_Leave);
             // 
@@ -237,8 +249,8 @@
             this.textBoxFc.Size = new System.Drawing.Size(100, 20);
             this.textBoxFc.TabIndex = 18;
             this.textBoxFc.Text = "40";
+            this.textBoxFc.TextChanged += new System.EventHandler(this.textBoxNoZero_textChanged);
             this.textBoxFc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.HandleNumberedEntry);
-            this.textBoxFc.TextChanged += new System.EventHandler(textBoxNoZero_textChanged);
             this.textBoxFc.Leave += new System.EventHandler(this.textBoxNoZero_Leave);
             // 
             // tabPage2
@@ -372,8 +384,8 @@
             this.textBoxEs.Size = new System.Drawing.Size(100, 20);
             this.textBoxEs.TabIndex = 23;
             this.textBoxEs.Text = "210000";
+            this.textBoxEs.TextChanged += new System.EventHandler(this.textBoxNoZero_textChanged);
             this.textBoxEs.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.HandleNumberedEntry);
-            this.textBoxEs.TextChanged += new System.EventHandler(textBoxNoZero_textChanged);
             this.textBoxEs.Leave += new System.EventHandler(this.textBoxNoZero_Leave);
             // 
             // textBoxFs
@@ -383,8 +395,8 @@
             this.textBoxFs.Size = new System.Drawing.Size(100, 20);
             this.textBoxFs.TabIndex = 22;
             this.textBoxFs.Text = "400";
+            this.textBoxFs.TextChanged += new System.EventHandler(this.textBoxNoZero_textChanged);
             this.textBoxFs.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.HandleNumberedEntry);
-            this.textBoxFs.TextChanged += new System.EventHandler(textBoxNoZero_textChanged);
             this.textBoxFs.Leave += new System.EventHandler(this.textBoxNoZero_Leave);
             // 
             // tabPage3
@@ -417,12 +429,14 @@
             // 
             // button3
             // 
+            this.button3.Enabled = false;
             this.button3.Location = new System.Drawing.Point(6, 65);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(299, 23);
             this.button3.TabIndex = 6;
             this.button3.Text = "add";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // label22
             // 
@@ -477,7 +491,7 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.button4);
+            this.groupBox3.Controls.Add(this.buttonAddPointForce);
             this.groupBox3.Controls.Add(this.label19);
             this.groupBox3.Controls.Add(this.label18);
             this.groupBox3.Controls.Add(this.textBoxForceLocation);
@@ -489,14 +503,16 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "point force";
             // 
-            // button4
+            // buttonAddPointForce
             // 
-            this.button4.Location = new System.Drawing.Point(218, 30);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(87, 23);
-            this.button4.TabIndex = 4;
-            this.button4.Text = "add";
-            this.button4.UseVisualStyleBackColor = true;
+            this.buttonAddPointForce.Enabled = false;
+            this.buttonAddPointForce.Location = new System.Drawing.Point(218, 30);
+            this.buttonAddPointForce.Name = "buttonAddPointForce";
+            this.buttonAddPointForce.Size = new System.Drawing.Size(87, 23);
+            this.buttonAddPointForce.TabIndex = 4;
+            this.buttonAddPointForce.Text = "add";
+            this.buttonAddPointForce.UseVisualStyleBackColor = true;
+            this.buttonAddPointForce.Click += new System.EventHandler(this.button4_Click);
             // 
             // label19
             // 
@@ -522,6 +538,7 @@
             this.textBoxForceLocation.Name = "textBoxForceLocation";
             this.textBoxForceLocation.Size = new System.Drawing.Size(100, 20);
             this.textBoxForceLocation.TabIndex = 1;
+            this.textBoxForceLocation.TextChanged += new System.EventHandler(this.AddPointForce_TextChanged);
             this.textBoxForceLocation.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.HandleNumberedEntry);
             // 
             // textBoxPointForce
@@ -530,6 +547,7 @@
             this.textBoxPointForce.Name = "textBoxPointForce";
             this.textBoxPointForce.Size = new System.Drawing.Size(100, 20);
             this.textBoxPointForce.TabIndex = 0;
+            this.textBoxPointForce.TextChanged += new System.EventHandler(this.AddPointForce_TextChanged);
             this.textBoxPointForce.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.HandleNumberedEntry);
             // 
             // panel1
@@ -538,6 +556,8 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.panel1.Controls.Add(this.pictureBoxDistributedForce);
+            this.panel1.Controls.Add(this.pictureBoxPointForce);
             this.panel1.Controls.Add(this.labelPanelLength);
             this.panel1.Controls.Add(this.labelpanelWidth);
             this.panel1.Controls.Add(this.labelPanelHeight);
@@ -547,6 +567,38 @@
             this.panel1.TabIndex = 1;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
+            // 
+            // pictureBoxDistributedForce
+            // 
+            this.pictureBoxDistributedForce.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxDistributedForce.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxDistributedForce.Image")));
+            this.pictureBoxDistributedForce.Location = new System.Drawing.Point(173, 0);
+            this.pictureBoxDistributedForce.Name = "pictureBoxDistributedForce";
+            this.pictureBoxDistributedForce.Size = new System.Drawing.Size(102, 50);
+            this.pictureBoxDistributedForce.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxDistributedForce.TabIndex = 4;
+            this.pictureBoxDistributedForce.TabStop = false;
+            this.pictureBoxDistributedForce.Visible = false;
+            this.pictureBoxDistributedForce.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxDistributedForce_MouseClick);
+            this.pictureBoxDistributedForce.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxDistributedForce_MouseDown);
+            this.pictureBoxDistributedForce.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxDistributedForce_MouseMove);
+            this.pictureBoxDistributedForce.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxDistributedForce_MouseUp);
+            // 
+            // pictureBoxPointForce
+            // 
+            this.pictureBoxPointForce.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxPointForce.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxPointForce.Image")));
+            this.pictureBoxPointForce.Location = new System.Drawing.Point(281, 0);
+            this.pictureBoxPointForce.Name = "pictureBoxPointForce";
+            this.pictureBoxPointForce.Size = new System.Drawing.Size(32, 139);
+            this.pictureBoxPointForce.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxPointForce.TabIndex = 4;
+            this.pictureBoxPointForce.TabStop = false;
+            this.pictureBoxPointForce.Visible = false;
+            this.pictureBoxPointForce.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxPointForce_MouseClick);
+            this.pictureBoxPointForce.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxPointForce_MouseDown);
+            this.pictureBoxPointForce.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxPointForce_MouseMove);
+            this.pictureBoxPointForce.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxPointForce_MouseUp);
             // 
             // labelPanelLength
             // 
@@ -599,6 +651,42 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.button2_Click);
             // 
+            // contextMenuStripForce
+            // 
+            this.contextMenuStripForce.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripTextBoxForce,
+            this.toolStripSeparator1,
+            this.toolStripMenuItem1,
+            this.cancelToolStripMenuItem});
+            this.contextMenuStripForce.Name = "contextMenuStripForce";
+            this.contextMenuStripForce.Size = new System.Drawing.Size(161, 101);
+            // 
+            // toolStripTextBoxForce
+            // 
+            this.toolStripTextBoxForce.Name = "toolStripTextBoxForce";
+            this.toolStripTextBoxForce.Size = new System.Drawing.Size(100, 23);
+            this.toolStripTextBoxForce.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.HandleNumberedEntry);
+            this.toolStripTextBoxForce.TextChanged += new System.EventHandler(this.toolStripTextBoxForce_TextChanged);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(157, 6);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(160, 22);
+            this.toolStripMenuItem1.Text = "Add";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
+            // cancelToolStripMenuItem
+            // 
+            this.cancelToolStripMenuItem.Name = "cancelToolStripMenuItem";
+            this.cancelToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.cancelToolStripMenuItem.Text = "Cancel";
+            this.cancelToolStripMenuItem.Click += new System.EventHandler(this.cancelToolStripMenuItem_Click);
+            // 
             // mainBeamSpec
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -624,6 +712,10 @@
             this.groupBox3.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDistributedForce)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPointForce)).EndInit();
+            this.contextMenuStripForce.ResumeLayout(false);
+            this.contextMenuStripForce.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -670,7 +762,7 @@
         private System.Windows.Forms.TextBox textBoxForceStart;
         private System.Windows.Forms.TextBox textBoxDistributedForce;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button buttonAddPointForce;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox textBoxForceLocation;
@@ -679,5 +771,12 @@
         private System.Windows.Forms.Label labelPanelHeight;
         private System.Windows.Forms.Label labelPanelLength;
         private System.Windows.Forms.NumericUpDown numericUpDownCount;
+        private System.Windows.Forms.PictureBox pictureBoxDistributedForce;
+        private System.Windows.Forms.PictureBox pictureBoxPointForce;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripForce;
+        private System.Windows.Forms.ToolStripTextBox toolStripTextBoxForce;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem cancelToolStripMenuItem;
     }
 }

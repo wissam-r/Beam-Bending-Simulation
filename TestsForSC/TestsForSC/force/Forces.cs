@@ -6,7 +6,7 @@ using System.Text;
 
 namespace TestsForSC.force
 {
-    class Forces
+    public class Forces
     {
         LinkedList<Force> forces;
         private double beamLength;

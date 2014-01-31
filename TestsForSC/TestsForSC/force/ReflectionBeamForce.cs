@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TestsForSC.force
 {
-    class ReflectionBeamForce : PointBaemForce
+    public class ReflectionBeamForce : PointBaemForce
     {
         private bool isleft;
         public ReflectionBeamForce(double power, double position)

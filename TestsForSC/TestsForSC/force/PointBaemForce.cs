@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TestsForSC.force
 {
-    class PointBaemForce : Force 
+    public class PointBaemForce : Force 
     {
         private double Position;
         

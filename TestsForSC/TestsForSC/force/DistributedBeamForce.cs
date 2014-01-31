@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TestsForSC.force
 {
-    class DistributedBeamForce:Force 
+    public class DistributedBeamForce:Force 
     {
         private Double start;
         private Double end;

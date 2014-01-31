@@ -6,11 +6,13 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using TestsForSC.force;
 
 namespace TestsForSC
 {
     public partial class mainBeamSpec : Form
     {
+        #region variables
         public double BeamHeight
         {
             private set;
@@ -46,7 +48,14 @@ namespace TestsForSC
             private set;
             get;
         }
-        
+
+        public Forces Forces
+        {
+            set;
+            get;
+        }
+        #endregion
+
         public mainBeamSpec()
         {
             InitializeComponent();
@@ -163,7 +172,32 @@ namespace TestsForSC
                 labelPanelLength.Location = new Point(upperLeft.X + size.Width / 2 - labelpanelWidth.Width / 2, upperLeft.Y + size.Height + gap);
             }
         }
-        
+
+        System.Drawing.Size size_paintForces;
+        Point upperLeft_paintForces;
+        private void paintForces(Control control)
+        {
+            using (Graphics g = control.CreateGraphics())
+            {
+                float scaler = (float)(BeamHeight / BeamLength);
+                int gap = 5;
+                {
+                    int length = control.Width - 2*gap;
+                    int height = (int)(length * scaler);
+                    if (height > control.Height / 2)
+                    {
+                        height = control.Height / 2 - 2 * gap;
+                    }
+                    size_paintForces = new System.Drawing.Size(length, height);
+                }
+                {
+                    int x = control.Width / 2 - size_paintForces.Width / 2;
+                    int y = control.Height - size_paintForces.Height - 2 * gap;
+                    upperLeft_paintForces = new Point(x, y);
+                }
+                g.FillRectangle(new SolidBrush(Color.Gray), new Rectangle(upperLeft_paintForces, size_paintForces));
+            }
+        }
 
         private void paintRenforcement(Control control)
         {
@@ -201,9 +235,10 @@ namespace TestsForSC
                     int width = size.Width;
                     int raduis = (int) (width * scaler);
                     int space = width / RenforcementCount;
+                    scaler = size.Height / (float)BeamHeight;
                     for (int i = 0; i < RenforcementCount; i++)
                     {
-                        drawCircul(upperLeft.X + space / 2 + i * space, upperLeft.Y + size.Height - (int)RenforcementA - raduis, raduis, g);
+                        drawCircul(upperLeft.X + space / 2 + i * space, upperLeft.Y + size.Height - (int)(RenforcementA*scaler), raduis, g);
                     }
                 }
                 {
@@ -285,7 +320,10 @@ namespace TestsForSC
         {
             double a;
             textChanged(textBoxA, panel1, out a, 1.0f);
-            RenforcementA = a;
+            if (a < BeamHeight)
+                RenforcementA = a;
+            else
+                textBoxA.Text = RenforcementA.ToString();
         }
 
         private void mainBeamSpec_Load(object sender, EventArgs e)
@@ -311,46 +349,6 @@ namespace TestsForSC
         private void button1_Click(object sender, EventArgs e)
         {
             this.Text = "button1_Click";
-        }
-
-        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch (tabControl1.SelectedIndex)
-            {
-                case 0:
-                    labelPanelHeight.Visible = true;
-                    labelPanelLength.Visible = true;
-                    labelpanelWidth.Visible = true;
-                    p = new painting(paintLength);
-                    p += paintHeightWidth;
-                    this.Width = 670;
-                    panel1.Invalidate();
-                    break;
-                case 1:
-                    labelPanelHeight.Visible = false;
-                    labelPanelLength.Visible = false;
-                    labelpanelWidth.Visible = false;
-                    p = new painting(paintRenforcement);                    
-                    this.Width = 1000;
-                    panel1.Invalidate();
-                    if (RenforcementA > BeamHeight)
-                    {
-                        textBoxA.Text = (BeamHeight / 100).ToString();
-                    }
-                    if (Renforcement2Raduis > BeamHeight || Renforcement2Raduis > (BeamWidth - RenforcementA))
-                        textBoxRadius.Text = (Math.Min(BeamWidth, BeamHeight - RenforcementA) / 2.0).ToString();
-                    break;
-                case 2:
-                    labelPanelHeight.Visible = false;
-                    labelPanelLength.Visible = false;
-                    labelpanelWidth.Visible = false;
-                    p -= paintLength;
-                    p -= paintHeightWidth;
-                    panel1.Invalidate();
-                    break;
-                default:
-                    break;
-            }
         }
 
         private void panel1_MouseMove(object sender, MouseEventArgs e)
@@ -381,12 +379,350 @@ namespace TestsForSC
                 this.buttonOK.Enabled = true;
             }
         }
-        
 
-        
+        //this method use for painting in panel1
+        private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            if (e.TabPage.Equals(tabPage1))
+            {
+                p = new painting(paintLength);
+                p += paintHeightWidth;
+                this.Width = 670;
+                labelPanelHeight.Visible = true;
+                labelPanelLength.Visible = true;
+                labelpanelWidth.Visible = true;
+                panel1.Invalidate();
+            }
+            else if (e.TabPage.Equals(tabPage2))
+            {
+                p = new painting(paintRenforcement);
+                this.Width = 1000;
+                panel1.Invalidate();
+            }
+            else if (e.TabPage.Equals(tabPage3))
+            {
+                pictureBoxDistributedForce.Visible = true;
+                pictureBoxPointForce.Visible = true;
+                p = new painting(paintForces);
+                panel1.Invalidate();
+            }
+        }
 
-        
+        //this method is used for values in the text boxes
+        private void tabControl1_Selected(object sender, TabControlEventArgs e)
+        {
+            if (e.TabPage.Equals(tabPage1))
+            {
+                
+            }
+            else if (e.TabPage.Equals(tabPage2))
+            {
+                if (RenforcementA > BeamHeight)
+                {
+                    textBoxA.Text = (BeamHeight / 100).ToString();
+                }
+                if (Renforcement2Raduis > BeamWidth || Renforcement2Raduis > (BeamHeight - RenforcementA))
+                    textBoxRadius.Text = (Math.Min(BeamWidth, BeamHeight - RenforcementA) / 2.0).ToString();
+            }
+            else if (e.TabPage.Equals(tabPage3))
+            {
+            }
+        }
 
+        //this method is used for painting in panel1 
+        private void tabControl1_Deselecting(object sender, TabControlCancelEventArgs e)
+        {
+            if (e.TabPage.Equals(tabPage1))
+            {
+                labelPanelHeight.Visible = false;
+                labelPanelLength.Visible = false;
+                labelpanelWidth.Visible = false;
+                p = null;
+            }
+            else if (e.TabPage.Equals(tabPage2))
+            {
+                p = null;
+            }
+            else if (e.TabPage.Equals(tabPage3))
+            {
+                pictureBoxDistributedForce.Visible = false;
+                pictureBoxPointForce.Visible = false;
+                p = null;
+            }
+        }
+
+        //this method is used for values in the text boxes
+        private void tabControl1_Deselected(object sender, TabControlEventArgs e)
+        {
+            if (e.TabPage.Equals(tabPage1))
+            {
+            }
+            else if (e.TabPage.Equals(tabPage2))
+            {
+            }
+            else if (e.TabPage.Equals(tabPage3))
+            {
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.Forces.Add(new force.PointBaemForce(
+                double.Parse(textBoxPointForce.Text),
+                double.Parse(textBoxForceLocation.Text)));
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Forces.Add(new force.DistributedBeamForce(
+                double.Parse(textBoxDistributedForce.Text),
+                double.Parse(textBoxForceStart.Text),
+                double.Parse(textBoxForceEnd.Text)));
+        }
+
+        private void AddPointForce_TextChanged(object sender, EventArgs e)
+        {
+            if (textBoxPointForce.Text != null
+                && textBoxPointForce.Text != ""
+                && textBoxForceLocation.Text != null
+                && textBoxForceLocation.Text != ""
+                && !buttonAddPointForce.Enabled)
+            {
+                this.buttonAddPointForce.Enabled = true;
+            }
+            else if (textBoxPointForce.Text == null
+                || textBoxPointForce.Text == ""
+                || textBoxForceLocation.Text == null
+                || textBoxForceLocation.Text == "")
+            {
+                buttonAddPointForce.Enabled = false;
+            }
+       }
+
+        private void AddDistributedForce_TextChanged(object sender, EventArgs e)
+        {
+            if (textBoxDistributedForce.Text != null
+                && textBoxDistributedForce.Text != ""
+                && textBoxForceStart.Text != null
+                && textBoxForceStart.Text != ""
+                && textBoxForceEnd.Text != null
+                && textBoxForceEnd.Text != ""
+                && !buttonAddPointForce.Enabled)
+            {
+                this.buttonAddPointForce.Enabled = true;
+            }
+            else if (textBoxDistributedForce.Text == null
+                || textBoxDistributedForce.Text == ""
+                || textBoxForceStart.Text == null
+                || textBoxForceStart.Text == ""
+                || textBoxForceEnd.Text == null
+                || textBoxForceEnd.Text == "")
+            {
+                buttonAddPointForce.Enabled = false;
+            }
+        }
+
+        private Type ForceSelcectd = null;
+
+        private bool pictureBoxPointForce_RightClickable = false;
+        private bool pictureBoxPointForce_LeftClickable = true;
         
+        private void pictureBoxPointForce_MouseClick(object sender, MouseEventArgs e)
+        {
+            switch (e.Button)
+            {
+                case System.Windows.Forms.MouseButtons.Right:
+                    if(pictureBoxPointForce_RightClickable)
+                        contextMenuStripForce.Show(pictureBoxPointForce, e.X, e.Y);
+                    break;
+                case System.Windows.Forms.MouseButtons.Left:
+                    if (pictureBoxPointForce_LeftClickable)
+                    {
+                        ForceSelcectd = typeof(PointBaemForce);
+                        pictureBoxPointForce.Location = new Point(upperLeft_paintForces.X - pictureBoxPointForce.Width / 2, upperLeft_paintForces.Y - pictureBoxPointForce.Height);
+                        pictureBoxPointForce_RightClickable = true;
+                        pictureBoxPointForce_LeftClickable = false;
+                        pictureBoxDistributedForce_LeftClickable = false;
+                        textBoxForceLocation.Text = "0";
+                    }
+                    break;
+            }
+        }
+
+        private bool pictureBoxDistributedForce_RightClickable = false;
+        private bool pictureBoxDistributedForce_LeftClickable = true;
+        private void pictureBoxDistributedForce_MouseClick(object sender, MouseEventArgs e)
+        {
+            switch (e.Button)
+            {
+                case System.Windows.Forms.MouseButtons.Right:
+                    if (pictureBoxDistributedForce_RightClickable)
+                        contextMenuStripForce.Show(pictureBoxDistributedForce, e.X, e.Y);
+                    break;
+                case System.Windows.Forms.MouseButtons.Left:
+                    if (pictureBoxDistributedForce_LeftClickable)
+                    {
+                        ForceSelcectd = typeof(DistributedBeamForce);
+                        pictureBoxDistributedForce.Location = new Point(upperLeft_paintForces.X, upperLeft_paintForces.Y - pictureBoxDistributedForce.Height);
+                        pictureBoxDistributedForce_RightClickable = true;
+                        pictureBoxPointForce_LeftClickable = false;
+                        pictureBoxDistributedForce_LeftClickable = false;
+                    }
+                    break;
+            }
+        }  
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            button4_Click(sender, e);
+        }
+
+        private void cancelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            pictureBoxPointForce_LeftClickable = true;
+            pictureBoxDistributedForce_LeftClickable = true;
+            toolStripTextBoxForce.Text = "";
+            pictureBoxPointForce.Location = new Point(281, 0);
+            pictureBoxDistributedForce.Location = new Point(175, 0);
+        }
+
+        private bool pictureBoxPointForce_Catch = false;
+        private Point oldXY;
+        private void pictureBoxPointForce_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (pictureBoxPointForce_RightClickable)
+            {
+                pictureBoxPointForce_Catch = true;
+                oldXY = e.Location;
+            }
+        }
+
+        private void pictureBoxPointForce_MouseMove(object sender, MouseEventArgs e)
+        {
+            PictureBox pictureBox = (sender as PictureBox);
+            if (pictureBoxPointForce_Catch)
+            {
+                int newLeft = pictureBox.Left + e.X - oldXY.X - pictureBox.Width / 2;
+                if (newLeft >= upperLeft_paintForces.X - pictureBox.Width / 2
+                    && newLeft <= upperLeft_paintForces.X + size_paintForces.Width - pictureBox.Width / 2)
+                {
+                    pictureBox.Left = newLeft;
+                    float scaler = (float)(BeamLength / 100 / size_paintForces.Width);
+                    textBoxForceLocation.Text = ((newLeft + pictureBox.Width / 2 - upperLeft_paintForces.X) * scaler).ToString();
+                }
+            }
+            else if (pictureBoxPointForce_RightClickable)
+            {
+                pictureBox.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            }
+        }
+
+        private void pictureBoxPointForce_MouseUp(object sender, MouseEventArgs e)
+        {
+            PictureBox pictureBox = (sender as PictureBox);
+            pictureBoxPointForce_Catch = false;
+            pictureBox.Cursor = System.Windows.Forms.Cursors.Default;
+        }
+
+        private bool pictureBoxDistributedForce_Catch = false;
+        private int pictureBoxDistributedForce_CatchMood = none;
+        private const int move = 0;
+        private const int stretchLeft = 1;
+        private const int stretchRight = 2;
+        private const int none = -1;
+        private void pictureBoxDistributedForce_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (pictureBoxDistributedForce_RightClickable)
+            {
+                pictureBoxDistributedForce_Catch = true;
+                oldXY = e.Location;
+                PictureBox pictureBox = (sender as PictureBox);
+                if (e.X < pictureBox.Width / 4)
+                {
+                    pictureBoxDistributedForce_CatchMood = stretchLeft;
+                }
+                else if (e.X > 3 * pictureBox.Width / 4)
+                {
+                    pictureBoxDistributedForce_CatchMood = stretchRight;
+                }
+                else
+                {
+                    pictureBoxDistributedForce_CatchMood = move;
+                }
+                
+            }
+        }
+
+        private void pictureBoxDistributedForce_MouseMove(object sender, MouseEventArgs e)
+        {
+            PictureBox pictureBox = (sender as PictureBox);
+            if (pictureBoxDistributedForce_Catch)
+            {
+                
+                switch(pictureBoxDistributedForce_CatchMood){
+                    case move:
+                        int newLeft = pictureBox.Left + e.X - oldXY.X;
+                        if (newLeft >= upperLeft_paintForces.X
+                            && newLeft <= upperLeft_paintForces.X + size_paintForces.Width - pictureBox.Width)
+                        {
+                            pictureBox.Left = newLeft;
+                        }
+                    break;
+                    case stretchRight:
+                        int newWidth = pictureBox.Width + e.X - oldXY.X;
+                        if (newWidth > 0
+                            && newWidth + pictureBox.Left < upperLeft_paintForces.X + size_paintForces.Width)
+                        {
+                            pictureBox.Width = newWidth;
+                        }
+                        oldXY.X = e.X;
+                    break;
+                    case stretchLeft:
+                        newWidth = pictureBox.Width -(e.X - oldXY.X);
+                        newLeft = pictureBox.Left + e.X - oldXY.X;
+                        if (newWidth > 0
+                            && newLeft >= upperLeft_paintForces.X)
+                        {
+                            pictureBox.Left = newLeft;
+                            pictureBox.Width = newWidth;
+                            pictureBox.Invalidate();
+                        }
+                    break;
+                }
+            }
+            else if (pictureBoxDistributedForce_RightClickable)
+            {
+                if (e.X < pictureBox.Width / 4)
+                {
+                    pictureBox.Cursor = System.Windows.Forms.Cursors.SizeWE;
+                }
+                else if (e.X > 3 * pictureBox.Width / 4)
+                {
+                    pictureBox.Cursor = System.Windows.Forms.Cursors.SizeWE;
+                }
+                else
+                {
+                    pictureBox.Cursor = System.Windows.Forms.Cursors.SizeAll;
+                }
+            }
+        }
+
+        private void pictureBoxDistributedForce_MouseUp(object sender, MouseEventArgs e)
+        {
+            PictureBox pictureBox = (sender as PictureBox);
+            pictureBoxDistributedForce_Catch = false;
+            pictureBoxDistributedForce_CatchMood = none;
+            pictureBox.Cursor = System.Windows.Forms.Cursors.Default;
+        }
+
+        private void toolStripTextBoxForce_TextChanged(object sender, EventArgs e)
+        {
+            if (ForceSelcectd == typeof(PointBaemForce))
+            {
+                textBoxPointForce.Text = (sender as ToolStripTextBox).Text;
+            }
+        }
+
+              
     }
 }
