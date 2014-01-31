@@ -60,7 +60,7 @@
             this.textBoxFs = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.button3 = new System.Windows.Forms.Button();
+            this.buttonAddDistributedForce = new System.Windows.Forms.Button();
             this.label22 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
@@ -413,7 +413,7 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.button3);
+            this.groupBox4.Controls.Add(this.buttonAddDistributedForce);
             this.groupBox4.Controls.Add(this.label22);
             this.groupBox4.Controls.Add(this.label21);
             this.groupBox4.Controls.Add(this.label20);
@@ -427,16 +427,16 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "distributed force";
             // 
-            // button3
+            // buttonAddDistributedForce
             // 
-            this.button3.Enabled = false;
-            this.button3.Location = new System.Drawing.Point(6, 65);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(299, 23);
-            this.button3.TabIndex = 6;
-            this.button3.Text = "add";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.buttonAddDistributedForce.Enabled = false;
+            this.buttonAddDistributedForce.Location = new System.Drawing.Point(6, 65);
+            this.buttonAddDistributedForce.Name = "buttonAddDistributedForce";
+            this.buttonAddDistributedForce.Size = new System.Drawing.Size(299, 23);
+            this.buttonAddDistributedForce.TabIndex = 6;
+            this.buttonAddDistributedForce.Text = "add";
+            this.buttonAddDistributedForce.UseVisualStyleBackColor = true;
+            this.buttonAddDistributedForce.Click += new System.EventHandler(this.button3_Click);
             // 
             // label22
             // 
@@ -471,6 +471,7 @@
             this.textBoxForceEnd.Name = "textBoxForceEnd";
             this.textBoxForceEnd.Size = new System.Drawing.Size(85, 20);
             this.textBoxForceEnd.TabIndex = 2;
+            this.textBoxForceEnd.TextChanged += new System.EventHandler(this.textBoxForceEnd_textChanged);
             this.textBoxForceEnd.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.HandleNumberedEntry);
             // 
             // textBoxForceStart
@@ -479,6 +480,7 @@
             this.textBoxForceStart.Name = "textBoxForceStart";
             this.textBoxForceStart.Size = new System.Drawing.Size(85, 20);
             this.textBoxForceStart.TabIndex = 1;
+            this.textBoxForceStart.TextChanged += new System.EventHandler(this.textBoxForceStart_textChanged);
             this.textBoxForceStart.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.HandleNumberedEntry);
             // 
             // textBoxDistributedForce
@@ -487,6 +489,7 @@
             this.textBoxDistributedForce.Name = "textBoxDistributedForce";
             this.textBoxDistributedForce.Size = new System.Drawing.Size(85, 20);
             this.textBoxDistributedForce.TabIndex = 0;
+            this.textBoxDistributedForce.TextChanged += new System.EventHandler(this.AddDistributedForce_TextChanged);
             this.textBoxDistributedForce.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.HandleNumberedEntry);
             // 
             // groupBox3
@@ -538,7 +541,7 @@
             this.textBoxForceLocation.Name = "textBoxForceLocation";
             this.textBoxForceLocation.Size = new System.Drawing.Size(100, 20);
             this.textBoxForceLocation.TabIndex = 1;
-            this.textBoxForceLocation.TextChanged += new System.EventHandler(this.AddPointForce_TextChanged);
+            this.textBoxForceLocation.TextChanged += new System.EventHandler(this.textBoxForceLocation_textChanged);
             this.textBoxForceLocation.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.HandleNumberedEntry);
             // 
             // textBoxPointForce
@@ -659,7 +662,8 @@
             this.toolStripMenuItem1,
             this.cancelToolStripMenuItem});
             this.contextMenuStripForce.Name = "contextMenuStripForce";
-            this.contextMenuStripForce.Size = new System.Drawing.Size(161, 101);
+            this.contextMenuStripForce.Size = new System.Drawing.Size(161, 79);
+            this.contextMenuStripForce.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripForce_Opening);
             // 
             // toolStripTextBoxForce
             // 
@@ -754,7 +758,7 @@
         private System.Windows.Forms.TextBox textBoxEs;
         private System.Windows.Forms.TextBox textBoxFs;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button buttonAddDistributedForce;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label20;
