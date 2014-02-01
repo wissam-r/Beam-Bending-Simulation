@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TestsForSC.beem.forms
 {
-    class Rectangle : Form
+    public class Rectangle : Form
     {
         //crossSectionalArea 
         //مساحة المقطع العرضي

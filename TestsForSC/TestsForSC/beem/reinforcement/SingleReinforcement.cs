@@ -6,7 +6,7 @@ using TestsForSC.helper;
 
 namespace TestsForSC.beem.reinforcement
 {
-    class SingleReinforcement : Reinforcement
+    public class SingleReinforcement : Reinforcement
     {
         //As  spaceTensileReinforcement
         private double As;

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TestsForSC.beem.reinforcement
 {
-    class DoubleReinforcement : Reinforcement
+    public class DoubleReinforcement : Reinforcement
     {
         //SpaceTensileReinforcement
         //مساحة المقطع العرضي لتسليح الشد

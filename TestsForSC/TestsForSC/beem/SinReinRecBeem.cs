@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace TestsForSC.beem
 {
-    class SinReinRecBeem : RenforcedBeem
+    public class SinReinRecBeem : RenforcedBeem
     {
         #region Private Parammters
         //The distance between the extreme pressure fiber and reinforcement center in the concrete

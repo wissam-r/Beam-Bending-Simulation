@@ -8,7 +8,7 @@ using TestsForSC.helper;
 
 namespace TestsForSC.beem
 {
-    class DoubReinRecBeem : RenforcedBeem
+    public class DoubReinRecBeem : RenforcedBeem
     {
 
         #region Private Parammters

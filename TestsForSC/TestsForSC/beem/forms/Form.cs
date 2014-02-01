@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TestsForSC.beem.forms
 {
-    interface Form
+    public interface Form
     {
         double crossSectionalArea(); //Area Calculation //حساب مساحة المقطع العرضي
         double distanceCenterGravity();// Distance from the center of gravity // البعد عن مركز الثقل

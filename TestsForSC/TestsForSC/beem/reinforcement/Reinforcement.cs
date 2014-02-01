@@ -6,7 +6,7 @@ using System.Text;
 
 namespace TestsForSC.beem.reinforcement
 {
-    interface Reinforcement
+    public interface Reinforcement
     {
         //R : radius قطر قضيب التسليح
         //N : number of Reinforcing penis عدد قضبان التسليح

@@ -8,7 +8,7 @@ using TestsForSC.helper;
 namespace TestsForSC.beem
 {
 
-    abstract class RenforcedBeem
+    public abstract class RenforcedBeem
     {
         public const double Ecu = 0.003;//Deformation of the concrete
 
