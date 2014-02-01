@@ -436,6 +436,7 @@
             this.buttonAddDistributedForce.TabIndex = 6;
             this.buttonAddDistributedForce.Text = "add";
             this.buttonAddDistributedForce.UseVisualStyleBackColor = true;
+            this.buttonAddDistributedForce.EnabledChanged += new System.EventHandler(this.buttonAddDistributedForce_EnabledChanged);
             this.buttonAddDistributedForce.Click += new System.EventHandler(this.button3_Click);
             // 
             // label22
@@ -515,6 +516,7 @@
             this.buttonAddPointForce.TabIndex = 4;
             this.buttonAddPointForce.Text = "add";
             this.buttonAddPointForce.UseVisualStyleBackColor = true;
+            this.buttonAddPointForce.EnabledChanged += new System.EventHandler(this.buttonAddPointForce_EnabledChanged);
             this.buttonAddPointForce.Click += new System.EventHandler(this.button4_Click);
             // 
             // label19
@@ -679,6 +681,7 @@
             // 
             // toolStripMenuItem1
             // 
+            this.toolStripMenuItem1.Enabled = false;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(160, 22);
             this.toolStripMenuItem1.Text = "Add";
