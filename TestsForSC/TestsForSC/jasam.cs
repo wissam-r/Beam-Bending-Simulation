@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using beam;
+using forces;
 
 namespace TestsForSC
 {
@@ -20,7 +22,7 @@ namespace TestsForSC
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.myBeam = new beem.SinReinRecBeem(
+            this.myBeam = new SinReinRecBeem(
                 double.Parse(textBoxFc.Text),
                 double.Parse(textBoxFs.Text),
                 double.Parse(textBoxHieght.Text),
@@ -31,7 +33,7 @@ namespace TestsForSC
                 int.Parse(textBoxCount.Text),
                 double.Parse(textBoxA.Text),
                 1);
-            this.myForces = new force.Forces(0, myBeam.L);
+            this.myForces = new Forces(0, myBeam.L);
             MessageBox.Show("العزم المقاوم الاستثماري  : " + myBeam.ERM.ToString() + "\n"
                 + " العزم المقاوم المثالي : " + myBeam.RM + "\n"
                 + "عزم التشقق : " + myBeam.Mcr.ToString() + "\n"
@@ -55,7 +57,7 @@ namespace TestsForSC
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.myForces.Add(new force.PointBaemForce(
+            this.myForces.Add(new PointBaemForce(
                 double.Parse(textBoxPointForce.Text),
                 double.Parse(textBoxForceLocation.Text)));
             NewPointPositionFlag = true;
@@ -63,7 +65,7 @@ namespace TestsForSC
 
         private void button3_Click(object sender, EventArgs e)
         {
-            this.myForces.Add(new force.DistributedBeamForce(
+            this.myForces.Add(new DistributedBeamForce(
                 double.Parse(textBoxDistributedForce.Text),
                 double.Parse(textBoxForceStart.Text),
                 double.Parse(textBoxForceEnd.Text)));

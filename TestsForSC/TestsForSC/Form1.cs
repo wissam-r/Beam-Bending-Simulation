@@ -6,12 +6,14 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using beam;
+using forces;
 
 namespace TestsForSC
 {
     public partial class Form1 : Form
     {
-        beem.SinReinRecBeem bemo= new beem.SinReinRecBeem(30,420, 20, 200, 20, 210000, 10, 2, 5,1);
+        SinReinRecBeem bemo= new SinReinRecBeem(30,420, 20, 200, 20, 210000, 10, 2, 5,1);
         public Form1()
         {
             InitializeComponent();
@@ -20,8 +22,8 @@ namespace TestsForSC
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            force.Forces f = new force.Forces(12000, 6);
-            f.Add(new force.PointBaemForce(30000, 2));
+            Forces f = new Forces(12000, 6);
+            f.Add(new PointBaemForce(30000, 2));
             //this.textBox16.Text = f.getMomentom(5).ToString();
             this.textBox15.Text = (f.getfMomentomd2x(3, 6) / (300 * 1000 * 1000)).ToString();
             //force.Forces f = new force.Forces(0, 7);
