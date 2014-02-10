@@ -13,6 +13,21 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -51,26 +66,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="beem\DoubReinRecBeem.cs" />
-    <Compile Include="beem\reinforcement\DoubleReinforcement.cs" />
-    <Compile Include="beem\RenforcedBeem.cs" />
-    <Compile Include="beem\forms\Form.cs" />
-    <Compile Include="beem\forms\Rectangle.cs" />
-    <Compile Include="beem\reinforcement\Reinforcement.cs" />
-    <Compile Include="beem\reinforcement\SingleReinforcement.cs" />
-    <Compile Include="beem\SinReinRecBeem.cs" />
-    <Compile Include="force\Forces.cs" />
-    <Compile Include="force\PointBaemForce.cs" />
-    <Compile Include="force\DistributedBeamForce.cs" />
-    <Compile Include="force\Force.cs" />
-    <Compile Include="force\ReflectionBeamForce.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="helper\MathHelper.cs" />
     <Compile Include="jasam.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,18 +81,6 @@
     <Compile Include="jasam.physics.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="mainBeamSpec.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="mainBeamSpec.Designer.cs">
-      <DependentUpon>mainBeamSpec.cs</DependentUpon>
-    </Compile>
-    <Compile Include="mainWorkForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="mainWorkForm.Designer.cs">
-      <DependentUpon>mainWorkForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Xna1.cs" />
@@ -100,12 +89,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="jasam.resx">
       <DependentUpon>jasam.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="mainBeamSpec.resx">
-      <DependentUpon>mainBeamSpec.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="mainWorkForm.resx">
-      <DependentUpon>mainWorkForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -131,6 +114,36 @@
       <Project>{9EBE0A20-D466-45F3-90CC-803A6D0BF038}</Project>
       <Name>BeamDesign</Name>
     </ProjectReference>
+    <ProjectReference Include="..\beam\beam.csproj">
+      <Project>{F820A04D-3357-4431-ACAF-3BCECD43D761}</Project>
+      <Name>beam</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\forces\forces.csproj">
+      <Project>{4EDBCF7D-9B7E-4D19-BBFB-ECE81A182BCD}</Project>
+      <Name>forces</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
