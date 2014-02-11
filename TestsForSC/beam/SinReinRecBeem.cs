@@ -205,6 +205,15 @@ namespace beam
                 0.85 * CP * B * Y * (D - Y / 2);
         }
 
+        public override double getERM()
+        {
+            return ERM;
+        }
+
+
+
+        
+
         #endregion
 
     }

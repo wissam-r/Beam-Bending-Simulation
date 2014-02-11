@@ -269,14 +269,14 @@ namespace beam
         // Moment Inertia equivalent cracked section about the neutral axis Icr
         protected double momentInertiaEquivalentCrackedSection(double x , double As,double Aas ,  double D, double Da )
         {
-            return B * Math.Pow(x, 3) / 3 + getRatioOfStandard() * As * Math.Pow(D - x, 2) + (getRatioOfStandard() - 1) * Aas * Math.Pow(Da - x, 2);
+            return B * Math.Pow(x, 3) / 3 + getRatioOfStandard() * As * Math.Pow(D - x, 2) + (getRatioOfStandard() - 1) * Aas * Math.Pow(x- Da, 2);
         }
 
         //moment effective inertia 
         //عزم العطالة حول مركز الجسم المتشقق
         public double Ie(double Ma, double Mcr, double Ig, double Icr)
         {
-            return Mcr > Ma ? Ig : ((Math.Pow(Mcr / Ma, 3) * Ig) + (1 - Math.Pow(Mcr / Ma, 3)) * Icr);
+            return Ma <= Mcr ? Ig : ((Math.Pow(Mcr / Ma, 3) * Ig) + (1 - Math.Pow(Mcr / Ma, 3)) * Icr);
         } 
 
         #endregion
@@ -335,6 +335,8 @@ namespace beam
         
         //Momentum-resistant
         abstract protected double calcRM();
+
+        abstract public double getERM();
 
         #endregion
 

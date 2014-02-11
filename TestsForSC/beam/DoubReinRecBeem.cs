@@ -259,6 +259,11 @@ namespace beam
             return (0.85 * CP * B * Y * (D - y / 2) + getSpaceCompressionReinforcement() * IF * (D - Da));
         }
 
+        public override double getERM() {
+            return ERM;
+        }
+
+        
         #endregion
 
         #region Private Methods
