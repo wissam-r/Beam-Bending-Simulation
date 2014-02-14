@@ -59,7 +59,8 @@ namespace TestsForSC
         {
             this.myForces.Add(new PointBaemForce(
                 double.Parse(textBoxPointForce.Text),
-                double.Parse(textBoxForceLocation.Text)));
+                double.Parse(textBoxForceLocation.Text),
+                double.Parse(textBoxLength.Text)));
             NewPointPositionFlag = true;
         }
 
@@ -68,7 +69,8 @@ namespace TestsForSC
             this.myForces.Add(new DistributedBeamForce(
                 double.Parse(textBoxDistributedForce.Text),
                 double.Parse(textBoxForceStart.Text),
-                double.Parse(textBoxForceEnd.Text)));
+                double.Parse(textBoxForceEnd.Text),
+                double.Parse(textBoxLength.Text)));
             NewPointPositionFlag = true;
         }
 

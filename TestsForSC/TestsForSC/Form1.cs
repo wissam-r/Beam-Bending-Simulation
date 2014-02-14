@@ -23,7 +23,7 @@ namespace TestsForSC
         private void Form1_Load(object sender, EventArgs e)
         {
             Forces f = new Forces(12000, 6);
-            f.Add(new PointBaemForce(30000, 2));
+            f.Add(new PointBaemForce(30000, 2,6));
             //this.textBox16.Text = f.getMomentom(5).ToString();
             this.textBox15.Text = (f.getfMomentomd2x(3, 6) / (300 * 1000 * 1000)).ToString();
             //force.Forces f = new force.Forces(0, 7);

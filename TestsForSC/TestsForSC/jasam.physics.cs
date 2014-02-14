@@ -17,6 +17,8 @@ namespace TestsForSC
         }
 
         public double BeamLenght{get{return myBeam.L;}}
+        public double BeamHeight { get { return myBeam.B; } }
+        public double BeamE { get { return myBeam.EMC; } }
 
         public double MomentomAt(double position)
         {
@@ -26,6 +28,16 @@ namespace TestsForSC
         {
             private set;
             get;
+        }
+
+        public double getNaturalSerfaceDepth()
+        {
+           return myBeam.X;
+        }
+
+        public double getIe(double ma)
+        {
+            return myBeam.getIe(ma);
         }
     }
 }
