@@ -147,6 +147,11 @@ namespace beam
 
         #endregion
 
+        public SinReinRecBeem( double h, double l, double b, double r, int n)
+            : this(30, 420, h, l, b, r, n) { }
+
+        public SinReinRecBeem(double cP, double iF, double h, double l, double b, double r, int n)
+            : this(cP, iF, h, l, b, 210000, r, n, 5, 1) { }
 
         public SinReinRecBeem(double cP, double iF, double h, double l, double b, double es, double r, int n, double a, byte choese)// a : the distance between the Maximum fiber strain and reinforcement , choese  : Type Bracelets iron
             : base(cP,iF , b, l,es)//(30, 20, 200, 20, 210000, 10, 2, 5);
