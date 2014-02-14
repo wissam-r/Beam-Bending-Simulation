@@ -5,7 +5,7 @@ using System.Text;
 
 namespace forces
 {
-    public abstract class Force
+    public abstract class Force : Force_
     {
         public const int factor = 1;//للتحويل بين الواحدات
         public Force(double power)
@@ -13,19 +13,18 @@ namespace forces
             Power = power;
         }
         public double Power { set; get; }
-        abstract public double getMomentom(double distance);
-        abstract public double getfMomentomd2x(double distance, double beamLength);
-        public abstract void add(Force force);
-        protected void addPower(Force force)
+        protected void addPower(Force_ force)
         {
             this.Power += force.Power;
         }
-        public abstract bool canAdd(Force force);
-        protected bool sameType(Force force)
+        protected bool sameType(Force_ force)
         {
             return this.GetType() == force.GetType();
         }
-        abstract public ReflectionBeamForce getReflectionLeft(double BeamLenght);
-        abstract public ReflectionBeamForce getReflectionRight(double BeamLenght);
+
+
+        public abstract void add(Force_ force);
+
+        public abstract bool canAdd(Force_ force);
     }
 }

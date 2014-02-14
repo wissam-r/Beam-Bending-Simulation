@@ -8,8 +8,8 @@ namespace forces
     public class ReflectionBeamForce : PointBaemForce
     {
         private bool isleft;
-        public ReflectionBeamForce(double power, double position)
-            : base(power, position)
+        public ReflectionBeamForce(double power, double position, Double beamLength)
+            :base(power,position,beamLength,false)
         {
             this.isleft = position==0;
         }
@@ -22,25 +22,33 @@ namespace forces
                 return distance * Power * factor;
             }
         }
+        public override double getShaer(double distance)
+        {
+            return 0;
+        }
 
-        public override double getfMomentomd2x(double distance,double beamLength)
+        public override double getfMomentomd2x(double distance)
         {
             if (!isleft)
                 return 0;
             else{
-                double A = -Power * Math.Pow(beamLength , 2) / (6) ;
+                double A = -Power * Math.Pow(BeamLength , 2) / (6) ;
                 return (Power * Math.Pow(distance , 3) / 6 + A*distance) * factor;
             }
         }
-        public void add(Force force)
+        public override void add(Force_ force)
         {
             if (this.canAdd(force))
                 base.add(force);
         }
-        public bool canAdd(Force force)
+        public override bool canAdd(Force_ force)
         {
             if (!base.canAdd(force)) return false;
             return this.isleft == ((ReflectionBeamForce)force).isleft;
+        }
+        public override ReflectionBeamForce getReflection(int x)
+        {
+            return null;
         }
     }
 }

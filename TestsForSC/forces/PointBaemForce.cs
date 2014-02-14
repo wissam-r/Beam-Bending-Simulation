@@ -5,54 +5,99 @@ using System.Text;
 
 namespace forces
 {
-    public class PointBaemForce : Force 
+    public class PointBaemForce : Force , BeamForce  
     {
-        private double Position;
-        
-        public PointBaemForce(double power, double position)
+        private double position;
+        private Double beamLength;
+        public  Double BeamLength
+        {
+            get { return beamLength; }
+        }
+        public PointBaemForce(double power, double position,Double beamLenght)
             : base(power)
         {
-            this.Position = position;
+            this.position = position;
+            this.beamLength = beamLenght;
+            calculReflectionLeft();
+            calculReflectionRight();
         }
-        public override double getMomentom(double distance)
+        protected PointBaemForce(double power, double position, Double beamLenght,bool calc)
+            : base(power)
         {
-            if (distance <= Position)
+            this.position = position;
+            this.beamLength = beamLenght;
+            if (calc)
+            {
+                calculReflectionLeft();
+                calculReflectionRight();
+            }
+        }
+        public virtual double getMomentom(double distance)
+        {
+            if (distance <= position)
                 return 0;
             else
             {
-                return -(distance - Position) * Power * factor;
+                return -(distance - position) * Power * factor;
             }
         }
-
-        public override double getfMomentomd2x(double distance,double beamLength)
+        public virtual double getShaer(double distance)
+        {
+            if (distance <= position)
+            {
+                return ReflectionLeft.Power;
+            }
+            else/* if (distance > position*/
+            {
+                return -ReflectionRight.Power;
+            }
+        }
+        public virtual double getfMomentomd2x(double distance)
         {
             
-            double A = Power * Math.Pow(beamLength - Position, 3) / (6 * beamLength);
-            if (distance <= Position)
+            double A = Power * Math.Pow(beamLength - position, 3) / (6 * beamLength);
+            if (distance <= position)
                 return A * distance * factor;
             else{                
-                return (-Power * Math.Pow(distance - Position, 3) / 6 + A*distance)*factor;
+                return (-Power * Math.Pow(distance - position, 3) / 6 + A*distance)*factor;
             }
         }
-        public override void add(Force force)
+        public override void add(Force_ force)
         {
             if (this.canAdd(force))
+            {
                 base.addPower(force);
+                calculReflectionRight();
+                calculReflectionLeft();            
+            }
         }
-        public override bool canAdd(Force force)
+        public override bool canAdd(Force_ force)
         {
             if (!base.sameType(force)) return false;
-            return this.Position == ((PointBaemForce)force).Position;
+            return this.position == ((PointBaemForce)force).position;
         }
 
-        public override ReflectionBeamForce getReflectionLeft(double BeamLenght)
+        private ReflectionBeamForce ReflectionLeft;
+        private void calculReflectionLeft()
         {
-            return new ReflectionBeamForce(this.Power * (BeamLenght - this.Position) / BeamLenght, 0);
+            ReflectionLeft = new ReflectionBeamForce(this.Power * (BeamLength - this.position) / BeamLength, 0,beamLength);
+        }
+        private ReflectionBeamForce ReflectionRight;
+        private void calculReflectionRight()
+        {
+            ReflectionRight = new ReflectionBeamForce(this.Power * this.position / BeamLength, 0,beamLength);
         }
 
-        public override ReflectionBeamForce getReflectionRight(double BeamLenght)
+        public virtual ReflectionBeamForce getReflection(int x)
         {
-            return new ReflectionBeamForce(this.Power * this.Position / BeamLenght, 0);
+            switch (x)
+            {
+                case 0: return ReflectionLeft;
+                    //break;
+                case 1: return ReflectionRight;
+                    //break;
+            }
+            throw new ArgumentOutOfRangeException("x", x, "x is to be in [0,1]");
         }
     }
 }

@@ -8,27 +8,27 @@ namespace forces
 {
     public class Forces
     {
-        LinkedList<Force> forces;
-        private double beamLength;
+        LinkedList<BeamForce> forces;
+        private Double beamLength;
         
 
-        public Forces(double weight,double beamLength)
+        public Forces(double weight,Double beamLength)
         {
             this.beamLength = beamLength;
-            forces = new LinkedList<Force>();
-            forces.AddFirst(new ReflectionBeamForce(weight / 2, 0));
-            forces.AddLast(new ReflectionBeamForce(weight / 2, beamLength));
-            forces.AddBefore(forces.Last, new DistributedBeamForce(weight/beamLength,0,beamLength));
+            forces = new LinkedList<BeamForce>();
+            forces.AddFirst(new ReflectionBeamForce(weight / 2, 0,beamLength));
+            forces.AddLast(new ReflectionBeamForce(weight / 2, beamLength,beamLength));
+            forces.AddBefore(forces.Last, new DistributedBeamForce(weight/beamLength,0,beamLength,beamLength));
         }
 
 
 
-        public void Add(Force item)
+        public void Add(BeamForce item)
         {
             if(item is ReflectionBeamForce)
                 return;
             bool added = false;
-            foreach (Force f in forces)
+            foreach (BeamForce f in forces)
             {
                 if (f.canAdd(item))
                 {
@@ -39,14 +39,23 @@ namespace forces
             }
             if (!added)
                 forces.AddBefore(forces.Last, item);
-            this.forces.First.Value.add(item.getReflectionLeft(beamLength));
-            this.forces.Last.Value.add(item.getReflectionRight(beamLength));
+            this.forces.First.Value.add(item.getReflection(0));
+            this.forces.Last.Value.add(item.getReflection(1));
         }
 
+        public double getShaer(double distance)
+        {
+            double sum = 0;
+            foreach (BeamForce f in forces)
+            {
+                sum += f.getShaer(distance);
+            }
+            return sum;
+        }
         public double getMomentom(double distance)
         {
             double sum = 0;
-            foreach (Force f in forces)
+            foreach (BeamForce f in forces)
             {
                 sum += f.getMomentom(distance);
             }
@@ -55,9 +64,9 @@ namespace forces
         public double getfMomentomd2x(double distance, double beamLength)
         {
             double sum = 0;
-            foreach (Force f in forces)
+            foreach (BeamForce f in forces)
             {
-                sum += f.getfMomentomd2x(distance, beamLength);
+                sum += f.getfMomentomd2x(distance);
             }
             return sum;
         }
@@ -70,12 +79,12 @@ namespace forces
             forces.Clear();
         }
 
-        public bool Contains(Force item)
+        public bool Contains(BeamForce item)
         {
             return this.forces.Contains(item);
         }
 
-        public void CopyTo(Force[] array, int arrayIndex)
+        public void CopyTo(BeamForce[] array, int arrayIndex)
         {
             this.forces.CopyTo(array, arrayIndex);
         }
@@ -85,7 +94,7 @@ namespace forces
             get { return this.forces.Count; }
         }
 
-        public bool Remove(Force item)
+        public bool Remove(BeamForce item)
         {
             return forces.Remove(item);
         }
