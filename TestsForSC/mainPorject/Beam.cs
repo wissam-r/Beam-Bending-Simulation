@@ -7,37 +7,74 @@ using forces;
 
 namespace mainPorject
 {
-    public class Beam
+    public class BeamWrapper
     {
-        private RenforcedBeem beam;
-        private Forces forces;
+        public RenforcedBeem beam;
+        public Forces forces;
 
         public double Width { 
             get{
-                throw new NotImplementedException();
+                return beam.B;
             }
         }
         public double Height {
             get
             {
-                throw new NotImplementedException();
+                if (beam.Form is beam.forms.Rectangle)
+                {
+                    return beam.Form.crossSectionalArea() / Width;
+                }
+                else
+                {
+                    throw new NotImplementedException();
+                }
             }
         }
         public double Length{get{return beam.L;}}
 
-        public double MaxMomentom{
+        public double MaxMomentom
+        {
             get
             {
-                throw new NotImplementedException();
+                return beam.getERM();
+            }
+        }
+        public double E
+        {
+            get
+            {
+                return beam.EMC;
             }
         }
         
         public double getDiflectionAt(double position){
             return forces.getfMomentomd2x(position, Length) / (beam.getIe(forces.getMomentom(position)) * beam.EMC);
         }
+
+        public double getShaer(double position)
+        {
+            return forces.getShaer(position);
+        }
         public double getMomentomAt(double position)
         {
             return forces.getMomentom(position);
+        }
+
+        public double getNaturalSerfaceDepth()
+        {
+            if (beam is SinReinRecBeem)
+            {
+                return (beam as SinReinRecBeem).X;
+            }
+            else if (beam is DoubReinRecBeem)
+            {
+                return (beam as DoubReinRecBeem).X;
+            }
+            else throw new NotImplementedException();
+        }
+        public double getI(double position)
+        {
+            return beam.getIe(forces.getMomentom(position));
         }
     }
 }
