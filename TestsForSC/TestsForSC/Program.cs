@@ -28,18 +28,18 @@ namespace TestsForSC
         static Xna1 game;
         static void Main(string[] args)
         {
-            //jasam form = new jasam();
-            //form.Disposed += new EventHandler(form_Disposed);
-            //using (game = new Xna1(form))
-            //{
-            //    form.Show();
-            //    form.TopMost = true;
-            //    game.Run();
-            //}
+            jasam form = new jasam();
+            form.Disposed += new EventHandler(form_Disposed);
+            using (game = new Xna1(form))
+            {
+                form.Show();
+                form.TopMost = true;
+                game.Run();
+            }
 
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new jasam());
+            //Application.EnableVisualStyles();
+            //Application.SetCompatibleTextRenderingDefault(false);
+            //Application.Run(new jasam());
 
             //using (Game1 game = new Game1())
             //{

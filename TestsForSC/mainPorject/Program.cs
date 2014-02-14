@@ -16,9 +16,23 @@ namespace mainPorject
         [STAThread]
         static void Main(string[] args)
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new mainBeamSpec());
+
+            mainWorkForm form = new mainWorkForm();
+            form.Disposed += new EventHandler(form_Disposed);
+            using (game = new Xna1(form))
+            {
+                form.Show();
+                form.TopMost = true;
+                game.Run();
+            }
+            //Application.EnableVisualStyles();
+            //Application.SetCompatibleTextRenderingDefault(false);
+            //Application.Run(new mainWorkForm());
+        }
+
+        static void form_Disposed(object sender, EventArgs e)
+        {
+            game.Exit();
         }
     }
 }
