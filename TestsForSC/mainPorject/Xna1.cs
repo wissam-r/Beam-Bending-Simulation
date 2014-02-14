@@ -16,7 +16,7 @@ namespace mainPorject
     class Xna1 : Microsoft.Xna.Framework.Game
     {
         private GraphicsDeviceManager graphics;
-        XnaFormable form;
+        XnaFormable home;
 
         VertexBuffer vertexBuffer;
         IndexBuffer indexBuffer;
@@ -26,42 +26,43 @@ namespace mainPorject
         Matrix view = Matrix.CreateLookAt(new Vector3(0, 0, 3), new Vector3(0, 0, 0), new Vector3(0, 1, 0));
         Matrix projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45), 800f / 480f, 0.01f, 100f);
 
-        int points;
-        const float accuracy = 10f;
-        int multipler = 100;
-        VertexPositionColor[] primitiveList;
-        short[] lineStripIndices;
+        private int points;
+        public float accuracy = 1f;
+        public int multipler = 2;
+        private VertexPositionColor[] primitiveList;
+        private short[] lineStripIndices;
         private bool ShouldDraw;
 
         public Xna1(XnaFormable formm)
         {
-            this.form = formm;
+            this.home = formm;
             graphics = new GraphicsDeviceManager(this);
             graphics.PreparingDeviceSettings += new EventHandler<PreparingDeviceSettingsEventArgs>(graphics_PreparingDeviceSettings);
             Form xnaWindow = (Form)Control.FromHandle((this.Window.Handle));
             xnaWindow.GotFocus += new EventHandler(xnaWindow_GotFocus);
-            form.XnaContorl.Resize += new EventHandler(Panel_Resize);
+            home.XnaContorl.Resize += new EventHandler(Panel_Resize);
 
             Content.RootDirectory = "Content";
             this.IsMouseVisible = true;
             ShouldDraw = false;
         }
+
         void graphics_PreparingDeviceSettings(object sender, PreparingDeviceSettingsEventArgs e)
         {
-            e.GraphicsDeviceInformation.PresentationParameters.DeviceWindowHandle = form.XnaContorl.Handle;
+            e.GraphicsDeviceInformation.PresentationParameters.DeviceWindowHandle = home.XnaContorl.Handle;
         }
 
         void xnaWindow_GotFocus(object sender, EventArgs e)
         {
             ((Form)sender).Visible = false;
-            form.Form.TopMost = false;
+            home.Form.TopMost = false;
         }
 
         void Panel_Resize(object sender, EventArgs e)
         {
-            graphics.PreferredBackBufferWidth = form.XnaContorl.Width;
-            graphics.PreferredBackBufferHeight = form.XnaContorl.Height;
-            float aspectRatio = (float)form.XnaContorl.Width / form.XnaContorl.Height;
+            graphics.PreferredBackBufferWidth = home.XnaContorl.Width;
+            graphics.PreferredBackBufferHeight = home.XnaContorl.Height;
+            float aspectRatio = (float)home.XnaContorl.Width / home.XnaContorl.Height;
             graphics.ApplyChanges();
         }
 
@@ -89,15 +90,15 @@ namespace mainPorject
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == Microsoft.Xna.Framework.Input.ButtonState.Pressed)
                 this.Exit();
 
-            if (form.NewPointsFlag)
+            if (home.NewPointsFlag)
             {
                 setVertices();
-                form.NewPointsFlag = false;
+                home.NewPointsFlag = false;
             }
-            else if (form.NewPointPositionFlag)
+            else if (home.NewPointPositionFlag)
             {
                 updateVertices();
-                form.NewPointPositionFlag = false;
+                home.NewPointPositionFlag = false;
             }
              
             base.Update(gameTime);
@@ -113,7 +114,7 @@ namespace mainPorject
              if (ShouldDraw)
              {
                  Matrix viewMatrix = Matrix.CreateLookAt(
-                    new Vector3(0.0f, 0.0f, (float)(((form.Beam.Length + 10) / 2) / Math.Tan(MathHelper.ToRadians(45 / 2.0f)))),
+                    new Vector3(0.0f, 0.0f, (float)(((home.Beam.Length + 10) / 2) / Math.Tan(MathHelper.ToRadians(45 / 2.0f)))),
                     Vector3.Zero,
                     Vector3.Up
                     );
@@ -149,16 +150,17 @@ namespace mainPorject
              
          }
 
+         #region vertices
          private void setVertices()
          {
-             points = (int)(form.Beam.Length * 2 * accuracy);
+             points = (int)(home.Beam.Length * 2 * accuracy) + 2;
 
              primitiveList = new VertexPositionColor[points];
              for (int i = 0; i < points/2; i++)
              {
                  Color c = Color.Green;
-                 primitiveList[i * 2] = new VertexPositionColor(new Vector3(i / accuracy - (float)form.Beam.Length / 2.0f, 0.0f, 0.0f), c);
-                 primitiveList[i * 2 + 1] = new VertexPositionColor(new Vector3(i / accuracy - (float)form.Beam.Length / 2.0f, 10.0f, 0.0f), c);
+                 primitiveList[i * 2] = new VertexPositionColor(new Vector3(i / accuracy - (float)home.Beam.Length / 2.0f, -(float)home.Beam.Height / 2, 0.0f), c);
+                 primitiveList[i * 2 + 1] = new VertexPositionColor(new Vector3(primitiveList[i*2].Position.X, primitiveList[i*2].Position.Y + (float)home.Beam.Height, 0.0f), c);
              }
              updateColors();
              updateDiflection();
@@ -186,20 +188,44 @@ namespace mainPorject
 
          private void updateColors()
          {
-             //for (int i = 0; i < points / 2; i++)
-             //{
-             //    Color c = new Color((float)Math.Abs(form.Forces.getMomentom(i / accuracy) / form.MaxMomentom), 1 - (float)Math.Abs(form.MomentomAt(i / accuracy) / form.MaxMomentom), 0.01f);
-             //    primitiveList[i * 2].Color = c;
-             //    primitiveList[i * 2 + 1].Color = c;
-             //}
+             for (int i = 0; i < points / 2; i++)
+             {
+                 Color c = new Color((float)Math.Abs(home.Beam.forces.getMomentom(i / accuracy) / home.Beam.MaxMomentom), 1 - (float)Math.Abs(home.Beam.forces.getMomentom(i / accuracy) / home.Beam.MaxMomentom), 0.01f);
+                 primitiveList[i * 2].Color = c;
+                 primitiveList[i * 2 + 1].Color = c;
+             }
          }
          private void updateDiflection()
          {
-             //for (int i = 0; i < points / 2; i++)
-             //{
-             //    primitiveList[i * 2].Position.Y = (float)form.diflectionAt(i / accuracy)*multipler;
-             //    primitiveList[i * 2 + 1].Position.Y = primitiveList[i * 2].Position.Y + 10;
-             //}
+             updateDiflection_Y();
+             updateDiflection_X();
          }
+         private void updateDiflection_Y()
+         {
+             for (int i = 0; i < points / 2; i++)
+             {
+                 primitiveList[i * 2].Position.Y = (float)home.Beam.getDiflectionAt(i / accuracy) * multipler - (float)home.Beam.Height;
+                 primitiveList[i * 2 + 1].Position.Y = primitiveList[i * 2].Position.Y + (float)home.Beam.Height;
+             }
+         }
+         private void updateDiflection_X()
+         {
+             for (int i = 1; i < points / 2 - 1; i++)
+             {
+                 double momentom = home.Beam.getMomentomAt(i / accuracy);
+                 if (momentom == 0) continue;
+                 double p = home.Beam.getI(i / accuracy) * home.Beam.E / home.Beam.getMomentomAt(i / accuracy);
+                 if (p == 0) continue;
+                 double Es;
+                 Es = home.Beam.getNaturalSerfaceDepth() / p;
+                 primitiveList[i * 2 - 2].Position.X -= (float)Es;
+                 primitiveList[i * 2 + 2].Position.X += (float)Es;
+
+                 Es = (home.Beam.Height - home.Beam.getNaturalSerfaceDepth()) / p;
+                 primitiveList[i * 2 - 1].Position.X += (float)Es;
+                 primitiveList[i * 2 + 1].Position.X -= (float)Es;
+             }
+         }
+        #endregion
     } 
 }

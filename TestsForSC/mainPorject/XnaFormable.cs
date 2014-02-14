@@ -14,6 +14,6 @@ namespace mainPorject
         Form Form { get; }
         bool NewPointsFlag { get; set; }
         bool NewPointPositionFlag { get; set; }
-        Beam Beam { get; }
+        BeamWrapper Beam { get; }
     }
 }
