@@ -74,8 +74,6 @@
             this.textBoxForceLocation = new System.Windows.Forms.TextBox();
             this.textBoxPointForce = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBoxDistributedForce = new System.Windows.Forms.PictureBox();
-            this.pictureBoxPointForce = new System.Windows.Forms.PictureBox();
             this.labelPanelLength = new System.Windows.Forms.Label();
             this.labelpanelWidth = new System.Windows.Forms.Label();
             this.labelPanelHeight = new System.Windows.Forms.Label();
@@ -86,6 +84,8 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.cancelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pictureBoxDistributedForce = new System.Windows.Forms.PictureBox();
+            this.pictureBoxPointForce = new System.Windows.Forms.PictureBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -94,9 +94,9 @@
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.contextMenuStripForce.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDistributedForce)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPointForce)).BeginInit();
-            this.contextMenuStripForce.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -283,6 +283,11 @@
             this.numericUpDownCount.ReadOnly = true;
             this.numericUpDownCount.Size = new System.Drawing.Size(46, 20);
             this.numericUpDownCount.TabIndex = 35;
+            this.numericUpDownCount.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
             this.numericUpDownCount.ValueChanged += new System.EventHandler(this.numericUpDownCount_ValueChanged);
             // 
             // label17
@@ -561,6 +566,7 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.pictureBoxDistributedForce);
             this.panel1.Controls.Add(this.pictureBoxPointForce);
             this.panel1.Controls.Add(this.labelPanelLength);
@@ -571,39 +577,6 @@
             this.panel1.Size = new System.Drawing.Size(313, 382);
             this.panel1.TabIndex = 1;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
-            this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
-            // 
-            // pictureBoxDistributedForce
-            // 
-            this.pictureBoxDistributedForce.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxDistributedForce.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxDistributedForce.Image")));
-            this.pictureBoxDistributedForce.Location = new System.Drawing.Point(173, 0);
-            this.pictureBoxDistributedForce.Name = "pictureBoxDistributedForce";
-            this.pictureBoxDistributedForce.Size = new System.Drawing.Size(100, 50);
-            this.pictureBoxDistributedForce.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxDistributedForce.TabIndex = 4;
-            this.pictureBoxDistributedForce.TabStop = false;
-            this.pictureBoxDistributedForce.Visible = false;
-            this.pictureBoxDistributedForce.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxDistributedForce_MouseClick);
-            this.pictureBoxDistributedForce.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxDistributedForce_MouseDown);
-            this.pictureBoxDistributedForce.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxDistributedForce_MouseMove);
-            this.pictureBoxDistributedForce.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxDistributedForce_MouseUp);
-            // 
-            // pictureBoxPointForce
-            // 
-            this.pictureBoxPointForce.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxPointForce.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxPointForce.Image")));
-            this.pictureBoxPointForce.Location = new System.Drawing.Point(281, 0);
-            this.pictureBoxPointForce.Name = "pictureBoxPointForce";
-            this.pictureBoxPointForce.Size = new System.Drawing.Size(32, 139);
-            this.pictureBoxPointForce.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxPointForce.TabIndex = 4;
-            this.pictureBoxPointForce.TabStop = false;
-            this.pictureBoxPointForce.Visible = false;
-            this.pictureBoxPointForce.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxPointForce_MouseClick);
-            this.pictureBoxPointForce.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxPointForce_MouseDown);
-            this.pictureBoxPointForce.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxPointForce_MouseMove);
-            this.pictureBoxPointForce.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxPointForce_MouseUp);
             // 
             // labelPanelLength
             // 
@@ -622,6 +595,7 @@
             this.labelpanelWidth.Size = new System.Drawing.Size(19, 13);
             this.labelpanelWidth.TabIndex = 1;
             this.labelpanelWidth.Text = "25";
+            this.labelpanelWidth.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // labelPanelHeight
             // 
@@ -631,6 +605,7 @@
             this.labelPanelHeight.Size = new System.Drawing.Size(19, 13);
             this.labelPanelHeight.TabIndex = 0;
             this.labelPanelHeight.Text = "55";
+            this.labelPanelHeight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // buttonOK
             // 
@@ -642,7 +617,7 @@
             this.buttonOK.TabIndex = 2;
             this.buttonOK.Text = "OK";
             this.buttonOK.UseVisualStyleBackColor = true;
-            this.buttonOK.Click += new System.EventHandler(this.button1_Click);
+            this.buttonOK.Click += new System.EventHandler(this.buttonOk_Click);
             // 
             // buttonCancel
             // 
@@ -654,7 +629,7 @@
             this.buttonCancel.TabIndex = 3;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.button2_Click);
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // contextMenuStripForce
             // 
@@ -694,16 +669,50 @@
             this.cancelToolStripMenuItem.Text = "Cancel";
             this.cancelToolStripMenuItem.Click += new System.EventHandler(this.cancelToolStripMenuItem_Click);
             // 
+            // pictureBoxDistributedForce
+            // 
+            this.pictureBoxDistributedForce.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxDistributedForce.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxDistributedForce.Image")));
+            this.pictureBoxDistributedForce.Location = new System.Drawing.Point(173, 0);
+            this.pictureBoxDistributedForce.Name = "pictureBoxDistributedForce";
+            this.pictureBoxDistributedForce.Size = new System.Drawing.Size(100, 50);
+            this.pictureBoxDistributedForce.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxDistributedForce.TabIndex = 4;
+            this.pictureBoxDistributedForce.TabStop = false;
+            this.pictureBoxDistributedForce.Visible = false;
+            this.pictureBoxDistributedForce.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxDistributedForce_MouseClick);
+            this.pictureBoxDistributedForce.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxDistributedForce_MouseDown);
+            this.pictureBoxDistributedForce.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxDistributedForce_MouseMove);
+            this.pictureBoxDistributedForce.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxDistributedForce_MouseUp);
+            // 
+            // pictureBoxPointForce
+            // 
+            this.pictureBoxPointForce.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxPointForce.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxPointForce.Image")));
+            this.pictureBoxPointForce.Location = new System.Drawing.Point(281, 0);
+            this.pictureBoxPointForce.Name = "pictureBoxPointForce";
+            this.pictureBoxPointForce.Size = new System.Drawing.Size(32, 139);
+            this.pictureBoxPointForce.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxPointForce.TabIndex = 4;
+            this.pictureBoxPointForce.TabStop = false;
+            this.pictureBoxPointForce.Visible = false;
+            this.pictureBoxPointForce.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxPointForce_MouseClick);
+            this.pictureBoxPointForce.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxPointForce_MouseDown);
+            this.pictureBoxPointForce.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxPointForce_MouseMove);
+            this.pictureBoxPointForce.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxPointForce_MouseUp);
+            // 
             // mainBeamSpec
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(654, 407);
+            this.ControlBox = false;
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tabControl1);
             this.Name = "mainBeamSpec";
+            this.ShowIcon = false;
             this.Text = "mainBeamSpec";
             this.Load += new System.EventHandler(this.mainBeamSpec_Load);
             this.tabControl1.ResumeLayout(false);
@@ -719,10 +728,10 @@
             this.groupBox3.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDistributedForce)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPointForce)).EndInit();
             this.contextMenuStripForce.ResumeLayout(false);
             this.contextMenuStripForce.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDistributedForce)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPointForce)).EndInit();
             this.ResumeLayout(false);
 
         }

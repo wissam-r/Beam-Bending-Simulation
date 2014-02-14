@@ -51,6 +51,29 @@
       <DependentUpon>mainWorkForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="myTrackBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="myTrackBar.Designer.cs">
+      <DependentUpon>myTrackBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="shareDiagram.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="shareDiagram.Designer.cs">
+      <DependentUpon>shareDiagram.cs</DependentUpon>
+    </Compile>
+    <Compile Include="fastControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="fastControl.Designer.cs">
+      <DependentUpon>fastControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Xna1.cs" />
     <Compile Include="XnaFormable.cs" />
   </ItemGroup>
@@ -60,6 +83,19 @@
     </EmbeddedResource>
     <EmbeddedResource Include="mainWorkForm.resx">
       <DependentUpon>mainWorkForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="myTrackBar.resx">
+      <DependentUpon>myTrackBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="shareDiagram.resx">
+      <DependentUpon>shareDiagram.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fastControl.resx">
+      <DependentUpon>fastControl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -83,6 +119,24 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Image1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow_down.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrows_down.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WidthHeight001.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WidthHeight010.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WidthHeight100.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
