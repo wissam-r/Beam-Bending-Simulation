@@ -5,10 +5,12 @@ using System.Text;
 
 namespace BeamDesign
 {
-    public class PartialDesign : SingleReinforcement
+    public class SRBPartialDesign : SingleReinforcement
     {
-        public PartialDesign(double Mu, double B, double D, double Fy, double Fc) : base(Mu, B, D, Fy, Fc)
+        public SRBPartialDesign(double Mu, double B, double H, double A, double Fy, double Fc) : base(Mu, B, H, A, Fy, Fc)
         {
+            if(H - A <= 0)
+                throw new Exception("α should be less than h");
             AsCalc();
         }
         override protected double AzeroCalc()
@@ -29,8 +31,15 @@ namespace BeamDesign
         }
         override protected void AsCalc()
         {
-            double As = Mu / (0.9 * GammazeroCalc() * D * Fy);
-            AreaS = As >= AsMinCalc() ? AsMinCalc() : As;
+            if (this.AlphaCalc() <= this.AlphaMaxCalc())
+            {
+                double As = Mu / (0.9 * GammazeroCalc() * D * Fy);
+                AreaS = As < AsMinCalc() ? AsMinCalc() : As;
+            }
+            else
+            {
+                throw new Exception("Double reinforcement Needed");
+            }
         }
     }
 }
