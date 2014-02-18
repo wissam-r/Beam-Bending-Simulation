@@ -7,11 +7,22 @@ namespace BeamDesign
 {
     public class SRBPartialDesign : SingleReinforcement
     {
+        #region Constructor
         public SRBPartialDesign(double Mu, double B, double H, double A, double Fy, double Fc) : base(Mu, B, H, A, Fy, Fc)
         {
             if(H - A <= 0)
                 throw new Exception("α should be less than h");
             AsCalc();
+        }
+        #endregion
+        #region Methods
+        protected double AlphaMaxCalc()
+        {
+            return 0.5 * Beta1Calc() * (630 / (630 + Fy));
+        }
+        protected double AsMinCalc()
+        {
+            return (0.9 / Fy) * B * D;
         }
         override protected double AzeroCalc()
         {
@@ -20,14 +31,6 @@ namespace BeamDesign
         override protected double AlphaCalc()
         {
             return 1 - Math.Sqrt(1 - 2 * AzeroCalc());
-        }
-        protected double AlphaMaxCalc()
-        {
-            return 0.5 * Beta1Calc() * (630 / (630 + Fy));
-        }
-        protected double AsMinCalc()
-        {
-            return (0.9 / Fy) * B * D;
         }
         override protected void AsCalc()
         {
@@ -41,5 +44,6 @@ namespace BeamDesign
                 throw new Exception("Double reinforcement Needed");
             }
         }
+        #endregion
     }
 }

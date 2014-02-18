@@ -46,18 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Beam1DesignForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Beam1DesignForm.Designer.cs">
-      <DependentUpon>Beam1DesignForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Fields.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Fields.Designer.cs">
-      <DependentUpon>Fields.cs</DependentUpon>
-    </Compile>
     <Compile Include="BeamDesignForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,12 +60,6 @@
     <Compile Include="calcedFields.Designer.cs">
       <DependentUpon>calcedFields.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Beam1DesignForm.resx">
-      <DependentUpon>Beam1DesignForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Fields.resx">
-      <DependentUpon>Fields.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="BeamDesignForm.resx">
       <DependentUpon>BeamDesignForm.cs</DependentUpon>
     </EmbeddedResource>

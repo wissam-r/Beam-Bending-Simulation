@@ -44,7 +44,7 @@
     <Compile Include="DRBPartialDesign.cs" />
     <Compile Include="SingleReinforcement.cs" />
     <Compile Include="SectionDesign.cs" />
-    <Compile Include="SRCPartialDesign.cs" />
+    <Compile Include="SRBPartialDesign.cs" />
     <Compile Include="WithMaxAs.cs" />
     <Compile Include="WithMinAs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

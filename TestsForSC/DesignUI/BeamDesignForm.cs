@@ -18,35 +18,18 @@ namespace DesignUI
         int radioTag = 0;
         private void btnCalc_Click(object sender, EventArgs e)
         {
-            try
-            {
-                switch (radioTag)
-                {
-                    case 0: SRBPartialDesign b = new SRBPartialDesign(double.Parse(this.txtBoxMu.Text), double.Parse(this.txtBoxb.Text), double.Parse(this.calcedFieldsSR.txtBoxh.Text), double.Parse(this.calcedFieldsSR.txtBoxa.Text), double.Parse(this.txtBoxfy.Text), double.Parse(this.txtBoxfc.Text));
-                        this.calcedFieldsSR.txtBoxAs.Text = b.AreaS.ToString();
-                        this.calcedFieldsSR.txtBoxd.Text = b.D.ToString(); break;
-                    case 1: WithMinAs c = new WithMinAs(double.Parse(this.txtBoxMu.Text), double.Parse(this.txtBoxb.Text), double.Parse(this.txtBoxfy.Text), double.Parse(this.txtBoxfc.Text));
-                        this.calcedFieldsSR.txtBoxAs.Text = c.AreaS.ToString();
-                        this.calcedFieldsSR.txtBoxd.Text = c.D.ToString(); break;
-                    case 2: WithMaxAs d = new WithMaxAs(double.Parse(this.txtBoxMu.Text), double.Parse(this.txtBoxb.Text), double.Parse(this.txtBoxfy.Text), double.Parse(this.txtBoxfc.Text));
-                        this.calcedFieldsSR.txtBoxAs.Text = d.AreaS.ToString();
-                        this.calcedFieldsSR.txtBoxd.Text = d.D.ToString(); break;
-                }
-            }
-            catch (Exception ex)
-            {
-                if (ex.Source == "BeamDesign")
-                    MessageBox.Show(ex.Message, "Error");
-                else
-                    MessageBox.Show("Please enter all fields values", "Error");
-            }
+            btnCalc();
         }
+
         private void radioBtn_CheckedChanged(object sender, EventArgs e)
         {
             RadioButton a = (RadioButton)sender;
             radioTag = int.Parse(a.Tag.ToString());
             this.calcedFieldsSR.txtBoxa.ReadOnly = radioTag == 0 ? false : true;
             this.calcedFieldsSR.txtBoxh.ReadOnly = radioTag == 0 ? false : true;
+            this.calcedFieldsSR.txtBoxa.Text = "";
+            this.calcedFieldsSR.txtBoxh.Text = "";
+
         }
         private void txtBox_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -59,19 +42,63 @@ namespace DesignUI
             else
                 e.Handled = false;
         }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void BeamDesignForm_KeyUp(object sender, KeyEventArgs e)
         {
-            DRBPartialDesign b = new DRBPartialDesign(double.Parse(this.txtBoxMu.Text), double.Parse(this.txtBoxb.Text), double.Parse(this.calcedFieldsDR.txtBoxh.Text), double.Parse(this.calcedFieldsDR.txtBoxa.Text), double.Parse(this.txtBoxfy.Text), double.Parse(this.txtBoxfc.Text));
-            this.calcedFieldsDR.txtBoxAs.Text = b.AreaS.ToString();
-            this.calcedFieldsDR.txtBoxd.Text = b.D.ToString();
-            this.txtBoxAs_.Text = b.AreaS_.ToString();
-
+            
+        }
+        
+        void btnCalc()
+        {
+            if (tabControl1.SelectedIndex == 0)
+            {
+                try
+                {
+                    switch (radioTag)
+                    {
+                        case 0: SRBPartialDesign b = new SRBPartialDesign(double.Parse(this.txtBoxMu.Text), double.Parse(this.txtBoxb.Text), double.Parse(this.calcedFieldsSR.txtBoxh.Text), double.Parse(this.calcedFieldsSR.txtBoxa.Text), double.Parse(this.txtBoxfy.Text), double.Parse(this.txtBoxfc.Text));
+                            this.calcedFieldsSR.txtBoxAs.Text = b.AreaS.ToString();
+                            this.calcedFieldsSR.txtBoxd.Text = b.D.ToString(); break;
+                        case 1: WithMinAs c = new WithMinAs(double.Parse(this.txtBoxMu.Text), double.Parse(this.txtBoxb.Text), double.Parse(this.txtBoxfy.Text), double.Parse(this.txtBoxfc.Text));
+                            this.calcedFieldsSR.txtBoxAs.Text = c.AreaS.ToString();
+                            this.calcedFieldsSR.txtBoxd.Text = c.D.ToString(); break;
+                        case 2: WithMaxAs d = new WithMaxAs(double.Parse(this.txtBoxMu.Text), double.Parse(this.txtBoxb.Text), double.Parse(this.txtBoxfy.Text), double.Parse(this.txtBoxfc.Text));
+                            this.calcedFieldsSR.txtBoxAs.Text = d.AreaS.ToString();
+                            this.calcedFieldsSR.txtBoxd.Text = d.D.ToString(); break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    if (ex.Source == "BeamDesign")
+                        MessageBox.Show(ex.Message, "Error");
+                    else
+                        MessageBox.Show("Please enter all fields values", "Error");
+                }
+            }
+            else
+            {
+                try
+                {
+                    DRBPartialDesign b = new DRBPartialDesign(double.Parse(this.txtBoxMu.Text), double.Parse(this.txtBoxb.Text), double.Parse(this.calcedFieldsDR.txtBoxh.Text), double.Parse(this.calcedFieldsDR.txtBoxa.Text), double.Parse(this.txtBoxfy.Text), double.Parse(this.txtBoxfc.Text));
+                    this.calcedFieldsDR.txtBoxAs.Text = b.AreaS.ToString();
+                    this.calcedFieldsDR.txtBoxd.Text = b.D.ToString();
+                    this.txtBoxAs_.Text = b.AreaS_.ToString();
+                }
+                catch (Exception ex)
+                {
+                    if (ex.Source == "BeamDesign")
+                        MessageBox.Show(ex.Message, "Error");
+                    else
+                        MessageBox.Show("Please enter all fields values", "Error");
+                }
+            }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void BeamDesignForm_KeyDown(object sender, KeyEventArgs e)
         {
-
+            if (e.KeyData == Keys.Enter)
+            {
+                btnCalc();
+            }
         }
     }
 }

@@ -7,11 +7,7 @@ namespace BeamDesign
 {
     public abstract class RectangularBeam
     {
-        /* b Width of section
-         * d Effective depth of section
-         * As Cross-sectional area of longitudinal tensile reinforcement
-         */
-        #region Private Members
+        #region Fields
         private double mu;
         private double b;
         private double d;
@@ -80,6 +76,7 @@ namespace BeamDesign
             
         }
         #endregion
+        #region Methods
         abstract protected double AlphaCalc();
         protected double Beta1Calc()
         {
@@ -89,5 +86,6 @@ namespace BeamDesign
         {
             return 1 - 0.5 * AlphaCalc();
         }
+        #endregion
     }
 }

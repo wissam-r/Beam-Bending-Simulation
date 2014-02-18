@@ -392,7 +392,7 @@
             this.txtBoxa.Size = new System.Drawing.Size(34, 20);
             this.txtBoxa.TabIndex = 11;
             // 
-            // BeamDesignForm
+            // Beam1DesignForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -404,7 +404,7 @@
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(180, 300);
             this.MinimumSize = new System.Drawing.Size(180, 300);
-            this.Name = "BeamDesignForm";
+            this.Name = "Beam1DesignForm";
             this.Text = "Beam Design";
             this.groupBox1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
