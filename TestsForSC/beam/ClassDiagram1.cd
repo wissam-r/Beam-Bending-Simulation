@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="beam.DoubReinRecBeem" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAFgFAABIACAAECEkDAAhABQAAAAYAEERGBhBEIAYAQ=</HashCode>
+      <FileName>DoubReinRecBeem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="beam.RenforcedBeem" Collapsed="true">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BQAEAACAAABAQHBZWKEwGASAMSAEAWSglRgkAkcABAA=</HashCode>
+      <FileName>RenforcedBeem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="beam.SinReinRecBeem" Collapsed="true">
+    <Position X="2.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAFgFAABAAAAAECEEDAAhAAQAAAAYAEERGBhBEIAYAQ=</HashCode>
+      <FileName>SinReinRecBeem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="beam.forms.Rectangle" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CACAAAAAAAAAAAAAAIBAAACAAAAAAACAQAAAIABAAAA=</HashCode>
+      <FileName>forms\Rectangle.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="beam.helper.MathHelper" Collapsed="true">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>helper\MathHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="beam.reinforcement.DoubleReinforcement" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAEAAAAAAAAAAAAAAAAAQAAAAAAAQAIAAAA=</HashCode>
+      <FileName>reinforcement\DoubleReinforcement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="beam.reinforcement.SingleReinforcement" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAAQAAAAAAAQAIAAAA=</HashCode>
+      <FileName>reinforcement\SingleReinforcement.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="beam.forms.Form" Collapsed="true">
+    <Position X="5.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>forms\Form.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="beam.reinforcement.Reinforcement" Collapsed="true">
+    <Position X="7" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>reinforcement\Reinforcement.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

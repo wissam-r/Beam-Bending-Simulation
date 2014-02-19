@@ -211,14 +211,13 @@ namespace beam
             return Reinforcement.spaceCompressionReinforcement();
         }
         //strength reduction factor
-        protected double getTeta(byte choese, double muS,double MuSmax, double D)
+        protected double getTeta(byte choese, double x, double D)
         {
-            if (muS < MuSmax)
-            {
+            if (et(D)>=0.005)          {
 
                 return 0.9;
             }
-            else if (muS > MuSb)
+            else if (et(D) <= 0.002)
             {
                 //getTheCorrectY();
                 return 0.7;
@@ -248,7 +247,7 @@ namespace beam
         protected double et(double D)
         //تشوه الحديد
         {
-            return (D - (getX()) / getX()) * Ecu;
+            return ((D - getX()) / getX()) * Ecu;
         }
 
         //The actual percentage of reinforcement
@@ -290,16 +289,14 @@ namespace beam
         }
         private double calcMuSmin()
         {
-            return Math.Sqrt(CP) / (4 * IF) > 1.4 / IF ? Math.Sqrt(CP) / (4 * IF) : 1.4 / IF; ;
+            return 0.9/IF ;
         }
         private double calcB1()
         {
-            if (CP <= 30)
-                return 0.85;
-            else if (CP >= 58)
-                return 0.65;
+            if (CP <= 28)
+                return 0.9;
             else
-                return 0.85 - 0.007 * (CP - 30);
+                return 0.8;
         }
         private double calcEmc()
         {

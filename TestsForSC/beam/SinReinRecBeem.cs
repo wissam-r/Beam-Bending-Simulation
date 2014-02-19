@@ -167,7 +167,7 @@ namespace beam
             this.asb = calcAsb(D);
             this.asMax = calcAsMax();
             this.muSmax = calcMuSmax();       
-            this.teta = getTeta(choese, MuS, MuSmax,D);
+            this.teta = getTeta(choese, X,D);
             this.rM = calcRM();
             this.eRM = RM * Teta;
 
