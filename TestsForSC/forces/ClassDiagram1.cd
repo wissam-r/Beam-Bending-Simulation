@@ -1,52 +1,52 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="forces.DistributedBeamForce" Collapsed="true">
-    <Position X="0.5" Y="1.75" Width="1.5" />
+  <Class Name="forces.DistributedBeamForce">
+    <Position X="3.25" Y="3.25" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>BAAAAAACAAAAAAAggBAIAAIIAACIAAEACAAAABACAAA=</HashCode>
+      <HashCode>BABAAAACAAAAAAAggBAIAAIIAACIAAEACAAAAAACAAA=</HashCode>
       <FileName>DistributedBeamForce.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="forces.Force" Collapsed="true">
-    <Position X="1.75" Y="0.5" Width="1.5" />
+  <Class Name="forces.Force">
+    <Position X="4.5" Y="0.5" Width="1.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAUAAAgAAAAAAAACAAAAABAAAAAAACAAA=</HashCode>
       <FileName>Force.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" />
+    <Lollipop Orientation="Right" Position="0.1" />
   </Class>
   <Class Name="forces.Forces" Collapsed="true">
-    <Position X="5.25" Y="0.5" Width="1.5" />
+    <Position X="0.5" Y="15.5" Width="3.25" />
     <TypeIdentifier>
-      <HashCode>BAoAAAAAAAAAAAAAAAAABAYAAAAAAAAACAAAAABQIAA=</HashCode>
+      <HashCode>BApAAAAAAAQAAAAAAAAABAYAAAAAAAAAAAAAAABQIAA=</HashCode>
       <FileName>Forces.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="forces.PointBaemForce" Collapsed="true">
-    <Position X="2.75" Y="1.75" Width="1.5" />
+  <Class Name="forces.PointBaemForce">
+    <Position X="5.75" Y="3.25" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>BAAAAAAAAAAAAAAggBAIAAIIAACIAAEACAAAABACAAA=</HashCode>
+      <HashCode>BABAAAAAAAAAAAAAgBAIIAIIAACIAAEACAAAAAACAAA=</HashCode>
       <FileName>PointBaemForce.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="forces.ReflectionBeamForce" Collapsed="true">
-    <Position X="2.75" Y="3" Width="1.5" />
+  <Class Name="forces.ReflectionBeamForce">
+    <Position X="5.75" Y="7" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>BAAAAIAAAAAAAAAAgAAIAAIAAAAAAAAAAAAAABACAAA=</HashCode>
+      <HashCode>BABAAIAAAAAAAAAAgAAIAAIAAAAAAAAAAAAAAAACAAA=</HashCode>
       <FileName>ReflectionBeamForce.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Interface Name="forces.BeamForce" Collapsed="true">
-    <Position X="0.5" Y="5.75" Width="1.5" />
+    <Position X="1" Y="14.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>BAAAAAAAAAAAAAAAAAAIAAIAAAAIAAAAAAAAABAAAAA=</HashCode>
+      <HashCode>BABAAAAAAAAAAAAAAAAIAAIAAAAIAAAAAAAAAAAAAAA=</HashCode>
       <FileName>BeamForce.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="forces.Force_" Collapsed="true">
-    <Position X="0.5" Y="4.5" Width="1.5" />
+    <Position X="1" Y="13.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAAAABAAAAAAACAAA=</HashCode>
       <FileName>Force_.cs</FileName>

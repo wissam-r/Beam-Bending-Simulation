@@ -48,7 +48,7 @@ namespace mainPorject
         }
         
         public double getDiflectionAt(double position){
-            return forces.getfMomentomd2x(position, Length) / (beam.getIe(forces.getMomentom(position)) * beam.EMC);
+            return forces.getfMomentomd2x(position) / (beam.getIe(forces.getMomentom(position)) * beam.EMC);
         }
 
         public double getShaer(double position)

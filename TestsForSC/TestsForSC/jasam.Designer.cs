@@ -85,6 +85,9 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.label24 = new System.Windows.Forms.Label();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.userControl_BasicSpec1 = new mainPorject.UserControl_BasicSpec();
+            this.userControl_AdvancedSpec1 = new mainPorject.UserControl_AdvancedSpec();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -98,6 +101,7 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            this.tabPage5.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBoxFc
@@ -389,10 +393,11 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(347, 330);
+            this.tabControl1.Size = new System.Drawing.Size(564, 382);
             this.tabControl1.TabIndex = 21;
             // 
             // tabPage1
@@ -403,7 +408,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(339, 304);
+            this.tabPage1.Size = new System.Drawing.Size(556, 356);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "beam constructing";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -415,7 +420,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(339, 304);
+            this.tabPage2.Size = new System.Drawing.Size(556, 356);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "set forces";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -560,7 +565,7 @@
             this.tabPage3.Controls.Add(this.button4);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(339, 304);
+            this.tabPage3.Size = new System.Drawing.Size(556, 356);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "force test";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -627,7 +632,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(339, 304);
+            this.tabPage4.Size = new System.Drawing.Size(556, 356);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "XNA";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -647,15 +652,15 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.label24);
             this.splitContainer1.Panel2.Controls.Add(this.trackBar1);
-            this.splitContainer1.Size = new System.Drawing.Size(333, 298);
-            this.splitContainer1.SplitterDistance = 254;
+            this.splitContainer1.Size = new System.Drawing.Size(550, 350);
+            this.splitContainer1.SplitterDistance = 298;
             this.splitContainer1.TabIndex = 0;
             // 
             // label24
             // 
             this.label24.AutoSize = true;
             this.label24.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label24.Location = new System.Drawing.Point(0, 27);
+            this.label24.Location = new System.Drawing.Point(0, 35);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(41, 13);
             this.label24.TabIndex = 1;
@@ -669,17 +674,43 @@
             this.trackBar1.Location = new System.Drawing.Point(0, 0);
             this.trackBar1.Maximum = 200;
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(333, 22);
+            this.trackBar1.Size = new System.Drawing.Size(550, 22);
             this.trackBar1.TabIndex = 0;
             this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.None;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             this.trackBar1.ValueChanged += new System.EventHandler(this.trackBar1_ValueChanged);
             // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.userControl_AdvancedSpec1);
+            this.tabPage5.Controls.Add(this.userControl_BasicSpec1);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(556, 356);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "tabPage5";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // userControl_BasicSpec1
+            // 
+            this.userControl_BasicSpec1.Location = new System.Drawing.Point(-4, 6);
+            this.userControl_BasicSpec1.Name = "userControl_BasicSpec1";
+            this.userControl_BasicSpec1.Size = new System.Drawing.Size(228, 309);
+            this.userControl_BasicSpec1.TabIndex = 0;
+            // 
+            // userControl_AdvancedSpec1
+            // 
+            this.userControl_AdvancedSpec1.Location = new System.Drawing.Point(230, 16);
+            this.userControl_AdvancedSpec1.Name = "userControl_AdvancedSpec1";
+            this.userControl_AdvancedSpec1.Size = new System.Drawing.Size(252, 147);
+            this.userControl_AdvancedSpec1.TabIndex = 1;
+            // 
             // jasam
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(368, 351);
+            this.ClientSize = new System.Drawing.Size(585, 403);
             this.Controls.Add(this.tabControl1);
             this.Name = "jasam";
             this.Text = "jasam";
@@ -702,6 +733,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            this.tabPage5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -765,5 +797,8 @@
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.TabPage tabPage5;
+        private mainPorject.UserControl_BasicSpec userControl_BasicSpec1;
+        private mainPorject.UserControl_AdvancedSpec userControl_AdvancedSpec1;
     }
 }

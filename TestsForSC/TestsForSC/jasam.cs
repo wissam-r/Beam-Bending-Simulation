@@ -81,7 +81,7 @@ namespace TestsForSC
 
         private void button5_Click(object sender, EventArgs e)
         {
-            MessageBox.Show((myForces.getfMomentomd2x(double.Parse(textBoxLocation.Text), myBeam.L)/(myBeam.getIe(myForces.getMomentom(double.Parse(textBoxLocation.Text))) * myBeam.EMC)).ToString());
+            MessageBox.Show((myForces.getfMomentomd2x(double.Parse(textBoxLocation.Text))/(myBeam.getIe(myForces.getMomentom(double.Parse(textBoxLocation.Text))) * myBeam.EMC)).ToString());
         }
 
         private void textBoxFc_TextChanged(object sender, EventArgs e)
@@ -91,7 +91,7 @@ namespace TestsForSC
 
         private void button6_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(myForces.getfMomentomd2x(double.Parse(textBoxLocation.Text), myBeam.L).ToString());
+            MessageBox.Show(myForces.getfMomentomd2x(double.Parse(textBoxLocation.Text)).ToString());
         }
 
         public Control XnaContorl{

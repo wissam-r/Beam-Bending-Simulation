@@ -17,18 +17,9 @@ namespace mainPorject
         #region variables
         //variables
         public BeamWrapper beamWrap;
-        //public RenforcedBeem beam;
-        public double BeamHeight
-        {
-            private set;
-            get;
-        }
 
-        public double BeamWidth
-        {
-            private set;
-            get;
-        }
+        public double BeamHeight { private set; get; }
+        public double BeamWidth { private set; get; }
 
         private double beamLength_DONOTUSE;
         public double BeamLength
@@ -41,60 +32,78 @@ namespace mainPorject
             get { return beamLength_DONOTUSE; }
         }
 
-        public double Renforcement2Raduis
-        {
-            private set;
-            get;
-        }
+        public double RenforcementDiameter { private set; get; }
+        public double RenforcementDiameter2 { private set; get; }
 
-        public int RenforcementCount
-        {
-            private set;
-            get;
-        }
+        public int RenforcementCount { private set; get; }
+        public int RenforcementCount2 { private set; get; }
 
-        public double RenforcementA
-        {
-            private set;
-            get;
-        }
+        public double RenforcementA { private set; get; }
+        public double RenforcementA2 { private set; get; }
 
         public Forces Forces
         {
             set;
             get;
         }
-        //public SinReinRecBeem sbeam
-        //{
-        //    private set;
-        //    get;
-        //}
-        //public DoubReinRecBeem dbeam
-        //{
-        //    private set;
-        //    get;
-        //}
         private List<Force> forces;
+
+        int stage_DONOTUSE;
+        private int stage
+        {
+            get { return stage_DONOTUSE; }
+            set 
+            {
+                switch (stage_DONOTUSE)
+                {
+                    case (0):
+                        desetStage0();
+                        break;
+                    case (1):
+                        desetStage1();
+                        break;
+                    case (2):
+                        desetStage2();
+                        break;
+                }
+                stage_DONOTUSE= value;
+                switch (stage_DONOTUSE)
+                {
+                    case(0):
+                        setStage0();
+                        break;
+                    case(1):
+                        setStage1();
+                        break;
+                    case(2):
+                        setStage2();
+                        break;
+                }
+            }
+        }
         #endregion
 
         public mainBeamSpec()
         {
             InitializeComponent();
+            stage = 0;
             forces = new List<Force>();
-            //p += paintLength;
             p = new painting( paintLength_V2);
             p += new painting(paintHeightWidth_V2);
+            p += new painting(paintRenforcement_V2);
         }
 
         private void mainBeamSpec_Load(object sender, EventArgs e)
         {
-            BeamHeight = double.Parse(textBoxHieght.Text);
-            BeamLength = double.Parse(textBoxLength.Text) * 100;
-            BeamWidth = double.Parse(textBoxWidth.Text);
-            RenforcementCount = (int)numericUpDownCount.Value;
-            Renforcement2Raduis = double.Parse(textBoxRadius.Text);
-            RenforcementA = double.Parse(textBoxA.Text);
-            numericUpDownCount.Maximum = (int)(BeamWidth / Renforcement2Raduis);
+            BeamHeight = userControl_BasicSpec1.Height;
+            BeamLength = userControl_BasicSpec1.Length * 100;
+            BeamWidth = userControl_BasicSpec1.Width;
+            RenforcementCount = userControl_BasicSpec1.Count;
+            RenforcementCount2 = userControl_BasicSpec1.Count2;
+            RenforcementDiameter = userControl_BasicSpec1.Diameter;
+            RenforcementDiameter2 = userControl_BasicSpec1.Diameter2;
+            RenforcementA = userControl_AdvancedSpec1.A;
+            RenforcementA2 = userControl_AdvancedSpec1.A2;
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -105,19 +114,7 @@ namespace mainPorject
 
         private void buttonOk_Click(object sender, EventArgs e)
         {
-            if (beamWrap == null) beamWrap = new BeamWrapper();
-            beamWrap.beam = new SinReinRecBeem(
-                double.Parse(textBoxFc.Text),
-                double.Parse(textBoxFs.Text),
-                BeamHeight,
-                BeamLength,
-                BeamWidth,
-                double.Parse(textBoxEs.Text),
-                double.Parse(textBoxRadius.Text),
-                (int)numericUpDownCount.Value,
-                double.Parse(textBoxA.Text),
-                1);
-            beamWrap.forces = new Forces(0, BeamLength);
+            beamWrap.forces = new Forces(userControl_BasicSpec1.Weight, BeamLength);
             foreach (BeamForce f in forces)
             {
                 beamWrap.forces.Add(f);
@@ -163,31 +160,6 @@ namespace mainPorject
             if (paintable != null)
                 paintable.Invalidate();
         }
-
-        private void textBoxNoZero_Leave(object sender, EventArgs e)
-        {
-            double num;
-            textChanged(sender as TextBox, null, out num, 1.0f);
-            if (num == 0)
-            {
-                this.ActiveControl = sender as Control;
-            }
-        }
-
-        private void textBoxNoZero_textChanged(object sender, EventArgs e)
-        {
-            TextBox textbox = sender as TextBox;
-            double num;
-            textChanged(sender as TextBox, null, out num, 1.0f);
-            if (num == 0 && buttonOK.Enabled)
-            {
-                this.buttonOK.Enabled = false;
-            }
-            else if (!buttonOK.Enabled)
-            {
-                this.buttonOK.Enabled = true;
-            }
-        }
         #endregion
 
         #region painting
@@ -204,40 +176,16 @@ namespace mainPorject
             p(panel1);
         }
 
-        private void paintHeightWidth(Control control)
+        private void labelPanel_TextChanged(object sender, EventArgs e)
         {
-            using (Graphics g = control.CreateGraphics())
-            {
-                float scaler = (float)(BeamHeight / BeamWidth);
-                System.Drawing.Size size;
-                {
-                    int width = (int)BeamWidth;
-                    if (width < 50)
-                        width = 50;
-                    else if (width > (int)(2.0 / 3.0 * control.Width))
-                        width = (int)(2.0 / 3.0 * control.Width);
-                    int height = (int)(width * scaler);
-                    if (height > control.Height / 2)
-                    {
-                        height = control.Height / 2;
-                        width = (int)(height / scaler);
-                    }
-                    width += 1;
-                    height += 1;
-                    size = new System.Drawing.Size(width, height);
-                }
-                Point upperLeft;
-                {
-                    int x = control.Width / 3 - size.Width / 2;
-                    int y = control.Height / 2 - size.Height;
-                    upperLeft = new Point(x, y);
-                }
-                g.FillRectangle(new SolidBrush(Color.Gray), new Rectangle(upperLeft, size));
-                int gap = 5;
-                labelpanelWidth.Location = new Point(upperLeft.X + size.Width / 2 - labelpanelWidth.Width / 2, upperLeft.Y + size.Height + gap);
-                labelPanelHeight.Location = new Point(upperLeft.X + size.Width + gap, upperLeft.Y + size.Height / 2 - labelPanelHeight.Height / 2);
-            }
+            panel1.Invalidate();
         }
+
+        private void userControl_BasicSpec1_DoubleCheckedChanged(object sender, EventArgs e)
+        {
+            panel1.Invalidate();
+        }
+        
         private void paintHeightWidth_V2(Control control)
         {
             using (Graphics g = control.CreateGraphics())
@@ -275,14 +223,16 @@ namespace mainPorject
                     {
                         return;
                     }
-                    height = control.Width / height;
-                    width = control.Width / width;
+                    height = (int)(control.Width / 1.2 / height);
+                    width = (int)(control.Width / 1.2 / width);
                     size = new System.Drawing.Size(width, height);
                 }
                 Point upperLeft;
                 {
-                    int x = control.Width / 3 - size.Width / 2;
-                    int y = control.Height / 2 - size.Height;
+                    //int x = control.Width / 3 - size.Width / 2;
+                    //int y = control.Height / 2 - size.Height;
+                    int x = 15;
+                    int y = 15;
                     upperLeft = new Point(x, y);
                 }
                 g.FillRectangle(new SolidBrush(Color.Gray), new Rectangle(upperLeft, size));
@@ -333,39 +283,6 @@ namespace mainPorject
             g.DrawLines(p, points.ToArray());
         }
 
-        private void paintLength(Control control)
-        {
-            using (Graphics g = control.CreateGraphics())
-            {
-                float scaler = (float)(BeamHeight / BeamLength);
-                int gap = 5;
-                System.Drawing.Size size;
-                {
-                    int length = (int)BeamLength;
-                    if (length < 200)
-                        length = 200;
-                    else if (length > (int)(control.Width - 5))
-                        length = (int)(control.Width - 5);
-                    int height = (int)(length * scaler);
-                    if (height > control.Height / 2)
-                    {
-                        height = control.Height / 2 - labelPanelLength.Size.Height - 2 * gap;
-                        length = (int)(height / scaler);
-                    }
-                    length += 1;
-                    height += 1;
-                    size = new System.Drawing.Size(length, height);
-                }
-                Point upperLeft;
-                {
-                    int x = control.Width / 2 - size.Width / 2;
-                    int y = control.Height - size.Height - labelPanelLength.Size.Height - 2 * gap;
-                    upperLeft = new Point(x, y);
-                }
-                g.FillRectangle(new SolidBrush(Color.Gray), new Rectangle(upperLeft, size));
-                labelPanelLength.Location = new Point(upperLeft.X + size.Width / 2 - labelpanelWidth.Width / 2, upperLeft.Y + size.Height + gap);
-            }
-        }
         private void paintLength_V2(Control control)
         {
             using (Graphics g = control.CreateGraphics())
@@ -410,6 +327,7 @@ namespace mainPorject
             }
         }
         Point upperLeft_paintForces;
+
         private void paintForces(Control control)
         {
             using (Graphics g = control.CreateGraphics())
@@ -417,7 +335,7 @@ namespace mainPorject
                 float scaler = (float)(BeamHeight / BeamLength);
                 int gap = 5;
                 {
-                    int length = control.Width - 2*gap;
+                    int length = control.Width - 2 * gap;
                     int height = (int)(length * scaler);
                     if (height > control.Height / 2)
                     {
@@ -434,7 +352,7 @@ namespace mainPorject
             }
         }
 
-        private void paintRenforcement(Control control)
+        private void paintRenforcement_V2(Control control)
         {
             using (Graphics g = control.CreateGraphics())
             {
@@ -442,51 +360,42 @@ namespace mainPorject
                 int gap = 5;
                 System.Drawing.Size size;
                 {
-                    int width = (int)BeamWidth;
-                    if (width < (control.Width - 150) / 2)
-                        width = (control.Width - 150) / 2;
-                    else if (width > (int)(control.Width - 150-2*gap))
-                        width = (int)(control.Width - 150 - 2*gap);
-                    int height = (int)(width * scaler);
-                    if (height > control.Height-2*gap)
-                    {
-                        height = control.Height - 2 * gap;
-                        width = (int)(height / scaler);
-                    }
+                    int width = control.Width / 2 - 5 * gap;
+                    int height = control.Height/2 + 5 * gap;
                     width += 1;
                     height += 1;
                     size = new System.Drawing.Size(width, height);
                 }
                 Point upperLeft;
                 {
-                    int x = 150 + (control.Width - 150)/2 - size.Width/2;
-                    int y = control.Height / 2 - size.Height / 2;
+                    int x = control.Width / 2 + gap;
+                    int y = 3*gap;
                     upperLeft = new Point(x, y);
                 }
                 g.FillRectangle(Brushes.Gray, new Rectangle(upperLeft, size));
-                if(RenforcementCount>0)
+                if (RenforcementCount > 0)
                 {
-                    scaler = (float)(Renforcement2Raduis/2 / BeamWidth);
+                    scaler = (float)(RenforcementDiameter / 2 / BeamWidth);
                     int width = size.Width;
-                    int raduis = (int) (width * scaler);
+                    int raduis = (int)(width * scaler);
                     int space = width / RenforcementCount;
                     scaler = size.Height / (float)BeamHeight;
                     for (int i = 0; i < RenforcementCount; i++)
                     {
-                        drawCircul(upperLeft.X + space / 2 + i * space, upperLeft.Y + size.Height - (int)(RenforcementA*scaler), raduis, g);
+                        drawCircul(upperLeft.X + space / 2 + i * space, upperLeft.Y + size.Height - (int)(RenforcementA * scaler), raduis, g);
                     }
                 }
+                if (RenforcementCount2 > 0 && userControl_BasicSpec1.DoubleChecked)
                 {
-                    
-                    int maxraduis2 = (int)BeamWidth;
-                    scaler = (float)Renforcement2Raduis / maxraduis2;
-                    int raduis = (int)(74 * scaler);
-                    //if (raduis > 70) raduis = 70;
-                    //else if (raduis < 30) raduis = 30;
-                    int x = 75;
-                    int y = control.Height / 2;
-                    g.DrawEllipse(Pens.Blue, x - raduis, y - raduis, 2 * raduis, 2 * raduis);
-                    g.DrawLine(Pens.LightBlue, x-raduis, y, x + raduis, y);
+                    scaler = (float)(RenforcementDiameter2 / 2 / BeamWidth);
+                    int width = size.Width;
+                    int raduis = (int)(width * scaler);
+                    int space = width / RenforcementCount2;
+                    scaler = size.Height / (float)BeamHeight;
+                    for (int i = 0; i < RenforcementCount2; i++)
+                    {
+                        drawCircul(upperLeft.X + space / 2 + i * space, upperLeft.Y +  (int)(RenforcementA2 * scaler), raduis, g);
+                    }
                 }
             }
         }
@@ -497,178 +406,71 @@ namespace mainPorject
         }
         #endregion
 
-        #region tabs controller
-        //tabs controller
-
-        //this method use for painting in panel1
-        private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)
+        #region Fields
+        //Fields
+        private void Height_NumberChanged(Control control, double num)
         {
-            if (e.TabPage.Equals(tabPage1))
-            {
-                //p = new painting(paintLength);
-                p = new painting(paintLength_V2);
-                p += paintHeightWidth_V2;
-                //pictureBoxWidthHeight.Visible = true;
-                this.Width = 670;
-                labelPanelHeight.Visible = true;
-                labelPanelLength.Visible = true;
-                labelpanelWidth.Visible = true;
-                panel1.Invalidate();
-            }
-            else if (e.TabPage.Equals(tabPage2))
-            {
-                p = new painting(paintRenforcement);
-                this.Width = 1000;
-                panel1.Invalidate();
-            }
-            else if (e.TabPage.Equals(tabPage3))
-            {
-                this.Width = 670;
-                pictureBoxDistributedForce.Visible = true;
-                pictureBoxPointForce.Visible = true;
-                p = new painting(paintForces);
-                panel1.Invalidate();
-                resetVariablesOfForcesTab();
-                forces = new List<Force>();
-                resetDistributedControls();
-                resetPictureBox();
-                resetPointForceControls();
-            }
+            BeamHeight = num;
+            labelPanelHeight.Text = BeamHeight.ToString();
         }
 
-        //this method is used for values in the text boxes
-        private void tabControl1_Selected(object sender, TabControlEventArgs e)
+        private void Length_NumberChanged(Control control, double num)
         {
-            if (e.TabPage.Equals(tabPage1))
-            {
-
-            }
-            else if (e.TabPage.Equals(tabPage2))
-            {
-                if (RenforcementA > BeamHeight)
-                {
-                    textBoxA.Text = (BeamHeight / 100).ToString();
-                }
-                if (Renforcement2Raduis > BeamWidth || Renforcement2Raduis > (BeamHeight - RenforcementA))
-                    textBoxRadius.Text = (Math.Min(BeamWidth, BeamHeight - RenforcementA) / 2.0).ToString();
-            }
-            else if (e.TabPage.Equals(tabPage3))
-            {
-            }
+            BeamLength = num*100;
+            labelPanelLength.Text = num.ToString();
         }
 
-        //this method is used for painting in panel1 
-        private void tabControl1_Deselecting(object sender, TabControlCancelEventArgs e)
+        private void Width_NumberChanged(Control control, double num)
         {
-            if (e.TabPage.Equals(tabPage1))
-            {
-                labelPanelHeight.Visible = false;
-                labelPanelLength.Visible = false;
-                labelpanelWidth.Visible = false;
-                p = null;
-                //pictureBoxWidthHeight.Visible = false;
-            }
-            else if (e.TabPage.Equals(tabPage2))
-            {
-                p = null;
-            }
-            else if (e.TabPage.Equals(tabPage3))
-            {
-                pictureBoxDistributedForce.Visible = false;
-                pictureBoxPointForce.Visible = false;
-                p = null;
-            }
+            BeamWidth = num;
+            labelpanelWidth.Text = BeamWidth.ToString();
         }
 
-        //this method is used for values in the text boxes
-        private void tabControl1_Deselected(object sender, TabControlEventArgs e)
+        private void userControl_BasicSpec1_Count2Changed(Control sender, double number)
         {
-            if (e.TabPage.Equals(tabPage1))
-            {
-            }
-            else if (e.TabPage.Equals(tabPage2))
-            {
-            }
-            else if (e.TabPage.Equals(tabPage3))
-            {
-            }
-        }
-        #endregion
-
-        #region size and material tab
-        //size and material tab
-        private void textBoxHieght_TextChanged(object sender, EventArgs e)
-        {
-            TextBox textbox = sender as TextBox;
-            double height;
-            textChanged(textBoxHieght, panel1,out height, 1.0f);
-            BeamHeight = height;
-            labelPanelHeight.Text = height.ToString();
-        }
-
-        private void textBoxLength_TextChanged(object sender, EventArgs e)
-        {
-            TextBox textbox = sender as TextBox;
-            double length;
-            textChanged(textBoxLength, panel1, out length, 100.0f);
-            BeamLength = length;
-            labelPanelLength.Text = (BeamLength/100).ToString();
-        }
-
-        private void textBoxWidth_TextChanged(object sender, EventArgs e)
-        {
-            TextBox textbox = sender as TextBox;
-            double width;
-            textChanged(textBoxWidth, panel1, out width, 1.0f);
-            BeamWidth = width;
-            labelpanelWidth.Text = width.ToString();
-        }
-        #endregion
-
-        #region renforcement tab
-        //renforcement tab
-        private void textBoxRadius_TextChanged(object sender, EventArgs e)
-        {
-            TextBox textbox = sender as TextBox;
-            double raduis2;
-            textChanged(textBoxRadius, panel1, out raduis2, 1.0f);
-            if (raduis2 <= BeamWidth && raduis2 <= (BeamHeight-RenforcementA))
-            {
-                Renforcement2Raduis = raduis2;
-                if (raduis2 > 0)
-                    numericUpDownCount.Maximum = (int)(BeamWidth / raduis2);
-                else if (raduis2 == 0)
-                    numericUpDownCount.Maximum = 0;
-                else
-                    throw new Exception();
-            }
-            else
-                textBoxRadius.Text = Renforcement2Raduis.ToString();
-            
-        }
-
-        private void numericUpDownCount_ValueChanged(object sender, EventArgs e)
-        {
-            if ((double)(numericUpDownCount.Value) * Renforcement2Raduis > BeamWidth)
-                return;
-            RenforcementCount = (int)numericUpDownCount.Value;
+            RenforcementCount2 = (int)number;
             panel1.Invalidate();
         }
 
-        private void textBoxA_TextChanged(object sender, EventArgs e)
+        private void userControl_BasicSpec1_Diameter2Changed(Control sender, double number)
         {
-            TextBox textbox = sender as TextBox;
-            double a;
-            textChanged(textBoxA, panel1, out a, 1.0f);
-            if (a < BeamHeight)
-                RenforcementA = a;
-            else
-                textBoxA.Text = RenforcementA.ToString();
+            RenforcementDiameter2 = number;
+            panel1.Invalidate();
+        }
+
+        private void Diameter_NumberChanged(Control control, double num)
+        {
+            RenforcementDiameter = num;
+            panel1.Invalidate();
+        }
+
+        private void Count_NumberChanged(Control control, double num)
+        {
+            RenforcementCount = (int)num;
+            panel1.Invalidate();
+        }
+
+        private void A_NumberChanged(Control control, double num)
+        {
+            RenforcementA = num;
+            panel1.Invalidate();
+        }
+
+        private void userControl_AdvancedSpec1_A2Changed(Control sender, double number)
+        {
+            RenforcementA2 = number;
+            panel1.Invalidate();
+        }
+
+        private void userControl_AdvancedSpec1_AChanged(Control sender, double number)
+        {
+            RenforcementA = number;
+            panel1.Invalidate();
         }
         #endregion
 
-        #region forces tab
-        //forces tab
+        #region forces 
+        //forces 
         string oldtextBoxForceLocation;
         private double oldStart;
         private double oldEnd;
@@ -825,7 +627,6 @@ namespace mainPorject
             }
         }
 
-        
         private void textBoxForceLocation_textChanged(object sender, EventArgs e)
         {
             TextBox textbox = sender as TextBox;
@@ -1329,5 +1130,177 @@ namespace mainPorject
         }
         #endregion
         
+        #region stages
+        private void setStage0()
+        {
+            userControl_AdvancedSpec1.Visible = false;
+            userControl_BasicSpec1.Visible = true;
+            panelForces.Visible = false;
+            button1.Visible = true;
+            button2.Visible = true;
+            button3.Visible = false;
+            buttonOK.Visible = false;
+            buttonCancel.Visible = true;
+
+            p = new painting(paintLength_V2);
+            p += paintHeightWidth_V2;
+            p += paintRenforcement_V2;
+            panel1.Width = 530;
+            labelPanelHeight.Visible = true;
+            labelPanelLength.Visible = true;
+            labelpanelWidth.Visible = true;
+
+            panel1.Invalidate();
+        }
+        private void setStage1()
+        {
+            userControl_AdvancedSpec1.Visible = true;
+            userControl_BasicSpec1.Visible = false;
+            panelForces.Visible = false;
+            button1.Visible = false;
+            button2.Visible = true;
+            button3.Visible = true;
+            buttonOK.Visible = false;
+            buttonCancel.Visible = true;
+
+            panel1.Width = 530;
+            labelPanelHeight.Visible = true;
+            labelPanelLength.Visible = true;
+            labelpanelWidth.Visible = true;
+        }
+        private void setStage2()
+        {
+            panelForces.Visible = true;
+            userControl_AdvancedSpec1.Visible = false;
+            userControl_BasicSpec1.Visible = false;
+            button1.Visible = false;
+            button2.Visible = false;
+            button3.Visible = true;
+            buttonOK.Visible = true;
+            buttonCancel.Visible = true;
+
+            pictureBoxDistributedForce.Visible = true;
+            pictureBoxPointForce.Visible = true;
+            panel1.Width = 435;
+            p = new painting(paintForces);
+            panel1.Invalidate();
+            resetVariablesOfForcesTab();
+            forces = new List<Force>();
+            resetDistributedControls();
+            resetPictureBox();
+            resetPointForceControls();
+        }
+        
+        private void desetStage0()
+        {
+            labelPanelHeight.Visible = false;
+            labelPanelLength.Visible = false;
+            labelpanelWidth.Visible = false;
+        }
+        private void desetStage1()
+        {
+            labelPanelHeight.Visible = false;
+            labelPanelLength.Visible = false;
+            labelpanelWidth.Visible = false;
+        }
+        private void desetStage2()
+        {
+            pictureBoxDistributedForce.Visible = false;
+            pictureBoxPointForce.Visible = false;
+            p = null;
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            stage = stage - 2 + stage % 2;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (!userControl_BasicSpec1.IsErrorFree())
+            {
+                MessageBox.Show("something wrong", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            stage = 1;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (stage == 0)
+            {
+                if (!userControl_BasicSpec1.IsErrorFree())
+                {
+                    MessageBox.Show("something wrong", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (!userControl_AdvancedSpec1.IsErrorFree())
+                {
+                    MessageBox.Show("something wrong", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    stage = 1;
+                    return;
+                }
+                if (beamWrap == null) beamWrap = new BeamWrapper();
+                if (userControl_BasicSpec1.DoubleChecked)
+                {
+                    beamWrap.beam = new DoubReinRecBeem(BeamHeight,
+                                                        BeamLength,
+                                                        BeamWidth,
+                                                        userControl_BasicSpec1.Diameter,
+                                                        userControl_BasicSpec1.Diameter2,
+                                                        userControl_BasicSpec1.Count,
+                                                        userControl_BasicSpec1.Count2);
+                }
+                else
+                {
+                    beamWrap.beam = new SinReinRecBeem(BeamHeight,
+                                                       BeamLength,
+                                                       BeamWidth,
+                                                       userControl_BasicSpec1.Diameter,
+                                                       userControl_BasicSpec1.Count);
+                }
+                stage = 2;
+            }
+            else if (stage == 1)
+            {
+                if (!userControl_AdvancedSpec1.IsErrorFree())
+                {
+                    MessageBox.Show("something wrong", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (beamWrap == null) beamWrap = new BeamWrapper();
+                if (userControl_BasicSpec1.DoubleChecked)
+                {
+                    beamWrap.beam = new DoubReinRecBeem(userControl_AdvancedSpec1.Fc,
+                                                        userControl_AdvancedSpec1.Fs,
+                                                        BeamHeight,
+                                                        BeamLength,
+                                                        BeamWidth,
+                                                        userControl_AdvancedSpec1.Es,
+                                                        userControl_BasicSpec1.Diameter,
+                                                        userControl_BasicSpec1.Diameter2,
+                                                        userControl_BasicSpec1.Count,
+                                                        userControl_BasicSpec1.Count2,
+                                                        userControl_AdvancedSpec1.A,
+                                                        userControl_AdvancedSpec1.A2,
+                                                        userControl_AdvancedSpec1.Chose);
+                }
+                else
+                {
+                    beamWrap.beam = new SinReinRecBeem(userControl_AdvancedSpec1.Fc,
+                                                        userControl_AdvancedSpec1.Fs,
+                                                        BeamHeight,
+                                                        BeamLength,
+                                                        BeamWidth,
+                                                        userControl_AdvancedSpec1.Es,
+                                                        userControl_BasicSpec1.Diameter,
+                                                        userControl_BasicSpec1.Count,
+                                                        userControl_AdvancedSpec1.A,
+                                                        userControl_AdvancedSpec1.Chose);
+                }
+                stage = 2;
+            }
+        }
+        #endregion
     }
 }

@@ -8,13 +8,10 @@ namespace forces
 {
     public class Forces
     {
-        LinkedList<BeamForce> forces;
-        private Double beamLength;
-        
+        LinkedList<BeamForce> forces;        
 
         public Forces(double weight,Double beamLength)
         {
-            this.beamLength = beamLength;
             forces = new LinkedList<BeamForce>();
             forces.AddFirst(new ReflectionBeamForce(weight / 2, 0,beamLength));
             forces.AddLast(new ReflectionBeamForce(weight / 2, beamLength,beamLength));
@@ -43,6 +40,14 @@ namespace forces
             this.forces.Last.Value.add(item.getReflection(1));
         }
 
+        public void AddAll(Forces alot)
+        {
+            foreach (BeamForce f in alot.forces)
+            {
+                this.Add(f);
+            }
+        }
+
         public double getShaer(double distance)
         {
             double sum = 0;
@@ -61,7 +66,7 @@ namespace forces
             }
             return sum;
         }
-        public double getfMomentomd2x(double distance, double beamLength)
+        public double getfMomentomd2x(double distance)
         {
             double sum = 0;
             foreach (BeamForce f in forces)

@@ -83,6 +83,18 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControl_AdvancedSpec.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl_AdvancedSpec.Designer.cs">
+      <DependentUpon>UserControl_AdvancedSpec.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl_BasicSpec.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl_BasicSpec.Designer.cs">
+      <DependentUpon>UserControl_BasicSpec.cs</DependentUpon>
+    </Compile>
     <Compile Include="Xna1.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -99,6 +111,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UserControl_AdvancedSpec.resx">
+      <DependentUpon>UserControl_AdvancedSpec.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl_BasicSpec.resx">
+      <DependentUpon>UserControl_BasicSpec.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
