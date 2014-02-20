@@ -25,6 +25,7 @@ namespace mainPorject
             quickOperation = splitContainerMainLeft.Panel1;
             extraInfo = MainSplitContainer.Panel2;
         }
+        private Forces stack;
         #endregion
 
         public mainWorkForm()
@@ -37,6 +38,7 @@ namespace mainPorject
 
             this.Visible = false;
             getNewBeam();
+            setTestForce();
             this.Visible = true;
         }
 
@@ -47,6 +49,7 @@ namespace mainPorject
                 DialogResult result = mbs.ShowDialog(this);
                 if (result == System.Windows.Forms.DialogResult.OK)
                 {
+                    Clear();
                     this.beam = mbs.beamWrap;
                     NewPointsFlag = true;
                     updateMometPoints();
@@ -54,10 +57,27 @@ namespace mainPorject
                     updateShaerPoints();
                     panelShaer.Paint += new PaintEventHandler(panelShaer_Paint);
                     trackBar1_reset();
-
                 }
             }
+        }
 
+        private void setTestForce()
+        {
+            if (Beam == null)
+                return;
+            using (TestForcesSpec tfs = new TestForcesSpec())
+            {
+                tfs.BeamLength = Beam.Length / 100;
+                DialogResult result = tfs.ShowDialog(this);
+                if (result == System.Windows.Forms.DialogResult.OK)
+                {
+                    Clear();
+                    Beam.F1  = tfs.F1 as PointBaemForce;
+                    Beam.F2  = tfs.F2 as PointBaemForce;
+                    stack = new Forces(0, Beam.Length);
+                    NewTestForces = true;
+                }
+            }
         }
 
         #region XnaFormable
@@ -83,6 +103,11 @@ namespace mainPorject
             get;
             set;
         }
+        public bool NewTestForces
+        {
+            get;
+            set;
+        }
 
         public BeamWrapper Beam
         {
@@ -93,11 +118,17 @@ namespace mainPorject
         #region menu strip
         private void newBeamToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            timer1.Stop();
             getNewBeam();
         }
         #endregion
 
         #region Diagrames
+        private void beam_paint(object sender, PaintEventArgs e,Point pos,Size size,Brush brush)
+        {
+            e.Graphics.FillRectangle(brush,pos.X,pos.Y-size.Height/2,size.Width,size.Height);
+        }
+
         private Point[] pointsMomentom;
         private Dictionary<string, double> maxMomentPoint = new Dictionary<string,double>(4);
         private const int lineY_panelMomentom = 40;
@@ -146,7 +177,8 @@ namespace mainPorject
         {
             Control panel = (sender as Panel);
             Graphics g = panel.CreateGraphics();
-            g.DrawLine(Pens.Black, (int)gap, lineY_panelMomentom, panel.Width - (int)gap, lineY_panelMomentom);
+            beam_paint(sender,e,new Point((int)gap,lineY_panelMomentom),new System.Drawing.Size(panel.Width-2*gap,3),Brushes.Black);
+            //g.DrawLine(Pens.Black, (int)gap, lineY_panelMomentom, panel.Width - (int)gap, lineY_panelMomentom);
             g.DrawLines(Pens.Plum, pointsMomentom);
         }
 
@@ -196,10 +228,10 @@ namespace mainPorject
                 minShaerPoint.Add("yPos", poitsShear[(int)minShaerPoint["atIndex"]].Y);
             }
             if ((maxShaerPoint["yPos"] < labelMaxShaer.Height + label2.Top + label2.Height - 3 * gap)||
-                (minShaerPoint["yPos"] > panelShaer.Height - 2 * gap))
+                (minShaerPoint["yPos"] > panelShaer.Height - labelMinShaer.Height - 2 * gap))
             {
-                scaler = Math.Min( (labelMaxShaer.Height + label2.Top + label2.Height - 3 * gap) / maxShaerPoint["shaer"],
-                    (panelShaer.Height - lineY_panelShaer - 2 * gap) / maxShaerPoint["shaer"]);
+                scaler = Math.Min( (labelMaxShaer.Height + label2.Top + label2.Height - 3 * gap) / Math.Abs(maxShaerPoint["shaer"]),
+                    (panelShaer.Height - lineY_panelShaer - labelMinShaer.Height - 2 * gap) / Math.Abs(minShaerPoint["shaer"]));
                 for (int i = 0; i < poitsShear.Length; i++)
                 {
                     poitsShear[i].Y = lineY_panelShaer - (int)((lineY_panelShaer - poitsShear[i].Y)*scaler) ;
@@ -217,11 +249,12 @@ namespace mainPorject
             labelMinShaer.Top = (int)(minShaerPoint["yPos"] + gap);
             panelShaer.Invalidate();
         }
-        void panelShaer_Paint(object sender, PaintEventArgs e)
+        private void panelShaer_Paint(object sender, PaintEventArgs e)
         {
             Control panel = (sender as Panel);
             Graphics g = panel.CreateGraphics();
-            g.DrawLine(Pens.Black, (int)gap, lineY_panelShaer, panel.Width - (int)gap, lineY_panelShaer);
+            beam_paint(sender, e, new Point(gap, lineY_panelShaer), new System.Drawing.Size(panel.Width - 2 * gap, 3), Brushes.Black);
+            //g.DrawLine(Pens.Black, (int)gap, lineY_panelShaer, panel.Width - (int)gap, lineY_panelShaer);
             g.DrawLines(Pens.Olive, poitsShear);
         }
         #endregion
@@ -240,6 +273,10 @@ namespace mainPorject
         }
         private void trackBar1_ValueChanged(object sender, EventArgs e)
         {
+            updateData();
+        }
+        private void updateData()
+        {
             double scaler = (double)trackBar1.Value / trackBar1.Maximum;
             double position = scaler * Beam.Length;
             labelPos.Text = position.ToString();
@@ -248,6 +285,82 @@ namespace mainPorject
             labelDef.Text = "Defliction : " + Beam.getDiflectionAt(position).ToString();
         }
         #endregion
+
+        private void testForcesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            timer1.Stop();
+            setTestForce();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            timer1.Start();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            bool change = false;
+            if (Beam.F1 != null)
+            {
+                Beam.forces.Add(new PointBaemForce(Beam.F1.Power,Beam.F1.Position,Beam.Length));
+                stack.Add(new PointBaemForce(-Beam.F1.Power, Beam.F1.Position, Beam.Length));
+                change = true;
+            }
+            if (Beam.F2 != null)
+            {
+                Beam.forces.Add(new PointBaemForce(Beam.F2.Power, Beam.F2.Position, Beam.Length));
+                stack.Add(new PointBaemForce(-Beam.F2.Power, Beam.F2.Position, Beam.Length));
+                change = true;
+            }
+            if (change)
+            {
+                updateMometPoints();
+                updateShaerPoints();
+                updateData();
+                NewPointPositionFlag = true;
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            timer1.Stop();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            timer1.Stop();
+            setTestForce();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            timer1.Stop();
+            Clear();
+        }
+        private void Clear()
+        {
+            if (stack != null)
+            {
+                Beam.forces.AddAll(stack);
+                stack = null;
+                Beam.F1 = null;
+                Beam.F2 = null;
+                NewTestForces = true;
+                updateAll();
+            }
+        }
+        private void updateAll()
+        {
+            updateMometPoints();
+            updateShaerPoints();
+            updateData();
+            NewPointPositionFlag = true;
+        }
+
+        private void splitContainerMainLeftRight_Panel2_Paint(object sender, PaintEventArgs e)
+        {
+            beam_paint(sender, e, new Point(trackBar1.Left + 10, trackBar1.Top - 30), new Size(trackBar1.Width - 20, 5), Brushes.White);
+        }
     }
 }
 

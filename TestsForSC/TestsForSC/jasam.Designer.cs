@@ -86,8 +86,9 @@
             this.label24 = new System.Windows.Forms.Label();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.userControl_BasicSpec1 = new mainPorject.UserControl_BasicSpec();
+            this.userControl_Forces1 = new mainPorject.UserControl_Forces();
             this.userControl_AdvancedSpec1 = new mainPorject.UserControl_AdvancedSpec();
+            this.userControl_BasicSpec1 = new mainPorject.UserControl_BasicSpec();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -682,6 +683,7 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.userControl_Forces1);
             this.tabPage5.Controls.Add(this.userControl_AdvancedSpec1);
             this.tabPage5.Controls.Add(this.userControl_BasicSpec1);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
@@ -692,12 +694,15 @@
             this.tabPage5.Text = "tabPage5";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
-            // userControl_BasicSpec1
+            // userControl_Forces1
             // 
-            this.userControl_BasicSpec1.Location = new System.Drawing.Point(-4, 6);
-            this.userControl_BasicSpec1.Name = "userControl_BasicSpec1";
-            this.userControl_BasicSpec1.Size = new System.Drawing.Size(228, 309);
-            this.userControl_BasicSpec1.TabIndex = 0;
+            this.userControl_Forces1.Location = new System.Drawing.Point(290, 226);
+            this.userControl_Forces1.Name = "userControl_Forces1";
+            this.userControl_Forces1.Size = new System.Drawing.Size(20, 71);
+            this.userControl_Forces1.TabIndex = 2;
+            this.userControl_Forces1.Type = mainPorject.forceType.point;
+            this.userControl_Forces1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.userControl_Forces1_MouseClick);
+            this.userControl_Forces1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.userControl_Forces1_MouseMove);
             // 
             // userControl_AdvancedSpec1
             // 
@@ -705,6 +710,13 @@
             this.userControl_AdvancedSpec1.Name = "userControl_AdvancedSpec1";
             this.userControl_AdvancedSpec1.Size = new System.Drawing.Size(252, 147);
             this.userControl_AdvancedSpec1.TabIndex = 1;
+            // 
+            // userControl_BasicSpec1
+            // 
+            this.userControl_BasicSpec1.Location = new System.Drawing.Point(-4, 6);
+            this.userControl_BasicSpec1.Name = "userControl_BasicSpec1";
+            this.userControl_BasicSpec1.Size = new System.Drawing.Size(228, 309);
+            this.userControl_BasicSpec1.TabIndex = 0;
             // 
             // jasam
             // 
@@ -800,5 +812,6 @@
         private System.Windows.Forms.TabPage tabPage5;
         private mainPorject.UserControl_BasicSpec userControl_BasicSpec1;
         private mainPorject.UserControl_AdvancedSpec userControl_AdvancedSpec1;
+        private mainPorject.UserControl_Forces userControl_Forces1;
     }
 }

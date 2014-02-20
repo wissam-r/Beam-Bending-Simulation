@@ -95,6 +95,12 @@
     <Compile Include="UserControl_BasicSpec.Designer.cs">
       <DependentUpon>UserControl_BasicSpec.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControl_Forces.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl_Forces.Designer.cs">
+      <DependentUpon>UserControl_Forces.cs</DependentUpon>
+    </Compile>
     <Compile Include="Xna1.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -116,6 +122,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControl_BasicSpec.resx">
       <DependentUpon>UserControl_BasicSpec.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl_Forces.resx">
+      <DependentUpon>UserControl_Forces.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

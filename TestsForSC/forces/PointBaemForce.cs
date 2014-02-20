@@ -8,6 +8,11 @@ namespace forces
     public class PointBaemForce : Force , BeamForce  
     {
         private double position;
+        public Double Position
+        {
+            get { return position; }
+            //set { position = value; }
+        }
         private Double beamLength;
         public  Double BeamLength
         {

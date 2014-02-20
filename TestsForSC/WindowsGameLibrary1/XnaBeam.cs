@@ -28,14 +28,18 @@ namespace WindowsGameLibrary1
         Matrix view = Matrix.CreateLookAt(new Vector3(0, 0, 3), new Vector3(0, 0, 0), new Vector3(0, 1, 0));
         Matrix projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45), 800f / 480f, 0.01f, 100f);
 
+        
         private int points;
+        private VertexPositionColor[] primitiveList;
+        private Vector3 leftSupportPos, rightSupportPos;
+        private Vector3 F1pos, F2pos;
+        private short[] lineStripIndices;
+
         public float accuracy = 1f;
         public int multipler = 2;
-        private VertexPositionColor[] primitiveList;
-        private short[] lineStripIndices;
         private bool ShouldDraw;
 
-        private Texture2D rightSupport,leftSupport;
+        private Texture2D rightSupport,leftSupport,F1,F2;
 
         public XnaBeam(XnaFormable formm)
         {
@@ -75,15 +79,36 @@ namespace WindowsGameLibrary1
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            basicEffect = new BasicEffect(GraphicsDevice);
+            if (home.Beam != null)
+            {
+                initializeWorld();
+            }
             base.Initialize();
+        }
+        private void initializeWorld()
+        {
+            Matrix viewMatrix = Matrix.CreateLookAt(
+                        new Vector3(0.0f, 0.0f, (float)(((home.Beam.Length + 10) / 2) / Math.Tan(MathHelper.ToRadians(45 / 2.0f)))),
+                        Vector3.Zero,
+                        Vector3.Up
+                        );
+            float depth = (float)((home.Beam.Length / 2) / Math.Sin(MathHelper.ToRadians(45 / 2f)))*1.2f;
+            Matrix projectionMatrix = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45), 800f / 480f, 0.01f, depth);
+            basicEffect.World = world;
+            basicEffect.View = viewMatrix;
+            basicEffect.Projection = projectionMatrix;
+            basicEffect.VertexColorEnabled = true;
         }
 
         protected override void LoadContent()
         {
-            basicEffect = new BasicEffect(GraphicsDevice);
+            
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            rightSupport = Content.Load<Texture2D>("LeftSupport");
+            rightSupport = Content.Load<Texture2D>("RightSupport");
+            leftSupport = Content.Load<Texture2D>("LeftSupport");
+            F1 = Content.Load<Texture2D>("force");
+            F2 = Content.Load<Texture2D>("force");
         }
 
         protected override void UnloadContent()
@@ -107,6 +132,11 @@ namespace WindowsGameLibrary1
                 updateVertices();
                 home.NewPointPositionFlag = false;
             }
+            if (home.NewTestForces)
+            {
+                updateFoces();
+                home.NewTestForces = false;
+            }
              
             base.Update(gameTime);
         }
@@ -117,20 +147,10 @@ namespace WindowsGameLibrary1
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
          protected override void Draw(GameTime gameTime)
          {
-             GraphicsDevice.Clear(Color.Black);
+             GraphicsDevice.Clear(Color.LightGray);
              if (ShouldDraw)
              {
-                 Matrix viewMatrix = Matrix.CreateLookAt(
-                    new Vector3(0.0f, 0.0f, (float)(((home.Beam.Length + 10) / 2) / Math.Tan(MathHelper.ToRadians(45 / 2.0f)))),
-                    Vector3.Zero,
-                    Vector3.Up
-                    );
-
-                 Matrix projectionMatrix = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45), 800f / 480f, 0.01f, 1000f);
-                 basicEffect.World = world;
-                 basicEffect.View = viewMatrix;
-                 basicEffect.Projection = projectionMatrix;
-                 basicEffect.VertexColorEnabled = true;
+                 
 
                  GraphicsDevice.SetVertexBuffer(vertexBuffer);
                  GraphicsDevice.Indices = indexBuffer;
@@ -152,14 +172,21 @@ namespace WindowsGameLibrary1
                                                                     lineStripIndices.Length - 2 // number of primitives to draw
                                                                 );
                  }
+                 spriteBatch.Begin();
+                 spriteBatch.Draw(leftSupport,
+                              new Vector2(leftSupportPos.X, leftSupportPos.Y),
+                              Color.White);
+                 spriteBatch.Draw(rightSupport,
+                              new Vector2(rightSupportPos.X, rightSupportPos.Y),
+                              Color.White);
+                 if(home.Beam.F1 != null)
+                    spriteBatch.Draw(F1, new Vector2(F1pos.X, F1pos.Y), Color.White);
+                 if (home.Beam.F2 != null)
+                    spriteBatch.Draw(F2, new Vector2(F2pos.X, F2pos.Y), Color.White);
+                 spriteBatch.End();
              }
 
-             spriteBatch.Begin();
-             spriteBatch.Draw(rightSupport,
-                          new Rectangle((int)primitiveList.First().Position.X,(int)primitiveList.First().Position.Y,20,20),
-                          new Rectangle(0,0,rightSupport.Width,rightSupport.Height),
-                          Color.White);
-             spriteBatch.End();
+             
 
              base.Draw(gameTime);
              
@@ -168,17 +195,18 @@ namespace WindowsGameLibrary1
          #region vertices
          private void setVertices()
          {
+             initializeWorld();
+             double height = home.Beam.Length / 16;
              points = (int)(home.Beam.Length * 2 * accuracy) + 2;
 
              primitiveList = new VertexPositionColor[points];
              for (int i = 0; i < points/2; i++)
              {
                  Color c = Color.Green;
-                 primitiveList[i * 2] = new VertexPositionColor(new Vector3(i / accuracy - (float)home.Beam.Length / 2.0f, -(float)home.Beam.Height / 2, 0.0f), c);
-                 primitiveList[i * 2 + 1] = new VertexPositionColor(new Vector3(primitiveList[i*2].Position.X, primitiveList[i*2].Position.Y + (float)home.Beam.Height, 0.0f), c);
+                 primitiveList[i * 2] = new VertexPositionColor(new Vector3(i / accuracy - (float)home.Beam.Length / 2.0f, -(float)height / 2, 0.0f), c);
+                 primitiveList[i * 2 + 1] = new VertexPositionColor(new Vector3(primitiveList[i * 2].Position.X, primitiveList[i * 2].Position.Y + (float)height, 0.0f), c);
              }
-             updateColors();
-             updateDiflection();
+             updateVertices();
              vertexBuffer = new VertexBuffer(GraphicsDevice, typeof(VertexPositionColor), points, BufferUsage.WriteOnly);
              vertexBuffer.SetData<VertexPositionColor>(primitiveList);
 
@@ -190,6 +218,10 @@ namespace WindowsGameLibrary1
              indexBuffer = new IndexBuffer(graphics.GraphicsDevice, typeof(short), lineStripIndices.Length, BufferUsage.WriteOnly);
              indexBuffer.SetData(lineStripIndices);
 
+             leftSupportPos = graphics.GraphicsDevice.Viewport.Project(primitiveList.First().Position, basicEffect.Projection, basicEffect.View, basicEffect.World);
+             leftSupportPos.X -= leftSupport.Width / 2;
+             rightSupportPos = graphics.GraphicsDevice.Viewport.Project(primitiveList[points - 2].Position, basicEffect.Projection, basicEffect.View, basicEffect.World);
+             rightSupportPos.X -= rightSupport.Width / 2;
              
              ShouldDraw = true;
          }
@@ -197,7 +229,7 @@ namespace WindowsGameLibrary1
          {
              updateColors();
              updateDiflection();
-
+             updateFoces();
              ShouldDraw = true;
          }
 
@@ -213,7 +245,7 @@ namespace WindowsGameLibrary1
          private void updateDiflection()
          {
              updateDiflection_Y();
-             updateDiflection_X();
+             //updateDiflection_X();
          }
          private void updateDiflection_Y()
          {
@@ -238,6 +270,28 @@ namespace WindowsGameLibrary1
                  Es = (home.Beam.Height - home.Beam.getNaturalSerfaceDepth()) / p;
                  primitiveList[i * 2 - 1].Position.X += (float)Es;
                  primitiveList[i * 2 + 1].Position.X -= (float)Es;
+             }
+         }
+
+         private void updateFoces()
+         {
+             
+             int indexF ;
+             if (home.Beam.F1 != null)
+             {
+                 indexF = (int)(home.Beam.F1.Position * 2 * accuracy) + 1;
+                 indexF += indexF % 2 == 0 ? 1 : 0;
+                 F1pos = graphics.GraphicsDevice.Viewport.Project(primitiveList[indexF].Position, basicEffect.Projection, basicEffect.View, basicEffect.World);
+                 F1pos.Y -= F1.Height;
+                 F1pos.X -= F1.Width / 2;
+             }
+             if (home.Beam.F2 != null)
+             {
+                 indexF = (int)(home.Beam.F2.Position * 2 * accuracy) + 1;
+                 indexF += indexF % 2 == 0 ? 1 : 0;
+                 F2pos = graphics.GraphicsDevice.Viewport.Project(primitiveList[indexF].Position, basicEffect.Projection, basicEffect.View, basicEffect.World);
+                 F2pos.Y -= F2.Height;
+                 F2pos.X -= F2.Width / 2;
              }
          }
         #endregion

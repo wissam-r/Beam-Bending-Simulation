@@ -131,5 +131,15 @@ namespace TestsForSC
         {
             MessageBox.Show(MaxMomentom.ToString());
         }
+
+        private void userControl_Forces1_MouseClick(object sender, MouseEventArgs e)
+        {
+            MessageBox.Show("hei");
+        }
+
+        private void userControl_Forces1_MouseMove(object sender, MouseEventArgs e)
+        {
+            this.Text = e.X.ToString();
+        }
     }
 }

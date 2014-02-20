@@ -76,5 +76,7 @@ namespace mainPorject
         {
             return beam.getIe(forces.getMomentom(position));
         }
+
+        public PointBaemForce F1,F2;
     }
 }

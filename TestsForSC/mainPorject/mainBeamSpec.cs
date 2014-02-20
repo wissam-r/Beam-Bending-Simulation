@@ -312,7 +312,7 @@ namespace mainPorject
                 }
                 g.FillRectangle(new SolidBrush(Color.Gray), new Rectangle(upperLeft, size));
                 labelPanelLength.Location = new Point(upperLeft.X + size.Width / 2 - labelpanelWidth.Width / 2, upperLeft.Y + size.Height + gap);
-                drawPointerH(g, Pens.GreenYellow, labelPanelLength.Bounds, new Rectangle(upperLeft, size));
+                drawPointerH(g, Pens.Blue, labelPanelLength.Bounds, new Rectangle(upperLeft, size));
             }
         }
 
@@ -578,7 +578,7 @@ namespace mainPorject
                 double.Parse(textBoxPointForce.Text),
                 double.Parse(textBoxForceLocation.Text)*100,
                 BeamLength));
-            resetPictureBox();
+            resetDrawPanel();
             resetPointForceControls();
             resetVariablesOfForcesTab();
         }
@@ -590,7 +590,7 @@ namespace mainPorject
                 double.Parse(textBoxForceStart.Text)*100,
                 double.Parse(textBoxForceEnd.Text)*100,
                 BeamLength));
-            resetPictureBox();
+            resetDrawPanel();
             resetDistributedControls();
             resetVariablesOfForcesTab();
         }
@@ -646,7 +646,7 @@ namespace mainPorject
             {
                 //strb.AppendLine(">>>text change: " + textbox.Text);
                 oldtextBoxForceLocation = textBoxForceLocation.Text;
-                movePictureBoxPointForce((int)(num / scaler)/100);
+                moveDrawPanelPointForce((int)(num / scaler)/100);
             }
             if (ForceSelcected == null)
                 ForceSelcected = typeof(PointBaemForce); 
@@ -676,7 +676,7 @@ namespace mainPorject
                 if(!double.TryParse(textBoxForceEnd.Text,out end)){
                     end = BeamLength/100;
                 }
-                movePictureBoxDistributedForce((int)(num / scaler), (int)(end / scaler));
+                moveDrawPanelDistributedForce((int)(num / scaler), (int)(end / scaler));
             }
             tryEnable_ButtonAddDistributedForce();
             if (ForceSelcected == null)
@@ -708,7 +708,7 @@ namespace mainPorject
                 {
                     start = 0;
                 }
-                movePictureBoxDistributedForce((int)(start / scaler), (int)(num/100 / scaler));
+                moveDrawPanelDistributedForce((int)(start / scaler), (int)(num / 100 / scaler));
             }
             tryEnable_ButtonAddDistributedForce();
             if(ForceSelcected == null)
@@ -763,244 +763,209 @@ namespace mainPorject
                 ForceSelcected = null;
             }
         }
-        //private bool PictureBoxPointForceMoving = false;
+        
+        private const int stretchLeft = 1;
+        private const int stretchRight = 2;
+        private const int none = -1;
+        
+        private Rectangle mouseClip = Cursor.Clip;
 
-        private void resetPictureBox()
+        
+        #endregion
+
+        #region forces panel drawing
+        //forces tab panel picture boxes
+ 
+        private void resetDrawPanel()
         {
-            pictureBoxPointForce_LeftClickable = true;
-            pictureBoxPointForce_RightClickable = false;
-            pictureBoxDistributedForce_LeftClickable = true;
-            pictureBoxDistributedForce_RightClickable = false;
+            drawPanelPointForce_LeftClickable = true;
+            drawPanelPointForce_RightClickable = false;
+            drawPanelDistributedForce_LeftClickable = true;
+            drawPanelDistributedForce_RightClickable = false;
             toolStripTextBoxForce.Text = "";
-            pictureBoxPointForce.Location = new Point(281, 0);
-            pictureBoxPointForce.Cursor = System.Windows.Forms.Cursors.Hand;
-            pictureBoxDistributedForce.Location = new Point(175, 0);
-            pictureBoxDistributedForce.Width = 100;
-            pictureBoxDistributedForce.Cursor = System.Windows.Forms.Cursors.Hand;
+            drawPanelPointForce.Location = new Point(281, 0);
+            drawPanelPointForce.Cursor = System.Windows.Forms.Cursors.Hand;
+            drawPanelDistributedForce.Location = new Point(175, 0);
+            drawPanelDistributedForce.Width = 100;
+            drawPanelDistributedForce.Cursor = System.Windows.Forms.Cursors.Hand;
         }
-        private void movePictureBoxPointForce(int x)
+        private void moveDrawPanelPointForce(int x)
         {
-            //strb.AppendLine(">>>move pic: " + x);
-            //pictureBoxPointForce.Left = x;
-            //pictureBoxPointForce.Top = upperLeft_paintForces.Y - pictureBoxPointForce.Height;
-            //PictureBoxPointForceMoving = true;
-            pictureBoxPointForce.Location = new Point(x + upperLeft_paintForces.X - pictureBoxPointForce.Width/2 ,upperLeft_paintForces.Y - pictureBoxPointForce.Height);
-            if (pictureBoxPointForce_RightClickable == false)
+            drawPanelPointForce.MouseMove -= drawPanelPointForce_MouseMove;
+            drawPanelPointForce.Location = new Point(x + upperLeft_paintForces.X - drawPanelPointForce.Width/2 ,upperLeft_paintForces.Y - drawPanelPointForce.Height);
+            drawPanelPointForce.MouseMove += drawPanelPointForce_MouseMove;
+            if (drawPanelPointForce_RightClickable == false)
             {
-                pictureBoxPointForce_RightClickable = true;
-                pictureBoxPointForce_LeftClickable = false;
-                pictureBoxDistributedForce_LeftClickable = false;
+                drawPanelPointForce_RightClickable = true;
+                drawPanelPointForce_LeftClickable = false;
+                drawPanelDistributedForce_LeftClickable = false;
             }
         }
-        private void movePictureBoxDistributedForceStart(int x)
+        private void moveDrawPanelDistributedForceStart(int x)
         {
-            int oldend = pictureBoxDistributedForce.Left + pictureBoxDistributedForce.Width - upperLeft_paintForces.X;
-            pictureBoxDistributedForce.Location = new Point(x + upperLeft_paintForces.X, upperLeft_paintForces.Y - pictureBoxDistributedForce.Height);
-            movePictureBoxDistributedForceEnd(oldend);
-            //if (pictureBoxDistributedForce_RightClickable == false)
+            int oldend = drawPanelDistributedForce.Left + drawPanelDistributedForce.Width - upperLeft_paintForces.X;
+            drawPanelDistributedForce.Location = new Point(x + upperLeft_paintForces.X, upperLeft_paintForces.Y - drawPanelDistributedForce.Height);
+            moveDrawPanelDistributedForceEnd(oldend);
+            //if (drawPanelDistributedForce_RightClickable == false)
             //{
-            //    pictureBoxDistributedForce_RightClickable = true;
-            //    pictureBoxDistributedForce_LeftClickable = false;
-            //    pictureBoxPointForce_LeftClickable = false;
+            //    drawPanelDistributedForce_RightClickable = true;
+            //    drawPanelDistributedForce_LeftClickable = false;
+            //    drawPanelPointForce_LeftClickable = false;
             //}
         }
-        private void movePictureBoxDistributedForceEnd(int x)
+        private void moveDrawPanelDistributedForceEnd(int x)
         {
-            pictureBoxDistributedForce.Width = x + upperLeft_paintForces.X - pictureBoxDistributedForce.Left;
-            if (pictureBoxDistributedForce_RightClickable == false)
+            drawPanelDistributedForce.Width = x + upperLeft_paintForces.X - drawPanelDistributedForce.Left;
+            if (drawPanelDistributedForce_RightClickable == false)
             {
-                pictureBoxDistributedForce_RightClickable = true;
-                pictureBoxDistributedForce_LeftClickable = false;
-                pictureBoxPointForce_LeftClickable = false;
+                drawPanelDistributedForce_RightClickable = true;
+                drawPanelDistributedForce_LeftClickable = false;
+                drawPanelPointForce_LeftClickable = false;
             }
         }
-        private void movePictureBoxDistributedForce(int start, int end)
+        private void moveDrawPanelDistributedForce(int start, int end)
         {
-            pictureBoxDistributedForce.Width = end - start;
-            pictureBoxDistributedForce.Location = new Point(start + upperLeft_paintForces.X, upperLeft_paintForces.Y - pictureBoxDistributedForce.Height);
-            if (pictureBoxDistributedForce_RightClickable == false)
+            drawPanelDistributedForce.Width = end - start;
+            drawPanelDistributedForce.Location = new Point(start + upperLeft_paintForces.X, upperLeft_paintForces.Y - drawPanelDistributedForce.Height);
+            if (drawPanelDistributedForce_RightClickable == false)
             {
-                pictureBoxDistributedForce_RightClickable = true;
-                pictureBoxDistributedForce_LeftClickable = false;
-                pictureBoxPointForce_LeftClickable = false;
+                drawPanelDistributedForce_RightClickable = true;
+                drawPanelDistributedForce_LeftClickable = false;
+                drawPanelPointForce_LeftClickable = false;
             }
         }
 
-        //pictureBoxPointForce
-        private bool pictureBoxPointForce_RightClickable = false;
-        private bool pictureBoxPointForce_LeftClickable = true;
-        private bool pictureBoxPointForce_Catch = false;
+        //drawPanelPointForce
+        private bool drawPanelPointForce_RightClickable = false;
+        private bool drawPanelPointForce_LeftClickable = true;
+        private bool drawPanelPointForce_Catch = false;
 
-        private void pictureBoxPointForce_MouseClick(object sender, MouseEventArgs e)
+        private void drawPanelPointForce_MouseClick(object sender, MouseEventArgs e)
         {
-            PictureBox pictureBox = (sender as PictureBox);
+            Control panel = (sender as Control);
             switch (e.Button)
             {
                 case System.Windows.Forms.MouseButtons.Right:
-                    if(pictureBoxPointForce_RightClickable)
-                        contextMenuStripForce.Show(pictureBoxPointForce, e.X, e.Y);
+                    if(drawPanelPointForce_RightClickable)
+                        contextMenuStripForce.Show(drawPanelPointForce, e.X, e.Y);
                     break;
                 case System.Windows.Forms.MouseButtons.Left:
-                    if (pictureBoxPointForce_LeftClickable)
+                    if (drawPanelPointForce_LeftClickable)
                     {
                         ForceSelcected = typeof(PointBaemForce);
-                        //movePictureBoxPointForce(upperLeft_paintForces.X - pictureBoxPointForce.Width / 2);
+                        //moveDrawPanelPointForce(upperLeft_paintForces.X - drawPanelPointForce.Width / 2);
                         textBoxForceLocation.Text = "0";
-                        pictureBox.Cursor = System.Windows.Forms.Cursors.SizeAll;
+                        panel.Cursor = System.Windows.Forms.Cursors.SizeAll;
                     }
-                    else if (pictureBoxDistributedForce_RightClickable)
+                    else if (drawPanelDistributedForce_RightClickable)
                     {
-                        resetPictureBox();
+                        resetDrawPanel();
                         resetDistributedControls();
-                        pictureBoxPointForce_MouseClick(pictureBoxDistributedForce, e);
+                        drawPanelPointForce_MouseClick(drawPanelDistributedForce, e);
                     }
                     break;
             }
         }
         
-        private void pictureBoxPointForce_MouseDown(object sender, MouseEventArgs e)
+        private void drawPanelPointForce_MouseDown(object sender, MouseEventArgs e)
         {
-            if (pictureBoxPointForce_RightClickable)
+            if (drawPanelPointForce_RightClickable)
             {
-                pictureBoxPointForce_Catch = true;
+                drawPanelPointForce_Catch = true;
                 oldXY = e.Location;
             }
         }
 
-        private void pictureBoxPointForce_MouseMove(object sender, MouseEventArgs e)
+        private void drawPanelPointForce_MouseMove(object sender, MouseEventArgs e)
         {
-            //if (PictureBoxPointForceMoving)
-            //{
-            //    PictureBoxPointForceMoving = false;
-            //    return;
-            //}
-            PictureBox pictureBox = (sender as PictureBox);
-            if (pictureBoxPointForce_Catch)
+            Control panel = (sender as Control);
+            if (drawPanelPointForce_Catch)
             {                
-                //int newLeft = pictureBox.Left + e.X - oldXY.X - pictureBox.Width / 2;
-                int newLeft = pictureBox.Left + e.X - pictureBox.Width / 2;
-                //int newLeft = pictureBox.Left + e.X;
-                if (newLeft >= upperLeft_paintForces.X - pictureBox.Width / 2
-                    && newLeft <= upperLeft_paintForces.X + size_paintForces.Width - pictureBox.Width / 2)
+                int newLeft = drawPanelPointForce.Left + e.X - panel.Width / 2;
+                if (newLeft >= upperLeft_paintForces.X - panel.Width / 2
+                    && newLeft <= upperLeft_paintForces.X + size_paintForces.Width - panel.Width / 2)
                 {
-                    //pictureBox.Left = newLeft;
-                    //movePictureBoxPointForce(newLeft);
-                    //strb.AppendLine(">>>move: " + e.Location);
-                    textBoxForceLocation.Text = ((newLeft + pictureBox.Width / 2 - upperLeft_paintForces.X) * scaler).ToString();
-                    
+                    textBoxForceLocation.Text = ((newLeft + panel.Width / 2 - upperLeft_paintForces.X) * scaler).ToString();
                 }
             }
-            //else if (pictureBoxPointForce_RightClickable)
-            //{
-            //    pictureBox.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            //}
         }
 
-        private void pictureBoxPointForce_MouseUp(object sender, MouseEventArgs e)
+        private void drawPanelPointForce_MouseUp(object sender, MouseEventArgs e)
         {
-            PictureBox pictureBox = (sender as PictureBox);
-            if (pictureBoxPointForce_RightClickable)
+            Control panel = (sender as Control);
+            if (drawPanelPointForce_RightClickable)
             {
-                pictureBoxPointForce_Catch = false;
-                pictureBoxPointForce.Cursor = System.Windows.Forms.Cursors.SizeAll;
+                drawPanelPointForce_Catch = false;
+                drawPanelPointForce.Cursor = System.Windows.Forms.Cursors.SizeAll;
             }
             else
             {
             }
-            //pictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
         }
 
-        //pictureBoxDistributedForce
-        private bool pictureBoxDistributedForce_RightClickable = false;
-        private bool pictureBoxDistributedForce_LeftClickable = true;
-        private bool pictureBoxDistributedForce_Catch = false;
-        private int pictureBoxDistributedForce_CatchMood = none;
-        //private const int move = 0;
-        private const int stretchLeft = 1;
-        private const int stretchRight = 2;
-        private const int none = -1;
-        //private bool handelCursor = true;
-        private Rectangle mouseClip = Cursor.Clip;
+        //drawPanelDistributedForce
+        private bool drawPanelDistributedForce_RightClickable = false;
+        private bool drawPanelDistributedForce_LeftClickable = true;
+        private bool drawPanelDistributedForce_Catch = false;
+        private int drawPanelDistributedForce_CatchMood = none;
 
-        private void pictureBoxDistributedForce_MouseClick(object sender, MouseEventArgs e)
+        private void drawPanelDistributedForce_MouseClick(object sender, MouseEventArgs e)
         {
             switch (e.Button)
             {
                 case System.Windows.Forms.MouseButtons.Right:
-                    if (pictureBoxDistributedForce_RightClickable)
-                        contextMenuStripForce.Show(pictureBoxDistributedForce, e.X, e.Y);
+                    if (drawPanelDistributedForce_RightClickable)
+                        contextMenuStripForce.Show(drawPanelDistributedForce, e.X, e.Y);
                     break;
                 case System.Windows.Forms.MouseButtons.Left:
-                    if (pictureBoxDistributedForce_LeftClickable)
+                    if (drawPanelDistributedForce_LeftClickable)
                     {
                         ForceSelcected = typeof(DistributedBeamForce);
                         //movePictureBoxDistributedForceStart(0);
                         textBoxForceStart.Text = "0";
-                        textBoxForceEnd.Text = (pictureBoxDistributedForce.Width * scaler).ToString();
+                        textBoxForceEnd.Text = (drawPanelDistributedForce.Width * scaler).ToString();
                     }
-                    else if (pictureBoxPointForce_RightClickable)
+                    else if (drawPanelPointForce_RightClickable)
                     {
-                        resetPictureBox();
+                        resetDrawPanel();
                         resetPointForceControls();
-                        pictureBoxDistributedForce_MouseClick(pictureBoxPointForce, e);
+                        drawPanelDistributedForce_MouseClick(drawPanelPointForce, e);
                     }
                     break;
             }
         }  
 
-        private void pictureBoxDistributedForce_MouseDown(object sender, MouseEventArgs e)
+        private void drawPanelDistributedForce_MouseDown(object sender, MouseEventArgs e)
         {
-            if (pictureBoxDistributedForce_RightClickable)
+            Control panel = (sender as Control);
+            if (drawPanelDistributedForce_RightClickable)
             {
-                pictureBoxDistributedForce_Catch = true;
+                drawPanelDistributedForce_Catch = true;
                 oldXY = e.Location;
-                PictureBox pictureBox = (sender as PictureBox);
-                if (e.X < pictureBox.Width / 4)
+
+
+                if (e.X < panel.Width / 4)
                 {
-                    pictureBoxDistributedForce_CatchMood = stretchLeft;
+                    drawPanelDistributedForce_CatchMood = stretchLeft;
                 }
-                else if (e.X > 3 * pictureBox.Width / 4)
+                else if (e.X > 3 * panel.Width / 4)
                 {
-                    pictureBoxDistributedForce_CatchMood = stretchRight;
+                    drawPanelDistributedForce_CatchMood = stretchRight;
                 }
-                //else
-                //{
-                //    pictureBoxDistributedForce_CatchMood = move;
-                //}
                 
             }
         }
 
-        private void pictureBoxDistributedForce_MouseMove(object sender, MouseEventArgs e)
+        private void drawPanelDistributedForce_MouseMove(object sender, MouseEventArgs e)
         {
-            //if (!handelCursor)
-            //{
-            //    handelCursor = true;
-            //    return;
-            //}
-            PictureBox pictureBox = (sender as PictureBox);
-            if (pictureBoxDistributedForce_Catch)
+            Control panel = (sender as Control);
+            if (drawPanelDistributedForce_Catch)
             {
                 int newLeft;
                 int newWidth;
-                switch(pictureBoxDistributedForce_CatchMood){
-                    //case move:
-                    //    newLeft = pictureBox.Left + e.X - pictureBox.Width/2;
-                    //    newWidth = pictureBox.Width;
-                    //    if (newLeft >= upperLeft_paintForces.X
-                    //        && newLeft <= upperLeft_paintForces.X + size_paintForces.Width - pictureBox.Width)
-                    //    {
-                    //        //pictureBox.Left = newLeft;
-                    //        pictureBoxDistributedForce.MouseMove -= pictureBoxDistributedForce_MouseMove;
-                    //        //textBoxForceStart.Text = ((newLeft - upperLeft_paintForces.X) * scaler).ToString();
-                    //        //textBoxForceEnd.Text = ((newLeft - upperLeft_paintForces.X + pictureBox.Width) * scaler).ToString();
-                    //        textBoxForceEnd.Text = ((newLeft - upperLeft_paintForces.X + newWidth) * scaler).ToString();
-                    //        textBoxForceStart.Text = ((newLeft - upperLeft_paintForces.X) * scaler).ToString();
-                    //        pictureBoxDistributedForce.MouseMove += pictureBoxDistributedForce_MouseMove;
-                    //    }
-                    //break;
+                switch(drawPanelDistributedForce_CatchMood){
                     case stretchRight:
-                        newLeft = pictureBox.Left;
+                        newLeft = drawPanelDistributedForce.Left;
                         newWidth =  e.X;
                         if (newWidth > 0
                             && newWidth + newLeft <= upperLeft_paintForces.X + size_paintForces.Width)
@@ -1010,46 +975,41 @@ namespace mainPorject
                         else
                         {
                             newWidth = size_paintForces.Width - (int)(oldStart/scaler);
-                            Cursor.Clip = new Rectangle(pictureBox.PointToScreen(new Point(0,0)),pictureBox.Size);
-                            //handelCursor = false;
-                            //Cursor.Position = pictureBoxDistributedForce.PointToScreen(new Point(pictureBoxDistributedForce.Width, e.Y));
+                            Cursor.Clip = new Rectangle(drawPanelDistributedForce.PointToScreen(new Point(0, 0)), drawPanelDistributedForce.Size);
                         }
-                        //pictureBox.Width = newWidth;
                         textBoxForceEnd.Text = ((newLeft - upperLeft_paintForces.X + newWidth) * scaler).ToString();
                         oldXY.X = e.X;
                     break;
                     case stretchLeft:
-                        newWidth = pictureBox.Width -(e.X - oldXY.X);
-                        newLeft = pictureBox.Left + e.X;
+                        newWidth = drawPanelDistributedForce.Width - (e.X - oldXY.X);
+                        newLeft = drawPanelDistributedForce.Left + e.X;
                         if (newWidth > 0
                             && newLeft >= upperLeft_paintForces.X)
                         {
-                            //pictureBox.Left = newLeft;
-                            //pictureBox.Width = newWidth;
                             textBoxForceStart.Text = ((newLeft - upperLeft_paintForces.X) * scaler).ToString();
                         }
                     break;
                 }
             }
-            else if (pictureBoxDistributedForce_RightClickable)
+            else if (drawPanelDistributedForce_RightClickable)
             {
-                if (e.X < pictureBox.Width / 4)
+                if (e.X < drawPanelDistributedForce.Width / 4)
                 {
-                    pictureBox.Cursor = System.Windows.Forms.Cursors.SizeWE;
+                    drawPanelDistributedForce.Cursor = System.Windows.Forms.Cursors.SizeWE;
                 }
-                else if (e.X > 3 * pictureBox.Width / 4)
+                else if (e.X > 3 * drawPanelDistributedForce.Width / 4)
                 {
-                    pictureBox.Cursor = System.Windows.Forms.Cursors.SizeWE;
+                    drawPanelDistributedForce.Cursor = System.Windows.Forms.Cursors.SizeWE;
                 }
             }
         }
 
-        private void pictureBoxDistributedForce_MouseUp(object sender, MouseEventArgs e)
+        private void drawPanelDistributedForce_MouseUp(object sender, MouseEventArgs e)
         {
-            PictureBox pictureBox = (sender as PictureBox);
-            pictureBoxDistributedForce_Catch = false;
-            pictureBoxDistributedForce_CatchMood = none;
-            pictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
+            Control panel = (sender as Control);
+            drawPanelDistributedForce_Catch = false;
+            drawPanelDistributedForce_CatchMood = none;
+            panel.Cursor = System.Windows.Forms.Cursors.Hand;
             Cursor.Clip = mouseClip;
         }
 
@@ -1124,7 +1084,7 @@ namespace mainPorject
         private void cancelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             resetVariablesOfForcesTab();
-            resetPictureBox();
+            resetDrawPanel();
             resetDistributedControls();
             resetPointForceControls();
         }
@@ -1179,15 +1139,15 @@ namespace mainPorject
             buttonOK.Visible = true;
             buttonCancel.Visible = true;
 
-            pictureBoxDistributedForce.Visible = true;
-            pictureBoxPointForce.Visible = true;
+            drawPanelDistributedForce.Visible = true;
+            drawPanelPointForce.Visible = true;
             panel1.Width = 435;
             p = new painting(paintForces);
             panel1.Invalidate();
             resetVariablesOfForcesTab();
             forces = new List<Force>();
             resetDistributedControls();
-            resetPictureBox();
+            resetDrawPanel();
             resetPointForceControls();
         }
         
@@ -1205,8 +1165,8 @@ namespace mainPorject
         }
         private void desetStage2()
         {
-            pictureBoxDistributedForce.Visible = false;
-            pictureBoxPointForce.Visible = false;
+            drawPanelDistributedForce.Visible = false;
+            drawPanelPointForce.Visible = false;
             p = null;
         }
 

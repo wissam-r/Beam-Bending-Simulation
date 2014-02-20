@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainBeamSpec));
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.buttonAddDistributedForce = new System.Windows.Forms.Button();
             this.label22 = new System.Windows.Forms.Label();
@@ -45,8 +44,8 @@
             this.textBoxForceLocation = new System.Windows.Forms.TextBox();
             this.textBoxPointForce = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBoxDistributedForce = new System.Windows.Forms.PictureBox();
-            this.pictureBoxPointForce = new System.Windows.Forms.PictureBox();
+            this.drawPanelDistributedForce = new mainPorject.UserControl_Forces();
+            this.drawPanelPointForce = new mainPorject.UserControl_Forces();
             this.labelPanelLength = new System.Windows.Forms.Label();
             this.labelpanelWidth = new System.Windows.Forms.Label();
             this.labelPanelHeight = new System.Windows.Forms.Label();
@@ -66,8 +65,6 @@
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDistributedForce)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPointForce)).BeginInit();
             this.contextMenuStripForce.SuspendLayout();
             this.panelForces.SuspendLayout();
             this.SuspendLayout();
@@ -220,8 +217,8 @@
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.pictureBoxDistributedForce);
-            this.panel1.Controls.Add(this.pictureBoxPointForce);
+            this.panel1.Controls.Add(this.drawPanelDistributedForce);
+            this.panel1.Controls.Add(this.drawPanelPointForce);
             this.panel1.Controls.Add(this.labelPanelLength);
             this.panel1.Controls.Add(this.labelpanelWidth);
             this.panel1.Controls.Add(this.labelPanelHeight);
@@ -232,37 +229,31 @@
             this.panel1.TabIndex = 1;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // pictureBoxDistributedForce
+            // drawPanelDistributedForce
             // 
-            this.pictureBoxDistributedForce.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxDistributedForce.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxDistributedForce.Image")));
-            this.pictureBoxDistributedForce.Location = new System.Drawing.Point(173, 0);
-            this.pictureBoxDistributedForce.Name = "pictureBoxDistributedForce";
-            this.pictureBoxDistributedForce.Size = new System.Drawing.Size(100, 50);
-            this.pictureBoxDistributedForce.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxDistributedForce.TabIndex = 4;
-            this.pictureBoxDistributedForce.TabStop = false;
-            this.pictureBoxDistributedForce.Visible = false;
-            this.pictureBoxDistributedForce.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxDistributedForce_MouseClick);
-            this.pictureBoxDistributedForce.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxDistributedForce_MouseDown);
-            this.pictureBoxDistributedForce.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxDistributedForce_MouseMove);
-            this.pictureBoxDistributedForce.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxDistributedForce_MouseUp);
+            this.drawPanelDistributedForce.Location = new System.Drawing.Point(345, 99);
+            this.drawPanelDistributedForce.Name = "drawPanelDistributedForce";
+            this.drawPanelDistributedForce.Size = new System.Drawing.Size(120, 40);
+            this.drawPanelDistributedForce.TabIndex = 6;
+            this.drawPanelDistributedForce.Type = mainPorject.forceType.distributed;
+            this.drawPanelDistributedForce.Visible = false;
+            this.drawPanelDistributedForce.MouseClick += new System.Windows.Forms.MouseEventHandler(this.drawPanelDistributedForce_MouseClick);
+            this.drawPanelDistributedForce.MouseDown += new System.Windows.Forms.MouseEventHandler(this.drawPanelDistributedForce_MouseDown);
+            this.drawPanelDistributedForce.MouseMove += new System.Windows.Forms.MouseEventHandler(this.drawPanelDistributedForce_MouseMove);
+            this.drawPanelDistributedForce.MouseUp += new System.Windows.Forms.MouseEventHandler(this.drawPanelDistributedForce_MouseUp);
             // 
-            // pictureBoxPointForce
+            // drawPanelPointForce
             // 
-            this.pictureBoxPointForce.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxPointForce.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxPointForce.Image")));
-            this.pictureBoxPointForce.Location = new System.Drawing.Point(281, 0);
-            this.pictureBoxPointForce.Name = "pictureBoxPointForce";
-            this.pictureBoxPointForce.Size = new System.Drawing.Size(32, 139);
-            this.pictureBoxPointForce.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxPointForce.TabIndex = 4;
-            this.pictureBoxPointForce.TabStop = false;
-            this.pictureBoxPointForce.Visible = false;
-            this.pictureBoxPointForce.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxPointForce_MouseClick);
-            this.pictureBoxPointForce.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxPointForce_MouseDown);
-            this.pictureBoxPointForce.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBoxPointForce_MouseMove);
-            this.pictureBoxPointForce.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxPointForce_MouseUp);
+            this.drawPanelPointForce.Location = new System.Drawing.Point(319, 47);
+            this.drawPanelPointForce.Name = "drawPanelPointForce";
+            this.drawPanelPointForce.Size = new System.Drawing.Size(20, 92);
+            this.drawPanelPointForce.TabIndex = 5;
+            this.drawPanelPointForce.Type = mainPorject.forceType.point;
+            this.drawPanelPointForce.Visible = false;
+            this.drawPanelPointForce.MouseClick += new System.Windows.Forms.MouseEventHandler(this.drawPanelPointForce_MouseClick);
+            this.drawPanelPointForce.MouseDown += new System.Windows.Forms.MouseEventHandler(this.drawPanelPointForce_MouseDown);
+            this.drawPanelPointForce.MouseMove += new System.Windows.Forms.MouseEventHandler(this.drawPanelPointForce_MouseMove);
+            this.drawPanelPointForce.MouseUp += new System.Windows.Forms.MouseEventHandler(this.drawPanelPointForce_MouseUp);
             // 
             // labelPanelLength
             // 
@@ -450,8 +441,6 @@
             this.groupBox3.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDistributedForce)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPointForce)).EndInit();
             this.contextMenuStripForce.ResumeLayout(false);
             this.contextMenuStripForce.PerformLayout();
             this.panelForces.ResumeLayout(false);
@@ -481,8 +470,6 @@
         private System.Windows.Forms.Label labelpanelWidth;
         private System.Windows.Forms.Label labelPanelHeight;
         private System.Windows.Forms.Label labelPanelLength;
-        private System.Windows.Forms.PictureBox pictureBoxDistributedForce;
-        private System.Windows.Forms.PictureBox pictureBoxPointForce;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripForce;
         private System.Windows.Forms.ToolStripTextBox toolStripTextBoxForce;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
@@ -494,5 +481,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Panel panelForces;
         private UserControl_AdvancedSpec userControl_AdvancedSpec1;
+        private UserControl_Forces drawPanelDistributedForce;
+        private UserControl_Forces drawPanelPointForce;
     }
 }
