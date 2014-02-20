@@ -97,10 +97,10 @@ namespace beam
             get { return muS; }
             private set { 
                 if (value >= 1)
-                    throw new ArgumentException("As can't be >=  A");
+                    throw new ArgumentException("As can't be >=  "+ getCrossSectionalArea());
                 else if (value < MuSmin)
                 {
-                    throw new ArgumentException("Mus can't be < MusMin");
+                    throw new ArgumentException("Mus can't be < "+MuSmin);
                 }
                 else
                 {
@@ -213,8 +213,14 @@ namespace beam
         public override double getERM()
         {
             return ERM;
+
         }
 
+        public override string getFailureWay()
+        {
+            return MuS < 1.5 * MuSmax ? "Ductile failure" : "Brittle faliure";
+        }
+        
 
 
         

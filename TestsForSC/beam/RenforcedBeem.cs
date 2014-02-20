@@ -49,6 +49,8 @@ namespace beam
         #endregion
 
         #region Private Parammeters
+        //determen how the concrete will fail
+        protected string failureWay ;
         //Resistance of concrete to pressure f'c
         private double cP;
         //Resistance of concrete to flatten Fcb
@@ -73,6 +75,8 @@ namespace beam
         private double n;
         ///Equilibrium ratio of reinforcement
         private double muSb;
+
+       
 
 
         #endregion
@@ -334,6 +338,10 @@ namespace beam
         abstract protected double calcRM();
 
         abstract public double getERM();
+
+        abstract public String getFailureWay();
+
+        
 
         #endregion
 

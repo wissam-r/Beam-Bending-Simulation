@@ -276,6 +276,11 @@ namespace beam
             return ERM;
         }
 
+        public override string getFailureWay()
+        {
+            return MuS < 1.5 * MuSmax ? "Ductile failure" : "Brittle faliure";
+        }
+
         
         #endregion
 
