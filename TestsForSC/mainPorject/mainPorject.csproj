@@ -142,10 +142,10 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="beam">
-      <HintPath>..\beam\bin\Release\beam.dll</HintPath>
+      <HintPath>..\beam\bin\Debug\beam.dll</HintPath>
     </Reference>
     <Reference Include="forces">
-      <HintPath>..\forces\bin\Release\forces.dll</HintPath>
+      <HintPath>..\forces\obj\Debug\forces.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />

@@ -5,6 +5,7 @@ using System.Text;
 using beam.forms;
 using beam.reinforcement;
 using beam.helper;
+using System.Windows.Forms;
 
 namespace beam
 {
@@ -214,7 +215,7 @@ namespace beam
             this.asb = calcAsb(D);
             this.asMax = calcAsMax();
             this.muSmax = calcMuSmax();
-            this.teta = getTeta(choese, X, D);
+            this.teta = getTeta(choese,X, D);
             this.rM = calcRM();
             this.eRM = RM * Teta;
 
@@ -235,22 +236,28 @@ namespace beam
 
         protected override double calcY()
         {
-            double y = ((getSpaceTensileReinforcement() - getSpaceCompressionReinforcement()) / B) * IF / (0.85 * CP);               
+            double y = (((getSpaceTensileReinforcement() - getSpaceCompressionReinforcement()) * IF) / (0.85 * CP*B));               
             if (((MuS- MuSa)<=MuSb) && ((Da/y) <= calcDaDivYLim())){
+                //MessageBox.Show("enterd1");
                 return y;
             }
-            else if ((MuS- MuSa)<=MuSb)
+            else if (((MuS- MuSa)>=MuSb)&((Da / y) <= calcDaDivYLim()))
             {
+               // MessageBox.Show("enterd2");
                 return MathHelper.sESDRP(0.85*CP , 
                     -(getSpaceTensileReinforcement()*IF + B*Da*MuSa*Es*Ecu ),
                     B*MuSa*Es*B1*Ecu*Math.Pow(Da,2)) ;
             }
-            else if ((Da / y) <= calcDaDivYLim())
-                return MathHelper.sESDRP(0.85*CP , 
-                    MuS*Es*Ecu*D+getSpaceCompressionReinforcement()*IF ,
-                    -(B1*MuS*Es*Ecu*Math.Pow(D , 2 ) )) ;
+            else if (((Da / y) >= calcDaDivYLim())&((MuS- MuSa)<=MuSb))
+            {
+               // MessageBox.Show("enterd3");
+                return MathHelper.sESDRP(0.85 * CP,
+                    MuS * Es * Ecu * D + getSpaceCompressionReinforcement() * IF,
+                    -(B1 * MuS * Es * Ecu * Math.Pow(D, 2)));
+            }
             else
             {
+                //MessageBox.Show("enterd4");
                 return MathHelper.sESDRP(0.85 * CP,
                     MuS * Es * Ecu * D - MuSa * Es * Ecu * Da,
                     -(B1 * MuS * Es * Ecu * Math.Pow(D, 2)) + B1 * MuSa * Es * Ecu * Math.Pow(Da, 2));
@@ -262,6 +269,8 @@ namespace beam
         {
             return (0.85 * CP * B * Y * (D - y / 2) + getSpaceCompressionReinforcement() * IF * (D - Da));
         }
+        public double test() { return 0.85 * CP * B * Y * (D - y / 2); }
+        public double tes1t() { return getSpaceCompressionReinforcement() * IF * (D - Da); }
 
         public override double getERM() {
             return ERM;
