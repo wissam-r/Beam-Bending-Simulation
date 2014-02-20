@@ -16,7 +16,6 @@ namespace mainPorject
         #region variables
         //variables
         private BeamWrapper beam;
-
         private SplitterPanel xnaPanel;
         private SplitterPanel quickOperation;
         private SplitterPanel extraInfo;

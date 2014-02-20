@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BeamWrapper.cs" />
     <Compile Include="BeamForce.cs" />
     <Compile Include="DistributedBeamForce.cs" />
     <Compile Include="Force.cs" />
@@ -53,6 +54,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\beam\beam.csproj">
+      <Project>{F820A04D-3357-4431-ACAF-3BCECD43D761}</Project>
+      <Name>beam</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using WindowsGameLibrary1;
 
 namespace mainPorject
 {
     static class Program
     {
-        static Xna1 game;
+        static XnaBeam game;
 
         /// <summary>
         /// The main entry point for the application.
@@ -19,7 +20,7 @@ namespace mainPorject
 
             mainWorkForm form = new mainWorkForm();
             form.Disposed += new EventHandler(form_Disposed);
-            using (game = new Xna1(form))
+            using (game = new XnaBeam(form))
             {
                 form.Show();
                 form.TopMost = true;

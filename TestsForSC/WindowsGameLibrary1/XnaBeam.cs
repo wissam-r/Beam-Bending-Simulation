@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
@@ -10,11 +10,11 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using System.Windows.Forms;
 using forces;
-using mainPorject.Properties;
+using mainPorject;
 
-namespace mainPorject
+namespace WindowsGameLibrary1
 {
-    class Xna1 : Microsoft.Xna.Framework.Game
+    public class XnaBeam:Game
     {
         private GraphicsDeviceManager graphics;
         XnaFormable home;
@@ -22,6 +22,7 @@ namespace mainPorject
         VertexBuffer vertexBuffer;
         IndexBuffer indexBuffer;
 
+        SpriteBatch spriteBatch;
         BasicEffect basicEffect;
         Matrix world = Matrix.CreateTranslation(0, 0, 0);
         Matrix view = Matrix.CreateLookAt(new Vector3(0, 0, 3), new Vector3(0, 0, 0), new Vector3(0, 1, 0));
@@ -34,10 +35,12 @@ namespace mainPorject
         private short[] lineStripIndices;
         private bool ShouldDraw;
 
-        private Texture rightSupport,leftSupport;
+        private Texture2D rightSupport,leftSupport;
 
-        public Xna1(XnaFormable formm)
+        public XnaBeam(XnaFormable formm)
         {
+            Content.RootDirectory = "Content";
+
             this.home = formm;
             graphics = new GraphicsDeviceManager(this);
             graphics.PreparingDeviceSettings += new EventHandler<PreparingDeviceSettingsEventArgs>(graphics_PreparingDeviceSettings);
@@ -48,9 +51,6 @@ namespace mainPorject
             Content.RootDirectory = "Content";
             this.IsMouseVisible = true;
             ShouldDraw = false;
-
-            rightSupport = new Texture2D(this.GraphicsDevice, Resources.LeftSupport.Width, Resources.LeftSupport.Height);
-       
         }
 
         void graphics_PreparingDeviceSettings(object sender, PreparingDeviceSettingsEventArgs e)
@@ -82,7 +82,8 @@ namespace mainPorject
         protected override void LoadContent()
         {
             basicEffect = new BasicEffect(GraphicsDevice);
-
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+            rightSupport = Content.Load<Texture2D>("LeftSupport");
         }
 
         protected override void UnloadContent()
@@ -152,6 +153,14 @@ namespace mainPorject
                                                                 );
                  }
              }
+
+             spriteBatch.Begin();
+             spriteBatch.Draw(rightSupport,
+                          new Rectangle((int)primitiveList.First().Position.X,(int)primitiveList.First().Position.Y,20,20),
+                          new Rectangle(0,0,rightSupport.Width,rightSupport.Height),
+                          Color.White);
+             spriteBatch.End();
+
              base.Draw(gameTime);
              
          }
@@ -222,8 +231,7 @@ namespace mainPorject
                  if (momentom == 0) continue;
                  double p = home.Beam.getI(i / accuracy) * home.Beam.E / home.Beam.getMomentomAt(i / accuracy);
                  if (p == 0) continue;
-                 double Es;
-                 Es = home.Beam.getNaturalSerfaceDepth() / p;
+                 double Es = home.Beam.getNaturalSerfaceDepth() / p;
                  primitiveList[i * 2 - 2].Position.X -= (float)Es;
                  primitiveList[i * 2 + 2].Position.X += (float)Es;
 
@@ -235,3 +243,4 @@ namespace mainPorject
         #endregion
     } 
 }
+

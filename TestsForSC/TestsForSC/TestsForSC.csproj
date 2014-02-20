@@ -140,6 +140,10 @@
       <Project>{4EDBCF7D-9B7E-4D19-BBFB-ECE81A182BCD}</Project>
       <Name>forces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WindowsGameLibrary1\WindowsGameLibrary1.csproj">
+      <Project>{38E67E5D-D8A3-43C6-BEE6-CFFB6C8B7F02}</Project>
+      <Name>WindowsGameLibrary1</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
