@@ -278,7 +278,7 @@ namespace beam
 
         public override string getFailureWay()
         {
-            return MuS < 1.5 * MuSmax ? "Ductile failure" : "Brittle faliure";
+            return MuS < MuSb ? "Ductile failure" : "Brittle faliure";
         }
 
         
