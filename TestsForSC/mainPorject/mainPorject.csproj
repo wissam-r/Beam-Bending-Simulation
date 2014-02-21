@@ -204,8 +204,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\RightSupportWhite.png" />
     <None Include="Resources\arrow.png" />
     <Content Include="Resources\LeftSupport.png" />
+    <None Include="Resources\LeftSupportWhite.png" />
     <Content Include="Resources\RightSupport.png" />
   </ItemGroup>
   <ItemGroup>

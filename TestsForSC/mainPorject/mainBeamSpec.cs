@@ -130,6 +130,7 @@ namespace mainPorject
             this.userControl_AdvancedSpec1.setFcText(fc);
             this.userControl_AdvancedSpec1.setFsText(fs);
         }
+
         private void mainBeamSpec_Load(object sender, EventArgs e)
         {
             BeamHeight = userControl_BasicSpec1.Height;
@@ -373,20 +374,20 @@ namespace mainPorject
                 int gap = 5;
                 {
                     int length = control.Width - 2 * gap;
-                    int height = (int)(length * scaler);
-                    if (height > control.Height / 2)
-                    {
-                        height = control.Height / 2 - 2 * gap;
-                    }
+                    int height = 10;
                     size_paintForces = new System.Drawing.Size(length, height);
                 }
                 {
                     int x = control.Width / 2 - size_paintForces.Width / 2;
-                    int y = control.Height - size_paintForces.Height - 2 * gap;
+                    int y = 2 * control.Height / 3 + size_paintForces.Height + 2 * gap;
                     upperLeft_paintForces = new Point(x, y);
                 }
-                g.FillRectangle(new SolidBrush(Color.Gray), new Rectangle(upperLeft_paintForces, size_paintForces));
+                //g.FillRectangle(new SolidBrush(Color.Gray), new Rectangle(upperLeft_paintForces, size_paintForces));
+                PaintEventArgs e = new PaintEventArgs(control.CreateGraphics(), control.ClientRectangle);
+                beam_paint(control, e, upperLeft_paintForces, size_paintForces, Brushes.White);
+                beamSupport_paint(control, e, upperLeft_paintForces, size_paintForces, new Size(25, 25), true);
             }
+            
         }
 
         private void paintRenforcement_V2(Control control)
@@ -438,6 +439,17 @@ namespace mainPorject
         private void drawCircul(int x, int y, int r, Graphics g)
         {
             g.FillEllipse(Brushes.Black, x-r, y-r, 2*r, 2*r);
+        }
+        private void beam_paint(object sender, PaintEventArgs e, Point pos, Size size, Brush brush)
+        {
+            e.Graphics.FillRectangle(brush, pos.X, pos.Y - size.Height / 2, size.Width, size.Height);
+        }
+        private void beamSupport_paint(object sender, PaintEventArgs e, Point beamPos, Size beamSize, Size supportSize, bool white)
+        {
+            Image image = white ? Properties.Resources.LeftSupportWhite : Properties.Resources.LeftSupport;
+            e.Graphics.DrawImage(image, new Rectangle(beamPos.X - supportSize.Width / 2, beamPos.Y, supportSize.Width, supportSize.Height));
+            image = white ? Properties.Resources.RightSupportWhite : Properties.Resources.RightSupport;
+            e.Graphics.DrawImage(image, new Rectangle(beamPos.X + beamSize.Width - supportSize.Width / 2, beamPos.Y, supportSize.Width, supportSize.Height));
         }
         #endregion
 

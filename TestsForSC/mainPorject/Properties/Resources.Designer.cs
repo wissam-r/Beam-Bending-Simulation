@@ -73,9 +73,29 @@ namespace mainPorject.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap LeftSupportWhite {
+            get {
+                object obj = ResourceManager.GetObject("LeftSupportWhite", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap RightSupport {
             get {
                 object obj = ResourceManager.GetObject("RightSupport", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RightSupportWhite {
+            get {
+                object obj = ResourceManager.GetObject("RightSupportWhite", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -191,6 +191,13 @@ namespace mainPorject
         {
             e.Graphics.FillRectangle(brush,pos.X,pos.Y-size.Height/2,size.Width,size.Height);
         }
+        private void beamSupport_paint(object sender, PaintEventArgs e, Point beamPos, Size beamSize,Size supportSize,bool white)
+        {
+            Image image = white ? Properties.Resources.LeftSupportWhite : Properties.Resources.LeftSupport;
+            e.Graphics.DrawImage(image, new Rectangle(beamPos.X - supportSize.Width / 2, beamPos.Y , supportSize.Width, supportSize.Height));
+            image = white ? Properties.Resources.RightSupportWhite : Properties.Resources.RightSupport;
+            e.Graphics.DrawImage(image, new Rectangle(beamPos.X + beamSize.Width - supportSize.Width / 2, beamPos.Y, supportSize.Width, supportSize.Height));
+        }
 
         private Point[] pointsMomentom;
         private Dictionary<string, double> maxMomentPoint = new Dictionary<string,double>(4);
@@ -427,6 +434,7 @@ namespace mainPorject
         private void splitContainerMainLeftRight_Panel2_Paint(object sender, PaintEventArgs e)
         {
             beam_paint(sender, e, new Point(trackBar1.Left + 10, trackBar1.Top - 30), new Size(trackBar1.Width - 20, 5), Brushes.White);
+            beamSupport_paint(sender, e, new Point(trackBar1.Left + 10, trackBar1.Top - 30), new Size(trackBar1.Width - 20, 5), new Size(25, 25), true);
         }
 
 
