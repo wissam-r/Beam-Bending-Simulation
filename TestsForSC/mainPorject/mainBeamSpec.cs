@@ -1187,78 +1187,85 @@ namespace mainPorject
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (stage == 0)
+            try
             {
-                if (!userControl_BasicSpec1.IsErrorFree())
+                if (stage == 0)
                 {
-                    MessageBox.Show("something wrong", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                    if (!userControl_BasicSpec1.IsErrorFree())
+                    {
+                        MessageBox.Show("something wrong", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    if (!userControl_AdvancedSpec1.IsErrorFree())
+                    {
+                        MessageBox.Show("something wrong", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        stage = 1;
+                        return;
+                    }
+                    if (beamWrap == null) beamWrap = new BeamWrapper();
+                    if (userControl_BasicSpec1.DoubleChecked)
+                    {
+                        beamWrap.beam = new DoubReinRecBeem(BeamHeight,
+                                                            BeamLength,
+                                                            BeamWidth,
+                                                            userControl_BasicSpec1.Diameter,
+                                                            userControl_BasicSpec1.Diameter2,
+                                                            userControl_BasicSpec1.Count,
+                                                            userControl_BasicSpec1.Count2);
+                    }
+                    else
+                    {
+                        beamWrap.beam = new SinReinRecBeem(BeamHeight,
+                                                           BeamLength,
+                                                           BeamWidth,
+                                                           userControl_BasicSpec1.Diameter,
+                                                           userControl_BasicSpec1.Count);
+                    }
+                    stage = 2;
                 }
-                if (!userControl_AdvancedSpec1.IsErrorFree())
+                else if (stage == 1)
                 {
-                    MessageBox.Show("something wrong", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    stage = 1;
-                    return;
+                    if (!userControl_AdvancedSpec1.IsErrorFree())
+                    {
+                        MessageBox.Show("something wrong", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    if (beamWrap == null) beamWrap = new BeamWrapper();
+                    if (userControl_BasicSpec1.DoubleChecked)
+                    {
+                        beamWrap.beam = new DoubReinRecBeem(userControl_AdvancedSpec1.Fc,
+                                                            userControl_AdvancedSpec1.Fs,
+                                                            BeamHeight,
+                                                            BeamLength,
+                                                            BeamWidth,
+                                                            userControl_AdvancedSpec1.Es,
+                                                            userControl_BasicSpec1.Diameter,
+                                                            userControl_BasicSpec1.Diameter2,
+                                                            userControl_BasicSpec1.Count,
+                                                            userControl_BasicSpec1.Count2,
+                                                            userControl_AdvancedSpec1.A,
+                                                            userControl_AdvancedSpec1.A2,
+                                                            userControl_AdvancedSpec1.Chose);
+                    }
+                    else
+                    {
+                        beamWrap.beam = new SinReinRecBeem(userControl_AdvancedSpec1.Fc,
+                                                            userControl_AdvancedSpec1.Fs,
+                                                            BeamHeight,
+                                                            BeamLength,
+                                                            BeamWidth,
+                                                            userControl_AdvancedSpec1.Es,
+                                                            userControl_BasicSpec1.Diameter,
+                                                            userControl_BasicSpec1.Count,
+                                                            userControl_AdvancedSpec1.A,
+                                                            userControl_AdvancedSpec1.Chose);
+                    }
+                    stage = 2;
                 }
-                if (beamWrap == null) beamWrap = new BeamWrapper();
-                if (userControl_BasicSpec1.DoubleChecked)
-                {
-                    beamWrap.beam = new DoubReinRecBeem(BeamHeight,
-                                                        BeamLength,
-                                                        BeamWidth,
-                                                        userControl_BasicSpec1.Diameter,
-                                                        userControl_BasicSpec1.Diameter2,
-                                                        userControl_BasicSpec1.Count,
-                                                        userControl_BasicSpec1.Count2);
-                }
-                else
-                {
-                    beamWrap.beam = new SinReinRecBeem(BeamHeight,
-                                                       BeamLength,
-                                                       BeamWidth,
-                                                       userControl_BasicSpec1.Diameter,
-                                                       userControl_BasicSpec1.Count);
-                }
-                stage = 2;
             }
-            else if (stage == 1)
+            catch (Exception ex)
             {
-                if (!userControl_AdvancedSpec1.IsErrorFree())
-                {
-                    MessageBox.Show("something wrong", "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                if (beamWrap == null) beamWrap = new BeamWrapper();
-                if (userControl_BasicSpec1.DoubleChecked)
-                {
-                    beamWrap.beam = new DoubReinRecBeem(userControl_AdvancedSpec1.Fc,
-                                                        userControl_AdvancedSpec1.Fs,
-                                                        BeamHeight,
-                                                        BeamLength,
-                                                        BeamWidth,
-                                                        userControl_AdvancedSpec1.Es,
-                                                        userControl_BasicSpec1.Diameter,
-                                                        userControl_BasicSpec1.Diameter2,
-                                                        userControl_BasicSpec1.Count,
-                                                        userControl_BasicSpec1.Count2,
-                                                        userControl_AdvancedSpec1.A,
-                                                        userControl_AdvancedSpec1.A2,
-                                                        userControl_AdvancedSpec1.Chose);
-                }
-                else
-                {
-                    beamWrap.beam = new SinReinRecBeem(userControl_AdvancedSpec1.Fc,
-                                                        userControl_AdvancedSpec1.Fs,
-                                                        BeamHeight,
-                                                        BeamLength,
-                                                        BeamWidth,
-                                                        userControl_AdvancedSpec1.Es,
-                                                        userControl_BasicSpec1.Diameter,
-                                                        userControl_BasicSpec1.Count,
-                                                        userControl_AdvancedSpec1.A,
-                                                        userControl_AdvancedSpec1.Chose);
-                }
-                stage = 2;
+                MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion

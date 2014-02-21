@@ -36,7 +36,7 @@ namespace mainPorject
         {
             get
             {
-                return beam.getERM();
+                return beam.ERM;
             }
         }
         public double E

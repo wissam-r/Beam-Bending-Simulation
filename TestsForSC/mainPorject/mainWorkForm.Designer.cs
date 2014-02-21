@@ -58,6 +58,10 @@
             this.labelMaxMomentom = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.labelSRM = new System.Windows.Forms.Label();
+            this.labelSCM = new System.Windows.Forms.Label();
+            this.button6 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainSplitContainer)).BeginInit();
             this.MainSplitContainer.Panel1.SuspendLayout();
@@ -74,6 +78,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.panelShaer.SuspendLayout();
             this.panelMomentom.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -140,6 +145,7 @@
             // 
             // MainSplitContainer.Panel2
             // 
+            this.MainSplitContainer.Panel2.Controls.Add(this.panel1);
             this.MainSplitContainer.Panel2.Controls.Add(this.panelShaer);
             this.MainSplitContainer.Panel2.Controls.Add(this.panelMomentom);
             this.MainSplitContainer.Size = new System.Drawing.Size(784, 496);
@@ -269,7 +275,7 @@
             // labelPos
             // 
             this.labelPos.AutoSize = true;
-            this.labelPos.Location = new System.Drawing.Point(3, 213);
+            this.labelPos.Location = new System.Drawing.Point(3, 147);
             this.labelPos.Name = "labelPos";
             this.labelPos.Size = new System.Drawing.Size(35, 13);
             this.labelPos.TabIndex = 4;
@@ -309,9 +315,9 @@
             this.panelShaer.Controls.Add(this.labelMinShaer);
             this.panelShaer.Controls.Add(this.labelMaxShaer);
             this.panelShaer.Controls.Add(this.label2);
-            this.panelShaer.Location = new System.Drawing.Point(4, 3);
+            this.panelShaer.Location = new System.Drawing.Point(4, 127);
             this.panelShaer.Name = "panelShaer";
-            this.panelShaer.Size = new System.Drawing.Size(276, 222);
+            this.panelShaer.Size = new System.Drawing.Size(276, 180);
             this.panelShaer.TabIndex = 1;
             // 
             // labelMinShaer
@@ -367,8 +373,44 @@
             // 
             // timer1
             // 
-            this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.button6);
+            this.panel1.Controls.Add(this.labelSCM);
+            this.panel1.Controls.Add(this.labelSRM);
+            this.panel1.Location = new System.Drawing.Point(4, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(276, 118);
+            this.panel1.TabIndex = 2;
+            // 
+            // labelSRM
+            // 
+            this.labelSRM.AutoSize = true;
+            this.labelSRM.Location = new System.Drawing.Point(19, 13);
+            this.labelSRM.Name = "labelSRM";
+            this.labelSRM.Size = new System.Drawing.Size(145, 13);
+            this.labelSRM.TabIndex = 0;
+            this.labelSRM.Text = "Section resistance moment : ";
+            // 
+            // labelSCM
+            // 
+            this.labelSCM.AutoSize = true;
+            this.labelSCM.Location = new System.Drawing.Point(19, 40);
+            this.labelSCM.Name = "labelSCM";
+            this.labelSCM.Size = new System.Drawing.Size(121, 13);
+            this.labelSCM.TabIndex = 0;
+            this.labelSCM.Text = "Section crack moment : ";
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(156, 82);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.TabIndex = 1;
+            this.button6.Text = "button6";
+            this.button6.UseVisualStyleBackColor = true;
             // 
             // mainWorkForm
             // 
@@ -401,6 +443,8 @@
             this.panelShaer.PerformLayout();
             this.panelMomentom.ResumeLayout(false);
             this.panelMomentom.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -437,5 +481,9 @@
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem testForcesToolStripMenuItem;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label labelSCM;
+        private System.Windows.Forms.Label labelSRM;
+        private System.Windows.Forms.Button button6;
     }
 }

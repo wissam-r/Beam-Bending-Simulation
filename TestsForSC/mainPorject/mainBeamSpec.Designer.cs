@@ -233,7 +233,7 @@
             // 
             this.drawPanelDistributedForce.Location = new System.Drawing.Point(345, 99);
             this.drawPanelDistributedForce.Name = "drawPanelDistributedForce";
-            this.drawPanelDistributedForce.Size = new System.Drawing.Size(120, 40);
+            this.drawPanelDistributedForce.Size = new System.Drawing.Size(125, 40);
             this.drawPanelDistributedForce.TabIndex = 6;
             this.drawPanelDistributedForce.Type = mainPorject.forceType.distributed;
             this.drawPanelDistributedForce.Visible = false;

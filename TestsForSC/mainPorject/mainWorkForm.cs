@@ -57,6 +57,8 @@ namespace mainPorject
                     updateShaerPoints();
                     panelShaer.Paint += new PaintEventHandler(panelShaer_Paint);
                     trackBar1_reset();
+                    labelSRM.Text = "Section resistance moment : " + Beam.MaxMomentom;
+                    labelSCM.Text = "Section crack moment : " + Beam.beam.Mcr;
                 }
             }
         }
@@ -289,7 +291,7 @@ namespace mainPorject
         private void testForcesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             timer1.Stop();
-            setTestForce();
+            setTestForce();            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -318,6 +320,11 @@ namespace mainPorject
                 updateShaerPoints();
                 updateData();
                 NewPointPositionFlag = true;
+                if (maxMomentPoint["moment"] >= Beam.MaxMomentom)
+                {
+                    timer1.Stop();
+                    MessageBox.Show("breakon");
+                }
             }
         }
 
