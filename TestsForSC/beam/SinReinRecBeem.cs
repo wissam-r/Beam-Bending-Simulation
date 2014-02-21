@@ -74,7 +74,7 @@ namespace beam
         {
             get { return muSmax; }
         }
-        public double ERM
+        override public double ERM
         {
             get { return eRM; }
         }
@@ -131,7 +131,7 @@ namespace beam
         {
             get { return icr; }
         }
-        public double Mcr 
+        override public double Mcr 
         {
             get { return mcr; }
             protected set { mcr = value; }
@@ -210,11 +210,7 @@ namespace beam
                 0.85 * CP * B * Y * (D - Y / 2);
         }
 
-        public override double getERM()
-        {
-            return ERM;
-
-        }
+        
 
         public override string getFailureWay()
         {

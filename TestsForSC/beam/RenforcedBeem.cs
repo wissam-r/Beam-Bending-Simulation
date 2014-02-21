@@ -339,13 +339,13 @@ namespace beam
 
         abstract public double ERM
         {
-            set;
             get;
         }
 
         abstract public double Mcr
         {
-            set;
+
+            protected set;
             get;
         }
 

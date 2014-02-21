@@ -96,7 +96,7 @@ namespace beam
 
             }
         }
-        public double ERM
+        override public double ERM
         {
             get { return eRM; }
         }
@@ -178,7 +178,7 @@ namespace beam
         {
             get { return icr; }
         }
-        public double Mcr
+        override public double Mcr
         {
             get { return mcr; }
             protected set { mcr = value; }
@@ -272,9 +272,7 @@ namespace beam
         public double test() { return 0.85 * CP * B * Y * (D - y / 2); }
         public double tes1t() { return getSpaceCompressionReinforcement() * IF * (D - Da); }
 
-        public override double getERM() {
-            return ERM;
-        }
+        
 
         public override string getFailureWay()
         {
