@@ -58,7 +58,7 @@ namespace mainPorject
                     panelShaer.Paint += new PaintEventHandler(panelShaer_Paint);
                     trackBar1_reset();
                     labelSRM.Text = "Section resistance moment : " + Beam.MaxMomentom;
-                    labelSCM.Text = "Section crack moment : " + Beam.beam.Mcr;
+                    labelSCM.Text = "Section crack moment : " + (Beam.beam.Mcr * Math.Pow(10,6));
                 }
             }
         }

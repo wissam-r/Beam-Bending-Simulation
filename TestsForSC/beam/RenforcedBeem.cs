@@ -279,6 +279,7 @@ namespace beam
         //عزم العطالة حول مركز الجسم المتشقق
         public double Ie(double Ma, double Mcr, double Ig, double Icr)
         {
+            Ma *= Math.Pow(10, -6);
             return Ma <= Mcr ? Ig : ((Math.Pow(Mcr / Ma, 3) * Ig) + (1 - Math.Pow(Mcr / Ma, 3)) * Icr);
         } 
 
