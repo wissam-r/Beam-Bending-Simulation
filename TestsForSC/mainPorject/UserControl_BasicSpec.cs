@@ -225,6 +225,31 @@ namespace mainPorject
                 ep.SetError(control, error);
             }
         }
+
+        public void setRecText(Double width, Double height, Double length)
+        {
+            if (width != null) { textBoxWidth.Text = width.ToString(); }
+            if (height != null) { textBoxHieght.Text = height.ToString(); }
+            if (length != null) { textBoxLength.Text = length.ToString(); }
+        }
+        public void setRenSText(Double diameter, Int32 count)
+        {
+            if (diameter != null) { textBoxDiameter.Text = diameter.ToString(); }
+            if (count != null) { numericUpDownCount.Value = count; }
+        }
+        public void setRenDText(Double diameter, Int32 count)
+        {
+            if (diameter != null) { textBoxDiameter2.Text = diameter.ToString(); }
+            if (count != null) { numericUpDownCount2.Value = count; }
+        }
+        public void setSingelOrDouble(bool sod)
+        {
+            checkBoxDouble.Checked = sod;
+        }
+        public void setWieghtText(Double wieght)
+        {
+            if (wieght != null) { textBoxWeight.Text = wieght.ToString(); }
+        }
         #endregion
 
         private void textBoxHieght_TextChanged(object sender, EventArgs e)

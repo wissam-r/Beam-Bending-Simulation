@@ -88,6 +88,12 @@
     <Compile Include="fastControl.Designer.cs">
       <DependentUpon>fastControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Start.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Start.Designer.cs">
+      <DependentUpon>Start.cs</DependentUpon>
+    </Compile>
     <Compile Include="TestForcesSpec.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,6 +138,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="fastControl.resx">
       <DependentUpon>fastControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Start.resx">
+      <DependentUpon>Start.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TestForcesSpec.resx">
       <DependentUpon>TestForcesSpec.cs</DependentUpon>
@@ -200,6 +209,10 @@
     <Content Include="Resources\RightSupport.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DesignUI\DesignUI.csproj">
+      <Project>{4AC6E6D1-A696-4B44-97DA-19A23676BED9}</Project>
+      <Name>DesignUI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\forces\forces.csproj">
       <Project>{4EDBCF7D-9B7E-4D19-BBFB-ECE81A182BCD}</Project>
       <Name>forces</Name>

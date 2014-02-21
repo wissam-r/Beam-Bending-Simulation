@@ -93,6 +93,43 @@ namespace mainPorject
             p += new painting(paintRenforcement_V2);
         }
 
+        public mainBeamSpec( double width, double height, double As, double Asl,double fc,double fs,double a,double al)
+        {
+            InitializeComponent();
+            stage = 0;
+            forces = new List<Force>();
+            p = new painting(paintLength_V2);
+            p += new painting(paintHeightWidth_V2);
+            p += new painting(paintRenforcement_V2);
+
+            this.userControl_BasicSpec1.setRecText(width,height,2);
+            this.userControl_BasicSpec1.setSingelOrDouble(true);
+            this.userControl_BasicSpec1.setRenSText(Math.Sqrt(As / 3 / Math.PI), 3);
+            this.userControl_BasicSpec1.setRenDText(Math.Sqrt(Asl / 3 / Math.PI), 3);
+
+            this.userControl_AdvancedSpec1.setAText(a);
+            this.userControl_AdvancedSpec1.setA2Text(al);
+            this.userControl_AdvancedSpec1.setFcText(fc);
+            this.userControl_AdvancedSpec1.setFsText(fs);
+        }
+
+        public mainBeamSpec(double width, double height, double As, double fc, double fs, double a)
+        {
+            InitializeComponent();
+            stage = 0;
+            forces = new List<Force>();
+            p = new painting(paintLength_V2);
+            p += new painting(paintHeightWidth_V2);
+            p += new painting(paintRenforcement_V2);
+
+            this.userControl_BasicSpec1.setRecText(width, height, 2);
+            this.userControl_BasicSpec1.setSingelOrDouble(false);
+            this.userControl_BasicSpec1.setRenSText(Math.Sqrt(As / 3 / Math.PI), 3);
+
+            this.userControl_AdvancedSpec1.setAText(a);
+            this.userControl_AdvancedSpec1.setFcText(fc);
+            this.userControl_AdvancedSpec1.setFsText(fs);
+        }
         private void mainBeamSpec_Load(object sender, EventArgs e)
         {
             BeamHeight = userControl_BasicSpec1.Height;
@@ -361,7 +398,7 @@ namespace mainPorject
                 System.Drawing.Size size;
                 {
                     int width = control.Width / 2 - 5 * gap;
-                    int height = control.Height/2 + 5 * gap;
+                    int height = control.Height / 2 + 5 * gap;
                     width += 1;
                     height += 1;
                     size = new System.Drawing.Size(width, height);
@@ -375,11 +412,10 @@ namespace mainPorject
                 g.FillRectangle(Brushes.Gray, new Rectangle(upperLeft, size));
                 if (RenforcementCount > 0)
                 {
-                    scaler = (float)(RenforcementDiameter / 2 / BeamWidth);
-                    int width = size.Width;
-                    int raduis = (int)(width * scaler);
-                    int space = width / RenforcementCount;
-                    scaler = size.Height / (float)BeamHeight;
+                    scaler = Math.Min((float)(size.Width / BeamWidth), (float)(size.Height / BeamHeight));
+                    int raduis = (int)(RenforcementDiameter * scaler) / 2;
+                    int space = size.Width / RenforcementCount;
+                    //scaler = size.Height / (float)BeamHeight;
                     for (int i = 0; i < RenforcementCount; i++)
                     {
                         drawCircul(upperLeft.X + space / 2 + i * space, upperLeft.Y + size.Height - (int)(RenforcementA * scaler), raduis, g);
@@ -387,11 +423,10 @@ namespace mainPorject
                 }
                 if (RenforcementCount2 > 0 && userControl_BasicSpec1.DoubleChecked)
                 {
-                    scaler = (float)(RenforcementDiameter2 / 2 / BeamWidth);
-                    int width = size.Width;
-                    int raduis = (int)(width * scaler);
-                    int space = width / RenforcementCount2;
-                    scaler = size.Height / (float)BeamHeight;
+                    scaler = Math.Min((float)(size.Width / BeamWidth), (float)(size.Height / BeamHeight));
+                    int raduis = (int)(RenforcementDiameter2 * scaler) / 2;
+                    int space = size.Width / RenforcementCount2;
+                    //scaler = size.Height / (float)BeamHeight;
                     for (int i = 0; i < RenforcementCount2; i++)
                     {
                         drawCircul(upperLeft.X + space / 2 + i * space, upperLeft.Y +  (int)(RenforcementA2 * scaler), raduis, g);

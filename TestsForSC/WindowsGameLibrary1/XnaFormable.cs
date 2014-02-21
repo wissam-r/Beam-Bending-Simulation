@@ -16,5 +16,6 @@ namespace mainPorject
         bool NewPointPositionFlag { get; set; }
         bool NewTestForces { get; set; }
         BeamWrapper Beam { get; }
+        void sendMassege(string str);
     }
 }

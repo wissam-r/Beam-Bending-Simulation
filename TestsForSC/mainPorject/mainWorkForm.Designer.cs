@@ -62,6 +62,7 @@
             this.labelSRM = new System.Windows.Forms.Label();
             this.labelSCM = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
+            this.backToStartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainSplitContainer)).BeginInit();
             this.MainSplitContainer.Panel1.SuspendLayout();
@@ -95,7 +96,8 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newBeamToolStripMenuItem});
+            this.newBeamToolStripMenuItem,
+            this.backToStartToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F)));
             this.fileToolStripMenuItem.ShowShortcutKeys = false;
@@ -208,7 +210,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(78, 93);
             this.button2.TabIndex = 1;
-            this.button2.Text = "stop";
+            this.button2.Text = "pause";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -241,8 +243,9 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(78, 94);
             this.button5.TabIndex = 4;
-            this.button5.Text = "button5";
+            this.button5.Text = "stop";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // splitContainerMainLeftRight
             // 
@@ -412,6 +415,13 @@
             this.button6.Text = "button6";
             this.button6.UseVisualStyleBackColor = true;
             // 
+            // backToStartToolStripMenuItem
+            // 
+            this.backToStartToolStripMenuItem.Name = "backToStartToolStripMenuItem";
+            this.backToStartToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.backToStartToolStripMenuItem.Text = "back to start";
+            this.backToStartToolStripMenuItem.Click += new System.EventHandler(this.backToStartToolStripMenuItem_Click);
+            // 
             // mainWorkForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -485,5 +495,6 @@
         private System.Windows.Forms.Label labelSCM;
         private System.Windows.Forms.Label labelSRM;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.ToolStripMenuItem backToStartToolStripMenuItem;
     }
 }

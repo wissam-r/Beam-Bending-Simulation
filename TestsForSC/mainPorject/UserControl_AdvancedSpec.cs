@@ -214,6 +214,27 @@ namespace mainPorject
                 ep.SetError(control, error);
             }
         }
+
+        public void setFcText(Double fc)
+        {
+            if (fc != null) { textBoxFc.Text = fc.ToString(); }
+        }
+        public void setFsText(Double fs)
+        {
+            if (fs != null) { textBoxFs.Text = fs.ToString(); }
+        }
+        public void setEsText(Double es)
+        {
+            if (es != null) { textBoxEs.Text = es.ToString(); }
+        }
+        public void setAText(Double a)
+        {
+            if (a != null) { textBoxA.Text = a.ToString(); }
+        }
+        public void setA2Text(Double a)
+        {
+            if (a != null) { textBoxA2.Text = a.ToString(); }
+        }
         #endregion
 
         private void textBoxFc_TextChanged(object sender, EventArgs e)

@@ -37,9 +37,27 @@ namespace mainPorject
             NewPointPositionFlag = false;
 
             this.Visible = false;
-            getNewBeam();
+            StartGet();
+            //getNewBeam();
             setTestForce();
             this.Visible = true;
+        }
+
+        private void StartGet()
+        {
+            using (Start mbs = new Start())
+            {
+                DialogResult result = mbs.ShowDialog(this);
+                if (result == System.Windows.Forms.DialogResult.OK)
+                {
+                    getNewBeam();
+                }
+                else if (result == System.Windows.Forms.DialogResult.Yes)
+                {
+                    getNewBeam(mbs);
+                }
+            }
+            
         }
 
         private void getNewBeam()
@@ -59,6 +77,49 @@ namespace mainPorject
                     trackBar1_reset();
                     labelSRM.Text = "Section resistance moment : " + Beam.MaxMomentom;
                     labelSCM.Text = "Section crack moment : " + (Beam.beam.Mcr * Math.Pow(10,6));
+                }
+            }
+        }
+        private void getNewBeam(Start str)
+        {
+            if (str.isSingel)
+            {
+                using (mainBeamSpec mbs = new mainBeamSpec(str.width,str.height,str.As,str.fc,str.fs,str.a))
+                {
+                    DialogResult result = mbs.ShowDialog(this);
+                    if (result == System.Windows.Forms.DialogResult.OK)
+                    {
+                        Clear();
+                        this.beam = mbs.beamWrap;
+                        NewPointsFlag = true;
+                        updateMometPoints();
+                        panelMomentom.Paint += new PaintEventHandler(panelMomentom_Paint);
+                        updateShaerPoints();
+                        panelShaer.Paint += new PaintEventHandler(panelShaer_Paint);
+                        trackBar1_reset();
+                        labelSRM.Text = "Section resistance moment : " + Beam.MaxMomentom;
+                        labelSCM.Text = "Section crack moment : " + (Beam.beam.Mcr * Math.Pow(10, 6));
+                    }
+                }
+            }
+            else
+            {
+                using (mainBeamSpec mbs = new mainBeamSpec(str.width,str.height,str.As,str.Asl,str.fc,str.fs,str.a,str.a))
+                {
+                    DialogResult result = mbs.ShowDialog(this);
+                    if (result == System.Windows.Forms.DialogResult.OK)
+                    {
+                        Clear();
+                        this.beam = mbs.beamWrap;
+                        NewPointsFlag = true;
+                        updateMometPoints();
+                        panelMomentom.Paint += new PaintEventHandler(panelMomentom_Paint);
+                        updateShaerPoints();
+                        panelShaer.Paint += new PaintEventHandler(panelShaer_Paint);
+                        trackBar1_reset();
+                        labelSRM.Text = "Section resistance moment : " + Beam.MaxMomentom;
+                        labelSCM.Text = "Section crack moment : " + (Beam.beam.Mcr * Math.Pow(10, 6));
+                    }
                 }
             }
         }
@@ -322,8 +383,7 @@ namespace mainPorject
                 NewPointPositionFlag = true;
                 if (maxMomentPoint["moment"] >= Beam.MaxMomentom)
                 {
-                    timer1.Stop();
-                    MessageBox.Show("breakon");
+                    sendMassege("break mom|" + maxMomentPoint["moment"] + "|" + maxMomentPoint["xPos"]);
                 }
             }
         }
@@ -367,6 +427,43 @@ namespace mainPorject
         private void splitContainerMainLeftRight_Panel2_Paint(object sender, PaintEventArgs e)
         {
             beam_paint(sender, e, new Point(trackBar1.Left + 10, trackBar1.Top - 30), new Size(trackBar1.Width - 20, 5), Brushes.White);
+        }
+
+
+        public void sendMassege(string str)
+        {
+            string[] words = str.Split('|');
+            if (words[0].ToLower() == "break def")
+            {
+                timer1.Stop();
+                double def = double.Parse(words[1]);
+                double pos = double.Parse(words[2]);                
+                MessageBox.Show(" break of deflection \ndeflection = " + def + "\nat position = " + pos, "break", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else if (words[0].ToLower() == "break mom")
+            {
+                timer1.Stop();
+                double mom = double.Parse(words[1]);
+                double pos = double.Parse(words[2]);
+                MessageBox.Show(" break of moment \nmoment = " + mom + "\nat position = " + pos, "break", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            timer1.Stop();
+            Beam.forces.AddAll(stack);
+            stack = new Forces(0,Beam.Length);
+            updateAll();
+        }
+
+        private void backToStartToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            StartGet();
+            setTestForce();
+            this.Visible = true;
         }
     }
 }

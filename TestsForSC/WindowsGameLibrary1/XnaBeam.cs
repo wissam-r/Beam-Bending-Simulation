@@ -249,10 +249,17 @@ namespace WindowsGameLibrary1
          }
          private void updateDiflection_Y()
          {
+             bool sent = false;
              for (int i = 0; i < points / 2; i++)
              {
-                 primitiveList[i * 2].Position.Y = (float)home.Beam.getDiflectionAt(i / accuracy) * multipler - (float)home.Beam.Height;
+                 float def = (float)home.Beam.getDiflectionAt(i / accuracy);
+                 primitiveList[i * 2].Position.Y = def * multipler - (float)home.Beam.Height;
                  primitiveList[i * 2 + 1].Position.Y = primitiveList[i * 2].Position.Y + (float)home.Beam.Height;
+                 if (def < home.Beam.MaxDiflection && !sent)
+                 {
+                     home.sendMassege("break def|" + def + "|" + i / accuracy/100);
+                     sent = true;
+                 }
              }
          }
          private void updateDiflection_X()

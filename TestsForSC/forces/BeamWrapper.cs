@@ -32,13 +32,9 @@ namespace mainPorject
         }
         public double Length{get{return beam.L;}}
 
-        public double MaxMomentom
-        {
-            get
-            {
-                return beam.ERM;
-            }
-        }
+        public double MaxMomentom { get { return beam.ERM; } }
+        public double MaxDiflection { get { return -beam.L / 240.0; } }
+
         public double E
         {
             get
