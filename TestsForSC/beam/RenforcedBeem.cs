@@ -337,7 +337,17 @@ namespace beam
         //Momentum-resistant
         abstract protected double calcRM();
 
-        abstract public double getERM();
+        abstract public double ERM
+        {
+            set;
+            get;
+        }
+
+        abstract public double Mcr
+        {
+            set;
+            get;
+        }
 
         abstract public String getFailureWay();
 
