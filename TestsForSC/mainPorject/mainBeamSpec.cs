@@ -457,7 +457,7 @@ namespace mainPorject
         //Fields
         private void Height_NumberChanged(Control control, double num)
         {
-            BeamHeight = num;
+            BeamHeight = num /10;
             labelPanelHeight.Text = BeamHeight.ToString();
         }
 
@@ -469,7 +469,7 @@ namespace mainPorject
 
         private void Width_NumberChanged(Control control, double num)
         {
-            BeamWidth = num;
+            BeamWidth = num/10;
             labelpanelWidth.Text = BeamWidth.ToString();
         }
 
@@ -481,13 +481,13 @@ namespace mainPorject
 
         private void userControl_BasicSpec1_Diameter2Changed(Control sender, double number)
         {
-            RenforcementDiameter2 = number;
+            RenforcementDiameter2 = number/10;
             panel1.Invalidate();
         }
 
         private void Diameter_NumberChanged(Control control, double num)
         {
-            RenforcementDiameter = num;
+            RenforcementDiameter = num/10;
             panel1.Invalidate();
         }
 
@@ -499,19 +499,19 @@ namespace mainPorject
 
         private void A_NumberChanged(Control control, double num)
         {
-            RenforcementA = num;
+            RenforcementA = num/10;
             panel1.Invalidate();
         }
 
         private void userControl_AdvancedSpec1_A2Changed(Control sender, double number)
         {
-            RenforcementA2 = number;
+            RenforcementA2 = number/10;
             panel1.Invalidate();
         }
 
         private void userControl_AdvancedSpec1_AChanged(Control sender, double number)
         {
-            RenforcementA = number;
+            RenforcementA = number/10;
             panel1.Invalidate();
         }
         #endregion
@@ -1256,7 +1256,7 @@ namespace mainPorject
                                                             BeamLength,
                                                             BeamWidth,
                                                             userControl_BasicSpec1.Diameter,
-                                                            userControl_BasicSpec1.Diameter2,
+                                                            userControl_BasicSpec1.Diameter2 ,
                                                             userControl_BasicSpec1.Count,
                                                             userControl_BasicSpec1.Count2);
                     }
@@ -1264,7 +1264,7 @@ namespace mainPorject
                     {
                         beamWrap.beam = new SinReinRecBeem(BeamHeight,
                                                            BeamLength,
-                                                           BeamWidth,
+                                                           BeamWidth * 10,
                                                            userControl_BasicSpec1.Diameter,
                                                            userControl_BasicSpec1.Count);
                     }

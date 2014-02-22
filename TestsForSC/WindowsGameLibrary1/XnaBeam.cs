@@ -84,6 +84,8 @@ namespace WindowsGameLibrary1
             if (home.Beam != null)
             {
                 initializeWorld();
+                multipler = (int)home.Beam.Length / 10;
+                accuracy = 200 / (int)home.Beam.Length + 1;
             }
             base.Initialize();
         }
@@ -148,7 +150,7 @@ namespace WindowsGameLibrary1
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
          protected override void Draw(GameTime gameTime)
          {
-             GraphicsDevice.Clear(Color.LightGray);
+             GraphicsDevice.Clear(Color.Gray);
              if (ShouldDraw)
              {
                  
@@ -271,7 +273,7 @@ namespace WindowsGameLibrary1
                  primitiveList[i * 2 + 1].Position.Y = primitiveList[i * 2].Position.Y + height;
                  if (def < home.Beam.MaxDiflection && !sent)
                  {
-                     home.sendMassege("break def|" + def + "|" + i / accuracy/100);
+                     home.sendMassege("break def|" + def + "|" + i / accuracy);
                      sent = true;
                  }
              }

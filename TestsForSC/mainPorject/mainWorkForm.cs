@@ -42,6 +42,24 @@ namespace mainPorject
             //this.Disposed += new EventHandler(form_Disposed);
         }
 
+        private void mainWorkForm_Load(object sender, EventArgs e)
+        {
+            if (StartGet())
+            {
+                setTestForce();
+                this.Visible = true;
+            }
+            else
+            {
+                this.Close();
+                return;
+            }
+            trackBar2.Value = 5;
+            //game = new WindowsGameLibrary1.XnaBeam(this);
+            //game.Run();
+        }
+
+        #region other form
         private bool StartGet()
         {
             using (Start mbs = new Start())
@@ -169,6 +187,7 @@ namespace mainPorject
                 }
             }
         }
+        #endregion
 
         #region XnaFormable
 
@@ -202,6 +221,26 @@ namespace mainPorject
         public BeamWrapper Beam
         {
             get { return beam; }
+        }
+
+        public void sendMassege(string str)
+        {
+            string[] words = str.Split('|');
+            if (words[0].ToLower() == "break def")
+            {
+                timer1.Stop();
+                double def = double.Parse(words[1]);
+                double pos = double.Parse(words[2]);
+                MessageBox.Show(" break of deflection \ndeflection = " + def + "\nat position = " + pos / 100, "break", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else if (words[0].ToLower() == "break mom")
+            {
+                timer1.Stop();
+                double mom = double.Parse(words[1]);
+                double pos = double.Parse(words[2]);
+                MessageBox.Show(" break of moment \nmoment = " + mom + "\nat position = " + pos / 100, "break", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
         }
         #endregion
 
@@ -276,7 +315,7 @@ namespace mainPorject
             Graphics g = panel.CreateGraphics();
             beam_paint(sender,e,new Point((int)gap,lineY_panelMomentom),new System.Drawing.Size(panel.Width-2*gap,3),Brushes.White);
             //g.DrawLine(Pens.Black, (int)gap, lineY_panelMomentom, panel.Width - (int)gap, lineY_panelMomentom);
-            g.DrawLines(Pens.Plum, pointsMomentom);
+            g.DrawLines(Pens.SkyBlue, pointsMomentom);
         }
 
         private Point[] poitsShear;
@@ -352,7 +391,7 @@ namespace mainPorject
             Graphics g = panel.CreateGraphics();
             beam_paint(sender, e, new Point(gap, lineY_panelShaer), new System.Drawing.Size(panel.Width - 2 * gap, 3), Brushes.White);
             //g.DrawLine(Pens.Black, (int)gap, lineY_panelShaer, panel.Width - (int)gap, lineY_panelShaer);
-            g.DrawLines(Pens.Olive, poitsShear);
+            g.DrawLines(Pens.SkyBlue, poitsShear);
         }
         #endregion
 
@@ -377,11 +416,11 @@ namespace mainPorject
             double scaler = (double)trackBar1.Value / trackBar1.Maximum;
             double position = scaler * Beam.Length;
             labelPos.Text = position.ToString();
-            labelMoment.Text = "Momentom : " + Beam.getMomentomAt(position).ToString();
-            labelShare.Text = "Shaer : " + Beam.getShaer(position).ToString();
-            labelDef.Text = "Defliction : " + Beam.getDiflectionAt(position).ToString();
-            label7.Text = "Test force 1 = ";
-            label8.Text = "Test force 2 = ";
+            labelMoment.Text = "(N.m) Momentom : " + Beam.getMomentomAt(position).ToString();
+            labelShare.Text = "(N) Shaer : " + Beam.getShaer(position).ToString();
+            labelDef.Text = "(cm) Defliction : " + Beam.getDiflectionAt(position).ToString();
+            label7.Text = "(N) Test force 1 = ";
+            label8.Text = "(N) Test force 2 = ";
             if (Beam.F1 != null && stack != null)
             {
                 label7.Text += Math.Abs( stack[Beam.F1.Position].Power);
@@ -391,14 +430,15 @@ namespace mainPorject
                 label8.Text += Math.Abs( stack[Beam.F2.Position].Power);
             }
         }
+
+        private void splitContainerMainLeftRight_Panel2_Paint(object sender, PaintEventArgs e)
+        {
+            beam_paint(sender, e, new Point(trackBar1.Left + 10, trackBar1.Top - 30), new Size(trackBar1.Width - 20, 5), Brushes.White);
+            beamSupport_paint(sender, e, new Point(trackBar1.Left + 10, trackBar1.Top - 30), new Size(trackBar1.Width - 20, 5), new Size(25, 25), true);
+        }
         #endregion
 
-        private void testForcesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            timer1.Stop();
-            setTestForce();            
-        }
-
+        #region fast buttons
         private void button1_Click(object sender, EventArgs e)
         {
             timer1.Start();
@@ -448,6 +488,21 @@ namespace mainPorject
             timer1.Stop();
             Clear();
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            timer1.Stop();
+            Beam.forces.AddAll(stack);
+            stack = new Forces(0, Beam.Length);
+            updateAll();
+        }
+
+        private void trackBar2_ValueChanged(object sender, EventArgs e)
+        {
+            timer1.Interval = trackBar2.Value * 100;
+            label4.Text = 2000f / timer1.Interval + "";
+        }
+
         private void Clear()
         {
             if (stack != null)
@@ -467,40 +522,13 @@ namespace mainPorject
             updateData();
             NewPointPositionFlag = true;
         }
+        #endregion
 
-        private void splitContainerMainLeftRight_Panel2_Paint(object sender, PaintEventArgs e)
-        {
-            beam_paint(sender, e, new Point(trackBar1.Left + 10, trackBar1.Top - 30), new Size(trackBar1.Width - 20, 5), Brushes.White);
-            beamSupport_paint(sender, e, new Point(trackBar1.Left + 10, trackBar1.Top - 30), new Size(trackBar1.Width - 20, 5), new Size(25, 25), true);
-        }
-
-
-        public void sendMassege(string str)
-        {
-            string[] words = str.Split('|');
-            if (words[0].ToLower() == "break def")
-            {
-                timer1.Stop();
-                double def = double.Parse(words[1]);
-                double pos = double.Parse(words[2]);                
-                MessageBox.Show(" break of deflection \ndeflection = " + def + "\nat position = " + pos, "break", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else if (words[0].ToLower() == "break mom")
-            {
-                timer1.Stop();
-                double mom = double.Parse(words[1]);
-                double pos = double.Parse(words[2]);
-                MessageBox.Show(" break of moment \nmoment = " + mom + "\nat position = " + pos, "break", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-
-        }
-
-        private void button5_Click(object sender, EventArgs e)
+        #region menu
+        private void testForcesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             timer1.Stop();
-            Beam.forces.AddAll(stack);
-            stack = new Forces(0,Beam.Length);
-            updateAll();
+            setTestForce();
         }
 
         private void backToStartToolStripMenuItem_Click(object sender, EventArgs e)
@@ -515,29 +543,7 @@ namespace mainPorject
             }
             this.Visible = true;
         }
-
-        private void trackBar2_ValueChanged(object sender, EventArgs e)
-        {
-            timer1.Interval = trackBar2.Value * 100;
-            label4.Text = 1000f/timer1.Interval + "";
-        }
-
-        private void mainWorkForm_Load(object sender, EventArgs e)
-        {
-            if (StartGet())
-            {
-                setTestForce();
-                this.Visible = true;
-            }
-            else
-            {
-                this.Close();
-                return;
-            }
-            trackBar2.Value = 5;
-            //game = new WindowsGameLibrary1.XnaBeam(this);
-            //game.Run();
-        }
+        #endregion
     }
 }
 

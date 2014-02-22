@@ -267,7 +267,7 @@ namespace mainPorject
         }
         private void textBoxHieght_NumberChanged(Control control, double num)
         {
-            Height = num;
+            Height = num/10;
             if (checkForZero(control, errorProviderHeight, Height))
             {
                 errorProviderHeight.Clear();
@@ -311,7 +311,7 @@ namespace mainPorject
         }
         private void textBoxWidth_NumberChanged(Control control, double num)
         {
-            Width = num;
+            Width = num/10;
             if (checkWidthDiameterCount())
             {
                 errorProviderWidth.Clear();
@@ -377,7 +377,7 @@ namespace mainPorject
         }
         private void textBoxDiameter_NumberChanged(Control control, double num)
         {
-            Diameter = num;
+            Diameter = num/10;
             if (checkWidthDiameterCount())
             {
                 errorProviderWidth.Clear();
@@ -405,7 +405,7 @@ namespace mainPorject
         }
         private void textBoxDiameter2_NumberChanged(Control control, double num)
         {
-            Diameter2 = num;
+            Diameter2 = num/10;
             if (checkWidthDiameterCount2())
             {
                 errorProviderWidth.Clear();

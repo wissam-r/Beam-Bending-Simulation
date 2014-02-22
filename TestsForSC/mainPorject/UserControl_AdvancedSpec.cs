@@ -318,7 +318,7 @@ namespace mainPorject
         }
         private void textBoxA_NumberChanged(Control control, double num)
         {
-            A = num;
+            A = num/10;
             if (checkForZero(control, errorProviderA, A))
             {
                 errorProviderA.Clear();
@@ -344,7 +344,7 @@ namespace mainPorject
         }
         private void textBoxA2_NumberChanged(Control control, double num)
         {
-            A2 = num;
+            A2 = num/10;
             if (checkForZero(control, errorProviderA2, A2))
             {
                 errorProviderA2.Clear();

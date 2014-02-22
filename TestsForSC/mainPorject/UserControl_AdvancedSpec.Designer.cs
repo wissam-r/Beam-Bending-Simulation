@@ -220,7 +220,7 @@
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(70, 29);
             this.label16.TabIndex = 41;
-            this.label16.Text = "(cm)";
+            this.label16.Text = "(mm)";
             this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // textBoxA
@@ -267,7 +267,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(70, 31);
             this.label5.TabIndex = 45;
-            this.label5.Text = "(cm)";
+            this.label5.Text = "(mm)";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // textBoxA2

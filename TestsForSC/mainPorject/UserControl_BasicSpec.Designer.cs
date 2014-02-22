@@ -88,7 +88,7 @@
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(40, 29);
             this.label12.TabIndex = 37;
-            this.label12.Text = "(cm)";
+            this.label12.Text = "(mm)";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label11
@@ -110,7 +110,7 @@
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(40, 29);
             this.label10.TabIndex = 35;
-            this.label10.Text = "(cm)";
+            this.label10.Text = "(mm)";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // labelWidth
@@ -211,7 +211,7 @@
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(40, 29);
             this.label15.TabIndex = 41;
-            this.label15.Text = "(cm)";
+            this.label15.Text = "(mm)";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label8
@@ -272,7 +272,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(40, 29);
             this.label2.TabIndex = 45;
-            this.label2.Text = "(kN)";
+            this.label2.Text = "(N)";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanelBasic
@@ -425,7 +425,7 @@
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(40, 29);
             this.label9.TabIndex = 51;
-            this.label9.Text = "(cm)";
+            this.label9.Text = "(mm)";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // labelWeight
