@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TestForcesSpec));
             this.textBox_pos1 = new System.Windows.Forms.TextBox();
             this.textBoxPower1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -83,10 +84,13 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("groupBox1.BackgroundImage")));
             this.groupBox1.Controls.Add(this.textBox_pos1);
             this.groupBox1.Controls.Add(this.textBoxPower1);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(171, 85);
@@ -96,10 +100,13 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("groupBox2.BackgroundImage")));
             this.groupBox2.Controls.Add(this.textBox_pos2);
             this.groupBox2.Controls.Add(this.textBoxPower2);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.groupBox2.Location = new System.Drawing.Point(180, 3);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(171, 85);
@@ -162,6 +169,7 @@
             // 
             // panel1
             // 
+            this.panel1.BackgroundImage = global::mainPorject.Properties.Resources._1600x900_modified;
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.userControl_Forces2);
             this.panel1.Controls.Add(this.groupBox2);
@@ -177,6 +185,7 @@
             // 
             // userControl_Forces2
             // 
+            this.userControl_Forces2.BackColor = System.Drawing.Color.Transparent;
             this.userControl_Forces2.Location = new System.Drawing.Point(232, 103);
             this.userControl_Forces2.Name = "userControl_Forces2";
             this.userControl_Forces2.Size = new System.Drawing.Size(20, 62);
@@ -188,6 +197,7 @@
             // 
             // userControl_Forces1
             // 
+            this.userControl_Forces1.BackColor = System.Drawing.Color.Transparent;
             this.userControl_Forces1.Location = new System.Drawing.Point(55, 103);
             this.userControl_Forces1.Name = "userControl_Forces1";
             this.userControl_Forces1.Size = new System.Drawing.Size(20, 62);

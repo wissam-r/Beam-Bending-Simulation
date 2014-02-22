@@ -111,7 +111,7 @@
             this.label21.AutoSize = true;
             this.label21.Location = new System.Drawing.Point(125, 23);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(70, 13);
+            this.label21.Size = new System.Drawing.Size(67, 13);
             this.label21.TabIndex = 4;
             this.label21.Text = "start location";
             // 
@@ -120,7 +120,7 @@
             this.label20.AutoSize = true;
             this.label20.Location = new System.Drawing.Point(16, 23);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(78, 13);
+            this.label20.Size = new System.Drawing.Size(77, 13);
             this.label20.TabIndex = 3;
             this.label20.Text = "foce in newten";
             // 
@@ -191,7 +191,7 @@
             this.label18.AutoSize = true;
             this.label18.Location = new System.Drawing.Point(16, 16);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(78, 13);
+            this.label18.Size = new System.Drawing.Size(77, 13);
             this.label18.TabIndex = 2;
             this.label18.Text = "foce in newten";
             // 
@@ -291,9 +291,9 @@
             // 
             this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonOK.Location = new System.Drawing.Point(12, 459);
+            this.buttonOK.Location = new System.Drawing.Point(15, 492);
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Size = new System.Drawing.Size(100, 71);
+            this.buttonOK.Size = new System.Drawing.Size(97, 36);
             this.buttonOK.TabIndex = 2;
             this.buttonOK.Text = "OK";
             this.buttonOK.UseVisualStyleBackColor = true;
@@ -304,9 +304,9 @@
             // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonCancel.Location = new System.Drawing.Point(138, 459);
+            this.buttonCancel.Location = new System.Drawing.Point(138, 450);
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(101, 71);
+            this.buttonCancel.Size = new System.Drawing.Size(101, 36);
             this.buttonCancel.TabIndex = 3;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
@@ -353,7 +353,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(28, 372);
+            this.button1.Location = new System.Drawing.Point(27, 385);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(200, 39);
             this.button1.TabIndex = 50;
@@ -363,7 +363,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(138, 417);
+            this.button2.Location = new System.Drawing.Point(15, 450);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(101, 36);
             this.button2.TabIndex = 51;
@@ -373,7 +373,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(11, 417);
+            this.button3.Location = new System.Drawing.Point(138, 492);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(101, 36);
             this.button3.TabIndex = 51;
@@ -420,6 +420,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::mainPorject.Properties.Resources._1600x900_modified;
             this.ClientSize = new System.Drawing.Size(784, 542);
             this.ControlBox = false;
             this.Controls.Add(this.userControl_BasicSpec1);

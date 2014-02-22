@@ -32,6 +32,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newBeamToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.backToStartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.testForcesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -50,6 +51,10 @@
             this.labelMoment = new System.Windows.Forms.Label();
             this.labelDef = new System.Windows.Forms.Label();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.button6 = new System.Windows.Forms.Button();
+            this.labelSCM = new System.Windows.Forms.Label();
+            this.labelSRM = new System.Windows.Forms.Label();
             this.panelShaer = new System.Windows.Forms.Panel();
             this.labelMinShaer = new System.Windows.Forms.Label();
             this.labelMaxShaer = new System.Windows.Forms.Label();
@@ -58,11 +63,6 @@
             this.labelMaxMomentom = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.labelSRM = new System.Windows.Forms.Label();
-            this.labelSCM = new System.Windows.Forms.Label();
-            this.button6 = new System.Windows.Forms.Button();
-            this.backToStartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainSplitContainer)).BeginInit();
             this.MainSplitContainer.Panel1.SuspendLayout();
@@ -77,9 +77,9 @@
             this.splitContainerMainLeftRight.Panel2.SuspendLayout();
             this.splitContainerMainLeftRight.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            this.panel1.SuspendLayout();
             this.panelShaer.SuspendLayout();
             this.panelMomentom.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -111,6 +111,13 @@
             this.newBeamToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.newBeamToolStripMenuItem.Text = "New beam";
             this.newBeamToolStripMenuItem.Click += new System.EventHandler(this.newBeamToolStripMenuItem_Click);
+            // 
+            // backToStartToolStripMenuItem
+            // 
+            this.backToStartToolStripMenuItem.Name = "backToStartToolStripMenuItem";
+            this.backToStartToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.backToStartToolStripMenuItem.Text = "back to start";
+            this.backToStartToolStripMenuItem.Click += new System.EventHandler(this.backToStartToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
@@ -173,6 +180,7 @@
             // 
             // tableLayoutPanel1
             // 
+            this.tableLayoutPanel1.BackgroundImage = global::mainPorject.Properties.Resources._1600x900_modified;
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.button1, 0, 0);
@@ -254,8 +262,13 @@
             this.splitContainerMainLeftRight.Name = "splitContainerMainLeftRight";
             this.splitContainerMainLeftRight.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
+            // splitContainerMainLeftRight.Panel1
+            // 
+            this.splitContainerMainLeftRight.Panel1.BackgroundImage = global::mainPorject.Properties.Resources._1600x900_modified;
+            // 
             // splitContainerMainLeftRight.Panel2
             // 
+            this.splitContainerMainLeftRight.Panel2.BackgroundImage = global::mainPorject.Properties.Resources._1600x900_modified;
             this.splitContainerMainLeftRight.Panel2.Controls.Add(this.labelShare);
             this.splitContainerMainLeftRight.Panel2.Controls.Add(this.labelPos);
             this.splitContainerMainLeftRight.Panel2.Controls.Add(this.labelMoment);
@@ -269,6 +282,8 @@
             // labelShare
             // 
             this.labelShare.AutoSize = true;
+            this.labelShare.BackColor = System.Drawing.Color.Transparent;
+            this.labelShare.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.labelShare.Location = new System.Drawing.Point(48, 26);
             this.labelShare.Name = "labelShare";
             this.labelShare.Size = new System.Drawing.Size(35, 13);
@@ -278,6 +293,8 @@
             // labelPos
             // 
             this.labelPos.AutoSize = true;
+            this.labelPos.BackColor = System.Drawing.Color.Transparent;
+            this.labelPos.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.labelPos.Location = new System.Drawing.Point(3, 147);
             this.labelPos.Name = "labelPos";
             this.labelPos.Size = new System.Drawing.Size(35, 13);
@@ -287,6 +304,8 @@
             // labelMoment
             // 
             this.labelMoment.AutoSize = true;
+            this.labelMoment.BackColor = System.Drawing.Color.Transparent;
+            this.labelMoment.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.labelMoment.Location = new System.Drawing.Point(48, 5);
             this.labelMoment.Name = "labelMoment";
             this.labelMoment.Size = new System.Drawing.Size(35, 13);
@@ -296,6 +315,8 @@
             // labelDef
             // 
             this.labelDef.AutoSize = true;
+            this.labelDef.BackColor = System.Drawing.Color.Transparent;
+            this.labelDef.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.labelDef.Location = new System.Drawing.Point(48, 47);
             this.labelDef.Name = "labelDef";
             this.labelDef.Size = new System.Drawing.Size(35, 13);
@@ -304,6 +325,7 @@
             // 
             // trackBar1
             // 
+            this.trackBar1.BackColor = System.Drawing.SystemColors.ControlDark;
             this.trackBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.trackBar1.Location = new System.Drawing.Point(0, 118);
             this.trackBar1.Name = "trackBar1";
@@ -313,11 +335,58 @@
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             this.trackBar1.ValueChanged += new System.EventHandler(this.trackBar1_ValueChanged);
             // 
+            // panel1
+            // 
+            this.panel1.BackgroundImage = global::mainPorject.Properties.Resources._1600x900_modified;
+            this.panel1.Controls.Add(this.button6);
+            this.panel1.Controls.Add(this.labelSCM);
+            this.panel1.Controls.Add(this.labelSRM);
+            this.panel1.Location = new System.Drawing.Point(4, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(276, 118);
+            this.panel1.TabIndex = 2;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(156, 82);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.TabIndex = 1;
+            this.button6.Text = "Options";
+            this.button6.UseVisualStyleBackColor = true;
+            // 
+            // labelSCM
+            // 
+            this.labelSCM.AutoSize = true;
+            this.labelSCM.BackColor = System.Drawing.Color.Transparent;
+            this.labelSCM.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSCM.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.labelSCM.Location = new System.Drawing.Point(19, 40);
+            this.labelSCM.Name = "labelSCM";
+            this.labelSCM.Size = new System.Drawing.Size(138, 15);
+            this.labelSCM.TabIndex = 0;
+            this.labelSCM.Text = "Section crack moment : ";
+            // 
+            // labelSRM
+            // 
+            this.labelSRM.AutoSize = true;
+            this.labelSRM.BackColor = System.Drawing.Color.Transparent;
+            this.labelSRM.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSRM.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.labelSRM.Location = new System.Drawing.Point(19, 13);
+            this.labelSRM.Name = "labelSRM";
+            this.labelSRM.Size = new System.Drawing.Size(165, 15);
+            this.labelSRM.TabIndex = 0;
+            this.labelSRM.Text = "Section resistance moment : ";
+            // 
             // panelShaer
             // 
+            this.panelShaer.BackgroundImage = global::mainPorject.Properties.Resources._1600x900_modified;
             this.panelShaer.Controls.Add(this.labelMinShaer);
             this.panelShaer.Controls.Add(this.labelMaxShaer);
             this.panelShaer.Controls.Add(this.label2);
+            this.panelShaer.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.panelShaer.Location = new System.Drawing.Point(4, 127);
             this.panelShaer.Name = "panelShaer";
             this.panelShaer.Size = new System.Drawing.Size(276, 180);
@@ -326,6 +395,7 @@
             // labelMinShaer
             // 
             this.labelMinShaer.AutoSize = true;
+            this.labelMinShaer.BackColor = System.Drawing.Color.Transparent;
             this.labelMinShaer.Location = new System.Drawing.Point(84, 161);
             this.labelMinShaer.Name = "labelMinShaer";
             this.labelMinShaer.Size = new System.Drawing.Size(0, 13);
@@ -334,6 +404,7 @@
             // labelMaxShaer
             // 
             this.labelMaxShaer.AutoSize = true;
+            this.labelMaxShaer.BackColor = System.Drawing.Color.Transparent;
             this.labelMaxShaer.Location = new System.Drawing.Point(37, 169);
             this.labelMaxShaer.Name = "labelMaxShaer";
             this.labelMaxShaer.Size = new System.Drawing.Size(0, 13);
@@ -342,14 +413,16 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Location = new System.Drawing.Point(12, 15);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(75, 13);
+            this.label2.Size = new System.Drawing.Size(73, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "shaer diagram";
             // 
             // panelMomentom
             // 
+            this.panelMomentom.BackgroundImage = global::mainPorject.Properties.Resources._1600x900_modified;
             this.panelMomentom.Controls.Add(this.labelMaxMomentom);
             this.panelMomentom.Controls.Add(this.label1);
             this.panelMomentom.Location = new System.Drawing.Point(4, 313);
@@ -360,6 +433,7 @@
             // labelMaxMomentom
             // 
             this.labelMaxMomentom.AutoSize = true;
+            this.labelMaxMomentom.BackColor = System.Drawing.Color.Transparent;
             this.labelMaxMomentom.Location = new System.Drawing.Point(169, 13);
             this.labelMaxMomentom.Name = "labelMaxMomentom";
             this.labelMaxMomentom.Size = new System.Drawing.Size(0, 13);
@@ -368,9 +442,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label1.Location = new System.Drawing.Point(12, 13);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(141, 13);
+            this.label1.Size = new System.Drawing.Size(139, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "bending momentom diagram";
             // 
@@ -378,54 +454,11 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.button6);
-            this.panel1.Controls.Add(this.labelSCM);
-            this.panel1.Controls.Add(this.labelSRM);
-            this.panel1.Location = new System.Drawing.Point(4, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(276, 118);
-            this.panel1.TabIndex = 2;
-            // 
-            // labelSRM
-            // 
-            this.labelSRM.AutoSize = true;
-            this.labelSRM.Location = new System.Drawing.Point(19, 13);
-            this.labelSRM.Name = "labelSRM";
-            this.labelSRM.Size = new System.Drawing.Size(145, 13);
-            this.labelSRM.TabIndex = 0;
-            this.labelSRM.Text = "Section resistance moment : ";
-            // 
-            // labelSCM
-            // 
-            this.labelSCM.AutoSize = true;
-            this.labelSCM.Location = new System.Drawing.Point(19, 40);
-            this.labelSCM.Name = "labelSCM";
-            this.labelSCM.Size = new System.Drawing.Size(121, 13);
-            this.labelSCM.TabIndex = 0;
-            this.labelSCM.Text = "Section crack moment : ";
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(156, 82);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
-            this.button6.TabIndex = 1;
-            this.button6.Text = "button6";
-            this.button6.UseVisualStyleBackColor = true;
-            // 
-            // backToStartToolStripMenuItem
-            // 
-            this.backToStartToolStripMenuItem.Name = "backToStartToolStripMenuItem";
-            this.backToStartToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
-            this.backToStartToolStripMenuItem.Text = "back to start";
-            this.backToStartToolStripMenuItem.Click += new System.EventHandler(this.backToStartToolStripMenuItem_Click);
-            // 
             // mainWorkForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::mainPorject.Properties.Resources._1600x900;
             this.ClientSize = new System.Drawing.Size(784, 542);
             this.Controls.Add(this.MainSplitContainer);
             this.Controls.Add(this.statusStrip1);
@@ -449,12 +482,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMainLeftRight)).EndInit();
             this.splitContainerMainLeftRight.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.panelShaer.ResumeLayout(false);
             this.panelShaer.PerformLayout();
             this.panelMomentom.ResumeLayout(false);
             this.panelMomentom.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

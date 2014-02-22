@@ -64,8 +64,10 @@
             // 
             // panelAdvancedSpec
             // 
+            this.panelAdvancedSpec.BackColor = System.Drawing.Color.Transparent;
             this.panelAdvancedSpec.Controls.Add(this.tableLayoutPanel1);
             this.panelAdvancedSpec.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelAdvancedSpec.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.panelAdvancedSpec.Location = new System.Drawing.Point(0, 0);
             this.panelAdvancedSpec.Name = "panelAdvancedSpec";
             this.panelAdvancedSpec.Size = new System.Drawing.Size(252, 147);
@@ -307,29 +309,34 @@
             // Ring
             // 
             this.Ring.AutoSize = true;
+            this.Ring.BackColor = System.Drawing.Color.Transparent;
             this.Ring.Checked = true;
+            this.Ring.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.Ring.Location = new System.Drawing.Point(3, 153);
             this.Ring.Name = "Ring";
-            this.Ring.Size = new System.Drawing.Size(146, 17);
+            this.Ring.Size = new System.Drawing.Size(144, 17);
             this.Ring.TabIndex = 1;
             this.Ring.TabStop = true;
             this.Ring.Text = "Ring shape renforcement";
-            this.Ring.UseVisualStyleBackColor = true;
+            this.Ring.UseVisualStyleBackColor = false;
             // 
             // spiral
             // 
             this.spiral.AutoSize = true;
+            this.spiral.BackColor = System.Drawing.Color.Transparent;
+            this.spiral.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.spiral.Location = new System.Drawing.Point(3, 174);
             this.spiral.Name = "spiral";
-            this.spiral.Size = new System.Drawing.Size(151, 17);
+            this.spiral.Size = new System.Drawing.Size(148, 17);
             this.spiral.TabIndex = 1;
             this.spiral.Text = "Spiral shape renforcement";
-            this.spiral.UseVisualStyleBackColor = true;
+            this.spiral.UseVisualStyleBackColor = false;
             // 
             // UserControl_AdvancedSpec
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::mainPorject.Properties.Resources._1600x900_modified;
             this.Controls.Add(this.spiral);
             this.Controls.Add(this.Ring);
             this.Controls.Add(this.panelAdvancedSpec);
