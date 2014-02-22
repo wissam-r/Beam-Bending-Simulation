@@ -32,6 +32,7 @@ namespace WindowsGameLibrary1
         private int points;
         private VertexPositionColor[] primitiveList;
         private Vector3 leftSupportPos, rightSupportPos;
+        private Vector3 leftSupportSize, rightSupportSize;
         private Vector3 F1pos, F2pos;
         private short[] lineStripIndices;
 
@@ -173,16 +174,17 @@ namespace WindowsGameLibrary1
                                                                 );
                  }
                  spriteBatch.Begin();
+                 //int supportsize = (int)(home.Beam.Length / 100);
                  spriteBatch.Draw(leftSupport,
-                              new Vector2(leftSupportPos.X, leftSupportPos.Y),
+                              new Rectangle((int)leftSupportPos.X, (int)leftSupportPos.Y, (int)leftSupportSize.X, (int)leftSupportSize.Y),
                               Color.White);
                  spriteBatch.Draw(rightSupport,
-                              new Vector2(rightSupportPos.X, rightSupportPos.Y),
+                              new Rectangle((int)rightSupportPos.X, (int)rightSupportPos.Y, (int)rightSupportSize.X, (int)rightSupportSize.Y),
                               Color.White);
-                 if(home.Beam.F1 != null)
-                    spriteBatch.Draw(F1, new Vector2(F1pos.X, F1pos.Y), Color.White);
+                 if (home.Beam.F1 != null)
+                     spriteBatch.Draw(F1, new Vector2(F1pos.X, F1pos.Y), Color.White);
                  if (home.Beam.F2 != null)
-                    spriteBatch.Draw(F2, new Vector2(F2pos.X, F2pos.Y), Color.White);
+                     spriteBatch.Draw(F2, new Vector2(F2pos.X, F2pos.Y), Color.White);
                  spriteBatch.End();
              }
 
@@ -193,10 +195,11 @@ namespace WindowsGameLibrary1
          }
 
          #region vertices
+         float height;
          private void setVertices()
          {
              initializeWorld();
-             double height = home.Beam.Length / 16;
+             height = (float)home.Beam.Length / 20;
              points = (int)(home.Beam.Length * 2 * accuracy) + 2;
 
              primitiveList = new VertexPositionColor[points];
@@ -218,10 +221,21 @@ namespace WindowsGameLibrary1
              indexBuffer = new IndexBuffer(graphics.GraphicsDevice, typeof(short), lineStripIndices.Length, BufferUsage.WriteOnly);
              indexBuffer.SetData(lineStripIndices);
 
+             Vector3 size = new Vector3((float)home.Beam.Length / 16);
+             Vector3 temp;
              leftSupportPos = graphics.GraphicsDevice.Viewport.Project(primitiveList.First().Position, basicEffect.Projection, basicEffect.View, basicEffect.World);
-             leftSupportPos.X -= leftSupport.Width / 2;
+             temp = graphics.GraphicsDevice.Viewport.Project(primitiveList.First().Position + size, basicEffect.Projection, basicEffect.View, basicEffect.World);
+             leftSupportSize = temp - leftSupportPos;
+             leftSupportSize.X = Math.Abs(leftSupportSize.X) * 1.5f;
+             leftSupportSize.Y = Math.Abs(leftSupportSize.Y);
+             leftSupportPos.X -= leftSupportSize.X / 2;
+
              rightSupportPos = graphics.GraphicsDevice.Viewport.Project(primitiveList[points - 2].Position, basicEffect.Projection, basicEffect.View, basicEffect.World);
-             rightSupportPos.X -= rightSupport.Width / 2;
+             temp = graphics.GraphicsDevice.Viewport.Project(primitiveList[points - 2].Position + size, basicEffect.Projection, basicEffect.View, basicEffect.World);
+             rightSupportSize = temp - rightSupportPos;
+             rightSupportSize.X = Math.Abs(rightSupportSize.X)*0.9f;
+             rightSupportSize.Y = Math.Abs(rightSupportSize.Y);
+             rightSupportPos.X -= rightSupportSize.X / 2;
              
              ShouldDraw = true;
          }
@@ -253,8 +267,8 @@ namespace WindowsGameLibrary1
              for (int i = 0; i < points / 2; i++)
              {
                  float def = (float)home.Beam.getDiflectionAt(i / accuracy);
-                 primitiveList[i * 2].Position.Y = def * multipler - (float)home.Beam.Height;
-                 primitiveList[i * 2 + 1].Position.Y = primitiveList[i * 2].Position.Y + (float)home.Beam.Height;
+                 primitiveList[i * 2].Position.Y = def * multipler - height;
+                 primitiveList[i * 2 + 1].Position.Y = primitiveList[i * 2].Position.Y + height;
                  if (def < home.Beam.MaxDiflection && !sent)
                  {
                      home.sendMassege("break def|" + def + "|" + i / accuracy/100);
