@@ -57,5 +57,16 @@ namespace mainPorject
                 }                
             }
         }
+
+        private void Start_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(DialogResult == System.Windows.Forms.DialogResult.Cancel)
+                DialogResult = System.Windows.Forms.DialogResult.Abort;
+        }
+
+        private void Start_Load(object sender, EventArgs e)
+        {
+            DialogResult = System.Windows.Forms.DialogResult.None;
+        }
     }
 }

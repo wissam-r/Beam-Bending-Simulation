@@ -44,6 +44,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPgSR = new System.Windows.Forms.TabPage();
+            this.calcedFieldsSR = new DesignUI.calcedFields();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.radioBtnPartialDesign = new System.Windows.Forms.RadioButton();
@@ -57,10 +58,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtBoxAs_ = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.calcedFieldsDR = new DesignUI.calcedFields();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.calcedFieldsSR = new DesignUI.calcedFields();
-            this.calcedFieldsDR = new DesignUI.calcedFields();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -74,12 +74,10 @@
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.BackgroundImage = global::DesignUI.Properties.Resources._1600x900_modified;
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.tabControl1, 0, 1);
-            this.tableLayoutPanel1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
@@ -90,7 +88,6 @@
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.BackgroundImage = global::DesignUI.Properties.Resources._1600x900_modified;
             this.tableLayoutPanel2.ColumnCount = 3;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
@@ -122,7 +119,7 @@
             // 
             // txtBoxMu
             // 
-            this.txtBoxMu.Location = new System.Drawing.Point(31, 3);
+            this.txtBoxMu.Location = new System.Drawing.Point(30, 3);
             this.txtBoxMu.Name = "txtBoxMu";
             this.txtBoxMu.Size = new System.Drawing.Size(100, 20);
             this.txtBoxMu.TabIndex = 1;
@@ -130,7 +127,7 @@
             // 
             // txtBoxb
             // 
-            this.txtBoxb.Location = new System.Drawing.Point(31, 29);
+            this.txtBoxb.Location = new System.Drawing.Point(30, 29);
             this.txtBoxb.Name = "txtBoxb";
             this.txtBoxb.Size = new System.Drawing.Size(100, 20);
             this.txtBoxb.TabIndex = 2;
@@ -138,7 +135,7 @@
             // 
             // txtBoxfy
             // 
-            this.txtBoxfy.Location = new System.Drawing.Point(31, 55);
+            this.txtBoxfy.Location = new System.Drawing.Point(30, 55);
             this.txtBoxfy.Name = "txtBoxfy";
             this.txtBoxfy.Size = new System.Drawing.Size(100, 20);
             this.txtBoxfy.TabIndex = 3;
@@ -146,7 +143,7 @@
             // 
             // txtBoxfc
             // 
-            this.txtBoxfc.Location = new System.Drawing.Point(31, 81);
+            this.txtBoxfc.Location = new System.Drawing.Point(30, 81);
             this.txtBoxfc.Name = "txtBoxfc";
             this.txtBoxfc.Size = new System.Drawing.Size(100, 20);
             this.txtBoxfc.TabIndex = 4;
@@ -155,11 +152,10 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.BackColor = System.Drawing.Color.Transparent;
             this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label7.Location = new System.Drawing.Point(3, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(22, 26);
+            this.label7.Size = new System.Drawing.Size(21, 26);
             this.label7.TabIndex = 21;
             this.label7.Text = "Mu";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -167,11 +163,10 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label2.Location = new System.Drawing.Point(3, 26);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(22, 26);
+            this.label2.Size = new System.Drawing.Size(21, 26);
             this.label2.TabIndex = 22;
             this.label2.Text = "b";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -179,11 +174,10 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label3.Location = new System.Drawing.Point(3, 52);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(22, 26);
+            this.label3.Size = new System.Drawing.Size(21, 26);
             this.label3.TabIndex = 20;
             this.label3.Text = "fy";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -191,11 +185,10 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label4.Location = new System.Drawing.Point(3, 78);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(22, 28);
+            this.label4.Size = new System.Drawing.Size(21, 28);
             this.label4.TabIndex = 18;
             this.label4.Text = "f\'c";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -203,11 +196,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(137, 0);
+            this.label1.Location = new System.Drawing.Point(136, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 26);
+            this.label1.Size = new System.Drawing.Size(57, 26);
             this.label1.TabIndex = 21;
             this.label1.Text = "kNm";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -215,37 +207,32 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.BackColor = System.Drawing.Color.Transparent;
             this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label8.Location = new System.Drawing.Point(137, 26);
+            this.label8.Location = new System.Drawing.Point(136, 26);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(56, 26);
+            this.label8.Size = new System.Drawing.Size(57, 26);
             this.label8.TabIndex = 23;
             this.label8.Text = "mm";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.BackColor = System.Drawing.Color.Transparent;
             this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label9.Location = new System.Drawing.Point(137, 52);
+            this.label9.Location = new System.Drawing.Point(136, 52);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(56, 26);
+            this.label9.Size = new System.Drawing.Size(57, 26);
             this.label9.TabIndex = 24;
             this.label9.Text = "MPa";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.BackColor = System.Drawing.Color.Transparent;
             this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label10.Location = new System.Drawing.Point(137, 78);
+            this.label10.Location = new System.Drawing.Point(136, 78);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(56, 28);
+            this.label10.Size = new System.Drawing.Size(57, 28);
             this.label10.TabIndex = 25;
             this.label10.Text = "MPa";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -274,12 +261,18 @@
             this.tabPgSR.Text = "SR";
             this.tabPgSR.UseVisualStyleBackColor = true;
             // 
+            // calcedFieldsSR
+            // 
+            this.calcedFieldsSR.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.calcedFieldsSR.Location = new System.Drawing.Point(3, 91);
+            this.calcedFieldsSR.Name = "calcedFieldsSR";
+            this.calcedFieldsSR.Size = new System.Drawing.Size(182, 83);
+            this.calcedFieldsSR.TabIndex = 9;
+            // 
             // groupBox1
             // 
-            this.groupBox1.BackgroundImage = global::DesignUI.Properties.Resources._1600x900_modified;
             this.groupBox1.Controls.Add(this.tableLayoutPanel4);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(182, 88);
@@ -321,9 +314,9 @@
             // radioBtnSDWMaxAs
             // 
             this.radioBtnSDWMaxAs.AutoSize = true;
-            this.radioBtnSDWMaxAs.Location = new System.Drawing.Point(3, 49);
+            this.radioBtnSDWMaxAs.Location = new System.Drawing.Point(3, 26);
             this.radioBtnSDWMaxAs.Name = "radioBtnSDWMaxAs";
-            this.radioBtnSDWMaxAs.Size = new System.Drawing.Size(160, 17);
+            this.radioBtnSDWMaxAs.Size = new System.Drawing.Size(158, 17);
             this.radioBtnSDWMaxAs.TabIndex = 8;
             this.radioBtnSDWMaxAs.Tag = "2";
             this.radioBtnSDWMaxAs.Text = "Section Design With Max As";
@@ -333,9 +326,9 @@
             // radioBtnSDWMinAs
             // 
             this.radioBtnSDWMinAs.AutoSize = true;
-            this.radioBtnSDWMinAs.Location = new System.Drawing.Point(3, 26);
+            this.radioBtnSDWMinAs.Location = new System.Drawing.Point(3, 49);
             this.radioBtnSDWMinAs.Name = "radioBtnSDWMinAs";
-            this.radioBtnSDWMinAs.Size = new System.Drawing.Size(157, 17);
+            this.radioBtnSDWMinAs.Size = new System.Drawing.Size(154, 17);
             this.radioBtnSDWMinAs.TabIndex = 7;
             this.radioBtnSDWMinAs.Tag = "1";
             this.radioBtnSDWMinAs.Text = "Section Design With Min As";
@@ -345,7 +338,6 @@
             // btnSRCalc
             // 
             this.btnSRCalc.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnSRCalc.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnSRCalc.Location = new System.Drawing.Point(3, 174);
             this.btnSRCalc.Name = "btnSRCalc";
             this.btnSRCalc.Size = new System.Drawing.Size(182, 25);
@@ -367,24 +359,20 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.BackgroundImage = global::DesignUI.Properties.Resources._1600x900_modified;
             this.groupBox2.Controls.Add(this.btnDRBcalc);
             this.groupBox2.Controls.Add(this.tableLayoutPanel3);
             this.groupBox2.Controls.Add(this.calcedFieldsDR);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.groupBox2.Location = new System.Drawing.Point(3, 3);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(182, 196);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Double Reinforcement Partial Design";
-            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
             // btnDRBcalc
             // 
             this.btnDRBcalc.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnDRBcalc.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnDRBcalc.Location = new System.Drawing.Point(3, 126);
             this.btnDRBcalc.Name = "btnDRBcalc";
             this.btnDRBcalc.Size = new System.Drawing.Size(176, 25);
@@ -436,14 +424,21 @@
             this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label6.Location = new System.Drawing.Point(147, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(26, 27);
+            this.label6.Size = new System.Drawing.Size(28, 27);
             this.label6.TabIndex = 2;
             this.label6.Text = "mm²";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // calcedFieldsDR
+            // 
+            this.calcedFieldsDR.Dock = System.Windows.Forms.DockStyle.Top;
+            this.calcedFieldsDR.Location = new System.Drawing.Point(3, 16);
+            this.calcedFieldsDR.Name = "calcedFieldsDR";
+            this.calcedFieldsDR.Size = new System.Drawing.Size(176, 83);
+            this.calcedFieldsDR.TabIndex = 6;
+            // 
             // button1
             // 
-            this.button1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.button1.Location = new System.Drawing.Point(7, 349);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
@@ -454,7 +449,6 @@
             // 
             // button2
             // 
-            this.button2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.button2.Location = new System.Drawing.Point(114, 349);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
@@ -463,34 +457,14 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // calcedFieldsSR
-            // 
-            this.calcedFieldsSR.BackgroundImage = global::DesignUI.Properties.Resources._1600x900_modified;
-            this.calcedFieldsSR.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.calcedFieldsSR.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.calcedFieldsSR.Location = new System.Drawing.Point(3, 91);
-            this.calcedFieldsSR.Name = "calcedFieldsSR";
-            this.calcedFieldsSR.Size = new System.Drawing.Size(182, 83);
-            this.calcedFieldsSR.TabIndex = 9;
-            // 
-            // calcedFieldsDR
-            // 
-            this.calcedFieldsDR.Dock = System.Windows.Forms.DockStyle.Top;
-            this.calcedFieldsDR.Location = new System.Drawing.Point(3, 16);
-            this.calcedFieldsDR.Name = "calcedFieldsDR";
-            this.calcedFieldsDR.Size = new System.Drawing.Size(176, 83);
-            this.calcedFieldsDR.TabIndex = 6;
-            // 
             // BeamDesignForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::DesignUI.Properties.Resources._1600x900_modified;
             this.ClientSize = new System.Drawing.Size(202, 372);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(208, 400);

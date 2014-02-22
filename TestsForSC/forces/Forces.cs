@@ -18,7 +18,47 @@ namespace forces
             forces.AddBefore(forces.Last, new DistributedBeamForce(weight/beamLength,0,beamLength,beamLength));
         }
 
+        public BeamForce this[double value]
+        {
+            get
+            {
+                foreach(BeamForce f in forces) 
+                {
+                    if (f is PointBaemForce)
+                    {
+                        if ((f as PointBaemForce).Position == value)
+                        {
+                            return f;
+                        }
+                    }
+                }
+                return null;
+            }
+        }
 
+        public BeamForce this[double value1, double value2]
+        {
+            get
+            {
+                foreach (BeamForce f in forces)
+                {
+                    if (f is DistributedBeamForce)
+                    {
+                        if ((f as DistributedBeamForce).Start == value1 &&
+                            (f as DistributedBeamForce).End == value2)
+                        {
+                            return f;
+                        }
+                    }
+                }
+                return null;
+            }
+        }
+
+        public BeamForce this[int value]
+        {
+            get { return forces.ElementAt(value); }
+        }
 
         public void Add(BeamForce item)
         {

@@ -71,7 +71,6 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="calcedFields.resx">
       <DependentUpon>calcedFields.cs</DependentUpon>
@@ -91,9 +90,6 @@
       <Project>{9EBE0A20-D466-45F3-90CC-803A6D0BF038}</Project>
       <Name>BeamDesign</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\1600x900 modified.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

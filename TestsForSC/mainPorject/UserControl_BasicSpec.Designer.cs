@@ -105,7 +105,6 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.BackColor = System.Drawing.Color.Transparent;
             this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label10.Location = new System.Drawing.Point(185, 20);
             this.label10.Name = "label10";
@@ -278,8 +277,6 @@
             // 
             // tableLayoutPanelBasic
             // 
-            this.tableLayoutPanelBasic.BackColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPanelBasic.BackgroundImage = global::mainPorject.Properties.Resources._1600x900_modified;
             this.tableLayoutPanelBasic.ColumnCount = 3;
             this.tableLayoutPanelBasic.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanelBasic.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -311,7 +308,6 @@
             this.tableLayoutPanelBasic.Controls.Add(this.labelWeight, 0, 8);
             this.tableLayoutPanelBasic.Controls.Add(this.label2, 2, 8);
             this.tableLayoutPanelBasic.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanelBasic.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.tableLayoutPanelBasic.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanelBasic.Name = "tableLayoutPanelBasic";
             this.tableLayoutPanelBasic.RowCount = 12;
@@ -445,7 +441,6 @@
             // 
             // panelBasicSpec
             // 
-            this.panelBasicSpec.BackgroundImage = global::mainPorject.Properties.Resources._1600x900_modified;
             this.panelBasicSpec.Controls.Add(this.checkBoxDouble);
             this.panelBasicSpec.Controls.Add(this.tableLayoutPanelBasic);
             this.panelBasicSpec.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -457,16 +452,14 @@
             // checkBoxDouble
             // 
             this.checkBoxDouble.AutoSize = true;
-            this.checkBoxDouble.BackColor = System.Drawing.Color.Transparent;
             this.checkBoxDouble.Checked = true;
             this.checkBoxDouble.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxDouble.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.checkBoxDouble.Location = new System.Drawing.Point(6, 313);
             this.checkBoxDouble.Name = "checkBoxDouble";
-            this.checkBoxDouble.Size = new System.Drawing.Size(119, 17);
+            this.checkBoxDouble.Size = new System.Drawing.Size(121, 17);
             this.checkBoxDouble.TabIndex = 1;
             this.checkBoxDouble.Text = "Double renforcemnt";
-            this.checkBoxDouble.UseVisualStyleBackColor = false;
+            this.checkBoxDouble.UseVisualStyleBackColor = true;
             this.checkBoxDouble.CheckedChanged += new System.EventHandler(this.checkBoxDouble_CheckedChanged);
             // 
             // errorProviderHeight

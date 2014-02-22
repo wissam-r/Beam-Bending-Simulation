@@ -26,6 +26,7 @@ namespace mainPorject
             extraInfo = MainSplitContainer.Panel2;
         }
         private Forces stack;
+        //private WindowsGameLibrary1.XnaBeam game;
         #endregion
 
         public mainWorkForm()
@@ -37,30 +38,33 @@ namespace mainPorject
             NewPointPositionFlag = false;
 
             this.Visible = false;
-            StartGet();
-            //getNewBeam();
-            setTestForce();
-            this.Visible = true;
+            //game = new WindowsGameLibrary1.XnaBeam(this);
+            //this.Disposed += new EventHandler(form_Disposed);
         }
 
-        private void StartGet()
+        private bool StartGet()
         {
             using (Start mbs = new Start())
             {
                 DialogResult result = mbs.ShowDialog(this);
                 if (result == System.Windows.Forms.DialogResult.OK)
                 {
-                    getNewBeam();
+                    return getNewBeam();
                 }
                 else if (result == System.Windows.Forms.DialogResult.Yes)
                 {
-                    getNewBeam(mbs);
+                    return getNewBeam(mbs);                    
                 }
+                else if (result == System.Windows.Forms.DialogResult.Abort)
+                {
+                    return false;
+                }
+                return true;
             }
             
         }
 
-        private void getNewBeam()
+        private bool getNewBeam()
         {
             using (mainBeamSpec mbs = new mainBeamSpec())
             {
@@ -77,10 +81,16 @@ namespace mainPorject
                     trackBar1_reset();
                     labelSRM.Text = "Section resistance moment : " + Beam.MaxMomentom;
                     labelSCM.Text = "Section crack moment : " + (Beam.beam.Mcr * Math.Pow(10,6));
+                    return true;
                 }
+                else if (result == System.Windows.Forms.DialogResult.Cancel && this.Beam == null)
+                {
+                    return false;
+                }
+                return true;
             }
         }
-        private void getNewBeam(Start str)
+        private bool getNewBeam(Start str)
         {
             if (str.isSingel)
             {
@@ -99,6 +109,11 @@ namespace mainPorject
                         trackBar1_reset();
                         labelSRM.Text = "Section resistance moment : " + Beam.MaxMomentom;
                         labelSCM.Text = "Section crack moment : " + (Beam.beam.Mcr * Math.Pow(10, 6));
+                        return true;
+                    }
+                    else if (result == System.Windows.Forms.DialogResult.Cancel && this.Beam == null)
+                    {
+                        return false;
                     }
                 }
             }
@@ -119,9 +134,15 @@ namespace mainPorject
                         trackBar1_reset();
                         labelSRM.Text = "Section resistance moment : " + Beam.MaxMomentom;
                         labelSCM.Text = "Section crack moment : " + (Beam.beam.Mcr * Math.Pow(10, 6));
+                        return true;
+                    }
+                    else if (result == System.Windows.Forms.DialogResult.Cancel && this.Beam == null)
+                    {
+                        return false;
                     }
                 }
             }
+            return true;
         }
 
         private void setTestForce()
@@ -247,7 +268,7 @@ namespace mainPorject
         {
             Control panel = (sender as Panel);
             Graphics g = panel.CreateGraphics();
-            beam_paint(sender,e,new Point((int)gap,lineY_panelMomentom),new System.Drawing.Size(panel.Width-2*gap,3),Brushes.Black);
+            beam_paint(sender,e,new Point((int)gap,lineY_panelMomentom),new System.Drawing.Size(panel.Width-2*gap,3),Brushes.White);
             //g.DrawLine(Pens.Black, (int)gap, lineY_panelMomentom, panel.Width - (int)gap, lineY_panelMomentom);
             g.DrawLines(Pens.Plum, pointsMomentom);
         }
@@ -323,7 +344,7 @@ namespace mainPorject
         {
             Control panel = (sender as Panel);
             Graphics g = panel.CreateGraphics();
-            beam_paint(sender, e, new Point(gap, lineY_panelShaer), new System.Drawing.Size(panel.Width - 2 * gap, 3), Brushes.Black);
+            beam_paint(sender, e, new Point(gap, lineY_panelShaer), new System.Drawing.Size(panel.Width - 2 * gap, 3), Brushes.White);
             //g.DrawLine(Pens.Black, (int)gap, lineY_panelShaer, panel.Width - (int)gap, lineY_panelShaer);
             g.DrawLines(Pens.Olive, poitsShear);
         }
@@ -353,6 +374,16 @@ namespace mainPorject
             labelMoment.Text = "Momentom : " + Beam.getMomentomAt(position).ToString();
             labelShare.Text = "Shaer : " + Beam.getShaer(position).ToString();
             labelDef.Text = "Defliction : " + Beam.getDiflectionAt(position).ToString();
+            label7.Text = "Test force 1 = ";
+            label8.Text = "Test force 2 = ";
+            if (Beam.F1 != null && stack != null)
+            {
+                label7.Text += Math.Abs( stack[Beam.F1.Position].Power);
+            }
+            if (Beam.F2 != null && stack != null)
+            {
+                label8.Text += Math.Abs( stack[Beam.F2.Position].Power);
+            }
         }
         #endregion
 
@@ -469,14 +500,37 @@ namespace mainPorject
         private void backToStartToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Visible = false;
-            StartGet();
-            setTestForce();
+            if (StartGet())
+                setTestForce();
+            else
+            {
+                this.Close();
+                return;
+            }
             this.Visible = true;
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
+        private void trackBar2_ValueChanged(object sender, EventArgs e)
         {
+            timer1.Interval = trackBar2.Value * 100;
+            label4.Text = 1000f/timer1.Interval + "";
+        }
 
+        private void mainWorkForm_Load(object sender, EventArgs e)
+        {
+            if (StartGet())
+            {
+                setTestForce();
+                this.Visible = true;
+            }
+            else
+            {
+                this.Close();
+                return;
+            }
+            trackBar2.Value = 5;
+            //game = new WindowsGameLibrary1.XnaBeam(this);
+            //game.Run();
         }
     }
 }

@@ -76,7 +76,7 @@
             this.label26.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label26.Location = new System.Drawing.Point(147, 26);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(26, 26);
+            this.label26.Size = new System.Drawing.Size(28, 26);
             this.label26.TabIndex = 32;
             this.label26.Text = "mm";
             this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -109,7 +109,7 @@
             this.label25.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label25.Location = new System.Drawing.Point(147, 0);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(26, 26);
+            this.label25.Size = new System.Drawing.Size(28, 26);
             this.label25.TabIndex = 26;
             this.label25.Text = "mm";
             this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -197,7 +197,7 @@
             this.label15.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label15.Location = new System.Drawing.Point(147, 52);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(26, 27);
+            this.label15.Size = new System.Drawing.Size(28, 27);
             this.label15.TabIndex = 33;
             this.label15.Text = "mm²";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;

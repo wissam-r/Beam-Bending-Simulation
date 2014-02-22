@@ -88,6 +88,14 @@ namespace forces
         {
             get { return beamLength; }
         }
+        public double Start
+        {
+            get { return start; }
+        }
+        public double End
+        {
+            get { return end; }
+        }
 
         private ReflectionBeamForce ReflectionLeft;
         private void calculReflectionLeft()

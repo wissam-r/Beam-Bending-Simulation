@@ -204,14 +204,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\sssss.jpg" />
     <None Include="Resources\RightSupportWhite.png" />
     <None Include="Resources\arrow.png" />
-    <None Include="Resources\1600x900.jpg" />
-    <None Include="Resources\2-20-2014 23-05-01.jpg" />
-    <None Include="Resources\asas.png" />
-    <None Include="Resources\2-22-2014 01-37-34.jpg" />
-    <None Include="Resources\1600x900 modified.jpg" />
     <Content Include="Resources\LeftSupport.png" />
     <None Include="Resources\LeftSupportWhite.png" />
     <Content Include="Resources\RightSupport.png" />

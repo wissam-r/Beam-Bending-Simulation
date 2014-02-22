@@ -52,7 +52,6 @@
             this.labelDef = new System.Windows.Forms.Label();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button6 = new System.Windows.Forms.Button();
             this.labelSCM = new System.Windows.Forms.Label();
             this.labelSRM = new System.Windows.Forms.Label();
             this.panelShaer = new System.Windows.Forms.Panel();
@@ -63,6 +62,13 @@
             this.labelMaxMomentom = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.trackBar2 = new System.Windows.Forms.TrackBar();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainSplitContainer)).BeginInit();
             this.MainSplitContainer.Panel1.SuspendLayout();
@@ -80,6 +86,7 @@
             this.panel1.SuspendLayout();
             this.panelShaer.SuspendLayout();
             this.panelMomentom.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -175,12 +182,11 @@
             // 
             this.splitContainerMainLeft.Panel2.Controls.Add(this.splitContainerMainLeftRight);
             this.splitContainerMainLeft.Size = new System.Drawing.Size(488, 496);
-            this.splitContainerMainLeft.SplitterDistance = 84;
+            this.splitContainerMainLeft.SplitterDistance = 67;
             this.splitContainerMainLeft.TabIndex = 0;
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.BackgroundImage = global::mainPorject.Properties.Resources._1600x900_modified;
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.button1, 0, 0);
@@ -188,16 +194,23 @@
             this.tableLayoutPanel1.Controls.Add(this.button3, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.button4, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.button5, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.trackBar2, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.label4, 0, 6);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 5;
+            this.tableLayoutPanel1.RowCount = 9;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(84, 496);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 117F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 53F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(67, 496);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // button1
@@ -205,7 +218,7 @@
             this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button1.Location = new System.Drawing.Point(3, 3);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(78, 93);
+            this.button1.Size = new System.Drawing.Size(61, 45);
             this.button1.TabIndex = 0;
             this.button1.Text = "start";
             this.button1.UseVisualStyleBackColor = true;
@@ -214,9 +227,9 @@
             // button2
             // 
             this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button2.Location = new System.Drawing.Point(3, 102);
+            this.button2.Location = new System.Drawing.Point(3, 54);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(78, 93);
+            this.button2.Size = new System.Drawing.Size(61, 45);
             this.button2.TabIndex = 1;
             this.button2.Text = "pause";
             this.button2.UseVisualStyleBackColor = true;
@@ -225,9 +238,9 @@
             // button3
             // 
             this.button3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button3.Location = new System.Drawing.Point(3, 201);
+            this.button3.Location = new System.Drawing.Point(3, 105);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(78, 93);
+            this.button3.Size = new System.Drawing.Size(61, 45);
             this.button3.TabIndex = 2;
             this.button3.Text = "new test";
             this.button3.UseVisualStyleBackColor = true;
@@ -236,9 +249,9 @@
             // button4
             // 
             this.button4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button4.Location = new System.Drawing.Point(3, 300);
+            this.button4.Location = new System.Drawing.Point(3, 156);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(78, 93);
+            this.button4.Size = new System.Drawing.Size(61, 45);
             this.button4.TabIndex = 3;
             this.button4.Text = "clear";
             this.button4.UseVisualStyleBackColor = true;
@@ -247,9 +260,9 @@
             // button5
             // 
             this.button5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button5.Location = new System.Drawing.Point(3, 399);
+            this.button5.Location = new System.Drawing.Point(3, 207);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(78, 94);
+            this.button5.Size = new System.Drawing.Size(61, 45);
             this.button5.TabIndex = 4;
             this.button5.Text = "stop";
             this.button5.UseVisualStyleBackColor = true;
@@ -262,29 +275,24 @@
             this.splitContainerMainLeftRight.Name = "splitContainerMainLeftRight";
             this.splitContainerMainLeftRight.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // splitContainerMainLeftRight.Panel1
-            // 
-            this.splitContainerMainLeftRight.Panel1.BackgroundImage = global::mainPorject.Properties.Resources._1600x900_modified;
-            // 
             // splitContainerMainLeftRight.Panel2
             // 
-            this.splitContainerMainLeftRight.Panel2.BackgroundImage = global::mainPorject.Properties.Resources._1600x900_modified;
+            this.splitContainerMainLeftRight.Panel2.Controls.Add(this.label8);
+            this.splitContainerMainLeftRight.Panel2.Controls.Add(this.label7);
             this.splitContainerMainLeftRight.Panel2.Controls.Add(this.labelShare);
             this.splitContainerMainLeftRight.Panel2.Controls.Add(this.labelPos);
             this.splitContainerMainLeftRight.Panel2.Controls.Add(this.labelMoment);
             this.splitContainerMainLeftRight.Panel2.Controls.Add(this.labelDef);
             this.splitContainerMainLeftRight.Panel2.Controls.Add(this.trackBar1);
             this.splitContainerMainLeftRight.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainerMainLeftRight_Panel2_Paint);
-            this.splitContainerMainLeftRight.Size = new System.Drawing.Size(400, 496);
-            this.splitContainerMainLeftRight.SplitterDistance = 329;
+            this.splitContainerMainLeftRight.Size = new System.Drawing.Size(417, 496);
+            this.splitContainerMainLeftRight.SplitterDistance = 246;
             this.splitContainerMainLeftRight.TabIndex = 0;
             // 
             // labelShare
             // 
             this.labelShare.AutoSize = true;
-            this.labelShare.BackColor = System.Drawing.Color.Transparent;
-            this.labelShare.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelShare.Location = new System.Drawing.Point(48, 26);
+            this.labelShare.Location = new System.Drawing.Point(34, 121);
             this.labelShare.Name = "labelShare";
             this.labelShare.Size = new System.Drawing.Size(35, 13);
             this.labelShare.TabIndex = 3;
@@ -293,9 +301,7 @@
             // labelPos
             // 
             this.labelPos.AutoSize = true;
-            this.labelPos.BackColor = System.Drawing.Color.Transparent;
-            this.labelPos.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelPos.Location = new System.Drawing.Point(3, 147);
+            this.labelPos.Location = new System.Drawing.Point(2, 230);
             this.labelPos.Name = "labelPos";
             this.labelPos.Size = new System.Drawing.Size(35, 13);
             this.labelPos.TabIndex = 4;
@@ -304,9 +310,7 @@
             // labelMoment
             // 
             this.labelMoment.AutoSize = true;
-            this.labelMoment.BackColor = System.Drawing.Color.Transparent;
-            this.labelMoment.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelMoment.Location = new System.Drawing.Point(48, 5);
+            this.labelMoment.Location = new System.Drawing.Point(34, 100);
             this.labelMoment.Name = "labelMoment";
             this.labelMoment.Size = new System.Drawing.Size(35, 13);
             this.labelMoment.TabIndex = 5;
@@ -315,9 +319,7 @@
             // labelDef
             // 
             this.labelDef.AutoSize = true;
-            this.labelDef.BackColor = System.Drawing.Color.Transparent;
-            this.labelDef.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelDef.Location = new System.Drawing.Point(48, 47);
+            this.labelDef.Location = new System.Drawing.Point(34, 142);
             this.labelDef.Name = "labelDef";
             this.labelDef.Size = new System.Drawing.Size(35, 13);
             this.labelDef.TabIndex = 6;
@@ -325,11 +327,10 @@
             // 
             // trackBar1
             // 
-            this.trackBar1.BackColor = System.Drawing.SystemColors.ControlDark;
             this.trackBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.trackBar1.Location = new System.Drawing.Point(0, 118);
+            this.trackBar1.Location = new System.Drawing.Point(0, 201);
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(400, 45);
+            this.trackBar1.Size = new System.Drawing.Size(417, 45);
             this.trackBar1.TabIndex = 2;
             this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.None;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
@@ -337,56 +338,38 @@
             // 
             // panel1
             // 
-            this.panel1.BackgroundImage = global::mainPorject.Properties.Resources._1600x900_modified;
-            this.panel1.Controls.Add(this.button6);
+            this.panel1.Controls.Add(this.label6);
+            this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.labelSCM);
             this.panel1.Controls.Add(this.labelSRM);
             this.panel1.Location = new System.Drawing.Point(4, 3);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(276, 118);
             this.panel1.TabIndex = 2;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(156, 82);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
-            this.button6.TabIndex = 1;
-            this.button6.Text = "Options";
-            this.button6.UseVisualStyleBackColor = true;
             // 
             // labelSCM
             // 
             this.labelSCM.AutoSize = true;
-            this.labelSCM.BackColor = System.Drawing.Color.Transparent;
-            this.labelSCM.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSCM.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.labelSCM.Location = new System.Drawing.Point(19, 40);
             this.labelSCM.Name = "labelSCM";
-            this.labelSCM.Size = new System.Drawing.Size(138, 15);
+            this.labelSCM.Size = new System.Drawing.Size(121, 13);
             this.labelSCM.TabIndex = 0;
             this.labelSCM.Text = "Section crack moment : ";
             // 
             // labelSRM
             // 
             this.labelSRM.AutoSize = true;
-            this.labelSRM.BackColor = System.Drawing.Color.Transparent;
-            this.labelSRM.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSRM.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.labelSRM.Location = new System.Drawing.Point(19, 13);
             this.labelSRM.Name = "labelSRM";
-            this.labelSRM.Size = new System.Drawing.Size(165, 15);
+            this.labelSRM.Size = new System.Drawing.Size(145, 13);
             this.labelSRM.TabIndex = 0;
             this.labelSRM.Text = "Section resistance moment : ";
             // 
             // panelShaer
             // 
-            this.panelShaer.BackgroundImage = global::mainPorject.Properties.Resources._1600x900_modified;
             this.panelShaer.Controls.Add(this.labelMinShaer);
             this.panelShaer.Controls.Add(this.labelMaxShaer);
             this.panelShaer.Controls.Add(this.label2);
-            this.panelShaer.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.panelShaer.Location = new System.Drawing.Point(4, 127);
             this.panelShaer.Name = "panelShaer";
             this.panelShaer.Size = new System.Drawing.Size(276, 180);
@@ -395,7 +378,6 @@
             // labelMinShaer
             // 
             this.labelMinShaer.AutoSize = true;
-            this.labelMinShaer.BackColor = System.Drawing.Color.Transparent;
             this.labelMinShaer.Location = new System.Drawing.Point(84, 161);
             this.labelMinShaer.Name = "labelMinShaer";
             this.labelMinShaer.Size = new System.Drawing.Size(0, 13);
@@ -404,7 +386,6 @@
             // labelMaxShaer
             // 
             this.labelMaxShaer.AutoSize = true;
-            this.labelMaxShaer.BackColor = System.Drawing.Color.Transparent;
             this.labelMaxShaer.Location = new System.Drawing.Point(37, 169);
             this.labelMaxShaer.Name = "labelMaxShaer";
             this.labelMaxShaer.Size = new System.Drawing.Size(0, 13);
@@ -413,16 +394,14 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Location = new System.Drawing.Point(12, 15);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(73, 13);
+            this.label2.Size = new System.Drawing.Size(75, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "shaer diagram";
             // 
             // panelMomentom
             // 
-            this.panelMomentom.BackgroundImage = global::mainPorject.Properties.Resources._1600x900_modified;
             this.panelMomentom.Controls.Add(this.labelMaxMomentom);
             this.panelMomentom.Controls.Add(this.label1);
             this.panelMomentom.Location = new System.Drawing.Point(4, 313);
@@ -433,7 +412,6 @@
             // labelMaxMomentom
             // 
             this.labelMaxMomentom.AutoSize = true;
-            this.labelMaxMomentom.BackColor = System.Drawing.Color.Transparent;
             this.labelMaxMomentom.Location = new System.Drawing.Point(169, 13);
             this.labelMaxMomentom.Name = "labelMaxMomentom";
             this.labelMaxMomentom.Size = new System.Drawing.Size(0, 13);
@@ -442,11 +420,9 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label1.Location = new System.Drawing.Point(12, 13);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(139, 13);
+            this.label1.Size = new System.Drawing.Size(141, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "bending momentom diagram";
             // 
@@ -454,11 +430,77 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // trackBar2
+            // 
+            this.trackBar2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.trackBar2.Location = new System.Drawing.Point(3, 328);
+            this.trackBar2.Minimum = 1;
+            this.trackBar2.Name = "trackBar2";
+            this.trackBar2.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.trackBar2.Size = new System.Drawing.Size(61, 111);
+            this.trackBar2.TabIndex = 5;
+            this.trackBar2.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.trackBar2.Value = 1;
+            this.trackBar2.ValueChanged += new System.EventHandler(this.trackBar2_ValueChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 255);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(58, 39);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "update speed per second";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 300);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(35, 13);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "label4";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(19, 67);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(147, 13);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "Strength  Reduction Factor : ";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(19, 92);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(128, 13);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "Maximum reinforcement :";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(49, 34);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(35, 13);
+            this.label7.TabIndex = 7;
+            this.label7.Text = "label7";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(49, 63);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(35, 13);
+            this.label8.TabIndex = 8;
+            this.label8.Text = "label8";
+            // 
             // mainWorkForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::mainPorject.Properties.Resources._1600x900;
             this.ClientSize = new System.Drawing.Size(784, 542);
             this.Controls.Add(this.MainSplitContainer);
             this.Controls.Add(this.statusStrip1);
@@ -466,6 +508,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "mainWorkForm";
             this.Text = "mainWorkForm";
+            this.Load += new System.EventHandler(this.mainWorkForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.MainSplitContainer.Panel1.ResumeLayout(false);
@@ -477,6 +520,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMainLeft)).EndInit();
             this.splitContainerMainLeft.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.splitContainerMainLeftRight.Panel2.ResumeLayout(false);
             this.splitContainerMainLeftRight.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerMainLeftRight)).EndInit();
@@ -488,6 +532,7 @@
             this.panelShaer.PerformLayout();
             this.panelMomentom.ResumeLayout(false);
             this.panelMomentom.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -527,7 +572,13 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label labelSCM;
         private System.Windows.Forms.Label labelSRM;
-        private System.Windows.Forms.Button button6;
         private System.Windows.Forms.ToolStripMenuItem backToStartToolStripMenuItem;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TrackBar trackBar2;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
     }
 }
