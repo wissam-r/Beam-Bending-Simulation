@@ -200,16 +200,15 @@
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 9;
+            this.tableLayoutPanel1.RowCount = 8;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 117F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 53F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 41F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 17F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 188F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(67, 496);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
@@ -218,7 +217,7 @@
             this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button1.Location = new System.Drawing.Point(3, 3);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(61, 45);
+            this.button1.Size = new System.Drawing.Size(61, 44);
             this.button1.TabIndex = 0;
             this.button1.Text = "start";
             this.button1.UseVisualStyleBackColor = true;
@@ -227,9 +226,9 @@
             // button2
             // 
             this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button2.Location = new System.Drawing.Point(3, 54);
+            this.button2.Location = new System.Drawing.Point(3, 53);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(61, 45);
+            this.button2.Size = new System.Drawing.Size(61, 44);
             this.button2.TabIndex = 1;
             this.button2.Text = "pause";
             this.button2.UseVisualStyleBackColor = true;
@@ -238,9 +237,9 @@
             // button3
             // 
             this.button3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button3.Location = new System.Drawing.Point(3, 105);
+            this.button3.Location = new System.Drawing.Point(3, 103);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(61, 45);
+            this.button3.Size = new System.Drawing.Size(61, 44);
             this.button3.TabIndex = 2;
             this.button3.Text = "new test";
             this.button3.UseVisualStyleBackColor = true;
@@ -249,9 +248,9 @@
             // button4
             // 
             this.button4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button4.Location = new System.Drawing.Point(3, 156);
+            this.button4.Location = new System.Drawing.Point(3, 153);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(61, 45);
+            this.button4.Size = new System.Drawing.Size(61, 44);
             this.button4.TabIndex = 3;
             this.button4.Text = "clear";
             this.button4.UseVisualStyleBackColor = true;
@@ -260,9 +259,9 @@
             // button5
             // 
             this.button5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button5.Location = new System.Drawing.Point(3, 207);
+            this.button5.Location = new System.Drawing.Point(3, 203);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(61, 45);
+            this.button5.Size = new System.Drawing.Size(61, 44);
             this.button5.TabIndex = 4;
             this.button5.Text = "stop";
             this.button5.UseVisualStyleBackColor = true;
@@ -433,11 +432,12 @@
             // trackBar2
             // 
             this.trackBar2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.trackBar2.Location = new System.Drawing.Point(3, 328);
+            this.trackBar2.Location = new System.Drawing.Point(3, 311);
+            this.trackBar2.Maximum = 20;
             this.trackBar2.Minimum = 1;
             this.trackBar2.Name = "trackBar2";
             this.trackBar2.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.trackBar2.Size = new System.Drawing.Size(61, 111);
+            this.trackBar2.Size = new System.Drawing.Size(61, 182);
             this.trackBar2.TabIndex = 5;
             this.trackBar2.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.trackBar2.Value = 1;
@@ -446,7 +446,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 255);
+            this.label3.Location = new System.Drawing.Point(3, 250);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(58, 39);
             this.label3.TabIndex = 6;
@@ -455,7 +455,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 300);
+            this.label4.Location = new System.Drawing.Point(3, 291);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 13);
             this.label4.TabIndex = 7;

@@ -81,6 +81,8 @@ namespace mainPorject
                     trackBar1_reset();
                     labelSRM.Text = "Section resistance moment : " + Beam.MaxMomentom;
                     labelSCM.Text = "Section crack moment : " + (Beam.beam.Mcr * Math.Pow(10,6));
+                    label5.Text = "Strength Reduction Factor : " + (Beam.beam.Teta);
+                    label6.Text = "Maximum reinforcement : " + (Beam.beam.AsMax);
                     return true;
                 }
                 else if (result == System.Windows.Forms.DialogResult.Cancel && this.Beam == null)
@@ -109,6 +111,8 @@ namespace mainPorject
                         trackBar1_reset();
                         labelSRM.Text = "Section resistance moment : " + Beam.MaxMomentom;
                         labelSCM.Text = "Section crack moment : " + (Beam.beam.Mcr * Math.Pow(10, 6));
+                        label5.Text = "Strength Reduction Factor : " + (Beam.beam.Teta);
+                        label6.Text = "Maximum reinforcement : " + (Beam.beam.AsMax);
                         return true;
                     }
                     else if (result == System.Windows.Forms.DialogResult.Cancel && this.Beam == null)
@@ -134,6 +138,8 @@ namespace mainPorject
                         trackBar1_reset();
                         labelSRM.Text = "Section resistance moment : " + Beam.MaxMomentom;
                         labelSCM.Text = "Section crack moment : " + (Beam.beam.Mcr * Math.Pow(10, 6));
+                        label5.Text = "Strength Reduction Factor : " + (Beam.beam.Teta);
+                        label6.Text = "Maximum reinforcement : " + (Beam.beam.AsMax);
                         return true;
                     }
                     else if (result == System.Windows.Forms.DialogResult.Cancel && this.Beam == null)
