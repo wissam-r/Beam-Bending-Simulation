@@ -39,9 +39,9 @@
             // trackBar1
             // 
             this.trackBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.trackBar1.Location = new System.Drawing.Point(0, 76);
+            this.trackBar1.Location = new System.Drawing.Point(0, 73);
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(533, 42);
+            this.trackBar1.Size = new System.Drawing.Size(533, 45);
             this.trackBar1.TabIndex = 0;
             this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.None;
             // 
@@ -85,6 +85,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::mainPorject.Properties.Resources._1600x900_modified22;
             this.Controls.Add(this.labelShare);
             this.Controls.Add(this.labelPos);
             this.Controls.Add(this.labelMoment);

@@ -118,16 +118,31 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="1600x900 modified22" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1600x900 modified22.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="asas" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\asas.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="1600x900 modified" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1600x900 modified.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RightSupport" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RightSupport.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="2-20-2014 23-05-01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\2-20-2014 23-05-01.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="LeftSupport" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LeftSupport.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="LeftSupportWhite" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LeftSupportWhite.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="RightSupport" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\RightSupport.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="RightSupportWhite" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RightSupportWhite.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="1600x900" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1600x900.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
