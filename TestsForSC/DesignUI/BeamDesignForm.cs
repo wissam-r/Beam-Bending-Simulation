@@ -65,6 +65,7 @@ namespace DesignUI
                             this.calcedFieldsSR.txtBoxAs.Text = d.AreaS.ToString();
                             this.calcedFieldsSR.txtBoxd.Text = d.D.ToString(); break;
                     }
+                    button1.Enabled = true;
                 }
                 catch (Exception ex)
                 {
@@ -82,6 +83,7 @@ namespace DesignUI
                     this.calcedFieldsDR.txtBoxAs.Text = b.AreaS.ToString();
                     this.calcedFieldsDR.txtBoxd.Text = b.D.ToString();
                     this.txtBoxAs_.Text = b.AreaS_.ToString();
+                    button1.Enabled = true;
                 }
                 catch (Exception ex)
                 {

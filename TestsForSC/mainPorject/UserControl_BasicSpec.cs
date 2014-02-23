@@ -139,14 +139,14 @@ namespace mainPorject
         }
         private void initializeValues()
         {
-            textBoxDiameter.Text = "2.5";
-            textBoxHieght.Text = "55";
+            textBoxDiameter.Text = "25";
+            textBoxHieght.Text = "550";
             textBoxLength.Text = "2";
             textBoxWeight.Text = "1000";
-            textBoxWidth.Text = "25";
+            textBoxWidth.Text = "250";
             numericUpDownCount.Value = 3;
-            textBoxDiameter2.Text = "1";
-            numericUpDownCount2.Value = 1;
+            textBoxDiameter2.Text = "25";
+            numericUpDownCount2.Value = 3;
         }
         #endregion
 

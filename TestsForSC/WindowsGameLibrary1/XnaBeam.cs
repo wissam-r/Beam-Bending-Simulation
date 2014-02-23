@@ -84,7 +84,7 @@ namespace WindowsGameLibrary1
             if (home.Beam != null)
             {
                 initializeWorld();
-                multipler = (int)home.Beam.Length / 10;
+                multipler = (int)home.Beam.Length / 5;
                 accuracy = 200 / (int)home.Beam.Length + 1;
             }
             base.Initialize();
@@ -201,7 +201,7 @@ namespace WindowsGameLibrary1
          private void setVertices()
          {
              initializeWorld();
-             height = (float)home.Beam.Length / 20;
+             height = (float)home.Beam.Length / 10;
              points = (int)(home.Beam.Length * 2 * accuracy) + 2;
 
              primitiveList = new VertexPositionColor[points];

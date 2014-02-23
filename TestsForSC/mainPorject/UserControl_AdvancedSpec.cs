@@ -124,8 +124,8 @@ namespace mainPorject
         }
         private void initializeValues()
         {
-            textBoxA.Text = "5";
-            textBoxA2.Text = "5";
+            textBoxA.Text = "50";
+            textBoxA2.Text = "50";
             textBoxEs.Text = "210000";
             textBoxFc.Text = "40";
             textBoxFs.Text = "400";

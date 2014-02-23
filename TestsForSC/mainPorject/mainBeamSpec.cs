@@ -1264,7 +1264,7 @@ namespace mainPorject
                     {
                         beamWrap.beam = new SinReinRecBeem(BeamHeight,
                                                            BeamLength,
-                                                           BeamWidth * 10,
+                                                           BeamWidth ,
                                                            userControl_BasicSpec1.Diameter,
                                                            userControl_BasicSpec1.Count);
                     }

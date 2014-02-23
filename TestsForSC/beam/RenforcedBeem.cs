@@ -228,7 +228,7 @@ namespace beam
             }
             else
             {
-                MessageBox.Show("enterd");
+               // MessageBox.Show("enterd");
                 //getTheCorrectY();
                 if (choese == 1)
 

@@ -223,9 +223,9 @@
             this.panel1.Controls.Add(this.labelpanelWidth);
             this.panel1.Controls.Add(this.labelPanelHeight);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(254, 0);
+            this.panel1.Location = new System.Drawing.Point(260, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(530, 542);
+            this.panel1.Size = new System.Drawing.Size(530, 548);
             this.panel1.TabIndex = 1;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -293,7 +293,7 @@
                         | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonOK.Location = new System.Drawing.Point(12, 459);
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Size = new System.Drawing.Size(100, 71);
+            this.buttonOK.Size = new System.Drawing.Size(100, 77);
             this.buttonOK.TabIndex = 2;
             this.buttonOK.Text = "OK";
             this.buttonOK.UseVisualStyleBackColor = true;
@@ -306,7 +306,7 @@
                         | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonCancel.Location = new System.Drawing.Point(138, 459);
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(101, 71);
+            this.buttonCancel.Size = new System.Drawing.Size(101, 77);
             this.buttonCancel.TabIndex = 3;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
@@ -431,6 +431,9 @@
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelForces);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximumSize = new System.Drawing.Size(800, 580);
+            this.MinimumSize = new System.Drawing.Size(800, 580);
             this.Name = "mainBeamSpec";
             this.ShowIcon = false;
             this.Text = "mainBeamSpec";

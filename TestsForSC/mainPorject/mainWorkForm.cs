@@ -97,10 +97,10 @@ namespace mainPorject
                     updateShaerPoints();
                     panelShaer.Paint += new PaintEventHandler(panelShaer_Paint);
                     trackBar1_reset();
-                    labelSRM.Text = "Section resistance moment : " + Beam.MaxMomentom;
-                    labelSCM.Text = "Section crack moment : " + (Beam.beam.Mcr * Math.Pow(10,6));
-                    label5.Text = "Strength Reduction Factor : " + (Beam.beam.Teta);
-                    label6.Text = "Maximum reinforcement : " + (Beam.beam.AsMax);
+                    labelSRM.Text = "Section resistance moment : " + Math.Round(Beam.MaxMomentom,5);
+                    labelSCM.Text = "Section crack moment : " + Math.Round(Beam.beam.Mcr * Math.Pow(10,6),5);
+                    label5.Text = "Strength Reduction Factor : " + Math.Round(Beam.beam.Teta,5);
+                    label6.Text = "Maximum reinforcement : " + Math.Round(Beam.beam.AsMax,5);
                     return true;
                 }
                 else if (result == System.Windows.Forms.DialogResult.Cancel && this.Beam == null)
@@ -127,10 +127,10 @@ namespace mainPorject
                         updateShaerPoints();
                         panelShaer.Paint += new PaintEventHandler(panelShaer_Paint);
                         trackBar1_reset();
-                        labelSRM.Text = "Section resistance moment : " + Beam.MaxMomentom;
-                        labelSCM.Text = "Section crack moment : " + (Beam.beam.Mcr * Math.Pow(10, 6));
-                        label5.Text = "Strength Reduction Factor : " + (Beam.beam.Teta);
-                        label6.Text = "Maximum reinforcement : " + (Beam.beam.AsMax);
+                        labelSRM.Text = "Section resistance moment : " + Math.Round(Beam.MaxMomentom, 5);
+                        labelSCM.Text = "Section crack moment : " + Math.Round(Beam.beam.Mcr * Math.Pow(10, 6), 5);
+                        label5.Text = "Strength Reduction Factor : " + Math.Round(Beam.beam.Teta, 5);
+                        label6.Text = "Maximum reinforcement : " + Math.Round(Beam.beam.AsMax, 5);
                         return true;
                     }
                     else if (result == System.Windows.Forms.DialogResult.Cancel && this.Beam == null)
@@ -154,10 +154,10 @@ namespace mainPorject
                         updateShaerPoints();
                         panelShaer.Paint += new PaintEventHandler(panelShaer_Paint);
                         trackBar1_reset();
-                        labelSRM.Text = "Section resistance moment : " + Beam.MaxMomentom;
-                        labelSCM.Text = "Section crack moment : " + (Beam.beam.Mcr * Math.Pow(10, 6));
-                        label5.Text = "Strength Reduction Factor : " + (Beam.beam.Teta);
-                        label6.Text = "Maximum reinforcement : " + (Beam.beam.AsMax);
+                        labelSRM.Text = "Section resistance moment : " + Math.Round(Beam.MaxMomentom, 5);
+                        labelSCM.Text = "Section crack moment : " + Math.Round(Beam.beam.Mcr * Math.Pow(10, 6), 5);
+                        label5.Text = "Strength Reduction Factor : " + Math.Round(Beam.beam.Teta, 5);
+                        label6.Text = "Maximum reinforcement : " + Math.Round(Beam.beam.AsMax, 5);
                         return true;
                     }
                     else if (result == System.Windows.Forms.DialogResult.Cancel && this.Beam == null)
@@ -231,14 +231,14 @@ namespace mainPorject
                 timer1.Stop();
                 double def = double.Parse(words[1]);
                 double pos = double.Parse(words[2]);
-                MessageBox.Show(" break of deflection \ndeflection = " + def + "\nat position = " + pos / 100, "break", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(" out of service by deflection \ndeflection = " + def + "\nat position = " + pos / 100+ "(m)", "out of servic", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else if (words[0].ToLower() == "break mom")
             {
                 timer1.Stop();
                 double mom = double.Parse(words[1]);
                 double pos = double.Parse(words[2]);
-                MessageBox.Show(" break of moment \nmoment = " + mom + "\nat position = " + pos / 100, "break", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(" break of moment \nmoment = " + mom + "\nat position = " + pos / 100 + "(m)\n" + Beam.beam.getFailureWay(), "break", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
         }
@@ -304,7 +304,7 @@ namespace mainPorject
                 maxMomentPoint.Remove("yPos");
                 maxMomentPoint.Add("yPos", pointsMomentom[(int)maxMomentPoint["atIndex"]].Y);
             }
-            labelMaxMomentom.Text = maxMomentPoint["moment"].ToString();
+            labelMaxMomentom.Text = Math.Round( maxMomentPoint["moment"],5).ToString();
             labelMaxMomentom.Left = (int)(maxMomentPoint["xPos"] - labelMaxMomentom.Width / 2);
             labelMaxMomentom.Top = (int)(maxMomentPoint["yPos"] + gap);
             panelMomentom.Invalidate();
@@ -377,10 +377,10 @@ namespace mainPorject
                 minShaerPoint.Remove("yPos");
                 minShaerPoint.Add("yPos", poitsShear[(int)minShaerPoint["atIndex"]].Y);
             }
-            labelMaxShaer.Text = maxShaerPoint["shaer"].ToString();
+            labelMaxShaer.Text = Math.Round( maxShaerPoint["shaer"],5).ToString();
             labelMaxShaer.Left = (int)(maxShaerPoint["xPos"]);
             labelMaxShaer.Top = (int)(maxShaerPoint["yPos"] - gap - labelMaxShaer.Height);
-            labelMinShaer.Text = minShaerPoint["shaer"].ToString();
+            labelMinShaer.Text = Math.Round( minShaerPoint["shaer"],5).ToString();
             labelMinShaer.Left = (int)(minShaerPoint["xPos"] - labelMinShaer.Width);
             labelMinShaer.Top = (int)(minShaerPoint["yPos"] + gap);
             panelShaer.Invalidate();
@@ -416,18 +416,22 @@ namespace mainPorject
             double scaler = (double)trackBar1.Value / trackBar1.Maximum;
             double position = scaler * Beam.Length;
             labelPos.Text = position.ToString();
-            labelMoment.Text = "(N.m) Momentom : " + Beam.getMomentomAt(position).ToString();
-            labelShare.Text = "(N) Shaer : " + Beam.getShaer(position).ToString();
-            labelDef.Text = "(cm) Defliction : " + Beam.getDiflectionAt(position).ToString();
+            labelMoment.Text = "(N.m) Momentom : " +Math.Round( Beam.getMomentomAt(position),5).ToString();
+            labelShare.Text = "(N) Shaer : " + Math.Round( Beam.getShaer(position),5).ToString();
+            labelDef.Text = "(cm) Defliction : " +Math.Round( Beam.getDiflectionAt(position),5).ToString();
             label7.Text = "(N) Test force 1 = ";
             label8.Text = "(N) Test force 2 = ";
             if (Beam.F1 != null && stack != null)
             {
-                label7.Text += Math.Abs( stack[Beam.F1.Position].Power);
+                PointBaemForce temp = stack[Beam.F1.Position] as PointBaemForce;
+                if(temp != null)
+                    label7.Text += Math.Round(Math.Abs(temp.Power),5);
             }
             if (Beam.F2 != null && stack != null)
             {
-                label8.Text += Math.Abs( stack[Beam.F2.Position].Power);
+                PointBaemForce temp = stack[Beam.F2.Position] as PointBaemForce;
+                if (temp != null)
+                    label8.Text += Math.Round(Math.Abs(temp.Power),5);
             }
         }
 

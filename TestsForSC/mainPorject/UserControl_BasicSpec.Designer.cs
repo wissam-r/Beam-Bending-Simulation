@@ -153,7 +153,7 @@
             this.textBoxWidth.Name = "textBoxWidth";
             this.textBoxWidth.Size = new System.Drawing.Size(108, 20);
             this.textBoxWidth.TabIndex = 2;
-            this.textBoxWidth.Text = "25.";
+            this.textBoxWidth.Text = "250.";
             this.textBoxWidth.Click += new System.EventHandler(this.textBoxFocus_Enter);
             this.textBoxWidth.TextChanged += new System.EventHandler(this.textBoxWidth_TextChanged);
             this.textBoxWidth.Enter += new System.EventHandler(this.textBoxFocus_Enter);
@@ -181,7 +181,7 @@
             this.textBoxHieght.Name = "textBoxHieght";
             this.textBoxHieght.Size = new System.Drawing.Size(108, 20);
             this.textBoxHieght.TabIndex = 0;
-            this.textBoxHieght.Text = "55.";
+            this.textBoxHieght.Text = "550.";
             this.textBoxHieght.Click += new System.EventHandler(this.textBoxFocus_Enter);
             this.textBoxHieght.TextChanged += new System.EventHandler(this.textBoxHieght_TextChanged);
             this.textBoxHieght.Enter += new System.EventHandler(this.textBoxFocus_Enter);
@@ -243,7 +243,7 @@
             this.textBoxDiameter.Name = "textBoxDiameter";
             this.textBoxDiameter.Size = new System.Drawing.Size(108, 20);
             this.textBoxDiameter.TabIndex = 3;
-            this.textBoxDiameter.Text = "2.5.";
+            this.textBoxDiameter.Text = "25.";
             this.textBoxDiameter.Click += new System.EventHandler(this.textBoxFocus_Enter);
             this.textBoxDiameter.TextChanged += new System.EventHandler(this.textBoxDiameter_TextChanged);
             this.textBoxDiameter.Enter += new System.EventHandler(this.textBoxFocus_Enter);

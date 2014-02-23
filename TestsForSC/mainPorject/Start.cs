@@ -33,24 +33,24 @@ namespace mainPorject
                 DialogResult result = mbs.ShowDialog(this);
                 if (result == System.Windows.Forms.DialogResult.OK)
                 {
-                    width = double.Parse(mbs.txtBoxb.Text) / 10;
+                    width = double.Parse(mbs.txtBoxb.Text);
                     fs = double.Parse(mbs.txtBoxfy.Text);
                     fc = double.Parse(mbs.txtBoxfc.Text);
                     if (mbs.tabControl1.SelectedTab == mbs.tabPgSR)
                     {
                         isSingel = true;
-                        height = double.Parse(mbs.calcedFieldsSR.txtBoxh.Text) / 10;
-                        a = double.Parse(mbs.calcedFieldsSR.txtBoxa.Text) / 10;
-                        As = double.Parse(mbs.calcedFieldsSR.txtBoxAs.Text) / 100;
+                        height = double.Parse(mbs.calcedFieldsSR.txtBoxh.Text);
+                        a = double.Parse(mbs.calcedFieldsSR.txtBoxa.Text);
+                        As = double.Parse(mbs.calcedFieldsSR.txtBoxAs.Text);
                     }
                     else
                     {
                         isSingel = false;
-                        height = double.Parse(mbs.calcedFieldsDR.txtBoxh.Text) / 10;
-                        a = double.Parse(mbs.calcedFieldsDR.txtBoxa.Text) / 10;
+                        height = double.Parse(mbs.calcedFieldsDR.txtBoxh.Text) ;
+                        a = double.Parse(mbs.calcedFieldsDR.txtBoxa.Text) ;
                         al = a;
-                        As = double.Parse(mbs.calcedFieldsDR.txtBoxa.Text) / 100;
-                        Asl = double.Parse(mbs.txtBoxAs_.Text) / 100;
+                        As = double.Parse(mbs.calcedFieldsDR.txtBoxa.Text);
+                        Asl = double.Parse(mbs.txtBoxAs_.Text);
                     }
                     DialogResult = System.Windows.Forms.DialogResult.Yes;
                     this.Close();
