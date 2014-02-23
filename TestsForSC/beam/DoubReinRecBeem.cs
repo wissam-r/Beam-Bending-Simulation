@@ -100,11 +100,11 @@ namespace beam
         {
             get { return eRM; }
         }
-        public double Teta
+        override public double Teta
         {
             get { return teta; }
         }
-        public double AsMax
+        override public double AsMax
         {
             get { return asMax; }
         }

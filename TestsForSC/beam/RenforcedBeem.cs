@@ -349,7 +349,14 @@ namespace beam
             protected set;
             get;
         }
-
+        abstract public double Teta
+        {
+            get;
+        }
+        abstract public double AsMax
+        {
+            get;
+        }
         abstract public String getFailureWay();
 
         
