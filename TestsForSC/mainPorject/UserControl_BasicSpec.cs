@@ -19,6 +19,7 @@ namespace mainPorject
         }
 
         #region handelling
+        //handelling
         public delegate void NumberChangedHandler(Control sender, double number);
         public event NumberChangedHandler HeightChanged;
         protected virtual void OnHeightChanged(Control sender, double number)
@@ -120,7 +121,6 @@ namespace mainPorject
         {
             TextBox textBox = sender as TextBox;
             if (e.KeyCode == Keys.Enter){
-                //this.SelectNextControl(sender as Control,true,false,false,true);
                 this.SelectNextControl(sender as Control, true, true, true, true);
                 e.Handled = true;
                 e.SuppressKeyPress = true;
@@ -148,9 +148,16 @@ namespace mainPorject
             textBoxDiameter2.Text = "25";
             numericUpDownCount2.Value = 3;
         }
+        private void textBoxFocus_Enter(object sender, EventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            textBox.SelectAll();
+        }
+        //handelling end
         #endregion
 
         #region getters
+        //getters
         public double Height { get; private set; }
         public double Length { get; private set; }
         public double Width { get; private set; }
@@ -159,6 +166,9 @@ namespace mainPorject
         public double Weight { get; private set; }
         public int Count { get; private set; }
         public int Count2 { get; private set; }
+        /// <summary>
+        /// double renforcement is used or not
+        /// </summary>
         public bool DoubleChecked { get { return checkBoxDouble.Checked; } }
         public bool IsErrorFree()
         {
@@ -178,9 +188,11 @@ namespace mainPorject
                 return false;
             }
         }
+        //getters end
         #endregion
 
         #region setters
+        //setters
         public void setErrorWidth(string error)
         {
             setError(errorProviderWidth, textBoxWidth, error);
@@ -250,8 +262,11 @@ namespace mainPorject
         {
             if (wieght != null) { textBoxWeight.Text = wieght.ToString(); }
         }
+        //setters end
         #endregion
 
+        #region changing handeling
+        //changing handeling
         private void textBoxHieght_TextChanged(object sender, EventArgs e)
         {
             TextBox textBox = sender as TextBox;
@@ -459,7 +474,11 @@ namespace mainPorject
             if (DoubleCheckedChanged != null)
                 DoubleCheckedChanged(sender, e);
         }
+        //changing handeling end
+        #endregion
 
+        #region checking
+        //checking
         private bool checkWidthDiameterCount()
         {
             if (Diameter * Count > Width)
@@ -491,11 +510,8 @@ namespace mainPorject
             }
             return true;
         }
-
-        private void textBoxFocus_Enter(object sender, EventArgs e)
-        {
-            TextBox textBox = sender as TextBox;
-            textBox.SelectAll();
-        }
+        //checking
+        #endregion
+        
     }
 }

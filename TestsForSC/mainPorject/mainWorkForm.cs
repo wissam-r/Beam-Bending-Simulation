@@ -26,7 +26,7 @@ namespace mainPorject
             extraInfo = MainSplitContainer.Panel2;
         }
         private Forces stack;
-        //private WindowsGameLibrary1.XnaBeam game;
+        //variables end
         #endregion
 
         public mainWorkForm()
@@ -38,8 +38,6 @@ namespace mainPorject
             NewPointPositionFlag = false;
 
             this.Visible = false;
-            //game = new WindowsGameLibrary1.XnaBeam(this);
-            //this.Disposed += new EventHandler(form_Disposed);
         }
 
         private void mainWorkForm_Load(object sender, EventArgs e)
@@ -55,11 +53,10 @@ namespace mainPorject
                 return;
             }
             trackBar2.Value = 5;
-            //game = new WindowsGameLibrary1.XnaBeam(this);
-            //game.Run();
         }
 
         #region other form
+        //other form
         private bool StartGet()
         {
             using (Start mbs = new Start())
@@ -187,42 +184,60 @@ namespace mainPorject
                 }
             }
         }
+        //other form end
         #endregion
 
         #region XnaFormable
-
+        //XnaFormable
+        /// <summary>
+        /// return a contorl that will hold xna drawing
+        /// </summary>
         public Control XnaContorl
         {
             get { return xnaPanel; }
         }
-
+        /// <summary>
+        /// return the form in which xna will be hold
+        /// </summary>
         public Form Form
         {
             get { return this; }
         }
-
+        /// <summary>
+        /// indecate that there is new points
+        /// </summary>
         public bool NewPointsFlag
         {
             get;
             set;
         }
-
+        /// <summary>
+        /// indecate that there is new position of the previous points has new y
+        /// </summary>
         public bool NewPointPositionFlag
         {
             get;
             set;
         }
+        /// <summary>
+        /// indecate that there is new test forces
+        /// </summary>
         public bool NewTestForces
         {
             get;
             set;
         }
-
+        /// <summary>
+        /// return beam wrapper to use in xna
+        /// </summary>
         public BeamWrapper Beam
         {
             get { return beam; }
         }
-
+        /// <summary>
+        /// send message to the form
+        /// </summary>
+        /// <prparam name="str">the messege could hold numbers</prparam>
         public void sendMassege(string str)
         {
             string[] words = str.Split('|');
@@ -242,17 +257,11 @@ namespace mainPorject
             }
 
         }
-        #endregion
-
-        #region menu strip
-        private void newBeamToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            timer1.Stop();
-            getNewBeam();
-        }
+        //XnaFormable end
         #endregion
 
         #region Diagrames
+        //Diagrames
         private void beam_paint(object sender, PaintEventArgs e,Point pos,Size size,Brush brush)
         {
             e.Graphics.FillRectangle(brush,pos.X,pos.Y-size.Height/2,size.Width,size.Height);
@@ -314,7 +323,6 @@ namespace mainPorject
             Control panel = (sender as Panel);
             Graphics g = panel.CreateGraphics();
             beam_paint(sender,e,new Point((int)gap,lineY_panelMomentom),new System.Drawing.Size(panel.Width-2*gap,3),Brushes.White);
-            //g.DrawLine(Pens.Black, (int)gap, lineY_panelMomentom, panel.Width - (int)gap, lineY_panelMomentom);
             g.DrawLines(Pens.SkyBlue, pointsMomentom);
         }
 
@@ -390,12 +398,13 @@ namespace mainPorject
             Control panel = (sender as Panel);
             Graphics g = panel.CreateGraphics();
             beam_paint(sender, e, new Point(gap, lineY_panelShaer), new System.Drawing.Size(panel.Width - 2 * gap, 3), Brushes.White);
-            //g.DrawLine(Pens.Black, (int)gap, lineY_panelShaer, panel.Width - (int)gap, lineY_panelShaer);
             g.DrawLines(Pens.SkyBlue, poitsShear);
         }
+        //Diagrames end
         #endregion
 
         #region track bar
+        //track bar
         private void trackBar1_reset()
         {
             trackBar1.SetRange(0, (int)(Beam.Length * 100));
@@ -440,9 +449,11 @@ namespace mainPorject
             beam_paint(sender, e, new Point(trackBar1.Left + 10, trackBar1.Top - 30), new Size(trackBar1.Width - 20, 5), Brushes.White);
             beamSupport_paint(sender, e, new Point(trackBar1.Left + 10, trackBar1.Top - 30), new Size(trackBar1.Width - 20, 5), new Size(25, 25), true);
         }
+        //track bar end
         #endregion
 
         #region fast buttons
+        //fast buttons
         private void button1_Click(object sender, EventArgs e)
         {
             timer1.Start();
@@ -526,9 +537,17 @@ namespace mainPorject
             updateData();
             NewPointPositionFlag = true;
         }
+        //fast buttons end
         #endregion
 
         #region menu
+        //menu
+        private void newBeamToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            timer1.Stop();
+            getNewBeam();
+        }
+
         private void testForcesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             timer1.Stop();
@@ -547,6 +566,7 @@ namespace mainPorject
             }
             this.Visible = true;
         }
+        //menu end
         #endregion
     }
 }

@@ -293,7 +293,7 @@
                         | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonOK.Location = new System.Drawing.Point(12, 459);
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Size = new System.Drawing.Size(100, 77);
+            this.buttonOK.Size = new System.Drawing.Size(100, 55);
             this.buttonOK.TabIndex = 2;
             this.buttonOK.Text = "OK";
             this.buttonOK.UseVisualStyleBackColor = true;
@@ -306,7 +306,7 @@
                         | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonCancel.Location = new System.Drawing.Point(138, 459);
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(101, 77);
+            this.buttonCancel.Size = new System.Drawing.Size(101, 55);
             this.buttonCancel.TabIndex = 3;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
@@ -420,7 +420,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 542);
+            this.ClientSize = new System.Drawing.Size(790, 548);
             this.ControlBox = false;
             this.Controls.Add(this.userControl_BasicSpec1);
             this.Controls.Add(this.button3);

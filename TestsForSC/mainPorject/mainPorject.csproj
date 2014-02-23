@@ -70,24 +70,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="myTrackBar.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="myTrackBar.Designer.cs">
-      <DependentUpon>myTrackBar.cs</DependentUpon>
-    </Compile>
-    <Compile Include="shareDiagram.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="shareDiagram.Designer.cs">
-      <DependentUpon>shareDiagram.cs</DependentUpon>
-    </Compile>
-    <Compile Include="fastControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="fastControl.Designer.cs">
-      <DependentUpon>fastControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Start.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -129,15 +111,6 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="myTrackBar.resx">
-      <DependentUpon>myTrackBar.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="shareDiagram.resx">
-      <DependentUpon>shareDiagram.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="fastControl.resx">
-      <DependentUpon>fastControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Start.resx">
       <DependentUpon>Start.cs</DependentUpon>

@@ -81,6 +81,7 @@ namespace mainPorject
                 }
             }
         }
+        //variables end
         #endregion
 
         public mainBeamSpec()
@@ -163,16 +164,6 @@ namespace mainPorject
 
         #region text handlers
         //text handlers
-        private bool isint(string str)
-        {
-            int n;
-            return int.TryParse(str,out n);
-        }
-        private bool isdouble(string str)
-        {
-            double n;
-            return double.TryParse(str,out n);
-        }
         private void HandleNumberedEntry(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar)
@@ -198,6 +189,7 @@ namespace mainPorject
             if (paintable != null)
                 paintable.Invalidate();
         }
+        //text handeling end
         #endregion
 
         #region painting
@@ -267,28 +259,16 @@ namespace mainPorject
                 }
                 Point upperLeft;
                 {
-                    //int x = control.Width / 3 - size.Width / 2;
-                    //int y = control.Height / 2 - size.Height;
                     int x = 15;
                     int y = 15;
                     upperLeft = new Point(x, y);
                 }
                 g.FillRectangle(new SolidBrush(Color.Gray), new Rectangle(upperLeft, size));
                 int gap = 5;
+                
                 labelpanelWidth.Location = new Point(upperLeft.X + size.Width / 2 - labelpanelWidth.Width / 2, upperLeft.Y + size.Height + gap);
                 labelPanelHeight.Location = new Point(upperLeft.X + size.Width + gap, upperLeft.Y + size.Height / 2 - labelPanelHeight.Height / 2);
-                //{
-                //    List<Point> points = new List<Point>();
-                //    points.Add(new Point(labelPanelHeight.Left, labelPanelHeight.Top - 1));
-                //    points.Add(new Point(labelPanelHeight.Left + labelPanelHeight.Width, points.Last().Y));
-                //    points.Add(new Point(points.Last().X, upperLeft.Y));
-                //    points.Add(new Point(upperLeft.X + size.Width, points.Last().Y));
-                //    points.Add(new Point(points.Last().X, upperLeft.Y + size.Height - 1));
-                //    points.Add(new Point(points[1].X, points.Last().Y));
-                //    points.Add(new Point(points.Last().X, labelPanelHeight.Top + labelPanelHeight.Height));
-                //    points.Add(new Point(labelPanelHeight.Left, points.Last().Y));
-                //    g.DrawLines(Pens.Blue, points.ToArray());
-                //}
+                
                 drawPointerV(g, Pens.Blue, labelPanelHeight.Bounds, new Rectangle(upperLeft, size));
                 drawPointerH(g, Pens.Blue, labelpanelWidth.Bounds, new Rectangle(upperLeft, size));
             }
@@ -331,14 +311,6 @@ namespace mainPorject
                 {
                     int length, height;
                     height = control.Height / 10;
-                    //if (scaler > 10)
-                    //{
-                    //    length = 11;
-                    //}
-                    //else
-                    //{
-                    //    length = (int)scaler;//divid by zero
-                    //}
                     length = (int)(control.Width / (scaler + 0.1) - 2 * gap);
                     size = new System.Drawing.Size(length, height);
                 }
@@ -382,7 +354,6 @@ namespace mainPorject
                     int y = 2 * control.Height / 3 + size_paintForces.Height + 2 * gap;
                     upperLeft_paintForces = new Point(x, y);
                 }
-                //g.FillRectangle(new SolidBrush(Color.Gray), new Rectangle(upperLeft_paintForces, size_paintForces));
                 PaintEventArgs e = new PaintEventArgs(control.CreateGraphics(), control.ClientRectangle);
                 beam_paint(control, e, upperLeft_paintForces, size_paintForces, Brushes.White);
                 beamSupport_paint(control, e, upperLeft_paintForces, size_paintForces, new Size(25, 25), true);
@@ -416,7 +387,6 @@ namespace mainPorject
                     scaler = Math.Min((float)(size.Width / BeamWidth), (float)(size.Height / BeamHeight));
                     int raduis = (int)(RenforcementDiameter * scaler) / 2;
                     int space = size.Width / RenforcementCount;
-                    //scaler = size.Height / (float)BeamHeight;
                     for (int i = 0; i < RenforcementCount; i++)
                     {
                         drawCircul(upperLeft.X + space / 2 + i * space, upperLeft.Y + size.Height - (int)(RenforcementA * scaler), raduis, g);
@@ -427,7 +397,6 @@ namespace mainPorject
                     scaler = Math.Min((float)(size.Width / BeamWidth), (float)(size.Height / BeamHeight));
                     int raduis = (int)(RenforcementDiameter2 * scaler) / 2;
                     int space = size.Width / RenforcementCount2;
-                    //scaler = size.Height / (float)BeamHeight;
                     for (int i = 0; i < RenforcementCount2; i++)
                     {
                         drawCircul(upperLeft.X + space / 2 + i * space, upperLeft.Y +  (int)(RenforcementA2 * scaler), raduis, g);
@@ -451,6 +420,7 @@ namespace mainPorject
             image = white ? Properties.Resources.RightSupportWhite : Properties.Resources.RightSupport;
             e.Graphics.DrawImage(image, new Rectangle(beamPos.X + beamSize.Width - supportSize.Width / 2, beamPos.Y, supportSize.Width, supportSize.Height));
         }
+        //painting end
         #endregion
 
         #region Fields
@@ -514,6 +484,7 @@ namespace mainPorject
             RenforcementA = number/10;
             panel1.Invalidate();
         }
+        //feilds end
         #endregion
 
         #region forces 
@@ -761,6 +732,7 @@ namespace mainPorject
             if(ForceSelcected == null)
                 ForceSelcected = typeof(DistributedBeamForce);
         }
+        //forces end
         #endregion
         
         #region forces tab panel picture boxes
@@ -817,7 +789,7 @@ namespace mainPorject
         
         private Rectangle mouseClip = Cursor.Clip;
 
-        
+        //forces tab panel picture boxes end
         #endregion
 
         #region forces panel drawing
@@ -846,28 +818,6 @@ namespace mainPorject
                 drawPanelPointForce_RightClickable = true;
                 drawPanelPointForce_LeftClickable = false;
                 drawPanelDistributedForce_LeftClickable = false;
-            }
-        }
-        private void moveDrawPanelDistributedForceStart(int x)
-        {
-            int oldend = drawPanelDistributedForce.Left + drawPanelDistributedForce.Width - upperLeft_paintForces.X;
-            drawPanelDistributedForce.Location = new Point(x + upperLeft_paintForces.X, upperLeft_paintForces.Y - drawPanelDistributedForce.Height);
-            moveDrawPanelDistributedForceEnd(oldend);
-            //if (drawPanelDistributedForce_RightClickable == false)
-            //{
-            //    drawPanelDistributedForce_RightClickable = true;
-            //    drawPanelDistributedForce_LeftClickable = false;
-            //    drawPanelPointForce_LeftClickable = false;
-            //}
-        }
-        private void moveDrawPanelDistributedForceEnd(int x)
-        {
-            drawPanelDistributedForce.Width = x + upperLeft_paintForces.X - drawPanelDistributedForce.Left;
-            if (drawPanelDistributedForce_RightClickable == false)
-            {
-                drawPanelDistributedForce_RightClickable = true;
-                drawPanelDistributedForce_LeftClickable = false;
-                drawPanelPointForce_LeftClickable = false;
             }
         }
         private void moveDrawPanelDistributedForce(int start, int end)
@@ -900,7 +850,6 @@ namespace mainPorject
                     if (drawPanelPointForce_LeftClickable)
                     {
                         ForceSelcected = typeof(PointBaemForce);
-                        //moveDrawPanelPointForce(upperLeft_paintForces.X - drawPanelPointForce.Width / 2);
                         textBoxForceLocation.Text = "0";
                         panel.Cursor = System.Windows.Forms.Cursors.SizeAll;
                     }
@@ -1060,10 +1009,11 @@ namespace mainPorject
             Cursor.Clip = mouseClip;
         }
 
-        
+        //forces tab panel picture boxes end
         #endregion
 
         #region menu strip
+        //menu strip
         private void addToolStrip_SetEnable()
         {
             if (toolStripMenuItem1.Enabled)
@@ -1135,9 +1085,11 @@ namespace mainPorject
             resetDistributedControls();
             resetPointForceControls();
         }
+        //menu strip end
         #endregion
         
         #region stages
+        //stage
         private void setStage0()
         {
             userControl_AdvancedSpec1.Visible = false;
@@ -1315,6 +1267,7 @@ namespace mainPorject
                 MessageBox.Show(ex.Message, "error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        //stage end
         #endregion
     }
 }

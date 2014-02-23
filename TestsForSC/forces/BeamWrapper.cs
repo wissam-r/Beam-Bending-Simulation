@@ -9,15 +9,20 @@ namespace mainPorject
 {
     public class BeamWrapper
     {
+        #region variables 
+        //variables
         public RenforcedBeem beam;
         public Forces forces;
 
-        public double Width { 
-            get{
+        public double Width
+        {
+            get
+            {
                 return beam.B;
             }
         }
-        public double Height {
+        public double Height
+        {
             get
             {
                 if (beam.Form is beam.forms.Rectangle)
@@ -30,23 +35,22 @@ namespace mainPorject
                 }
             }
         }
-        public double Length{get{return beam.L;}}
+        public double Length { get { return beam.L; } }
 
+        public PointBaemForce F1, F2;
+
+        #region max
+        //max
         public double MaxMomentom { get { return beam.ERM; } }
         public double MaxDiflection { get { return -beam.L / 240.0; } }
+        //max end
+        #endregion
+        //variables end
+        #endregion
 
-        public double E
-        {
-            get
-            {
-                return beam.EMC;
-            }
-        }
-        
         public double getDiflectionAt(double position){
             return forces.getfMomentomd2x(position) / (beam.getIe(forces.getMomentom(position)) * beam.EMC);
         }
-
         public double getShaer(double position)
         {
             return forces.getShaer(position);
@@ -68,11 +72,18 @@ namespace mainPorject
             }
             else throw new NotImplementedException();
         }
+
         public double getI(double position)
         {
             return beam.getIe(forces.getMomentom(position));
         }
-
-        public PointBaemForce F1,F2;
+        public double E
+        {
+            get
+            {
+                return beam.EMC;
+            }
+        }
+        
     }
 }

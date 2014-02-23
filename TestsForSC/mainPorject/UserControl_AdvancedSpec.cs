@@ -11,11 +11,23 @@ namespace mainPorject
 {
     public partial class UserControl_AdvancedSpec : UserControl
     {
+        #region variables
+        //variables
+        private UserControl_BasicSpec basic_DONOTUSE;
+        /// <summary>
+        /// the control that have the basic info of the beam
+        /// </summary>
+        public UserControl_BasicSpec Basic
+        {
+            get { return basic_DONOTUSE; }
+            set { basic_DONOTUSE = value; initializeHandling(); initializeValues(); }
+        }
+        //variables end
+        #endregion
+
         public UserControl_AdvancedSpec()
         {
             InitializeComponent();
-            //initializeHandling();
-            //initializeValues();
         }
         public UserControl_AdvancedSpec(ref UserControl_BasicSpec basic)
         {
@@ -23,10 +35,10 @@ namespace mainPorject
             InitializeComponent();
             this.Basic = basic;
             initializeHandling();
-            //initializeValues();
         }
 
         #region handelling
+        //handelling
         public delegate void NumberChangedHandler(Control sender, double number);
         public event NumberChangedHandler FcChanged;
         protected virtual void OnFcChanged(Control sender, double number)
@@ -107,11 +119,15 @@ namespace mainPorject
             TextBox textBox = sender as TextBox;
             if (e.KeyCode == Keys.Enter)
             {
-                //this.SelectNextControl(sender as Control,true,false,false,true);
                 this.SelectNextControl(sender as Control, true, true, true, true);
                 e.Handled = true;
                 e.SuppressKeyPress = true;
             }
+        }
+        private void textBoxFocus_Enter(object sender, EventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            textBox.SelectAll();
         }
         private void initializeHandling()
         {
@@ -130,19 +146,11 @@ namespace mainPorject
             textBoxFc.Text = "40";
             textBoxFs.Text = "400";
         }
-
-        #endregion
-
-        #region variables
-        private UserControl_BasicSpec basic_DONOTUSE;
-        public UserControl_BasicSpec Basic
-        {
-            get { return basic_DONOTUSE; }
-            set { basic_DONOTUSE = value; initializeHandling(); initializeValues(); }
-        }
+        //handelling end
         #endregion
 
         #region getters
+        //getters
         public double Fc { get; private set; }
         public double Fs { get; private set; }
         public double Es { get; private set; }
@@ -179,9 +187,11 @@ namespace mainPorject
                 return false;
             }
         }
+        //getters end
         #endregion
 
         #region setters
+        //setters
         public void setErrorA(string error)
         {
             setError(errorProviderA, textBoxA, error);
@@ -235,8 +245,11 @@ namespace mainPorject
         {
             if (a != null) { textBoxA2.Text = a.ToString(); }
         }
+        //setters  end
         #endregion
 
+        #region changing handeling
+        //changing handeling
         private void textBoxFc_TextChanged(object sender, EventArgs e)
         {
             TextBox textBox = sender as TextBox;
@@ -354,7 +367,11 @@ namespace mainPorject
                 errorProviderA2.Clear();
             }
         }
+        //changing handeling end
+        #endregion
 
+        #region checking
+        //checking
         private void isDouble(object sender, EventArgs e)
         {
             if (!(sender is CheckBox))
@@ -410,11 +427,8 @@ namespace mainPorject
             }
             return true;
         }
+        //checking
+        #endregion
 
-        private void textBoxFocus_Enter(object sender, EventArgs e)
-        {
-            TextBox textBox = sender as TextBox;
-            textBox.SelectAll();
-        }
     }
 }

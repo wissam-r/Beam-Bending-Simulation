@@ -12,9 +12,21 @@ namespace mainPorject
 {
     public partial class Start : Form
     {
+        #region variables
+        //variables
+        public double width, height, As, Asl, fc, fs, a, al;
+        public bool isSingel;
+        //variables end
+        #endregion
+
         public Start()
         {
             InitializeComponent();
+        }
+
+        private void Start_Load(object sender, EventArgs e)
+        {
+            DialogResult = System.Windows.Forms.DialogResult.None;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -22,10 +34,7 @@ namespace mainPorject
             DialogResult = System.Windows.Forms.DialogResult.OK;
             this.Close();
         }
-        public double width, height, As, Asl, fc, fs, a, al;
-        public bool isSingel;
-
-
+        
         private void button1_Click(object sender, EventArgs e)
         {
             using (BeamDesignForm mbs = new BeamDesignForm())
@@ -62,11 +71,6 @@ namespace mainPorject
         {
             if(DialogResult == System.Windows.Forms.DialogResult.Cancel)
                 DialogResult = System.Windows.Forms.DialogResult.Abort;
-        }
-
-        private void Start_Load(object sender, EventArgs e)
-        {
-            DialogResult = System.Windows.Forms.DialogResult.None;
-        }
+        } 
     }
 }

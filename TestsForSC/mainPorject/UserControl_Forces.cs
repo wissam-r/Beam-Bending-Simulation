@@ -16,12 +16,12 @@ namespace mainPorject
     }
     public partial class UserControl_Forces : UserControl
     {
-        public UserControl_Forces()
-        {
-            InitializeComponent();
-        }
-
+        #region variables
+        //variables 
         private forceType type_DONOTUSE;
+        /// <summary>
+        /// current force type
+        /// </summary>
         public forceType Type
         {
             set
@@ -46,6 +46,16 @@ namespace mainPorject
         }
 
         private const int space = 10;
+        //variables end
+        #endregion
+
+        public UserControl_Forces()
+        {
+            InitializeComponent();
+        }
+
+        #region paint
+        //paint
         private void PointForce_Paint(object sender, PaintEventArgs e)
         {
             this.Width = 20;
@@ -65,7 +75,11 @@ namespace mainPorject
             pen.StartCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
             e.Graphics.DrawLine(pen, new Point(x, panel1.Height), new Point(x, 0));
         }
+        //paint end
+        #endregion
 
+        #region send event on panel to form
+        //send event on panel to form
         private void panel1_MouseClick(object sender, MouseEventArgs e)
         {
             this.OnMouseClick(e);
@@ -85,59 +99,7 @@ namespace mainPorject
         {
             this.OnMouseUp(e);
         }
-
-        //public new event MouseEventHandler MouseClick
-        //{
-        //    add
-        //    {
-        //        base.MouseClick += value;
-        //        panel1.MouseClick += value;
-        //    }
-        //    remove
-        //    {
-        //        base.MouseClick -= value;
-        //        panel1.MouseClick -= value;
-        //    }
-        //}
-        //public new event MouseEventHandler MouseDown
-        //{
-        //    add
-        //    {
-        //        base.MouseDown += value;
-        //        panel1.MouseDown += value;
-        //    }
-        //    remove
-        //    {
-        //        base.MouseDown -= value;
-        //        panel1.MouseDown -= value;
-        //    }
-        //}
-        //public new event MouseEventHandler MouseMove
-        //{
-        //    add
-        //    {
-        //        base.MouseMove += value;
-        //        panel1.MouseMove += value;
-        //    }
-        //    remove
-        //    {
-        //        base.MouseMove -= value;
-        //        panel1.MouseMove -= value;
-        //    }
-        //}
-        //public new event MouseEventHandler MouseUp
-        //{
-        //    add
-        //    {
-        //        base.MouseUp += value;
-        //        panel1.MouseUp += value;
-        //    }
-        //    remove
-        //    {
-        //        base.MouseUp -= value;
-        //        panel1.MouseUp -= value;
-        //    }
-        //}
-
+        //send event on panel to form end
+        #endregion
     }
 }

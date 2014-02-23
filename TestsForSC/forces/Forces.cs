@@ -116,9 +116,6 @@ namespace forces
             return sum;
         }
 
-
-
-
         public void Clear()
         {
             forces.Clear();
