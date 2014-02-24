@@ -8,8 +8,12 @@ namespace beam.reinforcement
 {
     public class SingleReinforcement : Reinforcement
     {
+        #region private pararmetrs
         //As  spaceTensileReinforcement
         private double As;
+        #endregion
+
+        #region Constructers
 
         public SingleReinforcement(double r, int number)
         {
@@ -22,19 +26,27 @@ namespace beam.reinforcement
 
         }
 
+        #endregion
+
+        #region override methods
+
         public double spaceTensileReinforcement()
         {
             return As;
 
         }
-        
-
-        private double calcAs(double r, int number) { return number * Math.PI * Math.Pow(r / 2, 2); }
-
 
         public double spaceCompressionReinforcement()
         {
             return 0;
         }
+
+        #endregion
+
+        #region private calc methods
+
+        private double calcAs(double r, int number) { return number * Math.PI * Math.Pow(r / 2, 2); }
+
+        #endregion
     }
 }

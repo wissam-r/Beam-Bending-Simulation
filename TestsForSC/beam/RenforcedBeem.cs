@@ -9,8 +9,11 @@ namespace beam
 
     public abstract class RenforcedBeem
     {
+        #region Constatn parameters
         public const double Ecu = 0.003;//Deformation of the concrete
+        #endregion
 
+        # region Constracturs 
         public RenforcedBeem(double cP, double iF, double b, double l, double es)
         {
             B = b;
@@ -29,6 +32,7 @@ namespace beam
 
 
         }
+        #endregion 
 
         #region Composing Parammters
 
@@ -328,7 +332,6 @@ namespace beam
 
         #endregion
 
-
         #region Abstract Methods
         //moment effective inertia  
         abstract public double getIe(double Ma);
@@ -337,12 +340,12 @@ namespace beam
         
         //Momentum-resistant
         abstract protected double calcRM();
-
+        //Momentum-resistant
         abstract public double ERM
         {
             get;
         }
-
+        //Momentum-cracked
         abstract public double Mcr
         {
 
@@ -353,10 +356,12 @@ namespace beam
         {
             get;
         }
+        //max reindorcement
         abstract public double AsMax
         {
             get;
         }
+
         abstract public String getFailureWay();
 
         

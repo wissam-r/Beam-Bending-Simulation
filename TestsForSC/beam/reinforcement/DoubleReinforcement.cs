@@ -7,12 +7,17 @@ namespace beam.reinforcement
 {
     public class DoubleReinforcement : Reinforcement
     {
+        #region private parameters
         //SpaceTensileReinforcement
         //مساحة المقطع العرضي لتسليح الشد
         private double As;
         //SpaceCompressionReinforcement
         //مساحة المقطع العرضي لتسليح الضغط
         private double Aas;
+
+        #endregion
+
+        #region Constructers
         public DoubleReinforcement(double r , int n , double ra  , int na) {
 
             if (r <= 0)
@@ -30,6 +35,9 @@ namespace beam.reinforcement
         
         
         }
+        #endregion
+
+        #region override methods
         public double spaceTensileReinforcement()
         {
             return As;
@@ -39,8 +47,12 @@ namespace beam.reinforcement
         {
             return Aas;
         }
+        #endregion
 
+        #region private methods
         private double calcAs(double r, int number) { return number * Math.PI * Math.Pow(r / 2, 2); }
-
+        #endregion
     }
+
+
 }

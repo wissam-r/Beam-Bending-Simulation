@@ -7,6 +7,7 @@ namespace beam.forms
 {
     public class Rectangle : Form
     {
+        #region Private parameters
         //crossSectionalArea 
         //مساحة المقطع العرضي
         private double A;
@@ -18,7 +19,9 @@ namespace beam.forms
         private double Ig;
         // h : high  ارتفاع, l : Length طول الخرسانة, b : width عرض الخرسانة
 
+        #endregion
 
+        #region Constructers
         public Rectangle(double h, double l, double b) 
         { 
             this.A = calcCrossSectionalArea(h, b);
@@ -26,7 +29,9 @@ namespace beam.forms
             this.Ig = calcMomentInertiaNonCrackedSection(h, b);
 
         }
-        
+        #endregion
+
+        #region Private cacl Methods
         private double calcCrossSectionalArea(double h , double b){
             return h*b ;
         }
@@ -40,7 +45,9 @@ namespace beam.forms
             return b * Math.Pow(h, 3) / 12; 
         
         }
+        #endregion
 
+        #region override methods
         //A
         public double crossSectionalArea()
         {
@@ -55,6 +62,7 @@ namespace beam.forms
         public double momentInertiaNonCrackedSection()
         {
             return Ig;
-        } 
+        }
+        #endregion
     }
 }

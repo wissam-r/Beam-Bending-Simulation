@@ -12,6 +12,40 @@ namespace beam
     public class DoubReinRecBeem : RenforcedBeem
     {
 
+        #region Constructers
+        public DoubReinRecBeem(double h, double l, double b, double r, double ra, int n, int na)
+            : this(30, 420, h, l, b, r, ra, n, na) { }
+
+        public DoubReinRecBeem(double cP, double iF, double h, double l, double b, double r, double ra, int n, int na)
+            : this(cP, iF, h, l, b, 210000, r, ra, n, na, 5, 5, 1) { }
+
+        public DoubReinRecBeem(double cP, double iF, double h, double l, double b, double es, double r, double ra, int n, int na, double a, double aa, byte choese)// a : the distance between the Maximum fiber strain and reinforcement , choese  : Type Bracelets iron
+            : base(cP, iF, b, l, es)
+        {
+            H = h;
+            Form = new Rectangle(h, l, b);
+            Reinforcement = new DoubleReinforcement(r, n, ra, na);
+            D = H - a;
+            Da = aa;
+            MuS = calcMuS(getSpaceTensileReinforcement(), D);
+            MuSa = calcMuS(getSpaceCompressionReinforcement(), D);
+            this.y = calcY();
+            this.x = getX();
+            this.asb = calcAsb(D);
+            this.asMax = calcAsMax();
+            this.muSmax = calcMuSmax();
+            this.teta = getTeta(choese, X, D);
+            this.rM = calcRM();
+            this.eRM = RM * Teta;
+
+            Mcr = calcMcr();
+            equivalentX = depthNeutralAxisSectionEquivalent(getSpaceTensileReinforcement(), getSpaceCompressionReinforcement(), D, Da);
+            icr = momentInertiaEquivalentCrackedSection(EquivalentX, getSpaceTensileReinforcement(), getSpaceCompressionReinforcement(), D, Da);
+
+
+        }
+        #endregion
+
         #region Private Parammters
         //The distance between the extreme pressure fiber and tensile reinforcement center in the concrete
         //المسافة بين أقصى ليف ضغط و مركز التسليح للشد
@@ -193,40 +227,6 @@ namespace beam
         }
 
         #endregion
-
-        public DoubReinRecBeem(double h, double l, double b, double r, double ra, int n, int na)
-            : this(30, 420, h, l, b ,  r, ra, n, na) { }
-
-        public DoubReinRecBeem(double cP, double iF, double h, double l, double b, double r, double ra, int n, int na)
-            : this(cP, iF, h, l, b, 210000, r, ra, n, na, 5, 5, 1) { }
-
-        public DoubReinRecBeem(double cP, double iF, double h, double l, double b, double es, double r,double ra ,int n,int na ,  double a,double aa ,  byte choese)// a : the distance between the Maximum fiber strain and reinforcement , choese  : Type Bracelets iron
-            : base (cP, iF, b, l, es) 
-        {
-            H = h;
-            Form = new Rectangle(h, l, b);
-            Reinforcement = new DoubleReinforcement(r, n, ra, na);
-            D = H - a;
-            Da = aa;
-            MuS = calcMuS(getSpaceTensileReinforcement(), D);
-            MuSa = calcMuS(getSpaceCompressionReinforcement(), D);
-            this.y = calcY();
-            this.x = getX();
-            this.asb = calcAsb(D);
-            this.asMax = calcAsMax();
-            this.muSmax = calcMuSmax();
-            this.teta = getTeta(choese,X, D);
-            this.rM = calcRM();
-            this.eRM = RM * Teta;
-
-            Mcr = calcMcr();
-            equivalentX = depthNeutralAxisSectionEquivalent(getSpaceTensileReinforcement(), getSpaceCompressionReinforcement(), D, Da);
-            icr = momentInertiaEquivalentCrackedSection(EquivalentX, getSpaceTensileReinforcement(), getSpaceCompressionReinforcement(), D, Da);  
-
-
-        }
-
-
 
         #region Overrided Methods
         public override double getIe(double Ma)

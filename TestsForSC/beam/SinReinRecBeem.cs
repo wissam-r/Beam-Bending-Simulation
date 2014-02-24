@@ -10,6 +10,41 @@ namespace beam
 {
     public class SinReinRecBeem : RenforcedBeem
     {
+
+        #region Constructers
+
+        public SinReinRecBeem(double h, double l, double b, double r, int n)
+            : this(30, 420, h, l, b, r, n) { }
+
+        public SinReinRecBeem(double cP, double iF, double h, double l, double b, double r, int n)
+            : this(cP, iF, h, l, b, 210000, r, n, 5, 1) { }
+
+        public SinReinRecBeem(double cP, double iF, double h, double l, double b, double es, double r, int n, double a, byte choese)// a : the distance between the Maximum fiber strain and reinforcement , choese  : Type Bracelets iron
+            : base(cP, iF, b, l, es)//(30, 20, 200, 20, 210000, 10, 2, 5);
+        //a,h,l,b,r : cm , es,cp :Mpa 
+        {
+            H = h;
+            Form = new Rectangle(h, l, b);
+            Reinforcement = new SingleReinforcement(r, n);
+            D = h - a;
+            MuS = calcMuS(getSpaceTensileReinforcement(), D);
+            this.y = calcY();
+            this.x = getX();
+            this.asb = calcAsb(D);
+            this.asMax = calcAsMax();
+            this.muSmax = calcMuSmax();
+            this.teta = getTeta(choese, X, D);
+            this.rM = calcRM();
+            this.eRM = RM * Teta;
+
+            Mcr = calcMcr();
+            equivalentX = depthNeutralAxisSectionEquivalent(getSpaceTensileReinforcement(), 0, D, 0);
+            icr = momentInertiaEquivalentCrackedSection(EquivalentX, getSpaceTensileReinforcement(), 0, D, 0);
+
+        }
+
+        #endregion
+
         #region Private Parammters
         //The distance between the extreme pressure fiber and reinforcement center in the concrete
         //المسافة بين أقصى ليف شد و مركز التسليح
@@ -146,36 +181,6 @@ namespace beam
         }
 
         #endregion
-
-        public SinReinRecBeem( double h, double l, double b, double r, int n)
-            : this(30, 420, h, l, b, r, n) { }
-
-        public SinReinRecBeem(double cP, double iF, double h, double l, double b, double r, int n)
-            : this(cP, iF, h, l, b, 210000, r, n, 5, 1) { }
-
-        public SinReinRecBeem(double cP, double iF, double h, double l, double b, double es, double r, int n, double a, byte choese)// a : the distance between the Maximum fiber strain and reinforcement , choese  : Type Bracelets iron
-            : base(cP,iF , b, l,es)//(30, 20, 200, 20, 210000, 10, 2, 5);
-            //a,h,l,b,r : cm , es,cp :Mpa 
-        {
-            H = h;           
-            Form = new Rectangle(h, l, b);
-            Reinforcement = new SingleReinforcement(r, n);
-            D = h - a;
-            MuS = calcMuS(getSpaceTensileReinforcement() ,  D);
-            this.y = calcY();
-            this.x = getX();
-            this.asb = calcAsb(D);
-            this.asMax = calcAsMax();
-            this.muSmax = calcMuSmax();       
-            this.teta = getTeta(choese, X,D);
-            this.rM = calcRM();
-            this.eRM = RM * Teta;
-
-            Mcr = calcMcr(); 
-            equivalentX = depthNeutralAxisSectionEquivalent(getSpaceTensileReinforcement(),0,D,0);
-            icr = momentInertiaEquivalentCrackedSection(EquivalentX, getSpaceTensileReinforcement() , 0, D, 0);  
-                          
-        }
 
         #region Private ClacMethodes
 
